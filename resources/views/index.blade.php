@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Index de prueba  trabajando con ramas<h1>
-</body>
-</html>
+@extends('layouts1.landing')
+
+@section('title','Home')
+@section('content')
+
+<h1>Index de prueba rescatando mascotas</h1>
+
+@endsection

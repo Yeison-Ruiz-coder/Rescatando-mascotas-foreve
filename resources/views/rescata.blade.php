@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Rescatando mascotas</h1>
-</body>
-</html>
+@extends('layouts1.landing')
+
+@section('title','Rescata')
+@section('content')
+
+<h1>Rescata  mascotas version plantilla con landing</h1>
+
+@endsection

@@ -9,6 +9,10 @@
     </title>
 </head>
 <body>
+
+   
+    <h1>Desde esta plantilla realizo cambios a las otras vistas</h1>
+    @include('layouts1._partials.menu')
     @yield('content')
 </body>
 </html>
