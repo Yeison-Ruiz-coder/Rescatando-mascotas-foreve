@@ -20,7 +20,7 @@ use App\Http\Controllers\DashboardController;
 
 // Página pública
 Route::get('/', function () {
-    return view('welcome');
+    return view('eventos');
 });
 
 // Rutas con autenticación
@@ -51,7 +51,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/tipo/{tipo}', [UsuarioController::class, 'porTipo'])->name('usuarios.tipo');
     Route::get('/estadisticas', [DashboardController::class, 'estadisticas'])->name('estadisticas');
     Route::get('/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
+    Route::get('/eventos', function () {
+    return view('eventos');
+})->name('eventos');
+
 });
 
-// Rutas de autenticación (si usas Laravel Breeze o Jetstream)
-require __DIR__.'/auth.php';
+
