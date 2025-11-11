@@ -54,4 +54,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Rutas de autenticación (si usas Laravel Breeze o Jetstream)
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
