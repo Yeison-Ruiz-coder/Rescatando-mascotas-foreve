@@ -18,18 +18,33 @@ use App\Http\Controllers\DonacionController;
 use App\Http\Controllers\RescateController;
 use App\Http\Controllers\DashboardController;
 
-// Página pública
-Route::get('/', function () {
-    return view('welcome');
-});
+// ---------------------------------------------------------------------
+// 1. PÁGINAS PÚBLICAS
+// ---------------------------------------------------------------------
 
-// Rutas con autenticación
+// PÁGINA DE INICIO: Muestra directamente el índice de Donaciones.
+Route::get('/', [DonacionController::class, 'index'])->name('inicio');
+
+// Otras rutas de recurso que quieras que sean públicas
+Route::resource('donaciones', DonacionController::class)->only(['index', 'create', 'store']);
+
+
+// ---------------------------------------------------------------------
+// 2. RUTAS DE AUTENTICACIÓN (LOGIN, REGISTER, LOGOUT, etc.)
+// ¡ESTA LÍNEA ESTABA COMENTADA Y FALTABA!
+// ---------------------------------------------------------------------
+require __DIR__.'/auth.php';
+
+
+// ---------------------------------------------------------------------
+// 3. RUTAS PROTEGIDAS (Requieren que el usuario esté logueado)
+// ---------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
-    
+    });
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Rutas de recursos
+    // Rutas de recursos COMPLETAS
     Route::resource('administradores', AdministradorController::class);
     Route::resource('veterinarias', VeterinariaController::class);
     Route::resource('fundaciones', FundacionController::class);
@@ -43,15 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('suscripciones', SuscripcionController::class);
     Route::resource('adopciones', AdopcionController::class);
     Route::resource('notificaciones', NotificacionController::class);
-    Route::resource('donaciones', DonacionController::class);
     Route::resource('rescates', RescateController::class);
+    
 
-    // Rutas personalizadas
-    Route::get('/mascotas/estado/{estado}', [MascotaController::class, 'porEstado'])->name('mascotas.estado');
-    Route::get('/usuarios/tipo/{tipo}', [UsuarioController::class, 'porTipo'])->name('usuarios.tipo');
-    Route::get('/estadisticas', [DashboardController::class, 'estadisticas'])->name('estadisticas');
-    Route::get('/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
-});
 
-// Rutas de autenticación (si usas Laravel Breeze o Jetstream)
-// require __DIR__.'/auth.php';

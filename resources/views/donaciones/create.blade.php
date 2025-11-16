@@ -18,7 +18,7 @@
     
     <div class="row justify-content-center mt-4">
         <div class="col-md-7">
-            @include('donaciones.partials.form')
+            @yield('content')
         </div>
     </div>
 </div>
