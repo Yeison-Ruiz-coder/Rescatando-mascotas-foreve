@@ -29,4 +29,11 @@ class Adopcion extends Model
     {
         return $this->belongsTo(Mascota::class);
     }
+    
+    // Si implementaste la tabla de Entrevistas (1:N)
+   public function entrevistas()
+    {
+        // Una Adopción puede tener muchas Entrevistas (para seguimiento)
+        return $this->hasMany(Entrevista::class, 'adopcion_id');
+    }
 }

@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+//---------------------------------------------------------
+// Posible eliminacion por el problema de autenticación
+//---------------------------------------------------------
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

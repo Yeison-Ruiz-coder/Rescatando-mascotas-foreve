@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('inicio') }}">
-            <img src="{{ asset('img/logo-claro.png') }}" alt="Rescatando Mascotas Forever Logo" class="navbar-logo">
+            <img src="{{ asset('img/logo-oscuro.png') }}" alt="Rescatando Mascotas Forever Logo" class="navbar-logo">
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,6 @@
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownMascotas">
                     <li><a class="dropdown-item" href="{{ route('mascotas.create') }}">Reportar</a></li>
                     <li><a class="dropdown-item" href="{{ route('mascotas.index') }}">Buscar</a></li>
-                    <li><a class="dropdown-item" href="#">Actualizar</a></li>
                 </ul>
             </li>
 

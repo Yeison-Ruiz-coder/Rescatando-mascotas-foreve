@@ -69,4 +69,16 @@ class Usuario extends Model
     {
         return $this->hasMany(Rescate::class);
     }
+
+    public function entrevistasRealizadas()
+    {
+        // Este usuario realizó varias entrevistas
+        return $this->hasMany(Entrevista::class);
+    }
+
+    // util para tener el nombre completo en las vistas
+    public function getNombreCompletoAttribute()
+    {
+        return trim("{$this->Nombre_1} {$this->Apellido_1}");
+    }
 }

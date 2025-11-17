@@ -16,10 +16,13 @@ return new class extends Migration
             $table->string('Lugar_adopcion');
             $table->date('Fecha_adopcion');
             $table->enum ('estado', ['Aprobado','En proceso','Rechazado']);
+            $table->text('razon_rechazo')->nullable();
+            $table->date('fecha_cierre')->nullable();
             
 
             $table->unsignedBigInteger('usuario_id')->nullable();
             $table->unsignedBigInteger('mascota_id')->nullable();
+            $table->unsignedBigInteger('administrador_id')->nullable(); 
 
             $table->foreign('usuario_id')
             ->references('id')
@@ -30,6 +33,12 @@ return new class extends Migration
             ->references('id')
             ->on('mascotas')
             ->onDelete('set null'); 
+            
+            $table->foreign('administrador_id')
+            ->references('id')
+            ->on('administradores')
+            ->onDelete('set null');
+
             $table->timestamps();
         });
     }
