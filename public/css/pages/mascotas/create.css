@@ -1,0 +1,314 @@
+/* MASCOTAS CREATE STYLES */
+.create-mascota-hero {
+    background: linear-gradient(135deg, var(--color-fucsia) 0%, #FD4586dd 100%);
+    color: var(--color-texto-claro);
+    padding: 2.5rem 0;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+}
+
+.create-mascota-hero h1 {
+    color: var(--color-texto-claro);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.create-mascota-hero .lead {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Formulario */
+.form-mascota-container {
+    background: var(--color-texto-claro);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    margin-bottom: 3rem;
+}
+
+.form-mascota-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-gris-claro);
+}
+
+.form-mascota-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-mascota-section h3 {
+    color: var(--color-turquesa);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--color-fucsia);
+    display: inline-block;
+}
+
+/* Campos del formulario */
+.form-mascota-label {
+    font-weight: 700;
+    color: var(--color-turquesa);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.form-mascota-label .required {
+    color: var(--color-fucsia);
+    margin-left: 2px;
+}
+
+.form-mascota-control {
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--color-texto-claro);
+}
+
+.form-mascota-control:focus {
+    border-color: var(--color-turquesa);
+    box-shadow: 0 0 0 0.3rem rgba(27, 142, 149, 0.2);
+    background: var(--color-texto-claro);
+}
+
+.form-mascota-control.select-control {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231B8E95' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+    padding-right: 3rem;
+}
+
+/* Upload de imagen */
+.upload-area {
+    border: 3px dashed #ddd;
+    border-radius: 15px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--color-gris-claro);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: var(--color-turquesa);
+    background: rgba(27, 142, 149, 0.05);
+}
+
+.upload-area.dragover {
+    border-color: var(--color-fucsia);
+    background: rgba(253, 69, 134, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--color-turquesa);
+    margin-bottom: 1rem;
+}
+
+.upload-text {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.upload-hint {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.image-preview {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Botones */
+.form-mascota-buttons {
+    background: var(--color-gris-claro);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.btn-form-submit {
+    background: linear-gradient(45deg, var(--color-fucsia), var(--color-fucsia-hover));
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+    min-width: 180px;
+}
+
+.btn-form-submit:hover {
+    background: linear-gradient(45deg, var(--color-fucsia-hover), var(--color-fucsia));
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(253, 69, 134, 0.4);
+}
+
+.btn-form-cancel {
+    background: transparent;
+    color: #666;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+    min-width: 180px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-form-cancel:hover {
+    background: #666;
+    color: white;
+    border-color: #666;
+    transform: translateY(-3px);
+}
+
+/* Información de ayuda */
+.form-help-text {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.form-help-text i {
+    color: var(--color-turquesa);
+    margin-right: 0.25rem;
+}
+
+/* Validación */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .create-mascota-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .form-mascota-container {
+        padding: 1.5rem;
+        margin: 0 -1rem;
+        border-radius: 0;
+    }
+    
+    .form-mascota-buttons {
+        padding: 1.5rem;
+    }
+    
+    .btn-form-submit,
+    .btn-form-cancel {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}
+
+/* Estilos para radio buttons y checkboxes personalizados */
+.form-check-input:checked {
+    background-color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+}
+
+.form-check-label {
+    color: #555;
+    font-weight: 500;
+}
+
+
+.alert-card {
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.alert-card.success {
+    border-color: #28a745;
+    background: linear-gradient(135deg, #f8fff9, #e8f5e8);
+}
+
+.alert-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: rgba(40, 167, 69, 0.1);
+    border-bottom: 1px solid #28a745;
+}
+
+.alert-header h5 {
+    color: #155724;
+    flex-grow: 1;
+}
+
+.alert-body {
+    padding: 1.5rem;
+}
+
+.alert-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.btn-close:hover {
+    color: #dc3545;
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-card {
+    animation: slideIn 0.3s ease-out;
+}

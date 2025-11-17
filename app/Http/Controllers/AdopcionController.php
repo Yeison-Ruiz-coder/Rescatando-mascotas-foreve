@@ -40,7 +40,7 @@ class AdopcionController extends Controller
 
     public function show($id)
     {
-        $adopcion = Adopcion::with(['usuario', 'mascota'])->findOrFail($id);
+        $adopcion = Adopcion::with(['usuario', 'mascota','entrevista'])->findOrFail($id);
         return view('adopciones.show', compact('adopcion'));
     }
 

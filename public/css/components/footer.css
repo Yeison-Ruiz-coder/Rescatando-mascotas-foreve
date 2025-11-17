@@ -3,7 +3,7 @@
 
 .custom-footer {
     position: relative;
-    background:linear-gradient(#1B8E95,#1B8E95,#81022f); 
+    background:linear-gradient( #1B8E95,#1B8E95,#81022f); 
     color: var(--color-texto-claro);
     padding: 0; 
     overflow: hidden; 
@@ -97,7 +97,7 @@
 
 
 .footer-bottom {
-    background-color: #00000083; 
+    background-color: #000000a4; 
     padding: 15px 0 15px; 
     margin-top: 0;
 }

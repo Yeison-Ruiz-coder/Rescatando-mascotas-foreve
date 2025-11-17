@@ -14,7 +14,7 @@
     background-color: var(--color-turquesa); 
     padding: 8px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(#1B8E95,#1B8E95,#ff76a6d8);
+    background: linear-gradient(to right,#1B8E95,#1B8E95,#81022f);
 }
 
 .navbar-brand .navbar-logo {
