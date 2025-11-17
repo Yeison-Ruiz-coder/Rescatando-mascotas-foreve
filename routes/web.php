@@ -41,6 +41,10 @@ require __DIR__.'/auth.php';
 // ---------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
     });
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
@@ -61,4 +65,20 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('rescates', RescateController::class);
     
 
+<<<<<<< Updated upstream
 
+=======
+    // Rutas personalizadas
+    Route::get('/mascotas/estado/{estado}', [MascotaController::class, 'porEstado'])->name('mascotas.estado');
+    Route::get('/usuarios/tipo/{tipo}', [UsuarioController::class, 'porTipo'])->name('usuarios.tipo');
+    Route::get('/estadisticas', [DashboardController::class, 'estadisticas'])->name('estadisticas');
+    Route::get('/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
+
+// Rutas de autenticación (si usas Laravel Breeze o Jetstream)
+require __DIR__.'/auth.php';
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+>>>>>>> Stashed changes
