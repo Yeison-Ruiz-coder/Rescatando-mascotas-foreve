@@ -17,12 +17,22 @@ use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\DonacionController;
 use App\Http\Controllers\RescateController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Routing\Router;
 
 
 // Página pública
 Route::get('/', function () {
     return view('welcome');
 });
+// vistas  prueba
+Route::view('/','index')->name('index');
+Route::view('/about','about')->name('about');
+Route::view('/adopta','adopta')->name('adopta');
+Route::view('/rescata','rescata')->name('rescata');
+Route::view('/contacto','contacto')->name('contacto');
+Route::view('/servicios','servicios')->name('servicios');
+//Route::view('/servicios','servicios')->name('servicios');
+
 
 // Rutas con autenticación
 Route::middleware(['auth'])->group(function () {
@@ -57,3 +67,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Rutas de autenticación (si usas Laravel Breeze o Jetstream)
 require __DIR__.'/auth.php';
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

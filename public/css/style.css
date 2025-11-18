@@ -1,0 +1,544 @@
+/* ====================================
+   RESCATANDO MASCOTAS - ESTILOS PRINCIPALES
+   ==================================== */
+
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+  --dark-color: #0f172a;
+  --light-color: #f8fafc;
+  --gray-color: #6b7280;
+}
+
+* {
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+/* ====================================
+   LAYOUT GENERAL
+   ==================================== */
+
+.page-container {
+  min-height: calc(100vh - 200px);
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* ====================================
+   HERO SECTION
+   ==================================== */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section h1 {
+  animation: slideInDown 0.8s ease-out;
+}
+
+.hero-section p {
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================================
+   CARDS & HOVER EFFECTS
+   ==================================== */
+
+.card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px) !important;
+}
+
+.adopta-card,
+.rescata-card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.adopta-card img,
+.rescata-card img {
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.adopta-card:hover img,
+.rescata-card:hover img {
+  transform: scale(1.05);
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: var(--dark-color);
+  margin-bottom: 0.75rem;
+}
+
+/* ====================================
+   BUTTONS
+   ==================================== */
+
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* ====================================
+   FORMULARIOS
+   ==================================== */
+
+.contacto-form,
+.reporte-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.form-label {
+  color: var(--dark-color);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 2px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-control-lg {
+  height: auto;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+/* ====================================
+   BADGES
+   ==================================== */
+
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.badge.bg-success {
+  background-color: var(--success-color) !important;
+}
+
+.badge.bg-danger {
+  background-color: var(--danger-color) !important;
+}
+
+.badge.bg-warning {
+  background-color: var(--warning-color) !important;
+}
+
+.badge.bg-info {
+  background-color: var(--info-color) !important;
+}
+
+/* ====================================
+   SECCIONES
+   ==================================== */
+
+.adopta-section,
+.rescata-section,
+.contacto-section,
+.redes-section,
+.tips-section,
+.proceso-section {
+  padding: 3rem 0;
+}
+
+.adopta-section {
+  background: white;
+}
+
+.rescata-section {
+  background: white;
+}
+
+.contacto-section {
+  background: white;
+}
+
+.redes-section {
+  background: var(--light-color);
+}
+
+.tips-section {
+  background: white;
+}
+
+.proceso-section {
+  background: var(--light-color);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark-color);
+  margin-bottom: 3rem;
+}
+
+/* ====================================
+   PASO A PASO
+   ==================================== */
+
+.step-number {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.step-number:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+/* ====================================
+   INFO CARDS
+   ==================================== */
+
+.info-card {
+  background: linear-gradient(135deg, #f0f9ff 0%, #f3e8ff 100%);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.info-card a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.info-card a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+/* ====================================
+   REDES SOCIALES
+   ==================================== */
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: white;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-btn.facebook {
+  background: #1877f2;
+}
+
+.social-btn.facebook:hover {
+  background: #165bd6;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(24, 119, 242, 0.3);
+}
+
+.social-btn.instagram {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.social-btn.instagram:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+.social-btn.twitter {
+  background: #1da1f2;
+}
+
+.social-btn.twitter:hover {
+  background: #1a8cd8;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(29, 161, 242, 0.3);
+}
+
+.social-btn.whatsapp {
+  background: #25d366;
+}
+
+.social-btn.whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
+}
+
+/* ====================================
+   TIP CARDS
+   ==================================== */
+
+.tip-card {
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.tip-card h5 {
+  color: var(--dark-color);
+}
+
+.tip-card p {
+  color: var(--gray-color);
+  margin: 0;
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 250px;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .info-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .page-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .contacto-form,
+  .reporte-form {
+    padding: 1rem;
+  }
+}
+
+/* ====================================
+   ANIMACIONES ADICIONALES
+   ==================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+/* ====================================
+   UTILIDADES
+   ==================================== */
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.text-muted {
+  color: var(--gray-color) !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.rounded-3 {
+  border-radius: 12px !important;
+}
+
+.border-5 {
+  border-width: 5px !important;
+}
+
+/* Transiciones suaves */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.h1{
+  color:red;
+}
+

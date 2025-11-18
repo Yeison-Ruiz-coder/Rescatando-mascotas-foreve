@@ -1,0 +1,18 @@
+ <header>
+    <div class="logo">
+      <img src="{{ asset('assets/img/logo.png') }}" alt="Logo de Rescatando Mascotas">
+      <h1>Rescatando Mascotas</h1>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#adopta">Adopta</a>
+      <a href="#rescata">Rescata</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#servicios">Servicios</a>
+      
+    </nav>
+
+    <a href="#donar" class="btn-donar">🐾 Donar</a>
+  </header>
