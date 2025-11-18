@@ -62,7 +62,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //Route::resource('admin/mascotas', MascotaController::class);
 Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
-
+//Route::resource('tipos-vacunas', TipoVacunaController::class); es una prueba cris
 
 
 // RUTAS DE AUTENTICACIÓN
