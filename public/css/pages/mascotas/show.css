@@ -1,0 +1,198 @@
+/* ESTILOS PARA LA PÁGINA DE DETALLE DE MASCOTA */
+
+body {
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;
+}
+/* Foto principal */
+.gallery-main-img {
+    height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 10px 10px 0 0;
+}
+
+.gallery-main-img:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+}
+
+/* Miniaturas de la galería */
+.gallery-thumbnail {
+    height: 80px;
+    object-fit: cover;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.gallery-thumbnail:hover {
+    border-color: var(--color-fucsia);
+    transform: translateY(-2px);
+}
+
+.gallery-thumbnail.active {
+    border-color: var(--color-turquesa);
+    transform: scale(1.05);
+}
+
+.thumbnail-container {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-container .badge {
+    background-color: var(--color-turquesa);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Estados de la mascota */
+.estado-badge {
+    background-color: #F80058 !important;
+    color: white;
+}
+
+/* Badges generales */
+.badge {
+    background-color: #F80058;
+    color: white;
+}
+
+.raza-badge {
+    background-color: var(--color-gris-claro) !important;
+    color: var(--color-texto-oscuro) !important;
+    border: 1px solid #dee2e6;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    background:var(--color-turquesa) !important;
+    color: white;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+}
+
+.gestion-card .card-header {
+    background-color: var(--color-gris-claro) !important;
+    color: var(--color-texto-oscuro);
+}
+
+/* Listas */
+.list-group-item {
+    border: none;
+    padding: 1rem 1.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:nth-child(even) {
+    background-color: var(--color-gris-claro);
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+/* Títulos y texto */
+.card-title {
+    color: var(--color-turquesa);
+    font-weight: 700;
+}
+
+h1,h3, h4 {
+    color: #016065;
+    font-weight: 700;
+}
+
+.mb-4 h2 {
+    color:#5EBABF !important;
+}
+
+
+.descripcion-texto {
+    line-height: 1.6;
+    color: var(--color-gris-claro);
+}
+
+/* Botones */
+.btn-warning {
+    background-color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: var(--color-fucsia-hover);
+    border-color: var(--color-fucsia-hover);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Modal */
+.modal-header {
+    background-color: var(--color-turquesa);
+}
+
+.carousel-item img {
+    max-height: 500px;
+    object-fit: contain;
+    background-color: var(--color-gris-claro);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--color-turquesa);
+    border-radius: 50%;
+    padding: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gallery-main-img {
+        height: 300px;
+    }
+    
+    .gallery-thumbnail {
+        height: 60px;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+}
+
+/* Sombras y efectos */
+.shadow-lg {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Iconos */
+.fas {
+    color: var(--color-fucsia);
+}
+
+.card-header .fas {
+    color: white;
+}
+
+.gestion-card .card-header .fas {
+    color: var(--color-turquesa);
+}
+

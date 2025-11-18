@@ -261,4 +261,38 @@ class MascotaController extends Controller
 
         return view('mascotas.por-estado', compact('mascotas', 'estado'));
     }
+
+
+
+
+    // Metodos publicos para que los usaurios puedan navegar por mascotas
+
+    public function publicIndex(Request $request)
+    {
+        // Solo mascotas en adopción
+        $query = Mascota::where('estado', 'En adopcion')->with('fundacion');
+
+        // Filtros simples
+        if ($request->has('especie') && $request->especie != '') {
+            $query->where('Especie', $request->especie);
+        }
+
+        if ($request->has('genero') && $request->genero != '') {
+            $query->where('Genero', $request->genero);
+        }
+
+        $mascotas = $query->orderBy('created_at', 'desc')->paginate(12);
+        $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
+
+        return view('mascotas.public-index', compact('mascotas', 'especies'));
+    }
+
+    public function publicShow($id)
+    {
+        $mascota = Mascota::where('estado', 'En adopcion')
+            ->with('fundacion')
+            ->findOrFail($id);
+
+        return view('mascotas.public-show', compact('mascota'));
+    }
 }

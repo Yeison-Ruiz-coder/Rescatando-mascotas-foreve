@@ -23,22 +23,20 @@
                          class="card-img-top gallery-main-img"
                          alt="Foto de {{ $mascota->Nombre_mascota }}" 
                          id="foto-principal"
-                         style="height: 400px; object-fit: cover; cursor: pointer;"
                          data-bs-toggle="modal" 
                          data-bs-target="#galeriaModal">
                 @else
                     <img src="{{ Storage::url($mascota->Foto) }}" 
-                         class="card-img-top"
-                         alt="Foto de {{ $mascota->Nombre_mascota }}" 
-                         style="height: 400px; object-fit: cover;">
+                         class="card-img-top gallery-main-img"
+                         alt="Foto de {{ $mascota->Nombre_mascota }}">
                 @endif
                 
                 <div class="card-body bg-light text-center">
-                    <h1 class="card-title text-primary display-4 fw-bolder mb-0">{{ $mascota->Nombre_mascota }}</h1>
-                    <p class="text-muted lead">{{ $mascota->Especie }} en Adopción</p>
+                    <h1 class="card-title display-4 fw-bolder mb-0">{{ $mascota->Nombre_mascota }}</h1>
+                    <p class="text-muted lead">{{ $mascota->Especie }} - {{ $mascota->estado }}</p>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-success fs-6">{{ $mascota->estado }}</span>
+                        <span class="badge estado-badge fs-6">{{ $mascota->estado }}</span>
                         <span class="text-secondary fw-bold">{{ $mascota->Edad_aprox }} años</span>
                     </div>
                     @if($mascota->galeria_fotos && count($mascota->galeria_fotos) > 1)
@@ -54,7 +52,7 @@
             @if($mascota->galeria_fotos && count($mascota->galeria_fotos) > 1)
             <div class="row g-2 mb-4">
                 <div class="col-12">
-                    <h5 class="text-primary mb-3">
+                    <h5 class="mb-3">
                         <i class="fas fa-th me-2"></i>Galería de Fotos
                     </h5>
                 </div>
@@ -63,14 +61,13 @@
                     <div class="thumbnail-container position-relative">
                         <img src="{{ Storage::url($foto['ruta']) }}" 
                              class="img-thumbnail gallery-thumbnail {{ $index === 0 ? 'active' : '' }}"
-                             style="height: 80px; object-fit: cover; width: 100%; cursor: pointer;"
                              onclick="cambiarFotoPrincipal('{{ Storage::url($foto['ruta']) }}', {{ $index }})"
                              alt="{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}"
                              data-bs-toggle="modal" 
                              data-bs-target="#galeriaModal"
                              data-index="{{ $index }}">
                         @if($index === 0)
-                            <span class="badge bg-primary position-absolute top-0 start-0">Principal</span>
+                            <span class="badge position-absolute top-0 start-0">Principal</span>
                         @endif
                     </div>
                 </div>
@@ -78,15 +75,31 @@
             </div>
             @endif
 
-            {{-- Sección de Adopción --}}
-            <div class="mt-4 p-4 bg-primary text-white rounded shadow">
-                <h3 class="fw-bold">¿Listo para Adoptar?</h3>
-                <p>Si {{ $mascota->Nombre_mascota }} te ha robado el corazón, ¡inicia el proceso de solicitud ahora!</p>
-                
-                <a href="{{ route('adopciones.create') }}?mascota_id={{ $mascota->id }}" class="btn btn-warning btn-lg w-100 fw-bold">
-                    Iniciar Solicitud de Adopción
-                </a>
-                <small class="d-block mt-2 text-center text-light">Serás redirigido a un formulario de registro/inicio de sesión.</small>
+            {{-- Información de Gestión --}}
+            <div class="card shadow gestion-card">
+                <div class="card-header fw-bold">
+                    <i class="fas fa-cog me-2"></i>Información de Gestión
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>ID de Mascota:</strong>
+                        <span class="badge bg-secondary">{{ $mascota->id }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Fecha de Creación:</strong>
+                        <br>{{ $mascota->created_at->format('d/m/Y H:i') }}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Última Actualización:</strong>
+                        <br>{{ $mascota->updated_at->format('d/m/Y H:i') }}
+                    </div>
+                    @if($mascota->Fecha_salida)
+                    <div class="mb-3">
+                        <strong>Fecha de Salida:</strong>
+                        <br>{{ \Carbon\Carbon::parse($mascota->Fecha_salida)->format('d/m/Y') }}
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -95,21 +108,25 @@
             
             {{-- Descripción --}}
             <div class="mb-4">
-                <h2 class="text-primary fw-bold">
+                <h2 class="fw-bold">
                     <i class="fas fa-heart me-2"></i>Sobre Mí
                 </h2>
-                <p class="fs-5">{{ $mascota->Descripcion }}</p>
+                <p class="fs-5 descripcion-texto">{{ $mascota->Descripcion }}</p>
             </div>
 
             {{-- Detalles Técnicos --}}
             <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white fw-bold">
+                <div class="card-header fw-bold">
                     <i class="fas fa-info-circle me-2"></i>Ficha Técnica
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
+                        <strong>Especie:</strong> 
+                        <span class="badge">{{ $mascota->Especie }}</span>
+                    </li>
+                    <li class="list-group-item">
                         <strong>Género:</strong> 
-                        <span class="badge bg-info">{{ $mascota->Genero }}</span>
+                        <span class="badge">{{ $mascota->Genero }}</span>
                     </li>
                     <li class="list-group-item">
                         <strong>Lugar de Rescate:</strong> {{ $mascota->Lugar_rescate }}
@@ -127,12 +144,12 @@
             
             {{-- Razas --}}
             <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white fw-bold">
+                <div class="card-header fw-bold">
                     <i class="fas fa-paw me-2"></i>Raza / Cruce
                 </div>
                 <div class="card-body">
                     @forelse ($mascota->razas as $raza)
-                        <span class="badge bg-info text-dark fs-6 me-2 mb-2">{{ $raza->nombre_raza }}</span>
+                        <span class="badge raza-badge fs-6 me-2 mb-2">{{ $raza->nombre_raza }}</span>
                     @empty
                         <p class="text-muted">No hay información de raza registrada.</p>
                     @endforelse
@@ -141,7 +158,7 @@
 
             {{-- Vacunas --}}
             <div class="card shadow">
-                <div class="card-header bg-secondary text-white fw-bold">
+                <div class="card-header fw-bold">
                     <i class="fas fa-syringe me-2"></i>Historial de Vacunación
                 </div>
                 <div class="card-body">
@@ -167,7 +184,7 @@
 <div class="modal fade" id="galeriaModal" tabindex="-1" aria-labelledby="galeriaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header text-white">
                 <h5 class="modal-title" id="galeriaModalLabel">
                     Galería de {{ $mascota->Nombre_mascota }}
                 </h5>
@@ -180,7 +197,6 @@
                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                             <img src="{{ Storage::url($foto['ruta']) }}" 
                                  class="d-block w-100 rounded"
-                                 style="max-height: 500px; object-fit: contain;"
                                  alt="{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}">
                             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
                                 <h5>{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}</h5>
@@ -213,31 +229,7 @@
 @endsection
 
 @section('styles')
-<style>
-.gallery-thumbnail {
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.gallery-thumbnail:hover, 
-.gallery-thumbnail.active {
-    border-color: #007bff;
-    transform: scale(1.05);
-}
-
-.thumbnail-container {
-    transition: all 0.3s ease;
-}
-
-.gallery-main-img:hover {
-    opacity: 0.9;
-}
-
-.carousel-item {
-    text-align: center;
-    background: #f8f9fa;
-}
-</style>
+<link rel="stylesheet" href="{{ asset('css/pages/mascotas/show.css') }}">
 @endsection
 
 @section('scripts')

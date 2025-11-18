@@ -1,28 +1,31 @@
-/* ESTILOS PARA LA PÁGINA CREAR MASCOTA */
+/* ESTILOS PARA LA PÁGINA EDITAR MASCOTA */
 
 body {
     background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
     min-height: 100vh;
 }
 
-
 /* Header Principal */
-.create-mascota-header {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+.edit-mascota-header {
+    background: linear-gradient( #016065,#10141f);
     color: white;
     padding: 3rem 2rem;
     border-radius: 20px;
     margin-bottom: 2rem;
 }
 
-.create-mascota-header h1 {
+.edit-mascota-header h1 {
     color: white !important;
     margin-bottom: 1rem;
 }
 
-.create-mascota-header .lead {
-    color: rgba(255, 255, 255, 0.95) !important;
+.edit-mascota-header .lead {
+    color: rgba(255, 255, 255, 0.9) !important;
     font-size: 1.2rem;
+}
+
+.text-turquesa {
+    color: var(--color-turquesa) !important;
 }
 
 /* Card del Formulario */
@@ -175,54 +178,49 @@ textarea.form-control-custom {
     min-height: 120px;
 }
 
-/* Preview de Galería */
-.preview-container {
-    background-color: var(--color-gris-claro);
+/* Imagen Actual */
+.current-image {
+    text-align: center;
+}
+
+.current-img {
+    max-height: 200px;
+    max-width: 100%;
     border-radius: 12px;
-    padding: 1rem;
+    border: 3px solid var(--color-turquesa);
 }
 
-.preview-title {
-    margin-bottom: 1rem;
-    font-weight: 600;
-    color: var(--color-turquesa);
+/* Galería de Fotos */
+.gallery-upload-container {
+    margin-top: 1rem;
 }
 
-.preview-item {
+.current-gallery .gallery-item {
     position: relative;
-    margin-bottom: 1rem;
-    border-radius: 8px;
     overflow: hidden;
-    background: white;
-    padding: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.preview-image {
-    width: 100%;
+.current-gallery .gallery-item img {
     height: 100px;
     object-fit: cover;
-    border-radius: 6px;
+    transition: transform 0.3s ease;
 }
 
-.preview-badge {
+.current-gallery .gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: var(--color-fucsia);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-.preview-info {
     text-align: center;
-    margin-top: 0.5rem;
     font-size: 0.8rem;
-    color: var(--color-texto-oscuro);
-    font-weight: 500;
 }
 
 /* Texto de Ayuda */
@@ -316,12 +314,12 @@ textarea.form-control-custom {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .create-mascota-header {
+    .edit-mascota-header {
         padding: 2rem 1rem;
         border-radius: 15px;
     }
     
-    .create-mascota-header h1 {
+    .edit-mascota-header h1 {
         font-size: 2rem;
     }
     
@@ -357,14 +355,10 @@ textarea.form-control-custom {
     .multi-select {
         max-height: 100px;
     }
-    
-    .preview-item {
-        margin-bottom: 0.5rem;
-    }
 }
 
 @media (max-width: 576px) {
-    .create-mascota-header {
+    .edit-mascota-header {
         text-align: center;
         padding: 1.5rem 1rem;
     }
@@ -377,10 +371,6 @@ textarea.form-control-custom {
     .form-control-custom,
     .form-select-custom {
         padding: 0.65rem 0.85rem;
-    }
-    
-    .preview-image {
-        height: 80px;
     }
 }
 
@@ -396,8 +386,7 @@ textarea.form-control-custom {
 .btn-submit,
 .btn-cancel,
 .form-check-input,
-.multi-select option,
-.preview-item {
+.multi-select option {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

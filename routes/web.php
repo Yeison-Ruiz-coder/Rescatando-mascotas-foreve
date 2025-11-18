@@ -24,6 +24,20 @@ use App\Http\Controllers\TipoVacunaController;
 // PÁGINA DE INICIO
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 
+
+// RUTAS PÚBLICAS
+Route::get('/', [MascotaController::class, 'publicIndex'])->name('inicio');
+Route::get('/mascotas-disponibles', [MascotaController::class, 'publicIndex'])->name('mascotas.public.index');
+Route::get('/mascota/{id}', [MascotaController::class, 'publicShow'])->name('mascotas.public.show');
+
+// Para el formulario de solicitud
+Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'])
+    ->name('adopciones.solicitar');
+
+// Para procesar la solicitud
+Route::post('/adopciones/solicitar', [AdopcionController::class, 'solicitarStore'])
+    ->name('adopciones.solicitar.store');
+    
 // RUTAS PÚBLICAS COMPLETAS (para desarrollo)
 Route::resource('donaciones', DonacionController::class);
 Route::resource('mascotas', MascotaController::class);
@@ -48,6 +62,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //Route::resource('admin/mascotas', MascotaController::class);
 Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
+
+
 
 // RUTAS DE AUTENTICACIÓN
 require __DIR__.'/auth.php';

@@ -81,4 +81,6 @@ class Usuario extends Model
     {
         return trim("{$this->Nombre_1} {$this->Apellido_1}");
     }
+
+    
 }

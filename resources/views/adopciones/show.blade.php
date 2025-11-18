@@ -1,165 +1,258 @@
 @extends('layouts.app')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/pages/adopciones/show.css') }}">
+@endsection
+
 @section('content')
-<div class="container py-5">
-    
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Error:</strong> Por favor, revisa los campos del formulario de Entrevista/Actualización.
-        </div>
-    @endif
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="fw-bold text-primary">Gestión de Adopción #{{ $adopcion->id }}</h1>
-        <a href="{{ route('adopciones.index') }}" class="btn btn-secondary">
-            ← Volver a Solicitudes
-        </a>
-    </div>
-
-    <div class="row">
-        {{-- COLUMNA IZQUIERDA: DETALLES Y CAMBIO DE ESTADO --}}
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow-lg mb-4">
-                <div class="card-header bg-info text-white">
-                    <h4 class="fw-bold mb-0">Detalle de la Solicitud</h4>
-                </div>
-                <div class="card-body">
-                    
-                    {{-- Información de Mascota --}}
-                    <h5 class="text-success fw-bold">Mascota Solicitada:</h5>
-                    <p class="mb-1">
-                        <a href="{{ route('mascotas.show', $adopcion->mascota->id) }}" target="_blank" class="fw-bold text-decoration-none">
-                            {{ $adopcion->mascota->Nombre_mascota }} ({{ $adopcion->mascota->Especie }})
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- CARD PRINCIPAL -->
+            <div class="card card-detalle-adopcion animate-slide-in">
+                <!-- HEADER -->
+                <div class="card-header card-header-detalle d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-paw me-3 fa-lg"></i>
+                        <div>
+                            <h4 class="mb-0">Detalle de Adopción</h4>
+                            <small class="opacity-75">ID: #{{ $adopcion->id }}</small>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <a href="{{ route('adopciones.edit', $adopcion->id) }}" class="btn btn-light btn-sm">
+                            <i class="fas fa-edit me-2"></i>Editar
                         </a>
-                    </p>
-                    <p class="mb-3"><img src="{{ asset('storage/' . $adopcion->mascota->Foto) }}" alt="Mascota" style="width: 80px; height: 80px; object-fit: cover;" class="rounded-circle"></p>
-
-                    {{-- Información de Solicitante --}}
-                    <h5 class="text-success fw-bold mt-3">Datos del Solicitante:</h5>
-                    <p class="mb-1"><strong>Nombre:</strong> {{ $adopcion->usuario->Nombre_1 }} {{ $adopcion->usuario->Apellido_1 }}</p>
-                    <p class="mb-1"><strong>Email:</strong> {{ $adopcion->usuario->Email }}</p>
-                    <p class="mb-1"><strong>Teléfono:</strong> {{ $adopcion->usuario->Telefono }}</p>
-                    <p class="mb-1"><strong>Dirección Registrada:</strong> {{ $adopcion->usuario->Direccion }}</p>
-
-                    <hr>
-
-                    {{-- Datos de la Adopción --}}
-                    <p class="mb-1"><strong>Lugar de Adopción:</strong> {{ $adopcion->Lugar_adopcion }}</p>
-                    <p class="mb-1"><strong>Fecha de Solicitud:</strong> {{ \Carbon\Carbon::parse($adopcion->Fecha_adopcion)->format('d/m/Y') }}</p>
-                    <p class="mb-1"><strong>Estado Actual:</strong> 
-                        @php
-                            $badgeClass = match ($adopcion->estado) {
-                                'Aprobado' => 'bg-success',
-                                'Rechazado' => 'bg-danger',
-                                default => 'bg-warning text-dark',
-                            };
-                        @endphp
-                        <span class="badge {{ $badgeClass }} fs-6">{{ $adopcion->estado }}</span>
-                    </p>
+                        <a href="{{ route('adopciones.index') }}" class="btn btn-light btn-sm">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            {{-- FORMULARIO DE CAMBIO DE ESTADO --}}
-            <div class="card shadow">
-                <div class="card-header bg-danger text-white">
-                    <h4 class="fw-bold mb-0">Actualizar Estado de la Adopción</h4>
-                </div>
-                <div class="card-body">
-                    {{-- La ruta update usa el método PUT/PATCH --}}
-                    <form action="{{ route('adopciones.update', $adopcion->id) }}" method="POST">
-                        @csrf
-                        @method('PUT') 
-                        
-                        <div class="mb-3">
-                            <label for="estado" class="form-label">Nuevo Estado:</label>
-                            <select name="estado" id="estado" class="form-select" required>
-                                <option value="En proceso" {{ $adopcion->estado == 'En proceso' ? 'selected' : '' }}>En proceso</option>
-                                <option value="Aprobado" {{ $adopcion->estado == 'Aprobado' ? 'selected' : '' }}>Aprobado</option>
-                                <option value="Rechazado" {{ $adopcion->estado == 'Rechazado' ? 'selected' : '' }}>Rechazado</option>
-                            </select>
+                <div class="card-body p-4">
+                    <!-- ALERTAS -->
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                            <i class="fas fa-check-circle me-2 fa-lg"></i>
+                            <div class="flex-grow-1">{{ session('success') }}</div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
-                        
-                        {{-- Opcional: Campos ocultos necesarios para el update del controlador --}}
-                        <input type="hidden" name="Lugar_adopcion" value="{{ $adopcion->Lugar_adopcion }}">
-                        <input type="hidden" name="Fecha_adopcion" value="{{ $adopcion->Fecha_adopcion }}">
-                        <input type="hidden" name="usuario_id" value="{{ $adopcion->usuario_id }}">
-                        <input type="hidden" name="mascota_id" value="{{ $adopcion->mascota_id }}">
+                    @endif
 
-                        <button type="submit" class="btn btn-danger w-100 fw-bold">Guardar Cambio de Estado</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+                    <div class="row">
+                        <!-- INFORMACIÓN DE LA MASCOTA -->
+                        <div class="col-md-6 mb-4">
+                            <div class="seccion-info h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="icono-seccion icono-mascota">
+                                        <i class="fas fa-paw fa-lg"></i>
+                                    </div>
+                                    <h5 class="mb-0">Información de la Mascota</h5>
+                                </div>
+                                
+                                @if($adopcion->mascota)
+                                    <div class="info-item">
+                                        <strong>Nombre:</strong>
+                                        <span class="valor">{{ $adopcion->mascota->Nombre_mascota }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Especie:</strong>
+                                        <span class="valor">{{ $adopcion->mascota->Especie }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Raza:</strong>
+                                        <span class="valor">{{ $adopcion->mascota->Raza }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Edad:</strong>
+                                        <span class="valor">{{ $adopcion->mascota->Edad_aprox }} años</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Género:</strong>
+                                        <span class="valor">{{ $adopcion->mascota->Genero }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Estado:</strong>
+                                        <span class="valor">
+                                            <span class="badge badge-estado-detalle 
+                                                @if($adopcion->mascota->estado == 'Adoptado') bg-success
+                                                @elseif($adopcion->mascota->estado == 'En adopcion') bg-warning
+                                                @else bg-info
+                                                @endif">
+                                                {{ $adopcion->mascota->estado }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                @else
+                                    <div class="alerta-informativa">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        Mascota no encontrada en el sistema
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
-        {{-- COLUMNA DERECHA: HISTORIAL Y NUEVA ENTREVISTA --}}
-        <div class="col-lg-6">
-            
-            {{-- HISTORIAL DE ENTREVISTAS --}}
-            <div class="card shadow mb-4">
-                <div class="card-header bg-secondary text-white">
-                    <h4 class="fw-bold mb-0">Historial de Seguimiento (Entrevistas)</h4>
-                </div>
-                <div class="card-body" style="max-height: 400px; overflow-y: auto;">
-                    @forelse ($adopcion->entrevistas as $entrevista)
-                        <div class="border-start border-3 p-3 mb-3 
-                            @if($entrevista->resultado == 'Aprobado') border-success bg-light-success @elseif($entrevista->resultado == 'Rechazado') border-danger bg-light-danger @else border-warning bg-light @endif">
-                            <p class="small text-muted mb-1">
-                                <span class="fw-bold">Fecha:</span> {{ \Carbon\Carbon::parse($entrevista->fecha_entrevista)->format('d/m/Y') }} 
-                                | <span class="fw-bold">Resultado:</span> {{ $entrevista->resultado }}
-                            </p>
-                            <p class="mb-1">
-                                <strong>Notas:</strong> {{ $entrevista->notas }}
-                            </p>
-                            <p class="mb-0 small text-end">
-                                <small>Realizada por: {{ $entrevista->administrador ? $entrevista->administrador->Nombre_1 : 'Administrador Desconocido' }}</small>
-                            </p>
+                        <!-- INFORMACIÓN DEL ADOPTANTE -->
+                        <div class="col-md-6 mb-4">
+                            <div class="seccion-info h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="icono-seccion icono-usuario">
+                                        <i class="fas fa-user fa-lg"></i>
+                                    </div>
+                                    <h5 class="mb-0">Información del Adoptante</h5>
+                                </div>
+                                
+                                @if($adopcion->usuario)
+                                    <div class="info-item">
+                                        <strong>Nombre completo:</strong>
+                                        <span class="valor">{{ $adopcion->usuario->Nombre_1 }} {{ $adopcion->usuario->Apellido_1 }}</span>
+                                    </div>
+                                    @if($adopcion->usuario->Nombre_2 || $adopcion->usuario->Apellido_2)
+                                    <div class="info-item">
+                                        <strong>Nombres adicionales:</strong>
+                                        <span class="valor">{{ $adopcion->usuario->Nombre_2 }} {{ $adopcion->usuario->Apellido_2 }}</span>
+                                    </div>
+                                    @endif
+                                    <div class="info-item">
+                                        <strong>Email:</strong>
+                                        <span class="valor">{{ $adopcion->usuario->Email }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Teléfono:</strong>
+                                        <span class="valor">{{ $adopcion->usuario->Telefono }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Dirección:</strong>
+                                        <span class="valor">{{ $adopcion->usuario->Direccion }}</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <strong>Tipo de usuario:</strong>
+                                        <span class="valor">
+                                            <span class="badge badge-estado-detalle bg-secondary">
+                                                {{ $adopcion->usuario->tipo }}
+                                            </span>
+                                        </span>
+                                    </div>
+                                @else
+                                    <div class="alerta-informativa">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        Usuario adoptante no encontrado en el sistema
+                                    </div>
+                                @endif
+                            </div>
                         </div>
-                    @empty
-                        <p class="text-muted text-center">Aún no hay registros de seguimiento para esta solicitud.</p>
-                    @endforelse
-                </div>
-            </div>
-            
-            {{-- FORMULARIO PARA AGREGAR NUEVA ENTREVISTA --}}
-            <div class="card shadow">
-                <div class="card-header bg-success text-white">
-                    <h4 class="fw-bold mb-0">Registrar Nuevo Seguimiento</h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('entrevistas.store') }}" method="POST">
-                        @csrf
-                        
-                        {{-- Clave foránea oculta --}}
-                        <input type="hidden" name="adopcion_id" value="{{ $adopcion->id }}">
-                        
-                        {{-- Asumimos que el admin logueado es ID 1 para este ejemplo. Debes cambiarlo por Auth::id() --}}
-                        <input type="hidden" name="admin_id" value="1"> 
-                        
-                        <div class="mb-3">
-                            <label for="fecha_entrevista" class="form-label">Fecha de Seguimiento:</label>
-                            <input type="date" name="fecha_entrevista" id="fecha_entrevista" 
-                                   class="form-control" value="{{ old('fecha_entrevista', date('Y-m-d')) }}" required>
+                    </div>
+
+                    <!-- SEPARADOR -->
+                    <hr class="separador-seccion">
+
+                    <!-- INFORMACIÓN DE LA ADOPCIÓN -->
+                    <div class="seccion-info">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icono-seccion icono-adopcion">
+                                <i class="fas fa-file-contract fa-lg"></i>
+                            </div>
+                            <h5 class="mb-0">Información de la Adopción</h5>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="resultado" class="form-label">Resultado:</label>
-                            <select name="resultado" id="resultado" class="form-select" required>
-                                <option value="Pendiente">Pendiente (Aún en evaluación)</option>
-                                <option value="Aprobado">Aprobado (Pasa a la siguiente fase)</option>
-                                <option value="Rechazado">Rechazado (No cumplió requisitos)</option>
-                            </select>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Fecha de Adopción:</strong>
+                                    <span class="valor">{{ $adopcion->Fecha_adopcion->format('d/m/Y') }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Lugar de Adopción:</strong>
+                                    <span class="valor">{{ $adopcion->Lugar_adopcion }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Estado del proceso:</strong>
+                                    <span class="valor">
+                                        <span class="badge badge-estado-detalle 
+                                            @if($adopcion->estado == 'Aprobado') bg-success
+                                            @elseif($adopcion->estado == 'En proceso') bg-warning
+                                            @else bg-danger
+                                            @endif">
+                                            {{ $adopcion->estado }}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Fecha de Registro:</strong>
+                                    <span class="valor">{{ $adopcion->created_at->format('d/m/Y H:i') }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>Última Actualización:</strong>
+                                    <span class="valor">{{ $adopcion->updated_at->format('d/m/Y H:i') }}</span>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="notas" class="form-label">Notas / Comentarios:</label>
-                            <textarea name="notas" id="notas" class="form-control" rows="3" required>{{ old('notas') }}</textarea>
+
+                        <!-- INFORMACIÓN ADICIONAL -->
+                        @if($adopcion->fundacion)
+                        <div class="info-adicional mt-3">
+                            <div class="info-item">
+                                <strong>Fundación:</strong>
+                                <span class="valor">{{ $adopcion->fundacion->Nombre_1 }}</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Dirección de la Fundación:</strong>
+                                <span class="valor">{{ $adopcion->fundacion->Direccion }}</span>
+                            </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-success w-100 fw-bold">Guardar Seguimiento</button>
-                    </form>
+                        @endif
+
+                        @if($adopcion->administrador)
+                        <div class="info-adicional mt-3">
+                            <div class="info-item">
+                                <strong>Administrador Responsable:</strong>
+                                <span class="valor">{{ $adopcion->administrador->Nombre_1 }} {{ $adopcion->administrador->Apellido_1 }}</span>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if($adopcion->razon_rechazo)
+                        <div class="alerta-rechazo mt-3">
+                            <div class="info-item">
+                                <strong>Razón de Rechazo:</strong>
+                                <span class="valor">{{ $adopcion->razon_rechazo }}</span>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if($adopcion->fecha_cierre)
+                        <div class="info-adicional mt-3">
+                            <div class="info-item">
+                                <strong>Fecha de Cierre:</strong>
+                                <span class="valor">{{ $adopcion->fecha_cierre->format('d/m/Y') }}</span>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+
+                    <!-- BOTONES DE ACCIÓN -->
+                    <div class="botones-accion">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ route('adopciones.index') }}" class="btn btn-volver">
+                                <i class="fas fa-arrow-left me-2"></i>Volver al Listado
+                            </a>
+                            <div class="btn-group-acciones-detalle">
+                                <a href="{{ route('adopciones.edit', $adopcion->id) }}" class="btn btn-editar-detalle">
+                                    <i class="fas fa-edit me-2"></i>Editar Adopción
+                                </a>
+                                <form action="{{ route('adopciones.destroy', $adopcion->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-eliminar-detalle" 
+                                            onclick="return confirm('¿Estás seguro de eliminar esta adopción? Esta acción no se puede deshacer.')">
+                                        <i class="fas fa-trash me-2"></i>Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -63,4 +63,9 @@ class Mascota extends Model
         return $this->belongsToMany(TipoVacuna::class, 'mascota_vacuna', 'mascota_id', 'tipos_vacunas_id')
                     ->withPivot('fecha_aplicacion');
     }
+
+    public function solicitudAdopcion()
+    {
+        return $this->hasMany(solicitudAdopcion::class);
+    }
 }

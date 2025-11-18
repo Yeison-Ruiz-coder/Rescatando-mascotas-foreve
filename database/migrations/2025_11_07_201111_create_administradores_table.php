@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('Telefono')->unique();
             $table->string('Email')->unique();
             $table->string('Password_admin');
-            $table->Float('Sueldo_admin');
+            $table->decimal('Sueldo_admin', 10, 2);
             $table->timestamps();
         });
     }
