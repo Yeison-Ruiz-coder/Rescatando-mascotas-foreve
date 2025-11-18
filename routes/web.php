@@ -32,6 +32,7 @@ Route::view('/rescata','rescata')->name('rescata');
 Route::view('/contacto','contacto')->name('contacto');
 Route::view('/servicios','servicios')->name('servicios');
 //Route::view('/servicios','servicios')->name('servicios');
+//Route::view('/servicios','servicios')->name('servicios');
 
 
 // Rutas con autenticación
