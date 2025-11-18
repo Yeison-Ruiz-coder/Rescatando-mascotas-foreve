@@ -18,6 +18,7 @@ use App\Http\Controllers\DonacionController;
 use App\Http\Controllers\RescateController;
 use App\Http\Controllers\DashboardController;
 
+
 // Página pública
 Route::get('/', function () {
     return view('welcome');
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('notificaciones', NotificacionController::class);
     Route::resource('donaciones', DonacionController::class);
     Route::resource('rescates', RescateController::class);
+    //Route::resource('rescates', RescateController::class);
 
     // Rutas personalizadas
     Route::get('/mascotas/estado/{estado}', [MascotaController::class, 'porEstado'])->name('mascotas.estado');
