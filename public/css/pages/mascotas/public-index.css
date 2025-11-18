@@ -1,0 +1,326 @@
+/* DISEÑO MODERNO - INDEX DE MASCOTAS */
+body {
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;
+}
+
+.hero-mascotas {
+    background: linear-gradient(135deg, var(--color-turquesa) 0%, black 100%);
+    color:white;
+    padding: 4rem 0;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-mascotas::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 3000px;
+    height: 3000px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+
+
+.hero-mascotas h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #FEA4C4;
+}
+
+.hero-mascotas .lead {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* FILTROS MODERNOS */
+.filtros-modernos {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(255, 0, 0, 0.1);
+    border: 1px solid rgb(4, 61, 65);
+    margin-bottom: 2rem;
+}
+
+.filtros-modernos .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.filtros-modernos .form-select:focus {
+    border-color: var(--color-turquesa);
+    box-shadow: 0 0 0 0.2rem rgba(27, 142, 149, 0.1);
+}
+
+.btn-buscar-moderno {
+    background: linear-gradient(135deg, var(--color-fucsia), var(--color-fucsia-hover));
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-buscar-moderno:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(253, 69, 134, 0.4);
+    color: white;
+}
+
+
+
+/* CONTADOR */
+.contador-mascotas {
+    background: linear-gradient(135deg, #667eea 0%, #FD4586 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* TARJETAS DE MASCOTAS MODERNAS */
+.card-mascota-moderna {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    height: 100%;
+}
+
+.card-mascota-moderna:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-imagen-container {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+}
+
+.card-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-mascota-moderna:hover .card-imagen-container img {
+    transform: scale(1.1);
+}
+
+.overlay-mascota {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-mascota-moderna:hover .overlay-mascota {
+    opacity: 1;
+}
+
+.badges-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+}
+
+.badge-moderno {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-especie-moderno {
+    background: #F80058;
+    color: white;
+}
+
+.badge-genero-moderno {
+    background: rgba(253, 69, 134, 0.9);
+    color: white;
+}
+
+.badge-edad-moderno {
+    background: #FEA4C4;
+    color: #000;
+}
+
+/* CONTENIDO DE LA CARD */
+.card-body-moderno {
+    padding: 1.5rem;
+}
+
+.nombre-mascota {
+    color: var(--color-turquesa);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.descripcion-mascota {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3; /* Propiedad estándar */
+    box-orient: vertical; /* Propiedad estándar */
+    overflow: hidden;
+}
+
+.info-fundacion {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--color-gris-claro);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.info-fundacion i {
+    color: var(--color-turquesa);
+    margin-right: 0.5rem;
+}
+
+.info-fundacion span {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* BOTÓN MODERNO */
+.btn-conocer-mas {
+    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.btn-conocer-mas:hover {
+    background: linear-gradient(135deg, #1a7a80, var(--color-turquesa));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(27, 142, 149, 0.4);
+}
+
+/* ESTADO VACÍO */
+.estado-vacio {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.estado-vacio i {
+    color: var(--color-turquesa);
+    margin-bottom: 1rem;
+}
+
+.estado-vacio h4 {
+    color: var(--color-texto-oscuro);
+    margin-bottom: 1rem;
+}
+
+/* PAGINACIÓN MODERNA */
+.paginacion-moderna .pagination {
+    justify-content: center;
+}
+
+.paginacion-moderna .page-link {
+    border: none;
+    color: var(--color-turquesa);
+    padding: 0.75rem 1.5rem;
+    margin: 0 0.25rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.paginacion-moderna .page-item.active .page-link {
+    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    border-color: var(--color-turquesa);
+}
+
+.paginacion-moderna .page-link:hover {
+    background: var(--color-gris-claro);
+    color: var(--color-turquesa);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-mascotas {
+        padding: 3rem 1rem;
+        border-radius: 15px;
+    }
+    
+    .hero-mascotas h1 {
+        font-size: 2rem;
+    }
+    
+    .filtros-modernos {
+        padding: 1.5rem;
+    }
+    
+    .card-imagen-container {
+        height: 220px;
+    }
+    
+    .badge-moderno {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-mascotas h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card-body-moderno {
+        padding: 1rem;
+    }
+    
+    .nombre-mascota {
+        font-size: 1.1rem;
+    }
+}

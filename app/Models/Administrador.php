@@ -57,4 +57,9 @@ class Administrador extends Model
     {
         return $this->hasMany(Rescate::class);
     }
+
+    public function solicitudAdopcion()
+    {
+        return $this->hasMany(solicitudAdopcion::class);
+    }
 }

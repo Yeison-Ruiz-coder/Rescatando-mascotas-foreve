@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_id')->nullable();
             $table->unsignedBigInteger('mascota_id')->nullable();
             $table->unsignedBigInteger('administrador_id')->nullable(); 
+            $table->unsignedBigInteger('fundacion_id')->nullable(); 
 
             $table->foreign('usuario_id')
             ->references('id')
@@ -38,6 +39,11 @@ return new class extends Migration
             ->references('id')
             ->on('administradores')
             ->onDelete('set null');
+
+            $table->foreign('fundacion_id') 
+                ->references('id')
+                ->on('fundaciones')
+                ->onDelete('set null');
 
             $table->timestamps();
         });

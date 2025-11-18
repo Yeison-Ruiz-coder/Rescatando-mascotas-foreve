@@ -4,19 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGaleriaFotosToMascotasTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::table('mascotas', function (Blueprint $table) {
-            $table->json('galeria_fotos')->nullable()->after('Foto');
-        });
+        
+        if (!Schema::hasColumn('mascotas', 'galeria_fotos')) {
+            Schema::table('mascotas', function (Blueprint $table) {
+                $table->json('galeria_fotos')->nullable()->after('Foto');
+            });
+        }
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::table('mascotas', function (Blueprint $table) {
-            $table->dropColumn('galeria_fotos');
-        });
+        
+        if (Schema::hasColumn('mascotas', 'galeria_fotos')) {
+            Schema::table('mascotas', function (Blueprint $table) {
+                $table->dropColumn('galeria_fotos');
+            });
+        }
     }
-}
+};

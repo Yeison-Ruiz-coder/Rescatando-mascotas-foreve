@@ -24,13 +24,6 @@ return new class extends Migration
             $table->string('Password_user');
             $table->enum ('tipo', ['Administrador','Rescatista','Voluntario', 'Cliente']);
 
-            $table->unsignedBigInteger('administrador_id')->nullable();
-
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
-
             $table->timestamps();
         });
     }
