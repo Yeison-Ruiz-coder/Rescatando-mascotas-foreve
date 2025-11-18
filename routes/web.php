@@ -28,6 +28,9 @@ Route::view('/','index')->name('index');
 Route::view('/about','about')->name('about');
 Route::view('/adopta','adopta')->name('adopta');
 Route::view('/rescata','rescata')->name('rescata');
+Route::view('/contacto','contacto')->name('contacto');
+Route::view('/servicios','servicios')->name('servicios');
+
 
 // Rutas con autenticación
 Route::middleware(['auth'])->group(function () {
