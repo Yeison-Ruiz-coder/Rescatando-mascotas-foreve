@@ -133,7 +133,7 @@ class MascotaController extends Controller
             }
 
             return redirect()->route('mascotas.create')
-                ->with('success', '¡Mascota registrada exitosamente con ' . count($galeriaFotos) . ' fotos!');
+                ->with('success', 'Se guardaron' . count($galeriaFotos) . ' fotos en la galería .');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Error al registrar la mascota: ' . $e->getMessage())

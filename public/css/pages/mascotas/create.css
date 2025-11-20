@@ -406,3 +406,149 @@ textarea.form-control-custom {
     background-color: var(--color-turquesa);
     color: white;
 }
+
+/* ESTILOS PARA MENSAJES DE ALERTA PERSONALIZADOS */
+.alert {
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+    border-left: 6px solid var(--color-turquesa);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fde8ec 0%, #f8d7da 100%);
+    border-left: 6px solid var(--color-fucsia);
+    color: #721c24;
+}
+
+.alert-success::before {
+    background: var(--color-turquesa);
+}
+
+.alert-danger::before {
+    background: var(--color-fucsia);
+}
+
+.alert-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.alert-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.alert-success .alert-icon {
+    color: var(--color-turquesa);
+}
+
+.alert-danger .alert-icon {
+    color: var(--color-fucsia);
+}
+
+.alert-text {
+    flex: 1;
+}
+
+.alert-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.alert-message {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.alert-details {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    padding: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-close:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+
+/* Animaciones para los mensajes */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.alert {
+    animation: slideInDown 0.5s ease-out;
+}
+
+/* Efecto de pulso para el ícono de éxito */
+.alert-success .alert-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .alert-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .alert-icon {
+        font-size: 1.5rem;
+    }
+    
+    .alert-title {
+        font-size: 1.1rem;
+    }
+}

@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('styles')
+@push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/edit.css') }}">
-@endsection
+@endpush
 
 @section('content')
 <div class="container-fluid px-3 px-lg-5 py-4">

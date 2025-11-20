@@ -34,11 +34,11 @@ Route::get('/mascota/{id}', [MascotaController::class, 'publicShow'])->name('mas
 Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'])
     ->name('adopciones.solicitar');
 
-// Para procesar la solicitud
+// Para procesar la solicitu
 Route::post('/adopciones/solicitar', [AdopcionController::class, 'solicitarStore'])
     ->name('adopciones.solicitar.store');
     
-// RUTAS PÚBLICAS COMPLETAS (para desarrollo)
+// RUTAS COMPLETAS (para desarrollo)
 Route::resource('donaciones', DonacionController::class);
 Route::resource('mascotas', MascotaController::class);
 Route::resource('adopciones', AdopcionController::class);

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('styles')
+@push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/public-index.css') }}?v=2.0">
-@endsection
+@endpush
 
 @section('content')
 <div class="container py-4">

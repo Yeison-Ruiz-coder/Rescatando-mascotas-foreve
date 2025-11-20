@@ -4,6 +4,57 @@ body {
     background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
     min-height: 100vh;
 }
+
+/*Botones de accion*/
+
+.btn-warning {
+    background-color: #016065 !important;
+    border-color: #02474b !important;
+    transition: all 0.3s ease-in-out !important;
+    transform: translateY(0);
+}
+
+.btn-warning:hover {
+    background-color: #02474b !important;
+    border-color: #013336 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(1, 96, 101, 0.4);
+}
+
+.btn-danger {
+    background-color: red !important;
+    border-color: #ff6b6b !important;
+    transition: all 0.3s ease-in-out !important;
+    transform: translateY(0);
+}
+
+.btn-danger:hover {
+    background-color: #cc0000 !important;
+    border-color: #b30000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(#016065) !important;
+    border-color: #1A2032 !important;
+    transition: all 0.3s ease-in-out !important;
+    transform: translateY(0);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(#02474b, #016065) !important;
+    border-color: #161b2b !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(1, 96, 101, 0.4);
+}
+
+/* Efecto adicional al hacer clic en cualquier botón */
+.btn:active {
+    transform: scale(0.98) !important;
+    transition: all 0.1s ease-in-out !important;
+}
+
 /* Foto principal */
 .gallery-main-img {
     height: 400px;
