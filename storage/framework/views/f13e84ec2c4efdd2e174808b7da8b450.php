@@ -1,0 +1,9 @@
+<!-- Botones de acción -->
+<div class="form-actions">
+    <button type="submit" class="btn btn-submit">
+        <i class="fas fa-paw me-2"></i>Registrar Mascota
+    </button>
+    <a href="<?php echo e(route('mascotas.index')); ?>" class="btn btn-cancel">
+        <i class="fas fa-times me-2"></i>Cancelar
+    </a>
+</div><?php /**PATH C:\Users\Personal\Desktop\rescatando-mascotas\resources\views/admin/mascotas/partials/create/form-actions.blade.php ENDPATH**/ ?>

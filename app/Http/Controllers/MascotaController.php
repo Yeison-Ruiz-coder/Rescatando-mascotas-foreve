@@ -38,7 +38,7 @@ class MascotaController extends Controller
         $estados = ['En adopcion', 'Rescatada', 'Adoptado'];
         $todasRazas = Raza::all();
 
-        return view('mascotas.index', compact('mascotas', 'especies', 'estados', 'todasRazas'));
+        return view('admin.mascotas.index', compact('mascotas', 'especies', 'estados', 'todasRazas'));
     }
 
     public function create()
@@ -48,7 +48,7 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
         $fundaciones = Fundacion::all();
 
-        return view('mascotas.create', compact('razas', 'vacunas', 'especies', 'fundaciones'));
+        return view('admin.mascotas.create', compact('razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
     public function store(Request $request)

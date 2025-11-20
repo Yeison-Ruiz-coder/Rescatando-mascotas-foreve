@@ -1,0 +1,2 @@
+
+<?php echo $__env->make('portals.admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Personal\Desktop\rescatando-mascotas\resources\views/home/home.blade.php ENDPATH**/ ?>

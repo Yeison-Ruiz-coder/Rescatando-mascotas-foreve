@@ -1,4 +1,10 @@
-@extends('layouts.admin')
+<!--Todo fue Migrado y reorganizado en componentes
+para revisar cambiar la ruta del controlador mascota en index. --> 
+
+
+
+
+@extends('portals.admin.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/index.css') }}">
@@ -275,4 +281,3 @@
     </div>
     @endif
 </div>
-@endsection

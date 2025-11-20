@@ -1,3 +1,8 @@
+<!--Todo fue Migrado y reorganizado en componentes
+para revisar cambiar la ruta del controlador mascota en index. --> 
+
+
+
 @extends('layouts.admin')
 
 @push('styles')
