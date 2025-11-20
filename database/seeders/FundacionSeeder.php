@@ -12,7 +12,7 @@ class FundacionSeeder extends Seeder
     {
         // Primero verificar si la tabla existe y tiene datos
         if (!\Illuminate\Support\Facades\Schema::hasTable('fundaciones')) {
-            $this->command->error('❌ La tabla fundaciones no existe!');
+            $this->command->error('La tabla fundaciones no existe!');
             return;
         }
 

@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('styles')
+@push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/index.css') }}">
-@endsection
+@endpush
 
 @section('content')
 <div class="container-fluid px-3 px-lg-5 py-4">
@@ -236,6 +236,7 @@
                                class="btn btn-outline-warning btn-sm">
                                 <i class="fas fa-edit me-1"></i>Editar
                             </a>
+                            
                         </div>
                     </div>
                 </div>

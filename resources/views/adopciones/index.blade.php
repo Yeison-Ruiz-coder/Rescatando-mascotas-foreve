@@ -1,11 +1,10 @@
-@extends('layouts.app')
-
-@section('styles')
+@extends('layouts.admin')
+@push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/index.css') }}">
-@endsection
+@endpush
 
 @section('content')
-<div class="container fade-in">
+<div class="container fade-in py-4 mb-5">
     <div class="row">
         <div class="col-12">
             <!-- HEADER -->

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('styles')
+@push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/solicitudes.css') }}">
-@endsection
+@endpush
 
 @section('content')
 <div class="container py-4">
