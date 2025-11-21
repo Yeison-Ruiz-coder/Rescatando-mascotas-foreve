@@ -1,0 +1,13 @@
+.alert-card.error {
+    border-color: #dc3545;
+    background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+}
+
+.alert-card.error .alert-header {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-bottom: 1px solid #dc3545;
+}
+
+.alert-card.error .alert-header h5 {
+    color: #721c24;
+}

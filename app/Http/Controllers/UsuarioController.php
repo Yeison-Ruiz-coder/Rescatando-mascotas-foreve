@@ -22,16 +22,14 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'Nombre_1' => 'required|string|max:255',
-            'Apellido_1' => 'required|string|max:255',
-            'Fecha_nacimiento' => 'required|date|unique:usuarios',
-            'Email' => 'required|email|unique:usuarios',
-            'Password_user' => 'required|string|min:6',
-            'tipo' => 'required|in:Administrador,Rescatista,Voluntario,Cliente'
-        ]);
 
-        Usuario::create($request->all());
+
+        $datos = $request->all();
+
+        
+        $datos['Password_user'] = bcrypt($request->Password_user);
+
+        Usuario::create($datos); // Usamos $datos hasheados
 
         return redirect()->route('usuarios.index')
             ->with('success', 'Usuario creado exitosamente.');
@@ -40,9 +38,9 @@ class UsuarioController extends Controller
     public function show($id)
     {
         $usuario = Usuario::with([
-            'administrador', 
-            'comentarios', 
-            'solicitudes', 
+            'administrador',
+            'comentarios',
+            'solicitudes',
             'suscripciones',
             'adopciones',
             'donaciones'

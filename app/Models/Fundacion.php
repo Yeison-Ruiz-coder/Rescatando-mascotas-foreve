@@ -33,4 +33,8 @@ class Fundacion extends Model
     {
         return $this->hasMany(Rescate::class);
     }
+
+    public function adopciones(){
+        return $this->hasMany(Adopcion::class);
+    }
 }

@@ -1,0 +1,143 @@
+
+
+
+.custom-footer {
+    position: relative;
+    background:linear-gradient( #1B8E95,#1B8E95,#81022f); 
+    color: var(--color-texto-claro);
+    padding: 0; 
+    overflow: hidden; 
+}
+
+.footer-content-wrapper {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    padding: 60px 0; 
+}
+
+.custom-footer::before,
+.custom-footer::after {
+    content: none !important;
+}
+
+/* Títulos y Listas */
+.footer-title, .footer-title-social {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-decoration: underline; 
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
+    text-align: left;
+}
+
+.footer-title-social {
+    text-align: center; 
+}
+
+.footer-list a, .footer-list li {
+    color: var(--color-texto-claro);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.footer-list a:hover {
+    color: #F80058; 
+}
+
+
+/* Columna de Redes Sociales (Íconos agrupados) */
+
+.footer-social-col {
+    text-align: center;
+}
+
+.social-icons {
+    display: inline-block; 
+    padding-top: 5px;
+}
+
+.social-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+    margin-bottom: 10px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px; 
+    height: 50px;
+    background-color: var(--color-texto-claro); 
+    color: var(--color-texto-oscuro); 
+    border-radius: 50%;
+    font-size: 1.5rem;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+    background-color: var(--color-fucsia); 
+    color: var(--color-texto-claro); 
+}
+
+.custom-footer .footer-logo {
+    width: 100px; 
+    height: auto; 
+    border-radius: 4px;
+}
+
+
+/* SECCIÓN INFERIOR NEGRA (.footer-bottom) */
+
+
+.footer-bottom {
+    background-color: #000000a4; 
+    padding: 15px 0 15px; 
+    margin-top: 0;
+}
+
+.copyright-text {
+    font-size: 0.85rem;
+    opacity: 1; 
+    margin-bottom: 0; 
+}
+
+.legal-links a {
+    color: var(--color-texto-claro); 
+    opacity: 1;
+    font-size: 0.85rem;
+    padding: 0 10px;
+    transition: color 0.3s;
+}
+
+.legal-links a:hover {
+    color: #F80058; 
+    text-decoration: underline;
+    opacity: 1;
+}
+
+
+/* Responsividad para móviles */
+
+@media (max-width: 991px) {
+    .custom-footer {
+
+        padding: 0;
+    }
+    .footer-title, .footer-title-social, .footer-mission {
+        text-align: center;
+    }
+    .footer-list {
+        padding-left: 0;
+        text-align: center;
+    }
+    .footer-logo-col, .footer-section {
+        margin-bottom: 30px;
+    }
+}

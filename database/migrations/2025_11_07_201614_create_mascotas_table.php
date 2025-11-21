@@ -16,15 +16,16 @@ return new class extends Migration
             $table->string('Nombre_mascota');
             $table->string('Especie')->nullable();
             $table->string('Raza');
-            $table->integer('Edad_aprox')->unique();
-            $table->string('Genero')->unique();
+            $table->integer('Edad_aprox');
+            $table->string('Genero');
             $table->enum ('estado', ['Adoptado','En adopcion','Rescatada']);
-            $table->string('Lugar_rescate')->unique();
+            $table->string('Lugar_rescate');
             $table->text('Descripcion');
             $table->text('Foto');
-            $table->string('vacunas')->unique();
-            $table->date('Fecha_ingreso')->unique();
-            $table->date('Fecha_salida')->nullable()->unique();
+            $table->json('galeria_fotos')->nullable();
+            $table->string('vacunas');
+            $table->date('Fecha_ingreso');
+            $table->date('Fecha_salida')->nullable(); 
 
             $table->unsignedBigInteger('fundacion_id')->nullable();
 

@@ -1,0 +1,78 @@
+.adopta-section {
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;
+
+    padding: 80px 0;
+}
+
+.adopta-card {
+    background: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    height: 100%;
+}
+
+.adopta-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.adopta-card img {
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.adopta-card:hover img {
+    transform: scale(1.05);
+}
+
+.adopta-card .card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.adopta-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.badge-custom {
+    background: var(--background-light);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+}
+
+.btn-adoptar {
+    background: var(--accent-color);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    transition: var(--transition);
+    margin-top: auto;
+}
+
+.btn-adoptar:hover {
+    background: #0da271;
+    transform: translateY(-2px);
+}
