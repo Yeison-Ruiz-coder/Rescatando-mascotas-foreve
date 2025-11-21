@@ -8,7 +8,7 @@
                 </h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('mascotas.index') }}" method="GET" class="row g-3 align-items-end">
+                <form action="{{ route('admin.mascotas.index') }}" method="GET" class="row g-3 align-items-end">
                     <!-- Filtro por Especie -->
                     <div class="col-md-3">
                         <label for="especie" class="form-label fw-semibold">

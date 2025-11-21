@@ -60,11 +60,11 @@
         <!-- Botones de Acción -->
         <div class="mascota-actions mt-auto">
             <div class="d-grid gap-2">
-                <a href="{{ route('mascotas.show', $mascota) }}" 
+                <a href="{{ route('admin.mascotas.show', $mascota) }}" 
                    class="btn btn-primary btn-sm">
                     <i class="fas fa-eye me-1"></i>Ver Detalles
                 </a>
-                <a href="{{ route('mascotas.edit', $mascota) }}" 
+                <a href="{{ route('admin.mascotas.edit', $mascota) }}" 
                    class="btn btn-outline-warning btn-sm">
                     <i class="fas fa-edit me-1"></i>Editar
                 </a>

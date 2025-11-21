@@ -25,7 +25,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('mascotas.store') }}" method="POST" enctype="multipart/form-data" id="mascotaForm">
+                    <form action="{{ route('admin.mascotas.store') }}" method="POST" enctype="multipart/form-data" id="mascotaForm">
                         @csrf
 
                         <!-- Sección 1: Información Básica -->
