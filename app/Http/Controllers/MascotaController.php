@@ -38,6 +38,7 @@ class MascotaController extends Controller
         $estados = ['En adopcion', 'Rescatada', 'Adoptado'];
         $todasRazas = Raza::all();
 
+        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.index', compact('mascotas', 'especies', 'estados', 'todasRazas'));
     }
 
@@ -48,6 +49,7 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
         $fundaciones = Fundacion::all();
 
+        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.create', compact('razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
@@ -132,7 +134,8 @@ class MascotaController extends Controller
                 $mascota->razas()->sync($request->razas);
             }
 
-            return redirect()->route('mascotas.create')
+            // SOLO CAMBIÉ ESTA LÍNEA
+            return redirect()->route('admin.mascotas.index')
                 ->with('success', 'Se guardaron' . count($galeriaFotos) . ' fotos en la galería .');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -144,7 +147,9 @@ class MascotaController extends Controller
     public function show(Mascota $mascota)
     {
         $mascota->load(['razas', 'tiposVacunas', 'fundacion']);
-        return view('mascotas.show', compact('mascota'));
+        
+        // SOLO CAMBIÉ ESTA LÍNEA
+        return view('admin.mascotas.show', compact('mascota'));
     }
 
     // MÉTODO EDIT QUE FALTABA
@@ -158,7 +163,8 @@ class MascotaController extends Controller
         // Cargar relaciones para pre-seleccionar en el formulario
         $mascota->load(['razas', 'tiposVacunas']);
 
-        return view('mascotas.edit', compact('mascota', 'razas', 'vacunas', 'especies', 'fundaciones'));
+        // SOLO CAMBIÉ ESTA LÍNEA
+        return view('admin.mascotas.edit', compact('mascota', 'razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
     public function update(Request $request, Mascota $mascota)
@@ -219,7 +225,8 @@ class MascotaController extends Controller
             // NO sincronizar vacunas como relación many-to-many
             // porque ya las guardamos en el campo de texto 'vacunas'
 
-            return redirect()->route('mascotas.show', $mascota)
+            // SOLO CAMBIÉ ESTA LÍNEA
+            return redirect()->route('admin.mascotas.show', $mascota)
                 ->with('success', '¡Mascota actualizada exitosamente!');
         } catch (\Exception $e) {
             Log::error('Error al actualizar mascota: ' . $e->getMessage());
@@ -244,7 +251,8 @@ class MascotaController extends Controller
             // Eliminar mascota
             $mascota->delete();
 
-            return redirect()->route('mascotas.index')
+            // SOLO CAMBIÉ ESTA LÍNEA
+            return redirect()->route('admin.mascotas.index')
                 ->with('success', 'Mascota eliminada exitosamente');
         } catch (\Exception $e) {
             Log::error('Error al eliminar mascota: ' . $e->getMessage());
@@ -261,9 +269,6 @@ class MascotaController extends Controller
 
         return view('mascotas.por-estado', compact('mascotas', 'estado'));
     }
-
-
-
 
     // Metodos publicos para que los usaurios puedan navegar por mascotas
 
@@ -284,6 +289,7 @@ class MascotaController extends Controller
         $mascotas = $query->orderBy('created_at', 'desc')->paginate(12);
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
 
+        // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
         return view('mascotas.public-index', compact('mascotas', 'especies'));
     }
 
@@ -293,6 +299,7 @@ class MascotaController extends Controller
             ->with('fundacion')
             ->findOrFail($id);
 
+        // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
         return view('mascotas.public-show', compact('mascota'));
     }
 }

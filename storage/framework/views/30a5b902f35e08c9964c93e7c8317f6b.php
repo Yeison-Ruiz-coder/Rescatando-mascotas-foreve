@@ -1,5 +1,3 @@
-
-
 <?php $__env->startPush('styles'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/pages/mascotas/create.css')); ?>">
 <?php $__env->stopPush(); ?>
@@ -25,7 +23,7 @@
                     </h3>
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo e(route('mascotas.store')); ?>" method="POST" enctype="multipart/form-data" id="mascotaForm">
+                    <form action="<?php echo e(route('admin.mascotas.store')); ?>" method="POST" enctype="multipart/form-data" id="mascotaForm">
                         <?php echo csrf_field(); ?>
 
                         <!-- Sección 1: Información Básica -->

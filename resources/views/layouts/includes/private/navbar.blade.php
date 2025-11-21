@@ -73,8 +73,8 @@
                     Mascotas <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownMascotas">
-                    <li><a class="dropdown-item" href="{{ route('mascotas.create') }}">Reportar</a></li>
-                    <li><a class="dropdown-item" href="{{ route('mascotas.index') }}">Buscar</a></li>
+                    <li><a class="dropdown-item" href="{{  route('admin.mascotas.create') }}">Reportar</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.mascotas.index') }}">Buscar</a></li>
                 </ul>
             </li>
 

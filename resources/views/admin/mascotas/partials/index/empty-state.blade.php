@@ -7,10 +7,10 @@
         <h3 class="text-muted mb-3">No se encontraron mascotas</h3>
         <p class="text-muted mb-4">Intenta ajustar los filtros de búsqueda o crear una nueva mascota.</p>
         <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="{{ route('mascotas.index') }}" class="btn btn-primary">
+            <a href="{{ route('admin.mascotas.index') }}" class="btn btn-primary">
                 <i class="fas fa-redo me-2"></i>Ver todas las mascotas
             </a>
-            <a href="{{ route('mascotas.create') }}" class="btn btn-success">
+            <a href="{{  route('admin.mascotas.create') }}" class="btn btn-success">
                 <i class="fas fa-plus me-2"></i>Crear Nueva Mascota
             </a>
         </div>

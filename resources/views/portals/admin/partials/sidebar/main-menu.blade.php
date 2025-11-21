@@ -14,8 +14,8 @@
                 <i class="fas fa-chevron-down arrow"></i>
             </a>
             <ul class="submenu">
-                <li><a href="{{ route('mascotas.index') }}">Todas las Mascotas</a></li>
-                <li><a href="{{ route('mascotas.create') }}">Agregar Mascota</a></li>
+                <li><a href="{{ route('admin.mascotas.index') }}">Todas las Mascotas</a></li>
+                <li><a href="{{  route('admin.mascotas.create') }}">Agregar Mascota</a></li>
                 <li><a href="#">En Adopción</a></li>
             </ul>
         </li>

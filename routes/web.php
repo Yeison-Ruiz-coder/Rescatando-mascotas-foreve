@@ -26,9 +26,19 @@ use App\Http\Controllers\TipoVacunaController;
 // PÁGINA DE INICIO
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 
-// RUTAS PÚBLICAS
+// RUTAS PÚBLICAS DE MASCOTAS
 Route::get('/mascotas-disponibles', [MascotaController::class, 'publicIndex'])->name('mascotas.public.index');
 Route::get('/mascota/{id}', [MascotaController::class, 'publicShow'])->name('mascotas.public.show');
+//RUTAS PRIVADAS DE MASCOTAS
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');
+    Route::get('/mascotas/create', [MascotaController::class, 'create'])->name('mascotas.create');
+    Route::post('/mascotas', [MascotaController::class, 'store'])->name('mascotas.store');
+    Route::get('/mascotas/{mascota}', [MascotaController::class, 'show'])->name('mascotas.show');
+    Route::get('/mascotas/{mascota}/edit', [MascotaController::class, 'edit'])->name('mascotas.edit');
+    Route::put('/mascotas/{mascota}', [MascotaController::class, 'update'])->name('mascotas.update');
+    Route::delete('/mascotas/{mascota}', [MascotaController::class, 'destroy'])->name('mascotas.destroy');
+});
 
 // Para el formulario de solicitud
 Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'])
@@ -55,7 +65,6 @@ Route::middleware(['auth'])->group(function () {
 // RUTAS COMPLETAS PÚBLICAS (PARA DESARROLLO)
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('donaciones', DonacionController::class);
-Route::resource('mascotas', MascotaController::class);
 Route::resource('adopciones', AdopcionController::class);
 Route::resource('rescates', RescateController::class);
 Route::resource('reportes', ReporteController::class);

@@ -7,7 +7,7 @@
     <div class="alert-body">
         <p class="mb-3">La mascota ha sido registrada correctamente en el sistema.</p>
         <div class="alert-actions">
-            <a href="{{ route('mascotas.index') }}" class="btn btn-outline-primary me-2">
+            <a href="{{ route('admin.mascotas.index') }}" class="btn btn-outline-primary me-2">
                 <i class="fas fa-list me-1"></i>Volver al Listado
             </a>
             <button type="button" class="btn btn-primary" onclick="continueAdding()">
