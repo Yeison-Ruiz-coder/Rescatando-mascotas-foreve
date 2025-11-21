@@ -3,71 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
-use App\Models\Administrador;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
 {
+    // Mostrar todos los eventos
     public function index()
     {
-        $eventos = Evento::with('administrador')->get();
+        $eventos = Evento::all();
         return view('eventos.index', compact('eventos'));
     }
 
+    // Formulario para crear evento
     public function create()
     {
-        $administradores = Administrador::all();
-        return view('eventos.create', compact('administradores'));
+        return view('eventos.create');
     }
 
+    // Guardar evento
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre_evento' => 'required|string|max:255',
-            'Lugar_evento' => 'required|string|unique:eventos',
-            'Descripcion' => 'required|string|unique:eventos'
+            'Nombre_evento' => 'required',
+            'Lugar_evento' => 'required',
+            'Descripcion' => 'required',
+            'imagen' => 'nullable|image_url|mimes:jpg,jpeg,png'
         ]);
 
-        Evento::create($request->all());
+        $evento = new Evento();
+        $evento->Nombre_evento = $request->Nombre_evento;
+        $evento->Lugar_evento = $request->Lugar_evento;
+        $evento->Descripcion = $request->Descripcion;
+
+        // Guardar imagen
+        if ($request->hasFile('imagen')) {
+            $file = $request->file('imagen');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/eventos', $filename);
+            $evento->imagen_url = $filename;
+        }
+
+        $evento->save();
 
         return redirect()->route('eventos.index')
-            ->with('success', 'Evento creado exitosamente.');
-    }
-
-    public function show($id)
-    {
-        $evento = Evento::with('administrador')->findOrFail($id);
-        return view('eventos.show', compact('evento'));
-    }
-
-    public function edit($id)
-    {
-        $evento = Evento::findOrFail($id);
-        $administradores = Administrador::all();
-        return view('eventos.edit', compact('evento', 'administradores'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'Nombre_evento' => 'required|string|max:255',
-            'Lugar_evento' => 'required|string|unique:eventos,lugar_evento,' . $id,
-            'Descripcion' => 'required|string|unique:eventos,descripcion,' . $id
-        ]);
-
-        $evento = Evento::findOrFail($id);
-        $evento->update($request->all());
-
-        return redirect()->route('eventos.index')
-            ->with('success', 'Evento actualizado exitosamente.');
-    }
-
-    public function destroy($id)
-    {
-        $evento = Evento::findOrFail($id);
-        $evento->delete();
-
-        return redirect()->route('eventos.index')
-            ->with('success', 'Evento eliminado exitosamente.');
+            ->with('success', 'Evento creado correctamente');
     }
 }
