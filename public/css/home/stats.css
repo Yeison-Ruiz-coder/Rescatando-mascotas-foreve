@@ -1,0 +1,17 @@
+.stats-section {
+    background: var(--white);
+    padding: 60px 0;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stats-section p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-weight: 500;
+}

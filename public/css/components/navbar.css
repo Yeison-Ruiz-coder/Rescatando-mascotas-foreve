@@ -40,21 +40,17 @@
 /* Estilo de los botones principales (Fucsia) */
 .custom-navbar .main-btn {
     color: var(--color-texto-claro);
-    background-color: var(--color-fucsia);
     font-weight: bold;
     padding: 10px 15px;
     margin: 0 5px;
     border-radius: 5px;
-
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    text-transform: uppercase;
+    font-size: 20px;
+    
 }
 
 /*Botón se reduce al pasar el mouse */
 .custom-navbar .main-btn:hover {
-    background-color: var(--color-fucsia-hover);
-    color: var(--color-texto-claro);
-    transform: scale(0.98); 
+    color: var(--color-fucsia);; 
 }
 
 /* Icono de Perfil */

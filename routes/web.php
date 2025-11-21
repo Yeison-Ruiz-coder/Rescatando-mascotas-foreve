@@ -27,8 +27,8 @@ use App\Http\Controllers\TipoVacunaController;
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 
 // RUTAS PÚBLICAS DE MASCOTAS
-Route::get('/mascotas-disponibles', [MascotaController::class, 'publicIndex'])->name('mascotas.public.index');
-Route::get('/mascota/{id}', [MascotaController::class, 'publicShow'])->name('mascotas.public.show');
+Route::get('/mascotas-disponibles', [MascotaController::class, 'publicIndex'])->name('public.mascotas.index');
+Route::get('/mascota/{id}', [MascotaController::class, 'publicShow'])->name('public.mascotas.show');
 //RUTAS PRIVADAS DE MASCOTAS
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');

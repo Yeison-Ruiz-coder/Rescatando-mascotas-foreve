@@ -267,7 +267,7 @@ class MascotaController extends Controller
             ->with(['razas', 'tiposVacunas'])
             ->paginate(12);
 
-        return view('mascotas.por-estado', compact('mascotas', 'estado'));
+        return view('public.mascotas.index', compact('mascotas', 'estado'));
     }
 
     // Metodos publicos para que los usaurios puedan navegar por mascotas
@@ -290,7 +290,7 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
 
         // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
-        return view('mascotas.public-index', compact('mascotas', 'especies'));
+        return view('public.mascotas.index', compact('mascotas', 'especies'));
     }
 
     public function publicShow($id)
@@ -300,6 +300,6 @@ class MascotaController extends Controller
             ->findOrFail($id);
 
         // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
-        return view('mascotas.public-show', compact('mascota'));
+        return view('public.mascotas.show', compact('mascota'));
     }
 }

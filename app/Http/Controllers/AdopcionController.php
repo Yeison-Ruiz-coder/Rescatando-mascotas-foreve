@@ -141,10 +141,17 @@ class AdopcionController extends Controller
     // Funciones publicas
 
     public function solicitar($id)
-    {
-        $mascota = Mascota::where('estado', 'En adopcion')->findOrFail($id);
-        return view('adopciones.solicitar', compact('mascota'));
+{
+    
+    $mascota = Mascota::where('estado', 'En adopcion')->findOrFail($id);
+    
+    // Verificar que la mascota se está encontrando
+    if (!$mascota) {
+        abort(404, 'Mascota no encontrada');
     }
+    
+    return view('adopciones.solicitar', compact('mascota'));
+}
 
 
     public function solicitarStore(Request $request) // ← QUITAR el ", $id"
@@ -186,7 +193,7 @@ class AdopcionController extends Controller
             'administrador_id' => null,
         ]);
 
-        return redirect()->route('mascotas.public.index')
+        return redirect()->route('public.mascotas.index')
             ->with('success', '¡Solicitud de adopción enviada exitosamente! Te contactaremos en 2-3 días.');
     }
 }
