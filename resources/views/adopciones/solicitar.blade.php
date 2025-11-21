@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('portals.public.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/solicitudes.css') }}">
@@ -12,12 +12,12 @@
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb breadcrumb-solicitud">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('mascotas.public.index') }}">
+                        <a href="{{ route('public.mascotas.index') }}">
                             <i class="fas fa-paw me-1"></i>Mascotas
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('mascotas.public.show', $mascota->id) }}">
+                        <a href="{{ route('public.mascotas.show', $mascota->id) }}">
                             {{ $mascota->Nombre_mascota }}
                         </a>
                     </li>
@@ -275,7 +275,7 @@
                         <!-- BOTONES DE ACCIÓN -->
                         <div class="botones-accion-solicitud">
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('mascotas.public.show', $mascota->id) }}" class="btn btn-cancelar-solicitud">
+                                <a href="{{ route('public.mascotas.show', $mascota->id) }}" class="btn btn-cancelar-solicitud">
                                     <i class="fas fa-arrow-left me-2"></i>Cancelar
                                 </a>
                                 <button type="submit" class="btn btn-enviar-solicitud" id="btnEnviarSolicitud">
