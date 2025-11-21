@@ -82,4 +82,4 @@ Route::resource('comentarios', ComentarioController::class);
 Route::resource('notificaciones', NotificacionController::class);
 Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
->>>>>>> origin/master
+
