@@ -1,12 +1,12 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="max-w-3xl mx-auto p-6">
 
     <h1 class="text-3xl font-bold mb-6">Crear nuevo evento</h1>
 
-    <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+    <form action="<?php echo e(route('eventos.store')); ?>" method="POST" enctype="multipart/form-data">
+        <?php echo csrf_field(); ?>
 
         <div class="mb-4">
             <label class="block font-semibold">Nombre del evento:</label>
@@ -34,4 +34,6 @@
 
     </form>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanda\Desktop\Rescatando-mascotas-foreve\resources\views/eventos/create.blade.php ENDPATH**/ ?>

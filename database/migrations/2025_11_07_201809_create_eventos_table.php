@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre_evento');
-            $table->string('Lugar_evento')->unique();
-            $table->text('Descripcion')->unique();
+            $table->string('Lugar_evento');
+            $table->text('Descripcion');
+            $table->date('Fecha_evento')->nullable();
+            $table->string('imagen_url')->nullable();
 
             $table->unsignedBigInteger('administrador_id')->nullable();
 
