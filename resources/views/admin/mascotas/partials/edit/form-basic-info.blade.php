@@ -26,10 +26,10 @@
                     name="Especie" 
                     required>
                 <option value="">Selecciona una especie</option>
-                <option value="Perro" {{ old('Especie', $mascota->Especie) == 'Perro' ? 'selected' : '' }}>🐕 Perro</option>
-                <option value="Gato" {{ old('Especie', $mascota->Especie) == 'Gato' ? 'selected' : '' }}>🐈 Gato</option>
-                <option value="Conejo" {{ old('Especie', $mascota->Especie) == 'Conejo' ? 'selected' : '' }}>🐇 Conejo</option>
-                <option value="Otro" {{ old('Especie', $mascota->Especie) == 'Otro' ? 'selected' : '' }}>🐾 Otro</option>
+                <option value="Perro" {{ old('Especie', $mascota->Especie) == 'Perro' ? 'selected' : '' }}>Perro</option>
+                <option value="Gato" {{ old('Especie', $mascota->Especie) == 'Gato' ? 'selected' : '' }}>Gato</option>
+                <option value="Conejo" {{ old('Especie', $mascota->Especie) == 'Conejo' ? 'selected' : '' }}>Conejo</option>
+                <option value="Otro" {{ old('Especie', $mascota->Especie) == 'Otro' ? 'selected' : '' }}>Otro</option>
             </select>
         </div>
 
