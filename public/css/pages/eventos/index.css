@@ -1,0 +1,205 @@
+:root {
+    /* COLORES PRINCIPALES */
+    --color-turquesa: #1B8E95;
+    --color-fucsia: #FD4586;
+    --color-fucsia-hover: #d83d73;
+    --color-gris-claro: #f4f4f4;
+    
+    /* COLORES DE TEXTO */
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    color: var(--color-texto-oscuro);
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+/* TÍTULOS */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-turquesa);
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* ENLACES */
+a {
+    color: var(--color-fucsia);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-turquesa);
+}
+
+/* BOTONES */
+.btn-primary {
+    background-color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    color: var(--color-texto-claro);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-fucsia-hover);
+    border-color: var(--color-fucsia-hover);
+    color: var(--color-texto-claro);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    color: var(--color-texto-claro);
+}
+
+/* TARJETAS DE EVENTOS */
+.event-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-title {
+    color: var(--color-turquesa);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: var(--color-texto-oscuro);
+    line-height: 1.6;
+}
+
+/* FECHA DEL EVENTO */
+.event-date {
+    background-color: var(--color-turquesa);
+    color: var(--color-texto-claro);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* ALERTAS */
+.alert-success {
+    background-color: rgba(27, 142, 149, 0.1);
+    border-color: var(--color-turquesa);
+    color: var(--color-turquesa);
+}
+
+.alert-info {
+    background-color: rgba(253, 69, 134, 0.1);
+    border-color: var(--color-fucsia);
+    color: var(--color-fucsia);
+}
+
+.alert {
+    border-radius: 10px;
+    border-left: 4px solid;
+}
+
+/* BOTÓN CERRAR ALERTA */
+.btn-close {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* TEXTO SECUNDARIO */
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* CLASES UTILITARIAS PERSONALIZADAS */
+.text-fucsia {
+    color: var(--color-fucsia) !important;
+}
+
+.bg-turquesa {
+    background-color: var(--color-turquesa) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .event-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-primary {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ANIMACIONES SUAVES */
+.card, .btn, .alert {
+    transition: all 0.3s ease;
+}
+
+/* MEJORAS EN EL ESPACIADO */
+.container.mt-4 {
+    margin-top: 2rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 2rem !important;
+}
+
+/* ESTILOS PARA EL ESTADO VACÍO */
+.alert-info .btn-primary {
+    margin-top: 1rem;
+}
