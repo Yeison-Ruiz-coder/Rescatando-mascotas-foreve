@@ -4,48 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Models\Evento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
 {
-    // Mostrar todos los eventos
     public function index()
     {
-        $eventos = Evento::all();
+        $eventos = Evento::orderBy('Fecha_evento', 'desc')->get();
         return view('eventos.index', compact('eventos'));
     }
 
-    // Formulario para crear evento
     public function create()
     {
         return view('eventos.create');
     }
 
-    // Guardar evento
     public function store(Request $request)
     {
         $request->validate([
-            'Nombre_evento' => 'required',
-            'Lugar_evento' => 'required',
-            'Descripcion' => 'required',
-            'imagen' => 'nullable|image_url|mimes:jpg,jpeg,png'
+            'Nombre_evento' => 'required|string|max:255',
+            'Lugar_evento' => 'required|string|max:255',
+            'Descripcion' => 'required|string',
+            'Fecha_evento' => 'required|date',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $evento = new Evento();
-        $evento->Nombre_evento = $request->Nombre_evento;
-        $evento->Lugar_evento = $request->Lugar_evento;
-        $evento->Descripcion = $request->Descripcion;
-
-        // Guardar imagen
+        $imagenUrl = null;
         if ($request->hasFile('imagen')) {
-            $file = $request->file('imagen');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/eventos', $filename);
-            $evento->imagen_url = $filename;
+            $imagenPath = $request->file('imagen')->store('eventos', 'public');
+            $imagenUrl = Storage::url($imagenPath);
         }
 
-        $evento->save();
+        Evento::create([
+            'Nombre_evento' => $request->Nombre_evento,
+            'Lugar_evento' => $request->Lugar_evento,
+            'Descripcion' => $request->Descripcion,
+            'Fecha_evento' => $request->Fecha_evento,
+            'imagen_url' => $imagenUrl,
+            'administrador_id' => auth()->id() // o el ID del admin según tu lógica
+        ]);
 
         return redirect()->route('eventos.index')
-            ->with('success', 'Evento creado correctamente');
+            ->with('success', 'Evento creado exitosamente!');
+    }
+
+    public function show(Evento $evento)
+    {
+        return view('eventos.show', compact('evento'));
     }
 }

@@ -83,3 +83,4 @@ Route::resource('notificaciones', NotificacionController::class);
 Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
 
+Route::resource('eventos', EventoController::class);
