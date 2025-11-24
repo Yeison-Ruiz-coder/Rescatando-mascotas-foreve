@@ -21,7 +21,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazaController;
 use App\Http\Controllers\TipoVacunaController;
 
-<<<<<<< HEAD
+
 /*
 |--------------------------------------------------------------------------
 | 1. RUTAS PÚBLICAS
@@ -33,7 +33,7 @@ Route::get('/', [DonacionController::class, 'index'])->name('inicio');
 
 // Donaciones públicas
 Route::resource('donaciones', DonacionController::class)->only(['index', 'create', 'store']);
-=======
+
 // ... otros imports
 
 // PÁGINA DE INICIO
@@ -52,7 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/mascotas/{mascota}', [MascotaController::class, 'update'])->name('mascotas.update');
     Route::delete('/mascotas/{mascota}', [MascotaController::class, 'destroy'])->name('mascotas.destroy');
 });
->>>>>>> origin/master
+
 
 // Para el formulario de solicitud
 Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'])
@@ -60,7 +60,7 @@ Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'
 Route::post('/adopciones/solicitar', [AdopcionController::class, 'solicitarStore'])
     ->name('adopciones.solicitar.store');
 
-<<<<<<< HEAD
+
 /*
 |--------------------------------------------------------------------------
 | 2. AUTENTICACIÓN (Laravel Breeze / Jetstream)
@@ -113,7 +113,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mascotas/crear', [MascotaController::class, 'create'])->name('mascotas.create');
     Route::post('/mascotas', [MascotaController::class, 'store'])->name('mascotas.store');
 
-=======
+
 // RUTAS DE AUTENTICACIÓN
 require __DIR__.'/auth.php';
 
@@ -148,4 +148,4 @@ Route::resource('comentarios', ComentarioController::class);
 Route::resource('notificaciones', NotificacionController::class);
 Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
->>>>>>> origin/master
+
