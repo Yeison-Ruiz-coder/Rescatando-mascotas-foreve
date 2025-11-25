@@ -21,10 +21,17 @@ class Mascota extends Model
         'Lugar_rescate',
         'Descripcion',
         'Foto',
+        'galeria_fotos',
         'vacunas',
         'Fecha_ingreso',
         'Fecha_salida',
         'fundacion_id'
+    ];
+
+    protected $casts = [
+        'galeria_fotos' => 'array', 
+        'Fecha_ingreso' => 'date',
+        'Fecha_salida' => 'date',
     ];
 
     // Relaciones
@@ -41,5 +48,24 @@ class Mascota extends Model
     public function rescates()
     {
         return $this->hasMany(Rescate::class);
+    }
+    
+   public function razas()
+    {
+        // Une Mascota con Raza a través de la tabla pivot 'mascota_raza'
+        return $this->belongsToMany(Raza::class, 'mascota_raza', 'mascota_id', 'raza_id');
+    }
+
+    public function tiposVacunas()
+    {
+        // Une Mascota con TipoVacuna a través de la tabla pivot 'mascota_vacuna'
+        // Permite acceder a la fecha de aplicación
+        return $this->belongsToMany(TipoVacuna::class, 'mascota_vacuna', 'mascota_id', 'tipos_vacunas_id')
+                    ->withPivot('fecha_aplicacion');
+    }
+
+    public function solicitudAdopcion()
+    {
+        return $this->hasMany(solicitudAdopcion::class);
     }
 }

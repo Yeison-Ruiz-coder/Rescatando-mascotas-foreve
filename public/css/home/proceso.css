@@ -1,0 +1,67 @@
+.proceso-section {
+    padding: 80px 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+
+.bg-dark .proceso-section {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-light .proceso-section {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.step-card {
+    padding: 1rem;
+    text-align: center;
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    background: var(--color-fondo-oscuro);
+    color: var(--color-texto-claro);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    border: 3px solid var(--color-turquesa);
+}
+
+.step-card:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(253, 69, 134, 0.3);
+    border-color: var(--color-fucsia);
+}
+
+.step-card h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.step-card p {
+    line-height: 1.6;
+}
+
+.bg-dark .step-card h5 {
+    color: var(--color-texto-claro);
+}
+
+.bg-dark .step-card p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-light .step-card h5 {
+    color: var(--color-texto-oscuro);
+}
+
+.bg-light .step-card p {
+    color: var(--color-texto-oscuro);
+    opacity: 0.8;
+}

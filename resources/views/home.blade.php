@@ -14,6 +14,7 @@
                         </div>
                     @endif
 
+                    <a href="">Hola desde Home</a>
                     {{ __('You are logged in!') }}
                 </div>
             </div>

@@ -19,7 +19,6 @@ use App\Http\Controllers\RescateController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Routing\Router;
 
-
 // Página pública
 Route::get('/', function () {
     return view('welcome');
@@ -29,19 +28,14 @@ Route::view('/','index')->name('index');
 Route::view('/about','about')->name('about');
 Route::view('/adopta','adopta')->name('adopta');
 Route::view('/rescata','rescata')->name('rescata');
-Route::view('/contacto','contacto')->name('contacto');
-Route::view('/servicios','servicios')->name('servicios');
-//Route::view('/servicios','servicios')->name('servicios');
-
-
 
 // Rutas con autenticación
 Route::middleware(['auth'])->group(function () {
-    
+});
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    // Rutas de recursos
+
+    // Recursos protegidos
     Route::resource('administradores', AdministradorController::class);
     Route::resource('veterinarias', VeterinariaController::class);
     Route::resource('fundaciones', FundacionController::class);
@@ -55,7 +49,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('suscripciones', SuscripcionController::class);
     Route::resource('adopciones', AdopcionController::class);
     Route::resource('notificaciones', NotificacionController::class);
-    Route::resource('donaciones', DonacionController::class);
     Route::resource('rescates', RescateController::class);
     //Route::resource('rescates', RescateController::class);
 
@@ -64,10 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/tipo/{tipo}', [UsuarioController::class, 'porTipo'])->name('usuarios.tipo');
     Route::get('/estadisticas', [DashboardController::class, 'estadisticas'])->name('estadisticas');
     Route::get('/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
-});
 
 // Rutas de autenticación (si usas Laravel Breeze o Jetstream)
-//require __DIR__.'/auth.php';
-//Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

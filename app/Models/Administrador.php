@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+//---------------------------------------------------------
+// Posible eliminacion por el problema de autenticación
+//---------------------------------------------------------
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -52,5 +56,10 @@ class Administrador extends Model
     public function rescates()
     {
         return $this->hasMany(Rescate::class);
+    }
+
+    public function solicitudAdopcion()
+    {
+        return $this->hasMany(solicitudAdopcion::class);
     }
 }

@@ -1,0 +1,275 @@
+/* ESTILOS PARA LA PÁGINA DE DETALLE DE MASCOTA - ADMIN */
+
+/* VARIABLES */
+:root {
+    --color-turquesa: #1B8E95;
+    --color-fucsia: #FD4586;
+    --color-fucsia-hover: #d83d73;
+    --color-gris-claro: #f4f4f4;
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #333;
+}
+
+body {
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;
+}
+
+/* CLASES UTILITARIAS */
+.bg-gris-claro { background-color: var(--color-gris-claro) !important; }
+.bg-turquesa { background-color: var(--color-turquesa) !important; }
+.bg-fucsia { background-color: var(--color-fucsia) !important; }
+.text-turquesa { color: var(--color-turquesa) !important; }
+.text-fucsia { color: var(--color-fucsia) !important; }
+.border-turquesa { border-color: var(--color-turquesa) !important; }
+
+/* BOTONES BASE */
+.btn {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    color: white;
+}
+
+.btn:active {
+    transform: scale(0.98) !important;
+    transition: all 0.1s ease-in-out !important;
+}
+
+/* BOTONES ESPECÍFICOS */
+.btn-warning {
+    background-color: var(--color-turquesa) !important;
+    border-color: var(--color-turquesa) !important;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #16747a !important;
+    border-color: #16747a !important;
+    box-shadow: 0 4px 15px rgba(27, 142, 149, 0.3);
+}
+
+.btn-danger {
+    background-color: rgba(255, 255, 255, 0.678);
+    border-color: var(--color-fucsia) !important;
+    color: var(--color-fucsia);
+}
+
+.btn-danger:hover {
+    background-color: var(--color-fucsia-hover) !important;
+    border-color: var(--color-fucsia-hover) !important;
+    box-shadow: 0 4px 15px rgba(253, 69, 134, 0.3);
+}
+
+
+.btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268 !important;
+    border-color: #545b62 !important;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* TARJETAS */
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--color-turquesa)) !important;
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.gestion-card .card-header {
+    background-color: var(--color-gris-claro) !important;
+    color: var(--color-texto-oscuro);
+}
+
+/* IMÁGENES Y GALERÍA */
+.gallery-main-img {
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid var(--color-turquesa);
+    box-shadow: 0 4px 15px rgba(27, 142, 149, 0.3);
+}
+
+.gallery-main-img:hover {
+    transform: scale(1.02);
+    border-color: var(--color-fucsia);
+    box-shadow: 0 6px 20px rgba(253, 69, 134, 0.4);
+}
+
+/* MINIATURAS */
+.gallery-thumbnail {
+    width: 134px !important;
+    height: 100px !important;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    border-radius: 8px;
+}
+
+.gallery-thumbnail:hover {
+    transform: scale(1.1);
+    border-color: var(--color-fucsia) !important;
+}
+
+.gallery-thumbnail.active {
+    border-color: var(--color-turquesa) !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px var(--color-turquesa);
+}
+
+/* CONTENEDOR DE MINIATURAS */
+.thumbnail-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.thumbnail-container .badge {
+    background-color: var(--color-turquesa);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    z-index: 10;
+}
+
+/* BADGES */
+.estado-badge, .badge {
+    background-color: var(--color-fucsia) !important;
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.raza-badge {
+    background-color: var(--color-gris-claro) !important;
+    color: var(--color-texto-oscuro) !important;
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+/* LISTAS */
+.list-group-item {
+    border: none;
+    padding: 1rem 1.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:nth-child(even) {
+    background-color: var(--color-gris-claro);
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+/* TÍTULOS Y TEXTO */
+.card-title, h1, h3, h4 {
+    color: var(--color-turquesa);
+    font-weight: 700;
+}
+
+.mb-4 h2 {
+    color: #5EBABF !important;
+}
+
+.descripcion-texto {
+    line-height: 1.6;
+    color: var(--color-texto-oscuro);
+}
+
+/* MODAL */
+.modal-header {
+    background: linear-gradient(135deg, var(--color-turquesa)) !important;
+    color: white;
+    border: none;
+}
+
+.carousel-item img {
+    max-height: 500px;
+    object-fit: contain;
+    background-color: var(--color-gris-claro);
+    border-radius: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--color-turquesa);
+    border-radius: 50%;
+    padding: 1.2rem;
+}
+
+/* EFECTOS DE TRANSICIÓN */
+.transition-all, .hover-lift:hover {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+}
+
+/* SOMBRAS */
+.shadow-lg { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; }
+.shadow { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important; }
+
+/* ICONOS */
+.fas { color: var(--color-fucsia); }
+.card-header .fas { color: white; }
+.gestion-card .card-header .fas { color: var(--color-turquesa); }
+
+/* BORDE LIGERO PARA INFORMACIÓN */
+.bg-light-info {
+    background-color: rgba(27, 142, 149, 0.1) !important;
+    border-left: 4px solid var(--color-turquesa);
+    border-radius: 8px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .gallery-main-img { height: 300px; }
+    .gallery-thumbnail { 
+        width: 120px !important; 
+        height: 90px !important; 
+    }
+    .card-header { padding: 0.75rem 1rem; }
+    .display-4 { font-size: 2rem; }
+}
+
+@media (max-width: 576px) {
+    .gallery-main-img { height: 250px; }
+    .gallery-thumbnail { 
+        width: 100px !important; 
+        height: 75px !important; 
+    }
+}

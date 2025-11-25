@@ -17,19 +17,12 @@ return new class extends Migration
             $table->string('Nombre_2')->nullable();
             $table->string('Apellido_1');
             $table->string('Apellido_2')->nullable();
-            $table->date('Fecha_nacimiento')->unique();
-            $table->string('Direccion')->unique();
-            $table->string('Telefono')->unique();
+            $table->date('Fecha_nacimiento');
+            $table->string('Direccion');
+            $table->string('Telefono');
             $table->string('Email')->unique();
             $table->string('Password_user');
             $table->enum ('tipo', ['Administrador','Rescatista','Voluntario', 'Cliente']);
-
-            $table->unsignedBigInteger('administrador_id')->nullable();
-
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
 
             $table->timestamps();
         });

@@ -1,0 +1,346 @@
+/* ESTILOS PARA LA PÁGINA INDEX DE MASCOTAS */
+
+body {
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;
+}
+
+/* Header Principal */
+.mascotas-header {
+    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+}
+
+.mascotas-header h1 {
+    color: white !important;
+    margin-bottom: 1rem;
+}
+
+.mascotas-header .lead {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.2rem;
+}
+
+/* Cards de Estadísticas */
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.9;
+}
+
+.stat-info h4 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.stat-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+/* Card de Mascota */
+.mascota-card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.mascota-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Contenedor de Imagen */
+.mascota-img-container {
+    height: 250px;
+    background-color: var(--color-gris-claro);
+}
+
+.mascota-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.mascota-card:hover .mascota-card-img {
+    transform: scale(1.05);
+}
+
+/* Badges de Estado */
+.mascota-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.badge-adopcion {
+    background-color: var(--color-fucsia) ;
+}
+
+.badge-adoptado {
+    background-color: var(--color-turquesa);
+}
+
+.badge-rescatada {
+    background-color: #ffc107;
+    color: var(--color-texto-oscuro) !important;
+}
+
+/* Contenido de la Card */
+.mascota-nombre {
+    color: var(--color-turquesa);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.mascota-especie {
+    color: var(--color-texto-oscuro);
+    font-size: 0.9rem;
+}
+
+/* Información de la Mascota */
+.mascota-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-item i {
+    width: 16px;
+    text-align: center;
+}
+
+/* Descripción */
+.mascota-descripcion {
+    border-left: 3px solid var(--color-gris-claro);
+    padding-left: 1rem;
+}
+
+/* Botones de Acción */
+.mascota-actions .btn {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.mascota-actions .btn-primary {
+    background-color: var(--color-turquesa);
+    border-color: var(--color-turquesa);
+}
+
+.mascota-actions .btn-primary:hover {
+    background-color: #16747a;
+    border-color: #16747a;
+    transform: translateY(-2px);
+}
+
+.mascota-actions .btn-outline-warning {
+    color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+}
+
+.mascota-actions .btn-outline-warning:hover {
+    background-color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Estado Vacío */
+.empty-state {
+    background-color: var(--color-gris-claro);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    opacity: 0.5;
+}
+
+/* Paginación */
+.mascotas-pagination .pagination {
+    justify-content: center;
+}
+
+.mascotas-pagination .page-link {
+    color: var(--color-turquesa);
+    border: 1px solid #dee2e6;
+    padding: 0.75rem 1.25rem;
+    margin: 0 0.25rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.mascotas-pagination .page-link:hover {
+    background-color: var(--color-turquesa);
+    color: white;
+    border-color: var(--color-turquesa);
+}
+
+.mascotas-pagination .page-item.active .page-link {
+    background-color: var(--color-turquesa);
+    border-color: var(--color-turquesa);
+    color: white;
+}
+
+.mascotas-pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #f8f9fa;
+}
+
+/* Filtros */
+.filtros-mascotas .card {
+    border-radius: 15px;
+}
+
+.filtros-mascotas .card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.form-label {
+    color: var(--color-turquesa);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-select, .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: var(--color-turquesa);
+    box-shadow: 0 0 0 0.2rem rgba(27, 142, 149, 0.25);
+}
+
+
+
+/* Botones Principales */
+.btn-success {
+    background-color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: var(--color-fucsia-hover);
+    border-color: var(--color-fucsia-hover);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--color-turquesa);
+    border-color: var(--color-turquesa);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #16747a;
+    border-color: #16747a;
+    transform: translateY(-2px);
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mascotas-header {
+        padding: 2rem 1rem;
+        border-radius: 15px;
+    }
+    
+    .mascotas-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .stat-info h4 {
+        font-size: 1.5rem;
+    }
+    
+    .mascota-img-container {
+        height: 200px;
+    }
+    
+    .empty-state {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .mascotas-header {
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .mascota-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Animaciones suaves */
+.mascota-card, .stat-card, .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mejoras de accesibilidad */
+.btn:focus, .form-select:focus, .form-control:focus {
+    box-shadow: 0 0 0 3px rgba(27, 142, 149, 0.1);
+}
+
+/* Scroll suave para toda la página */
+html {
+    scroll-behavior: smooth;
+}
