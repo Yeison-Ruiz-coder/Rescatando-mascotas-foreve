@@ -22,12 +22,12 @@
     
     <div class="admin-container">
         
-
         
         <div class="admin-main-container">
             
             
             <div class="admin-navbar-container">
+                
                 <?php echo $__env->make('portals.public.partials.navbar.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
 
@@ -40,7 +40,6 @@
             <?php echo $__env->make('portals.public.partials.footer.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         </div>
-
     </div>
     
     

@@ -15,7 +15,7 @@
         <a class="nav-link main-btn" href="{{ route('solicitudes.index') }}">Solicitudes</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link main-btn" href="{{ route('suscripciones.create') }}">Suscríbete</a>
+        <a class="nav-link main-btn" href="{{ route('eventos.index') }}">Eventos</a>
     </li>
     <li class="nav-item">
         <a class="nav-link main-btn" href="{{ url('/nosotros') }}">Nosotros</a>

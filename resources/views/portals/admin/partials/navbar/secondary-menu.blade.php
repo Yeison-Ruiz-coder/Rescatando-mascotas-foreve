@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <ul class="nav second-row-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownRescatistas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownRescatistas" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Rescatistas <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownRescatistas">
@@ -13,17 +14,19 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownMascotas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownMascotas" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Mascotas <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownMascotas">
-                    <li><a class="dropdown-item" href="{{  route('admin.mascotas.create') }}">Reportar</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.mascotas.create') }}">Reportar</a></li>
                     <li><a class="dropdown-item" href="{{ route('admin.mascotas.index') }}">Buscar</a></li>
                 </ul>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownRescates" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownRescates" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Rescates <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownRescates">
@@ -33,7 +36,8 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownFormularios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownFormularios" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Formularios <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownFormularios">
@@ -42,9 +46,10 @@
                     <li><a class="dropdown-item" href="#">Rescatista</a></li>
                 </ul>
             </li>
-            
+
             <li class="nav-item dropdown">
-                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownDona" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link second-dropdown-toggle" href="#" id="dropdownDona" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Dona <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownDona">
@@ -53,5 +58,8 @@
                 </ul>
             </li>
         </ul>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </div>
 </div>

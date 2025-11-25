@@ -23,13 +23,16 @@ body {
 
 /* TÍTULOS */
 h1, h2, h3, h4, h5, h6 {
-    color: var(--color-turquesa);
+    color: var(--color--texto-claro);
     font-weight: 700;
 }
 
 h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+}
+.text-white {
+    color: var(--color-texto-claro) !important;
 }
 
 /* ENLACES */
@@ -111,12 +114,14 @@ a:hover {
 
 /* FECHA DEL EVENTO */
 .event-date {
-    background-color: var(--color-turquesa);
-    color: var(--color-texto-claro);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+    background-color: transparent; 
+    color: var(--color-turquesa); 
+    padding: 0.25rem 0; 
+    border-radius: 0;  
     font-size: 0.875rem;
     font-weight: 600;
+    border: 1px solid var(--color-turquesa); 
+    padding: 0.25rem 0.5rem; 
 }
 
 /* ALERTAS */
@@ -202,4 +207,26 @@ a:hover {
 /* ESTILOS PARA EL ESTADO VACÍO */
 .alert-info .btn-primary {
     margin-top: 1rem;
+}
+/* Botones de acción */
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Mejora para los grupos de botones */
+.d-flex.gap-2 {
+    gap: 0.5rem;
+}
+
+/* Asegurar que los formularios en línea se vean bien */
+form.d-inline {
+    display: inline-block;
 }
