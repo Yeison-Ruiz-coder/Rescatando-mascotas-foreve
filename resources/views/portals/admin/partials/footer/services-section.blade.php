@@ -15,7 +15,7 @@
             <li><a href="#">Donación de suministros</a></li>
             <li><a href="{{ route('suscripciones.create') }}">Suscripción</a></li>
             <li><a href="#">Rescatistas</a></li>
-            <li><a href="{{ route('eventos.index') }}">Eventos</a></li>
+            <li><a href="{{ route('admin.eventos.index') }}">Eventos</a></li>
             <li><a href="#">Calificación</a></li>
         </ul>
     </div>

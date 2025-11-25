@@ -14,7 +14,7 @@
     
     <!-- Proceso Section -->
     <?php echo $__env->make('home.partials.proceso', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    
+
     <!-- Testimonios Section -->
     <?php echo $__env->make('home.partials.testimonios', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     

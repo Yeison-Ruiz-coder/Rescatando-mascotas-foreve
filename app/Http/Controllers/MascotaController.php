@@ -9,6 +9,7 @@ use App\Models\Fundacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator; // Agregar este use
 
 class MascotaController extends Controller
 {
@@ -38,7 +39,6 @@ class MascotaController extends Controller
         $estados = ['En adopcion', 'Rescatada', 'Adoptado'];
         $todasRazas = Raza::all();
 
-        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.index', compact('mascotas', 'especies', 'estados', 'todasRazas'));
     }
 
@@ -49,7 +49,6 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
         $fundaciones = Fundacion::all();
 
-        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.create', compact('razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
@@ -121,8 +120,8 @@ class MascotaController extends Controller
                 'estado' => $request->estado,
                 'Lugar_rescate' => $request->Lugar_rescate,
                 'Descripcion' => $request->Descripcion,
-                'Foto' => $fotoPrincipalPath, // Primera foto como principal
-                'galeria_fotos' => $galeriaFotos, // Array completo de fotos
+                'Foto' => $fotoPrincipalPath,
+                'galeria_fotos' => $galeriaFotos,
                 'vacunas' => $vacunasSeleccionadas,
                 'Fecha_ingreso' => $request->Fecha_ingreso,
                 'Fecha_salida' => $request->Fecha_salida,
@@ -130,14 +129,12 @@ class MascotaController extends Controller
             ]);
 
             // Sincronizar razas
-            if ($request->has('razas')) {
-                $mascota->razas()->sync($request->razas);
-            }
+            $mascota->razas()->sync($request->razas);
 
-            // SOLO CAMBIÉ ESTA LÍNEA
             return redirect()->route('admin.mascotas.index')
                 ->with('success', 'Se guardaron' . count($galeriaFotos) . ' fotos en la galería .');
         } catch (\Exception $e) {
+            Log::error('Error al registrar mascota: ' . $e->getMessage());
             return redirect()->back()
                 ->with('error', 'Error al registrar la mascota: ' . $e->getMessage())
                 ->withInput();
@@ -152,7 +149,6 @@ class MascotaController extends Controller
         return view('admin.mascotas.show', compact('mascota'));
     }
 
-    // MÉTODO EDIT QUE FALTABA
     public function edit(Mascota $mascota)
     {
         $razas = Raza::all();
@@ -160,7 +156,6 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
         $fundaciones = Fundacion::all();
 
-        // Cargar relaciones para pre-seleccionar en el formulario
         $mascota->load(['razas', 'tiposVacunas']);
 
         // SOLO CAMBIÉ ESTA LÍNEA
@@ -199,7 +194,19 @@ class MascotaController extends Controller
                 $validated['Foto'] = $fotoPath;
             }
 
-            // Obtener nombres de razas seleccionadas
+            // Actualizar otros campos
+            $mascota->Nombre_mascota = $request->Nombre_mascota;
+            $mascota->Especie = $request->Especie;
+            $mascota->Edad_aprox = $request->Edad_aprox;
+            $mascota->Genero = $request->Genero;
+            $mascota->estado = $request->estado;
+            $mascota->Lugar_rescate = $request->Lugar_rescate;
+            $mascota->Descripcion = $request->Descripcion;
+            $mascota->Fecha_ingreso = $request->Fecha_ingreso;
+            $mascota->Fecha_salida = $request->Fecha_salida;
+            $mascota->fundacion_id = $request->fundacion_id;
+
+            // Actualizar razas
             $razasSeleccionadas = Raza::whereIn('id', $request->razas)
                 ->pluck('nombre_raza')
                 ->implode(', ');
@@ -225,7 +232,6 @@ class MascotaController extends Controller
             // NO sincronizar vacunas como relación many-to-many
             // porque ya las guardamos en el campo de texto 'vacunas'
 
-            // SOLO CAMBIÉ ESTA LÍNEA
             return redirect()->route('admin.mascotas.show', $mascota)
                 ->with('success', '¡Mascota actualizada exitosamente!');
         } catch (\Exception $e) {
@@ -239,19 +245,27 @@ class MascotaController extends Controller
     public function destroy(Mascota $mascota)
     {
         try {
-            // Eliminar imagen si existe
+            // Eliminar fotos de almacenamiento
             if ($mascota->Foto && Storage::disk('public')->exists($mascota->Foto)) {
                 Storage::disk('public')->delete($mascota->Foto);
             }
 
-            // Eliminar relaciones many-to-many
+            // Eliminar fotos de la galería
+            if ($mascota->galeria_fotos && is_array($mascota->galeria_fotos)) {
+                foreach ($mascota->galeria_fotos as $foto) {
+                    if (isset($foto['ruta']) && Storage::disk('public')->exists($foto['ruta'])) {
+                        Storage::disk('public')->delete($foto['ruta']);
+                    }
+                }
+            }
+
+            // Eliminar relaciones
             $mascota->razas()->detach();
             $mascota->tiposVacunas()->detach();
 
             // Eliminar mascota
             $mascota->delete();
 
-            // SOLO CAMBIÉ ESTA LÍNEA
             return redirect()->route('admin.mascotas.index')
                 ->with('success', 'Mascota eliminada exitosamente');
         } catch (\Exception $e) {
@@ -261,6 +275,9 @@ class MascotaController extends Controller
         }
     }
 
+    // ... resto de métodos públicos (sin cambios)
+
+
     public function porEstado($estado)
     {
         $mascotas = Mascota::where('estado', $estado)
@@ -269,8 +286,6 @@ class MascotaController extends Controller
 
         return view('public.mascotas.index', compact('mascotas', 'estado'));
     }
-
-    // Metodos publicos para que los usaurios puedan navegar por mascotas
 
     public function publicIndex(Request $request)
     {
@@ -289,7 +304,6 @@ class MascotaController extends Controller
         $mascotas = $query->orderBy('created_at', 'desc')->paginate(12);
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
 
-        // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
         return view('public.mascotas.index', compact('mascotas', 'especies'));
     }
 
@@ -299,7 +313,6 @@ class MascotaController extends Controller
             ->with('fundacion')
             ->findOrFail($id);
 
-        // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
         return view('public.mascotas.show', compact('mascota'));
     }
 }

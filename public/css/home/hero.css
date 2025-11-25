@@ -1,7 +1,7 @@
 .hero-section {
-    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    background: var(--color-fondo-oscuro) !important;
     min-height: 100vh;
-    color: var(--white);
+    color: var(--color-texto-claro);
     padding: 120px 0 80px;
     position: relative;
     overflow: hidden;
@@ -17,7 +17,7 @@
     font-weight: 800;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    color: rgb(0, 207, 235);
+    color: #00cfeb;
 }
 
 .hero-section .lead {
@@ -34,8 +34,9 @@
 
 .hero-image {
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-dark);
     animation: float 6s ease-in-out infinite;
+    border: 3px solid var(--color-turquesa);
 }
 
 @keyframes float {
@@ -43,7 +44,6 @@
     50% { transform: translateY(-20px); }
 }
 
-/* Animaciones */
 .animate-fade-in-up {
     animation: fadeInUp 1s ease-out;
 }

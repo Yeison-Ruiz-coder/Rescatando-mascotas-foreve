@@ -17,7 +17,7 @@
                     <a class="nav-link main-btn" href="<?php echo e(route('reportes.create')); ?>">REPORTA</a> 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-btn" href="<?php echo e(route('mascotas.public.index')); ?>">ADOPTA</a>
+                    <a class="nav-link main-btn" href="<?php echo e(route('public.mascotas.index')); ?>">ADOPTA</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link main-btn" href="<?php echo e(route('rescates.index')); ?>">RESCATA</a>
