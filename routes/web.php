@@ -84,3 +84,6 @@ Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
 
 Route::resource('eventos', EventoController::class);
+// Rutas públicas para usuarios (solo ver)
+Route::get('/eventos-publicos', [PublicEventoController::class, 'index'])->name('eventos.public.index');
+Route::get('/eventos-publicos/{evento}', [PublicEventoController::class, 'show'])->name('eventos.public.show');

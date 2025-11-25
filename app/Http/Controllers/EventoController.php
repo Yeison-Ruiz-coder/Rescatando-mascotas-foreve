@@ -52,4 +52,25 @@ class EventoController extends Controller
     {
         return view('eventos.show', compact('evento'));
     }
+    public function destroy(Evento $evento)
+    {
+    // Eliminar la imagen si existe
+    if ($evento->imagen_url) {
+        Storage::delete(str_replace('/storage', '', $evento->imagen_url));
+    }
+    
+    $evento->delete();
+    
+    return redirect()->route('eventos.index')
+        ->with('success', 'Evento eliminado correctamente.');
+    }
+    public function edit(Evento $evento)
+{
+    return view('eventos.edit', compact('evento'));
+}
+
+    public function update(Request $request, Evento $evento)
+    {
+    // Lógica para actualizar el evento
+    }
 }

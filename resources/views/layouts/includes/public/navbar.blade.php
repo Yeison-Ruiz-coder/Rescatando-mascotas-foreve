@@ -31,6 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link main-btn" href="{{ url('/nosotros') }}">NOSOTROS</a>
                 </li>
+                <li class="nav-item">
+                     <a class="nav-link main-btn" href="{{ route('eventos.public.index') }}">EVENTOS</a>
+                </li>
             </ul>
             
             <div class="navbar-profile dropdown">

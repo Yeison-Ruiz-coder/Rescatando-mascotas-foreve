@@ -6,9 +6,12 @@
     <title>Eventos de Mascotas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/pages/eventos/index.css') }}" rel="stylesheet">
-
+    <!-- Agregar Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    @extends('portals.admin.layouts.app')
+    @section('content')
     <div class="container mt-4">
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,9 +23,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1>Eventos para Mascotas</h1>
+                    <h1 class="text-white">Eventos para Mascotas</h1> 
                     <a href="{{ route('eventos.create') }}" class="btn btn-primary">
-                        Crear Nuevo Evento
+                        <i class="fas fa-plus"></i> Crear Nuevo Evento
                     </a>
                 </div>
             </div>
@@ -50,15 +53,28 @@
                             <div class="mt-auto">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <small class="text-muted">
-                                        <i class="bi bi-geo-alt"></i> {{ $evento->Lugar_evento }}
+                                        <i class="fas fa-map-marker-alt"></i> {{ $evento->Lugar_evento }}
                                     </small>
                                     <span class="event-date">
                                         {{ \Carbon\Carbon::parse($evento->Fecha_evento)->format('d M Y') }}
                                     </span>
                                 </div>
-                                <a href="{{ route('eventos.show', $evento) }}" class="btn btn-outline-primary btn-sm">
-                                    Ver Detalles
-                                </a>
+                                
+                                <div class="d-flex gap-2">
+                                    <a href="{{ route('eventos.show', $evento) }}" class="btn btn-outline-primary btn-sm flex-fill">
+                                        <i class="fas fa-eye"></i> Ver Detalles
+                                    </a>
+                                    
+                                    <!-- Botón Eliminar con confirmación -->
+                                    <form action="{{ route('eventos.destroy', $evento) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                                onclick="return confirm('¿Estás seguro de que quieres eliminar este evento?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,6 +95,7 @@
             </div>
         @endif
     </div>
+    @endsection
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
