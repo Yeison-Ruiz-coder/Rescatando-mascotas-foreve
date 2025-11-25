@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazaController;
 use App\Http\Controllers\TipoVacunaController;
+use App\Http\Controllers\PublicEventoController;
 
 // ... otros imports
 
@@ -85,5 +86,6 @@ Route::resource('tipos-vacunas', TipoVacunaController::class);
 
 Route::resource('eventos', EventoController::class);
 // Rutas públicas para usuarios (solo ver)
-Route::get('/eventos-publicos', [PublicEventoController::class, 'index'])->name('eventos.public.index');
-Route::get('/eventos-publicos/{evento}', [PublicEventoController::class, 'show'])->name('eventos.public.show');
+
+Route::get('/eventos', [PublicEventoController::class, 'index'])->name('eventos.public.index');
+Route::get('/eventos/{id}', [PublicEventoController::class, 'show'])->name('eventos.public.show');
