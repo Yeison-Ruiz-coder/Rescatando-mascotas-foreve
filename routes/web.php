@@ -130,7 +130,6 @@ Route::middleware(['auth'])->group(function () {
 // RUTAS COMPLETAS PÚBLICAS (PARA DESARROLLO)
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('donaciones', DonacionController::class);
-Route::resource('adopciones', AdopcionController::class);
 Route::resource('rescates', RescateController::class);
 Route::resource('reportes', ReporteController::class);
 Route::resource('solicitudes', SolicitudController::class);
@@ -153,3 +152,18 @@ Route::get('/eventos{evento}', [EventoController::class, 'show'])->name('eventos
 
 
 Route::get('/eventos/publicos', [EventoController::class, 'index'])->name('public.eventos.index');
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('adopciones', AdopcionController::class);
+});
+
+// O si prefieres definirlas individualmente:
+Route::prefix('admin')->name('admin.')->group(function () {});
+    Route::get('/adopciones', [AdopcionController::class, 'index'])->name('adopciones.index');
+    Route::get('/adopciones/create', [AdopcionController::class, 'create'])->name('adopciones.create');
+    Route::post('/adopciones', [AdopcionController::class, 'store'])->name('adopciones.store');
+    Route::get('/adopciones/{adopcion}', [AdopcionController::class, 'show'])->name('adopciones.show');
+    Route::get('/adopciones/{adopcion}/edit', [AdopcionController::class, 'edit'])->name('adopciones.edit');
+    Route::put('/adopciones/{adopcion}', [AdopcionController::class, 'update'])->name('adopciones.update');
+    Route::delete('/adopciones/{adopcion}', [AdopcionController::class, 'destroy'])->name('adopciones.destroy');
