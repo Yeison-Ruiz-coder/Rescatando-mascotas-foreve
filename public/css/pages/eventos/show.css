@@ -144,11 +144,7 @@ strong {
     box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
 }
 
-.btn-secondary::before {
-    content: "←";
-    margin-right: 0.5rem;
-    font-weight: bold;
-}
+
 
 /* FECHA DE CREACIÓN - ESTILO MÁS DISCRETO */
 .text-muted:last-child {
@@ -285,4 +281,33 @@ h1, h5 {
 .card-text {
     word-wrap: break-word;
     hyphens: auto;
+}
+/* Botones de acción */
+.btn-outline-primary {
+    color: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-fucsia);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Espaciado entre botones */
+.d-flex.gap-2 {
+    gap: 0.5rem;
 }

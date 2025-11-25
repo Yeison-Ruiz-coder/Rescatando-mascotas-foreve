@@ -11,12 +11,12 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = Evento::orderBy('Fecha_evento', 'desc')->get();
-        return view('eventos.index', compact('eventos'));
+        return view('admin.eventos.index', compact('eventos'));
     }
 
     public function create()
     {
-        return view('eventos.create');
+        return view('admin.eventos.create');
     }
 
     public function store(Request $request)
@@ -44,12 +44,39 @@ class EventoController extends Controller
             'administrador_id' => auth()->id() // o el ID del admin según tu lógica
         ]);
 
-        return redirect()->route('eventos.index')
+        return redirect()->route('admin.eventos.index')
             ->with('success', 'Evento creado exitosamente!');
     }
 
     public function show(Evento $evento)
     {
-        return view('eventos.show', compact('evento'));
+        return view('admin.eventos.show', compact('evento'));
+    }
+    public function destroy(Evento $evento)
+    {
+    // Eliminar la imagen si existe
+    if ($evento->imagen_url) {
+        Storage::delete(str_replace('/storage', '', $evento->imagen_url));
+    }
+    
+    $evento->delete();
+    
+    return redirect()->route('admin.eventos.index')
+        ->with('success', 'Evento eliminado correctamente.');
+    }
+    public function edit(Evento $evento)
+{
+    return view('admin.eventos.edit', compact('evento'));
+}
+
+    public function update(Request $request, Evento $evento)
+    {
+    // Lógica para actualizar el evento
+    }
+
+
+    public function Eventospublicos(Request $request, Evento $evento)
+    {
+      return view('public.eventos.index', compact('eventospublicos'));
     }
 }

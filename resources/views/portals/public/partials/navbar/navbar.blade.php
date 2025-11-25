@@ -26,6 +26,11 @@
                 <li class="nav-item">
                     <a class="nav-link main-link" href="{{ route('rescates.index') }}">Rescates</a>
                 </li>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link main-link" href="{{ route('public.eventos.index') }}">Eventos</a>
+                </li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle main-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
