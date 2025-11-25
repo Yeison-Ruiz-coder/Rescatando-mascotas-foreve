@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/veterinarias/index.blade.php ENDPATH**/ ?>

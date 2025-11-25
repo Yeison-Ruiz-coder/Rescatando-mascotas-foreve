@@ -17,6 +17,9 @@
     <li class="nav-item">
         <a class="nav-link main-btn" href="{{ route('eventos.index') }}">Eventos</a>
     </li>
+     <li class="nav-item">
+        <a class="nav-link main-btn" href="{{ route('veterinarias.index') }}">Veterinarias</a>
+    </li>
     <li class="nav-item">
         <a class="nav-link main-btn" href="{{ url('/nosotros') }}">Nosotros</a>
     </li>
