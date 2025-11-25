@@ -14,7 +14,7 @@
     
     <!-- Proceso Section -->
     @include('home.partials.proceso')
-    
+
     <!-- Testimonios Section -->
     @include('home.partials.testimonios')
     

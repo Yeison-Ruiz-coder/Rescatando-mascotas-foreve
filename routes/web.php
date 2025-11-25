@@ -21,6 +21,17 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazaController;
 use App\Http\Controllers\TipoVacunaController;
 
+/*
+|--------------------------------------------------------------------------
+| 1. RUTAS PÚBLICAS
+|--------------------------------------------------------------------------
+*/
+
+// Página de inicio
+Route::get('/', [DonacionController::class, 'index'])->name('inicio');
+
+// Donaciones públicas
+Route::resource('donaciones', DonacionController::class)->only(['index', 'create', 'store']);
 // ... otros imports
 
 // PÁGINA DE INICIO
@@ -48,6 +59,57 @@ Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'
 Route::post('/adopciones/solicitar', [AdopcionController::class, 'solicitarStore'])
     ->name('adopciones.solicitar.store');
 
+/*
+|--------------------------------------------------------------------------
+| 2. AUTENTICACIÓN (Laravel Breeze / Jetstream)
+|--------------------------------------------------------------------------
+|
+| NO TOCAR. Esto carga login, register, logout, etc.
+|
+*/
+require __DIR__.'/auth.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| 3. RUTAS PROTEGIDAS (requieren login)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->group(function () {
+});
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Recursos protegidos
+    Route::resource('administradores', AdministradorController::class);
+    Route::resource('veterinarias', VeterinariaController::class);
+    Route::resource('fundaciones', FundacionController::class);
+    Route::resource('tiendas', TiendaController::class);
+    Route::resource('mascotas', MascotaController::class);
+    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('reportes', ReporteController::class);
+    Route::resource('eventos', EventoController::class);
+    Route::resource('comentarios', ComentarioController::class);
+    Route::resource('solicitudes', SolicitudController::class);
+    Route::resource('suscripciones', SuscripcionController::class);
+    Route::resource('adopciones', AdopcionController::class);
+    Route::resource('notificaciones', NotificacionController::class);
+    Route::resource('rescates', RescateController::class);
+
+    // Rutas personalizadas
+    Route::get('/mascotas/estado/{estado}', [MascotaController::class, 'porEstado'])->name('mascotas.estado');
+    Route::get('/usuarios/tipo/{tipo}', [UsuarioController::class, 'porTipo'])->name('usuarios.tipo');
+    Route::get('/estadisticas', [DashboardController::class, 'estadisticas'])->name('estadisticas');
+    Route::get('/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
+
+    // Vista de eventos
+    Route::resource('eventos', EventoController::class);
+
+
+    // Formulario manual para crear mascotas
+    Route::get('/mascotas/crear', [MascotaController::class, 'create'])->name('mascotas.create');
+    Route::post('/mascotas', [MascotaController::class, 'store'])->name('mascotas.store');
 
 // RUTAS DE AUTENTICACIÓN
 require __DIR__.'/auth.php';
