@@ -2,11 +2,11 @@
 <!-- Foto Principal Grande -->
 <div class="card shadow-lg border-0 mb-3">
     <?php if($mascota->galeria_fotos && count($mascota->galeria_fotos) > 0): ?>
-        <img src="<?php echo e(Storage::url($mascota->galeria_fotos[0]['ruta'])); ?>"
+        <img src="<?php echo e(asset('storage/' . $mascota->galeria_fotos[0]['ruta'])); ?>"
             class="card-img-top gallery-main-img" alt="Foto de <?php echo e($mascota->Nombre_mascota); ?>"
             id="foto-principal" data-bs-toggle="modal" data-bs-target="#galeriaModal">
     <?php else: ?>
-        <img src="<?php echo e(Storage::url($mascota->Foto)); ?>" class="card-img-top gallery-main-img"
+        <img src="<?php echo e(asset('storage/' . $mascota->Foto)); ?>" class="card-img-top gallery-main-img"
             alt="Foto de <?php echo e($mascota->Nombre_mascota); ?>">
     <?php endif; ?>
 
@@ -38,9 +38,9 @@
         <?php $__currentLoopData = $mascota->galeria_fotos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $foto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-3">
                 <div class="thumbnail-container position-relative">
-                    <img src="<?php echo e(Storage::url($foto['ruta'])); ?>"
+                    <img src="<?php echo e(asset('storage/' . $foto['ruta'])); ?>"
                         class="img-thumbnail gallery-thumbnail <?php echo e($index === 0 ? 'active' : ''); ?>"
-                        onclick="cambiarFotoPrincipal('<?php echo e(Storage::url($foto['ruta'])); ?>', <?php echo e($index); ?>)"
+                        onclick="cambiarFotoPrincipal('<?php echo e(asset('storage/' . $foto['ruta'])); ?>', <?php echo e($index); ?>)"
                         alt="<?php echo e($foto['titulo'] ?? 'Foto ' . ($index + 1)); ?>" data-bs-toggle="modal"
                         data-bs-target="#galeriaModal" data-index="<?php echo e($index); ?>">
                     <?php if($index === 0): ?>

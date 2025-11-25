@@ -1,5 +1,3 @@
-
-
 <?php $__env->startPush('styles'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/pages/mascotas/public-show.css')); ?>">
 <?php $__env->stopPush(); ?>

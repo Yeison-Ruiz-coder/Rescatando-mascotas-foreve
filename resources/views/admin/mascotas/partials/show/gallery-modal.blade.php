@@ -15,8 +15,9 @@
                         <div class="carousel-inner">
                             @foreach ($mascota->galeria_fotos as $index => $foto)
                                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <img src="{{ Storage::url($foto['ruta']) }}" class="d-block w-100 rounded"
-                                        alt="{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}">
+                                    <img src="{{ asset('storage/' . $foto['ruta']) }}" 
+                                         class="d-block w-100 rounded"
+                                         alt="{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}">
                                     <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
                                         <h5>{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}</h5>
                                     </div>

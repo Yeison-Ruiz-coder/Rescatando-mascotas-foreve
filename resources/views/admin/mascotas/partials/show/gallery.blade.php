@@ -2,11 +2,11 @@
 <!-- Foto Principal Grande -->
 <div class="card shadow-lg border-0 mb-3">
     @if ($mascota->galeria_fotos && count($mascota->galeria_fotos) > 0)
-        <img src="{{ Storage::url($mascota->galeria_fotos[0]['ruta']) }}"
+        <img src="{{ asset('storage/' . $mascota->galeria_fotos[0]['ruta']) }}"
             class="card-img-top gallery-main-img" alt="Foto de {{ $mascota->Nombre_mascota }}"
             id="foto-principal" data-bs-toggle="modal" data-bs-target="#galeriaModal">
     @else
-        <img src="{{ Storage::url($mascota->Foto) }}" class="card-img-top gallery-main-img"
+        <img src="{{ asset('storage/' . $mascota->Foto) }}" class="card-img-top gallery-main-img"
             alt="Foto de {{ $mascota->Nombre_mascota }}">
     @endif
 
@@ -38,9 +38,9 @@
         @foreach ($mascota->galeria_fotos as $index => $foto)
             <div class="col-3">
                 <div class="thumbnail-container position-relative">
-                    <img src="{{ Storage::url($foto['ruta']) }}"
+                    <img src="{{ asset('storage/' . $foto['ruta']) }}"
                         class="img-thumbnail gallery-thumbnail {{ $index === 0 ? 'active' : '' }}"
-                        onclick="cambiarFotoPrincipal('{{ Storage::url($foto['ruta']) }}', {{ $index }})"
+                        onclick="cambiarFotoPrincipal('{{ asset('storage/' . $foto['ruta']) }}', {{ $index }})"
                         alt="{{ $foto['titulo'] ?? 'Foto ' . ($index + 1) }}" data-bs-toggle="modal"
                         data-bs-target="#galeriaModal" data-index="{{ $index }}">
                     @if ($index === 0)

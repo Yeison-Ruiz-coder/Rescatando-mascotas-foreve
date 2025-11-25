@@ -16,8 +16,9 @@
                         <div class="carousel-inner">
                             <?php $__currentLoopData = $mascota->galeria_fotos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $foto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="carousel-item <?php echo e($index === 0 ? 'active' : ''); ?>">
-                                    <img src="<?php echo e(Storage::url($foto['ruta'])); ?>" class="d-block w-100 rounded"
-                                        alt="<?php echo e($foto['titulo'] ?? 'Foto ' . ($index + 1)); ?>">
+                                    <img src="<?php echo e(asset('storage/' . $foto['ruta'])); ?>" 
+                                         class="d-block w-100 rounded"
+                                         alt="<?php echo e($foto['titulo'] ?? 'Foto ' . ($index + 1)); ?>">
                                     <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
                                         <h5><?php echo e($foto['titulo'] ?? 'Foto ' . ($index + 1)); ?></h5>
                                     </div>

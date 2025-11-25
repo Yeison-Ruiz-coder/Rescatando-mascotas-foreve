@@ -38,7 +38,6 @@ class MascotaController extends Controller
         $estados = ['En adopcion', 'Rescatada', 'Adoptado'];
         $todasRazas = Raza::all();
 
-        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.index', compact('mascotas', 'especies', 'estados', 'todasRazas'));
     }
 
@@ -49,13 +48,12 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
         $fundaciones = Fundacion::all();
 
-        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.create', compact('razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
     public function store(Request $request)
     {
-        // Validación - CAMBIAR 'Foto' por 'fotos[]'
+        // Validación corregida
         $validated = $request->validate([
             'Nombre_mascota' => 'required|string|max:255',
             'Especie' => 'required|string',
@@ -66,8 +64,8 @@ class MascotaController extends Controller
             'estado' => 'required|in:Adoptado,En adopcion,Rescatada',
             'Lugar_rescate' => 'required|string|max:500',
             'Descripcion' => 'required|string|min:10|max:1000',
-            'fotos' => 'required|array|min:1', // ← CAMBIADO
-            'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // ← CAMBIADO
+            'fotos' => 'required|array|min:1|max:5',
+            'fotos.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'vacunas_aplicadas' => 'nullable|array',
             'vacunas_aplicadas.*' => 'exists:tipos_vacunas,id',
             'Fecha_ingreso' => 'required|date',
@@ -121,8 +119,8 @@ class MascotaController extends Controller
                 'estado' => $request->estado,
                 'Lugar_rescate' => $request->Lugar_rescate,
                 'Descripcion' => $request->Descripcion,
-                'Foto' => $fotoPrincipalPath, // Primera foto como principal
-                'galeria_fotos' => $galeriaFotos, // Array completo de fotos
+                'Foto' => $fotoPrincipalPath,
+                'galeria_fotos' => $galeriaFotos,
                 'vacunas' => $vacunasSeleccionadas,
                 'Fecha_ingreso' => $request->Fecha_ingreso,
                 'Fecha_salida' => $request->Fecha_salida,
@@ -130,14 +128,12 @@ class MascotaController extends Controller
             ]);
 
             // Sincronizar razas
-            if ($request->has('razas')) {
-                $mascota->razas()->sync($request->razas);
-            }
+            $mascota->razas()->sync($request->razas);
 
-            // SOLO CAMBIÉ ESTA LÍNEA
             return redirect()->route('admin.mascotas.index')
-                ->with('success', 'Se guardaron' . count($galeriaFotos) . ' fotos en la galería .');
+                ->with('success', 'Mascota registrada exitosamente con ' . count($galeriaFotos) . ' fotos.');
         } catch (\Exception $e) {
+            Log::error('Error al registrar mascota: ' . $e->getMessage());
             return redirect()->back()
                 ->with('error', 'Error al registrar la mascota: ' . $e->getMessage())
                 ->withInput();
@@ -147,12 +143,9 @@ class MascotaController extends Controller
     public function show(Mascota $mascota)
     {
         $mascota->load(['razas', 'tiposVacunas', 'fundacion']);
-        
-        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.show', compact('mascota'));
     }
 
-    // MÉTODO EDIT QUE FALTABA
     public function edit(Mascota $mascota)
     {
         $razas = Raza::all();
@@ -160,16 +153,13 @@ class MascotaController extends Controller
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
         $fundaciones = Fundacion::all();
 
-        // Cargar relaciones para pre-seleccionar en el formulario
         $mascota->load(['razas', 'tiposVacunas']);
-
-        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.edit', compact('mascota', 'razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
     public function update(Request $request, Mascota $mascota)
     {
-        // Validación (similar a store pero con Foto opcional)
+        // Validación consistente con store
         $validated = $request->validate([
             'Nombre_mascota' => 'required|string|max:255',
             'Especie' => 'required|string',
@@ -180,7 +170,8 @@ class MascotaController extends Controller
             'estado' => 'required|in:Adoptado,En adopcion,Rescatada',
             'Lugar_rescate' => 'required|string|max:500',
             'Descripcion' => 'required|string|min:10|max:1000',
-            'Foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'fotos' => 'sometimes|array|max:5', // Cambiado a 'sometimes' para actualización
+            'fotos.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             'vacunas_aplicadas' => 'nullable|array',
             'vacunas_aplicadas.*' => 'exists:tipos_vacunas,id',
             'Fecha_ingreso' => 'required|date',
@@ -189,43 +180,72 @@ class MascotaController extends Controller
         ]);
 
         try {
-            // Procesar nueva imagen si se proporciona
-            if ($request->hasFile('Foto')) {
-                // Eliminar imagen anterior si existe
-                if ($mascota->Foto && Storage::disk('public')->exists($mascota->Foto)) {
-                    Storage::disk('public')->delete($mascota->Foto);
+            // Procesar NUEVAS fotos si se enviaron
+            $galeriaFotos = $mascota->galeria_fotos ?? [];
+            $fotoPrincipalPath = $mascota->Foto;
+
+            if ($request->hasFile('fotos')) {
+                // Eliminar fotos anteriores si existen
+                if (!empty($galeriaFotos)) {
+                    foreach ($galeriaFotos as $fotoExistente) {
+                        if (isset($fotoExistente['ruta']) && Storage::disk('public')->exists($fotoExistente['ruta'])) {
+                            Storage::disk('public')->delete($fotoExistente['ruta']);
+                        }
+                    }
                 }
-                $fotoPath = $request->file('Foto')->store('mascotas', 'public');
-                $validated['Foto'] = $fotoPath;
+
+                // Procesar nuevas fotos
+                $galeriaFotos = [];
+                foreach ($request->file('fotos') as $index => $foto) {
+                    $fotoPath = $foto->store('mascotas', 'public');
+
+                    if ($index === 0) {
+                        $fotoPrincipalPath = $fotoPath;
+                    }
+
+                    $galeriaFotos[] = [
+                        'ruta' => $fotoPath,
+                        'titulo' => "Foto " . ($index + 1),
+                        'orden' => $index,
+                        'es_principal' => $index === 0
+                    ];
+                }
             }
 
             // Obtener nombres de razas seleccionadas
             $razasSeleccionadas = Raza::whereIn('id', $request->razas)
                 ->pluck('nombre_raza')
                 ->implode(', ');
-            $validated['Raza'] = $razasSeleccionadas;
 
-            // Obtener nombres de vacunas seleccionadas para el campo vacunas (texto)
+            // Obtener nombres de vacunas seleccionadas
             $vacunasSeleccionadas = 'No especificado';
             if ($request->has('vacunas_aplicadas')) {
                 $vacunasSeleccionadas = TipoVacuna::whereIn('id', $request->vacunas_aplicadas)
                     ->pluck('nombre_vacuna')
                     ->implode(', ');
             }
-            $validated['vacunas'] = $vacunasSeleccionadas;
 
-            // Actualizar mascota
-            $mascota->update($validated);
+            // Actualizar la mascota
+            $mascota->update([
+                'Nombre_mascota' => $request->Nombre_mascota,
+                'Especie' => $request->Especie,
+                'Raza' => $razasSeleccionadas,
+                'Edad_aprox' => $request->Edad_aprox,
+                'Genero' => $request->Genero,
+                'estado' => $request->estado,
+                'Lugar_rescate' => $request->Lugar_rescate,
+                'Descripcion' => $request->Descripcion,
+                'Foto' => $fotoPrincipalPath,
+                'galeria_fotos' => $galeriaFotos,
+                'vacunas' => $vacunasSeleccionadas,
+                'Fecha_ingreso' => $request->Fecha_ingreso,
+                'Fecha_salida' => $request->Fecha_salida,
+                'fundacion_id' => $request->fundacion_id
+            ]);
 
-            // Sincronizar relaciones
-            if ($request->has('razas')) {
-                $mascota->razas()->sync($request->razas);
-            }
+            // Sincronizar razas
+            $mascota->razas()->sync($request->razas);
 
-            // NO sincronizar vacunas como relación many-to-many
-            // porque ya las guardamos en el campo de texto 'vacunas'
-
-            // SOLO CAMBIÉ ESTA LÍNEA
             return redirect()->route('admin.mascotas.show', $mascota)
                 ->with('success', '¡Mascota actualizada exitosamente!');
         } catch (\Exception $e) {
@@ -239,19 +259,27 @@ class MascotaController extends Controller
     public function destroy(Mascota $mascota)
     {
         try {
-            // Eliminar imagen si existe
+            // Eliminar fotos de almacenamiento
             if ($mascota->Foto && Storage::disk('public')->exists($mascota->Foto)) {
                 Storage::disk('public')->delete($mascota->Foto);
             }
 
-            // Eliminar relaciones many-to-many
+            // Eliminar fotos de la galería
+            if ($mascota->galeria_fotos && is_array($mascota->galeria_fotos)) {
+                foreach ($mascota->galeria_fotos as $foto) {
+                    if (isset($foto['ruta']) && Storage::disk('public')->exists($foto['ruta'])) {
+                        Storage::disk('public')->delete($foto['ruta']);
+                    }
+                }
+            }
+
+            // Eliminar relaciones
             $mascota->razas()->detach();
             $mascota->tiposVacunas()->detach();
 
             // Eliminar mascota
             $mascota->delete();
 
-            // SOLO CAMBIÉ ESTA LÍNEA
             return redirect()->route('admin.mascotas.index')
                 ->with('success', 'Mascota eliminada exitosamente');
         } catch (\Exception $e) {
@@ -261,6 +289,9 @@ class MascotaController extends Controller
         }
     }
 
+    // ... resto de métodos públicos (sin cambios)
+
+
     public function porEstado($estado)
     {
         $mascotas = Mascota::where('estado', $estado)
@@ -269,8 +300,6 @@ class MascotaController extends Controller
 
         return view('public.mascotas.index', compact('mascotas', 'estado'));
     }
-
-    // Metodos publicos para que los usaurios puedan navegar por mascotas
 
     public function publicIndex(Request $request)
     {
@@ -289,7 +318,6 @@ class MascotaController extends Controller
         $mascotas = $query->orderBy('created_at', 'desc')->paginate(12);
         $especies = ['Perro', 'Gato', 'Conejo', 'Otro'];
 
-        // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
         return view('public.mascotas.index', compact('mascotas', 'especies'));
     }
 
@@ -299,7 +327,6 @@ class MascotaController extends Controller
             ->with('fundacion')
             ->findOrFail($id);
 
-        // ESTOS SE MANTIENEN IGUAL (son vistas públicas)
         return view('public.mascotas.show', compact('mascota'));
     }
 }
