@@ -1,136 +1,102 @@
-/* ESTILOS PARA LA PÁGINA DE DETALLE DE MASCOTA */
+/* ESTILOS PARA LA PÁGINA DE DETALLE DE MASCOTA - ADMIN */
+
+/* VARIABLES */
+:root {
+    --color-turquesa: #1B8E95;
+    --color-fucsia: #FD4586;
+    --color-fucsia-hover: #d83d73;
+    --color-gris-claro: #f4f4f4;
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #333;
+}
 
 body {
     background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
     min-height: 100vh;
 }
 
-/*Botones de accion*/
+/* CLASES UTILITARIAS */
+.bg-gris-claro { background-color: var(--color-gris-claro) !important; }
+.bg-turquesa { background-color: var(--color-turquesa) !important; }
+.bg-fucsia { background-color: var(--color-fucsia) !important; }
+.text-turquesa { color: var(--color-turquesa) !important; }
+.text-fucsia { color: var(--color-fucsia) !important; }
+.border-turquesa { border-color: var(--color-turquesa) !important; }
 
-.btn-warning {
-    background-color: #016065 !important;
-    border-color: #02474b !important;
-    transition: all 0.3s ease-in-out !important;
+/* BOTONES BASE */
+.btn {
+    font-weight: 600;
+    transition: all 0.3s ease;
     transform: translateY(0);
 }
 
-.btn-warning:hover {
-    background-color: #02474b !important;
-    border-color: #013336 !important;
+.btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(1, 96, 101, 0.4);
+    color: white;
 }
 
-.btn-danger {
-    background-color: red !important;
-    border-color: #ff6b6b !important;
-    transition: all 0.3s ease-in-out !important;
-    transform: translateY(0);
-}
-
-.btn-danger:hover {
-    background-color: #cc0000 !important;
-    border-color: #b30000 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
-}
-
-.btn-secondary {
-    background: linear-gradient(#016065) !important;
-    border-color: #1A2032 !important;
-    transition: all 0.3s ease-in-out !important;
-    transform: translateY(0);
-}
-
-.btn-secondary:hover {
-    background: linear-gradient(#02474b, #016065) !important;
-    border-color: #161b2b !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(1, 96, 101, 0.4);
-}
-
-/* Efecto adicional al hacer clic en cualquier botón */
 .btn:active {
     transform: scale(0.98) !important;
     transition: all 0.1s ease-in-out !important;
 }
 
-/* Foto principal */
-.gallery-main-img {
-    height: 400px;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    border-radius: 10px 10px 0 0;
-}
-
-.gallery-main-img:hover {
-    transform: scale(1.02);
-    opacity: 0.95;
-}
-
-/* Miniaturas de la galería */
-.gallery-thumbnail {
-    height: 80px;
-    object-fit: cover;
-    width: 100%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.gallery-thumbnail:hover {
-    border-color: var(--color-fucsia);
-    transform: translateY(-2px);
-}
-
-.gallery-thumbnail.active {
-    border-color: var(--color-turquesa);
-    transform: scale(1.05);
-}
-
-.thumbnail-container {
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.thumbnail-container .badge {
-    background-color: var(--color-turquesa);
-    font-size: 0.7rem;
-    padding: 0.25rem 0.5rem;
-}
-
-/* Estados de la mascota */
-.estado-badge {
-    background-color: #F80058 !important;
+/* BOTONES ESPECÍFICOS */
+.btn-warning {
+    background-color: var(--color-turquesa) !important;
+    border-color: var(--color-turquesa) !important;
     color: white;
 }
 
-/* Badges generales */
-.badge {
-    background-color: #F80058;
-    color: white;
+.btn-warning:hover {
+    background-color: #16747a !important;
+    border-color: #16747a !important;
+    box-shadow: 0 4px 15px rgba(27, 142, 149, 0.3);
 }
 
-.raza-badge {
-    background-color: var(--color-gris-claro) !important;
-    color: var(--color-texto-oscuro) !important;
-    border: 1px solid #dee2e6;
+.btn-danger {
+    background-color: rgba(255, 255, 255, 0.678);
+    border-color: var(--color-fucsia) !important;
+    color: var(--color-fucsia);
 }
 
-/* Cards */
+.btn-danger:hover {
+    background-color: var(--color-fucsia-hover) !important;
+    border-color: var(--color-fucsia-hover) !important;
+    box-shadow: 0 4px 15px rgba(253, 69, 134, 0.3);
+}
+
+
+.btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268 !important;
+    border-color: #545b62 !important;
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* TARJETAS */
 .card {
     border: none;
     border-radius: 15px;
+    transition: all 0.3s ease;
     overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .card-header {
-    background:var(--color-turquesa) !important;
+    background: linear-gradient(135deg, var(--color-turquesa)) !important;
     color: white;
     border: none;
-    padding: 1rem 1.25rem;
-    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
 }
 
 .gestion-card .card-header {
@@ -138,7 +104,82 @@ body {
     color: var(--color-texto-oscuro);
 }
 
-/* Listas */
+/* IMÁGENES Y GALERÍA */
+.gallery-main-img {
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 3px solid var(--color-turquesa);
+    box-shadow: 0 4px 15px rgba(27, 142, 149, 0.3);
+}
+
+.gallery-main-img:hover {
+    transform: scale(1.02);
+    border-color: var(--color-fucsia);
+    box-shadow: 0 6px 20px rgba(253, 69, 134, 0.4);
+}
+
+/* MINIATURAS */
+.gallery-thumbnail {
+    width: 134px !important;
+    height: 100px !important;
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    border-radius: 8px;
+}
+
+.gallery-thumbnail:hover {
+    transform: scale(1.1);
+    border-color: var(--color-fucsia) !important;
+}
+
+.gallery-thumbnail.active {
+    border-color: var(--color-turquesa) !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px var(--color-turquesa);
+}
+
+/* CONTENEDOR DE MINIATURAS */
+.thumbnail-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.thumbnail-container .badge {
+    background-color: var(--color-turquesa);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    z-index: 10;
+}
+
+/* BADGES */
+.estado-badge, .badge {
+    background-color: var(--color-fucsia) !important;
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.raza-badge {
+    background-color: var(--color-gris-claro) !important;
+    color: var(--color-texto-oscuro) !important;
+    border: 1px solid #dee2e6;
+    border-radius: 15px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+/* LISTAS */
 .list-group-item {
     border: none;
     padding: 1rem 1.25rem;
@@ -153,97 +194,82 @@ body {
     background-color: #e9ecef;
 }
 
-/* Títulos y texto */
-.card-title {
+/* TÍTULOS Y TEXTO */
+.card-title, h1, h3, h4 {
     color: var(--color-turquesa);
     font-weight: 700;
 }
 
-h1,h3, h4 {
-    color: #016065;
-    font-weight: 700;
-}
-
 .mb-4 h2 {
-    color:#5EBABF !important;
+    color: #5EBABF !important;
 }
-
 
 .descripcion-texto {
     line-height: 1.6;
-    color: var(--color-gris-claro);
+    color: var(--color-texto-oscuro);
 }
 
-/* Botones */
-.btn-warning {
-    background-color: var(--color-fucsia);
-    border-color: var(--color-fucsia);
-    color: white;
-}
-
-.btn-warning:hover {
-    background-color: var(--color-fucsia-hover);
-    border-color: var(--color-fucsia-hover);
-    color: white;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-/* Modal */
+/* MODAL */
 .modal-header {
-    background-color: var(--color-turquesa);
+    background: linear-gradient(135deg, var(--color-turquesa)) !important;
+    color: white;
+    border: none;
 }
 
 .carousel-item img {
     max-height: 500px;
     object-fit: contain;
     background-color: var(--color-gris-claro);
+    border-radius: 10px;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: var(--color-turquesa);
     border-radius: 50%;
-    padding: 1.5rem;
+    padding: 1.2rem;
 }
 
-/* Responsive */
+/* EFECTOS DE TRANSICIÓN */
+.transition-all, .hover-lift:hover {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+}
+
+/* SOMBRAS */
+.shadow-lg { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; }
+.shadow { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important; }
+
+/* ICONOS */
+.fas { color: var(--color-fucsia); }
+.card-header .fas { color: white; }
+.gestion-card .card-header .fas { color: var(--color-turquesa); }
+
+/* BORDE LIGERO PARA INFORMACIÓN */
+.bg-light-info {
+    background-color: rgba(27, 142, 149, 0.1) !important;
+    border-left: 4px solid var(--color-turquesa);
+    border-radius: 8px;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .gallery-main-img {
-        height: 300px;
+    .gallery-main-img { height: 300px; }
+    .gallery-thumbnail { 
+        width: 120px !important; 
+        height: 90px !important; 
     }
-    
-    .gallery-thumbnail {
-        height: 60px;
+    .card-header { padding: 0.75rem 1rem; }
+    .display-4 { font-size: 2rem; }
+}
+
+@media (max-width: 576px) {
+    .gallery-main-img { height: 250px; }
+    .gallery-thumbnail { 
+        width: 100px !important; 
+        height: 75px !important; 
     }
-    
-    .display-4 {
-        font-size: 2rem;
-    }
 }
-
-/* Sombras y efectos */
-.shadow-lg {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-}
-
-.shadow {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
-}
-
-/* Iconos */
-.fas {
-    color: var(--color-fucsia);
-}
-
-.card-header .fas {
-    color: white;
-}
-
-.gestion-card .card-header .fas {
-    color: var(--color-turquesa);
-}
-

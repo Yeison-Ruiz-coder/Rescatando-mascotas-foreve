@@ -8,10 +8,11 @@ body {
 
 /* HEADER DE CREACIÓN */
 .create-adopcion-header {
-     background: linear-gradient(135deg, rgba(27, 143, 149, 0.596), rgba(253, 69, 133, 0.445));
+    background: linear-gradient(135deg, rgba(27, 143, 149, 0.596), rgba(253, 69, 133, 0.445));
     border-radius: 15px;
     padding: 2rem;
     margin-bottom: 2rem;
+    width: 1000px;
     border-left: 4px solid var(--color-turquesa);
     text-align: center;
 }
@@ -33,6 +34,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     overflow: hidden;
+    width: 1000px;
 }
 
 .card-header-formulario {

@@ -17,7 +17,7 @@
                     <a class="nav-link main-btn" href="{{ route('reportes.create') }}">REPORTA</a> 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-btn" href="{{ route('mascotas.public.index') }}">ADOPTA</a>
+                    <a class="nav-link main-btn" href="{{ route('public.mascotas.index') }}">ADOPTA</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link main-btn" href="{{ route('rescates.index') }}">RESCATA</a>

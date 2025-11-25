@@ -552,3 +552,81 @@ textarea.form-control-custom {
         font-size: 1.1rem;
     }
 }
+
+/* ========== ESTILOS OPTIMIZADOS PARA IMÁGENES ========== */
+
+/* Preview de Galería - VERSIÓN OPTIMIZADA */
+.preview-container {
+    background-color: var(--color-gris-claro);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.gallery-preview {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.gallery-preview-item {
+    position: relative;
+    width: 120px;
+    height: 100px;
+}
+
+.gallery-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--color-turquesa);
+}
+
+.preview-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: var(--color-fucsia);
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.remove-preview {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--color-fucsia);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Responsive para imágenes */
+@media (max-width: 768px) {
+    .gallery-preview-item {
+        width: 100px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-preview {
+        justify-content: center;
+    }
+    
+    .gallery-preview-item {
+        width: 80px;
+        height: 70px;
+    }
+}
