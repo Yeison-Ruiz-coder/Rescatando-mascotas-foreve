@@ -9,6 +9,7 @@ use App\Models\Fundacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator; // Agregar este use
 
 class MascotaController extends Controller
 {
@@ -53,7 +54,7 @@ class MascotaController extends Controller
 
     public function store(Request $request)
     {
-        // Validación corregida
+        // Validación - CAMBIAR 'Foto' por 'fotos[]'
         $validated = $request->validate([
             'Nombre_mascota' => 'required|string|max:255',
             'Especie' => 'required|string',
@@ -64,8 +65,8 @@ class MascotaController extends Controller
             'estado' => 'required|in:Adoptado,En adopcion,Rescatada',
             'Lugar_rescate' => 'required|string|max:500',
             'Descripcion' => 'required|string|min:10|max:1000',
-            'fotos' => 'required|array|min:1|max:5',
-            'fotos.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'fotos' => 'required|array|min:1', // ← CAMBIADO
+            'fotos.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // ← CAMBIADO
             'vacunas_aplicadas' => 'nullable|array',
             'vacunas_aplicadas.*' => 'exists:tipos_vacunas,id',
             'Fecha_ingreso' => 'required|date',
@@ -131,7 +132,7 @@ class MascotaController extends Controller
             $mascota->razas()->sync($request->razas);
 
             return redirect()->route('admin.mascotas.index')
-                ->with('success', 'Mascota registrada exitosamente con ' . count($galeriaFotos) . ' fotos.');
+                ->with('success', 'Se guardaron' . count($galeriaFotos) . ' fotos en la galería .');
         } catch (\Exception $e) {
             Log::error('Error al registrar mascota: ' . $e->getMessage());
             return redirect()->back()
@@ -143,6 +144,8 @@ class MascotaController extends Controller
     public function show(Mascota $mascota)
     {
         $mascota->load(['razas', 'tiposVacunas', 'fundacion']);
+        
+        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.show', compact('mascota'));
     }
 
@@ -154,12 +157,14 @@ class MascotaController extends Controller
         $fundaciones = Fundacion::all();
 
         $mascota->load(['razas', 'tiposVacunas']);
+
+        // SOLO CAMBIÉ ESTA LÍNEA
         return view('admin.mascotas.edit', compact('mascota', 'razas', 'vacunas', 'especies', 'fundaciones'));
     }
 
     public function update(Request $request, Mascota $mascota)
     {
-        // Validación consistente con store
+        // Validación (similar a store pero con Foto opcional)
         $validated = $request->validate([
             'Nombre_mascota' => 'required|string|max:255',
             'Especie' => 'required|string',
@@ -170,8 +175,7 @@ class MascotaController extends Controller
             'estado' => 'required|in:Adoptado,En adopcion,Rescatada',
             'Lugar_rescate' => 'required|string|max:500',
             'Descripcion' => 'required|string|min:10|max:1000',
-            'fotos' => 'sometimes|array|max:5', // Cambiado a 'sometimes' para actualización
-            'fotos.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'Foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'vacunas_aplicadas' => 'nullable|array',
             'vacunas_aplicadas.*' => 'exists:tipos_vacunas,id',
             'Fecha_ingreso' => 'required|date',
@@ -180,71 +184,53 @@ class MascotaController extends Controller
         ]);
 
         try {
-            // Procesar NUEVAS fotos si se enviaron
-            $galeriaFotos = $mascota->galeria_fotos ?? [];
-            $fotoPrincipalPath = $mascota->Foto;
-
-            if ($request->hasFile('fotos')) {
-                // Eliminar fotos anteriores si existen
-                if (!empty($galeriaFotos)) {
-                    foreach ($galeriaFotos as $fotoExistente) {
-                        if (isset($fotoExistente['ruta']) && Storage::disk('public')->exists($fotoExistente['ruta'])) {
-                            Storage::disk('public')->delete($fotoExistente['ruta']);
-                        }
-                    }
+            // Procesar nueva imagen si se proporciona
+            if ($request->hasFile('Foto')) {
+                // Eliminar imagen anterior si existe
+                if ($mascota->Foto && Storage::disk('public')->exists($mascota->Foto)) {
+                    Storage::disk('public')->delete($mascota->Foto);
                 }
-
-                // Procesar nuevas fotos
-                $galeriaFotos = [];
-                foreach ($request->file('fotos') as $index => $foto) {
-                    $fotoPath = $foto->store('mascotas', 'public');
-
-                    if ($index === 0) {
-                        $fotoPrincipalPath = $fotoPath;
-                    }
-
-                    $galeriaFotos[] = [
-                        'ruta' => $fotoPath,
-                        'titulo' => "Foto " . ($index + 1),
-                        'orden' => $index,
-                        'es_principal' => $index === 0
-                    ];
-                }
+                $fotoPath = $request->file('Foto')->store('mascotas', 'public');
+                $validated['Foto'] = $fotoPath;
             }
 
-            // Obtener nombres de razas seleccionadas
+            // Actualizar otros campos
+            $mascota->Nombre_mascota = $request->Nombre_mascota;
+            $mascota->Especie = $request->Especie;
+            $mascota->Edad_aprox = $request->Edad_aprox;
+            $mascota->Genero = $request->Genero;
+            $mascota->estado = $request->estado;
+            $mascota->Lugar_rescate = $request->Lugar_rescate;
+            $mascota->Descripcion = $request->Descripcion;
+            $mascota->Fecha_ingreso = $request->Fecha_ingreso;
+            $mascota->Fecha_salida = $request->Fecha_salida;
+            $mascota->fundacion_id = $request->fundacion_id;
+
+            // Actualizar razas
             $razasSeleccionadas = Raza::whereIn('id', $request->razas)
                 ->pluck('nombre_raza')
                 ->implode(', ');
+            $validated['Raza'] = $razasSeleccionadas;
 
-            // Obtener nombres de vacunas seleccionadas
+            // Obtener nombres de vacunas seleccionadas para el campo vacunas (texto)
             $vacunasSeleccionadas = 'No especificado';
             if ($request->has('vacunas_aplicadas')) {
                 $vacunasSeleccionadas = TipoVacuna::whereIn('id', $request->vacunas_aplicadas)
                     ->pluck('nombre_vacuna')
                     ->implode(', ');
             }
+            $validated['vacunas'] = $vacunasSeleccionadas;
 
-            // Actualizar la mascota
-            $mascota->update([
-                'Nombre_mascota' => $request->Nombre_mascota,
-                'Especie' => $request->Especie,
-                'Raza' => $razasSeleccionadas,
-                'Edad_aprox' => $request->Edad_aprox,
-                'Genero' => $request->Genero,
-                'estado' => $request->estado,
-                'Lugar_rescate' => $request->Lugar_rescate,
-                'Descripcion' => $request->Descripcion,
-                'Foto' => $fotoPrincipalPath,
-                'galeria_fotos' => $galeriaFotos,
-                'vacunas' => $vacunasSeleccionadas,
-                'Fecha_ingreso' => $request->Fecha_ingreso,
-                'Fecha_salida' => $request->Fecha_salida,
-                'fundacion_id' => $request->fundacion_id
-            ]);
+            // Actualizar mascota
+            $mascota->update($validated);
 
-            // Sincronizar razas
-            $mascota->razas()->sync($request->razas);
+            // Sincronizar relaciones
+            if ($request->has('razas')) {
+                $mascota->razas()->sync($request->razas);
+            }
+
+            // NO sincronizar vacunas como relación many-to-many
+            // porque ya las guardamos en el campo de texto 'vacunas'
 
             return redirect()->route('admin.mascotas.show', $mascota)
                 ->with('success', '¡Mascota actualizada exitosamente!');

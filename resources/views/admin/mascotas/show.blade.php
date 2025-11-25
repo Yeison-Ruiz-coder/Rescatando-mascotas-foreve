@@ -23,8 +23,6 @@
     </div>
 </div>
 
-<!-- Modal para galería completa -->
-@include('admin.mascotas.partials.show.gallery-modal')
 @endsection
 
 @push('styles')

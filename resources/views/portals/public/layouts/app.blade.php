@@ -22,12 +22,12 @@
     {{-- Contenedor Principal --}}
     <div class="admin-container">
         
-
         {{-- Contenido Principal --}}
         <div class="admin-main-container">
             
             {{-- Navbar --}}
             <div class="admin-navbar-container">
+                {{-- SOLO ESTA LÍNEA --}}
                 @include('portals.public.partials.navbar.navbar')
             </div>
 
@@ -36,11 +36,10 @@
                 @yield('content')
             </main>
 
-            {{-- Footer Admin (opcional) --}}
+            {{-- Footer --}}
             @include('portals.public.partials.footer.footer')
 
         </div>
-
     </div>
     
     {{-- Scripts --}}

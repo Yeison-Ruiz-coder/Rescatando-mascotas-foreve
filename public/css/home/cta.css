@@ -1,16 +1,18 @@
 .cta-section {
-    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
-    color: var(--white);
+    background: var(--color-fondo-oscuro) !important;
+    color: var(--color-texto-claro);
     padding: 80px 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .cta-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: rgb(0, 207, 235);
-
+    color: #00cfeb;
+    text-shadow: 0 2px 10px rgba(0, 207, 235, 0.3);
 }
 
 .cta-section .lead {

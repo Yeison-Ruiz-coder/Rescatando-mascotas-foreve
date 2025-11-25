@@ -1,5 +1,4 @@
-@extends('layouts.admin')
-
+@extends('portals.public.layouts.app')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/create.css') }}">
 @endpush

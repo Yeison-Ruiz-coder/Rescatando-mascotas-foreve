@@ -1,13 +1,16 @@
 :root {
-    --primary-color: #4f46e5;
-    --secondary-color: #7c3aed;
-    --accent-color: #10b981;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --background-light: #f9fafb;
-    --white: #ffffff;
+    --color-turquesa: #1B8E95;
+    --color-fucsia: #FD4586;
+    --color-fucsia-hover: #e03a75;
+    --color-gris-claro: #f8f9fa;
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #333;
+    --color-fondo-oscuro: #10141f;
+    --color-fondo-claro: #ffffff;
+    --color-fondo-gradiente: linear-gradient(135deg, #10141f 0%, #1B8E95 50%, #81022f 100%);
     --border-radius: 15px;
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 10px 25px rgba(0, 0, 0, 0.3);
     --transition: all 0.3s ease;
 }
 
@@ -20,9 +23,25 @@
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    color: var(--text-dark);
+    color: var(--color-texto-oscuro);
     overflow-x: hidden;
-    
+    background: var(--color-fondo-claro);
+}
+
+/* Clases para fondos alternados */
+.bg-dark {
+    background: var(--color-fondo-oscuro) !important;
+    color: var(--color-texto-claro);
+}
+
+.bg-light {
+    background: var(--color-fondo-claro) !important;
+    color: var(--color-texto-oscuro);
+}
+
+.bg-gradient {
+    background: var(--color-fondo-gradiente) !important;
+    color: var(--color-texto-claro);
 }
 
 .section-padding {
@@ -32,22 +51,43 @@ body {
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
     text-align: center;
     margin-bottom: 1rem;
 }
 
+/* Títulos para fondos oscuros */
+.bg-dark .section-title,
+.bg-gradient .section-title {
+    color: #00cfeb;
+}
+
+/* Títulos para fondos claros */
+.bg-light .section-title {
+    color: var(--color-turquesa);
+}
+
 .section-subtitle {
     font-size: 1.1rem;
-    color: var(--text-light);
     text-align: center;
     margin-bottom: 3rem;
 }
 
-.btn-primary-custom {
-    background: var(--accent-color);
+.bg-dark .section-subtitle,
+.bg-gradient .section-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bg-light .section-subtitle {
+    color: var(--color-texto-oscuro);
+    opacity: 0.8;
+}
+
+/* Botones para fondos oscuros */
+.bg-dark .btn-primary-custom,
+.bg-gradient .btn-primary-custom {
+    background: var(--color-fucsia);
     border: none;
-    color: var(--white);
+    color: var(--color-texto-claro);
     padding: 12px 30px;
     border-radius: 50px;
     font-weight: 600;
@@ -56,17 +96,34 @@ body {
     transition: var(--transition);
 }
 
-.btn-primary-custom:hover {
-    background: #0da271;
-    color: var(--white);
+.bg-dark .btn-primary-custom:hover,
+.bg-gradient .btn-primary-custom:hover {
+    background: var(--color-fucsia-hover);
     transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    box-shadow: 0 8px 20px rgba(253, 69, 134, 0.3);
+}
+
+/* Botones para fondos claros */
+.bg-light .btn-primary-custom {
+    background: var(--color-turquesa);
+    border: none;
+    color: var(--color-texto-claro);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.bg-light .btn-primary-custom:hover {
+    background: #067A80;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(27, 142, 149, 0.3);
 }
 
 .btn-outline-custom {
-    border: 2px solid var(--white);
-    color: var(--white);
-    background: transparent;
+    border: 2px solid;
     padding: 10px 28px;
     border-radius: 50px;
     font-weight: 600;
@@ -75,7 +132,28 @@ body {
     transition: var(--transition);
 }
 
-.btn-outline-custom:hover {
-    background: var(--white);
-    color: var(--primary-color);
+/* Outline para fondos oscuros */
+.bg-dark .btn-outline-custom,
+.bg-gradient .btn-outline-custom {
+    border-color: var(--color-texto-claro);
+    color: var(--color-texto-claro);
+    background: transparent;
+}
+
+.bg-dark .btn-outline-custom:hover,
+.bg-gradient .btn-outline-custom:hover {
+    background: var(--color-texto-claro);
+    color: var(--color-turquesa);
+}
+
+/* Outline para fondos claros */
+.bg-light .btn-outline-custom {
+    border-color: var(--color-turquesa);
+    color: var(--color-turquesa);
+    background: transparent;
+}
+
+.bg-light .btn-outline-custom:hover {
+    background: var(--color-turquesa);
+    color: var(--color-texto-claro);
 }

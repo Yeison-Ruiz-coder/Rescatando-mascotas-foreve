@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('portals.public.layouts.app')
 
 @section('content')
 
