@@ -55,7 +55,7 @@ class AdopcionController extends Controller
         $mascotas = Mascota::all();
         $usuarios = Usuario::where('tipo', 'Cliente')->get();
 
-        return view('adopciones.index', compact('adopciones', 'estados', 'mascotas', 'usuarios'));
+        return view('admin.adopciones.index', compact('adopciones', 'estados', 'mascotas', 'usuarios'));
     }
 
     // En AdopcionController.php - método create() CORREGIDO
@@ -66,7 +66,7 @@ class AdopcionController extends Controller
         $administradores = Administrador::all();
         $fundaciones = Fundacion::all();
 
-        return view('adopciones.create', compact('usuarios', 'mascotas', 'administradores', 'fundaciones')); // Agregar fundaciones aquí
+        return view('admin.adopciones.create', compact('usuarios', 'mascotas', 'administradores', 'fundaciones')); // Agregar fundaciones aquí
     }
 
     // En AdopcionController.php - método store() ACTUALIZADO
@@ -86,7 +86,7 @@ class AdopcionController extends Controller
 
         Adopcion::create($request->all());
 
-        return redirect()->route('adopciones.index')
+        return redirect()->route('admin.adopciones.index')
             ->with('success', 'Adopción creada exitosamente.');
     }
 
@@ -94,7 +94,7 @@ class AdopcionController extends Controller
     public function show($id)
     {
         $adopcion = Adopcion::with(['usuario', 'mascota', 'administrador', 'fundacion'])->findOrFail($id);
-        return view('adopciones.show', compact('adopcion'));
+        return view('admin.adopciones.show', compact('adopcion'));
     }
 
     public function edit($id)
@@ -105,7 +105,7 @@ class AdopcionController extends Controller
         $administradores = Administrador::all();
         $fundaciones = Fundacion::all(); // Agregar fundaciones
 
-        return view('adopciones.edit', compact('adopcion', 'usuarios', 'mascotas', 'administradores', 'fundaciones'));
+        return view('admin.adopciones.edit', compact('adopcion', 'usuarios', 'mascotas', 'administradores', 'fundaciones'));
     }
 
     public function update(Request $request, $id)
@@ -124,7 +124,7 @@ class AdopcionController extends Controller
         $adopcion = Adopcion::findOrFail($id);
         $adopcion->update($request->all());
 
-        return redirect()->route('adopciones.index')
+        return redirect()->route('admin.adopciones.index')
             ->with('success', 'Adopción actualizada exitosamente.');
     }
 
@@ -133,7 +133,7 @@ class AdopcionController extends Controller
         $adopcion = Adopcion::findOrFail($id);
         $adopcion->delete();
 
-        return redirect()->route('adopciones.index')
+        return redirect()->route('admin.adopciones.index')
             ->with('success', 'Adopción eliminada exitosamente.');
     }
 
@@ -150,7 +150,7 @@ class AdopcionController extends Controller
         abort(404, 'Mascota no encontrada');
     }
     
-    return view('adopciones.solicitar', compact('mascota'));
+    return view('public.adopciones.solicitar', compact('mascota'));
 }
 
 
