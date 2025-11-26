@@ -8,7 +8,7 @@ use App\Models\Administrador;
 use App\Models\Fundacion;
 use App\Models\Mascota;
 use Illuminate\Http\Request;
-use App\Models\SolicitudAdopcion;
+use App\Models\Solicitud;
 
 
 class AdopcionController extends Controller
@@ -141,20 +141,20 @@ class AdopcionController extends Controller
     // Funciones publicas
 
     public function solicitar($id)
-{
-    
-    $mascota = Mascota::where('estado', 'En adopcion')->findOrFail($id);
-    
-    // Verificar que la mascota se está encontrando
-    if (!$mascota) {
-        abort(404, 'Mascota no encontrada');
+    {
+
+        $mascota = Mascota::where('estado', 'En adopcion')->findOrFail($id);
+
+        // Verificar que la mascota se está encontrando
+        if (!$mascota) {
+            abort(404, 'Mascota no encontrada');
+        }
+
+        return view('public.adopciones.solicitar', compact('mascota'));
     }
-    
-    return view('public.adopciones.solicitar', compact('mascota'));
-}
 
 
-    public function solicitarStore(Request $request) // ← QUITAR el ", $id"
+    public function solicitarStore(Request $request)
     {
         // Validar los datos
         $request->validate([
@@ -175,22 +175,51 @@ class AdopcionController extends Controller
         // Verificar que la mascota esté disponible
         $mascota = Mascota::where('estado', 'En adopcion')->findOrFail($request->mascota_id);
 
-        // Crear la solicitud
-        SolicitudAdopcion::create([
-            'mascota_id' => $request->mascota_id,
-            'nombre_solicitante' => $request->nombre,
-            'apellido_solicitante' => $request->apellido,
-            'email' => $request->email,
-            'telefono' => $request->telefono,
-            'direccion' => $request->direccion,
-            'experiencia_mascotas' => $request->experiencia_mascotas,
-            'tipo_vivienda' => $request->tipo_vivienda,
-            'motivo_adopcion' => $request->motivo_adopcion,
-            'compromiso_cuidado' => $request->has('compromiso_cuidado'),
-            'compromiso_esterilizacion' => $request->has('compromiso_esterilizacion'),
-            'compromiso_seguimiento' => $request->has('compromiso_seguimiento'),
-            'estado' => 'Pendiente',
-            'administrador_id' => null,
+        // SOLUCIÓN TEMPORAL: Usar un usuario existente o crear sin campos problemáticos
+        try {
+            // Intentar encontrar un usuario existente
+            $usuario = Usuario::where('email', $request->email)->first();
+
+            if (!$usuario) {
+                // Si no existe, crear uno mínimo
+                $usuario = Usuario::create([
+                    'nombre' => $request->nombre,
+                    'apellido' => $request->apellido,
+                    'email' => $request->email,
+                    'telefono' => $request->telefono,
+                    'tipo' => 'Cliente',
+                    'password' => bcrypt(uniqid()),
+                    // Agregar campos mínimos requeridos
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Si falla, usar un usuario por defecto (admin o el primero que encuentre)
+            $usuario = Usuario::where('tipo', 'Administrador')->first();
+
+            if (!$usuario) {
+                $usuario = Usuario::first();
+            }
+        }
+
+        // Crear la solicitud en el sistema general de solicitudes
+        Solicitud::create([
+            'tipo' => 'Para Adoptar',
+            'contenido' => "Solicitud de adopción para: {$mascota->Nombre_mascota}
+                       \nSolicitante: {$request->nombre} {$request->apellido}
+                       \nEmail: {$request->email}
+                       \nTeléfono: {$request->telefono}
+                       \nDirección: {$request->direccion}
+                       \nExperiencia: {$request->experiencia_mascotas}
+                       \nVivienda: {$request->tipo_vivienda}
+                       \nMotivo: {$request->motivo_adopcion}
+                       \nCompromisos:
+                       - Cuidado: " . ($request->has('compromiso_cuidado') ? 'Sí' : 'No') . "
+                       - Esterilización: " . ($request->has('compromiso_esterilizacion') ? 'Sí' : 'No') . "
+                       - Seguimiento: " . ($request->has('compromiso_seguimiento') ? 'Sí' : 'No'),
+            'fecha_solicitud' => now(),
+            'usuario_id' => $usuario->id,
+            'estado' => 'En Revisión',
+            'mascota_id' => $mascota->id,
         ]);
 
         return redirect()->route('public.mascotas.index')

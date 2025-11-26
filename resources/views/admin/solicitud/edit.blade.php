@@ -49,4 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+@push('scripts')
+<script src="{{ asset('js/pages/solicitud/edit.js') }}"></script>
+@endpush
 @endpush

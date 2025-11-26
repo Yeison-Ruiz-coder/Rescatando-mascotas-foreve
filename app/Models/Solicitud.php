@@ -9,23 +9,33 @@ class Solicitud extends Model
 {
     use HasFactory;
 
-    // AÑADE ESTA LÍNEA para especificar el nombre de la tabla
     protected $table = 'solicitudes'; 
 
-    // Aquí van tus campos rellenables (fillable)
     protected $fillable = [
         'tipo',
-        'contenido',
-        'fecha_solicitud',
+        'contenido', // En minúscula
+        'fecha_solicitud', // En minúscula
         'usuario_id',
-        'estado',
+        'estado', // Nuevo campo
+        'mascota_id' // Nuevo campo
     ];
 
-    // Si tienes timestamps (created_at, updated_at) en la tabla, déjalo.
-    // public $timestamps = true; 
+     //  CASTS
+    protected $casts = [
+        'fecha_solicitud' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public $timestamps = true;
 
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    public function mascota()
+    {
+        return $this->belongsTo(Mascota::class);
     }
 }
