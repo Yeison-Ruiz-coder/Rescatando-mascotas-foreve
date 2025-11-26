@@ -12,7 +12,7 @@
     
     
     <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('css/components/navbar.css')); ?>"> 
+    <link rel="stylesheet" href="<?php echo e(asset('css/components/admin-navbar.css')); ?>"> 
     <link rel="stylesheet" href="<?php echo e(asset('css/components/footer.css')); ?>"> 
     
     
@@ -30,7 +30,7 @@
 
 <body>
     
-    <?php echo $__env->make('portals.public.partials.navbar.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('portals.admin.partials.navbar.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     
     <div id="home-content-wrapper">
@@ -42,6 +42,7 @@
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html><?php /**PATH C:\Users\Personal\Desktop\rescatando-mascotas\resources\views/home/layouts/main.blade.php ENDPATH**/ ?>
