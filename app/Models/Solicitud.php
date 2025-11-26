@@ -9,16 +9,21 @@ class Solicitud extends Model
 {
     use HasFactory;
 
-    protected $table = 'solicitudes';
+    // AÑADE ESTA LÍNEA para especificar el nombre de la tabla
+    protected $table = 'solicitudes'; 
 
+    // Aquí van tus campos rellenables (fillable)
     protected $fillable = [
         'tipo',
-        'Contenido',
-        'Fecha_solicitud',
-        'usuario_id'
+        'contenido',
+        'fecha_solicitud',
+        'usuario_id',
+        'estado',
     ];
 
-    // Relaciones
+    // Si tienes timestamps (created_at, updated_at) en la tabla, déjalo.
+    // public $timestamps = true; 
+
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);

@@ -12,7 +12,11 @@
         <a class="nav-link main-btn" href="<?php echo e(route('rescates.index')); ?>">Rescata</a>
     </li>
     <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link main-btn" href="<?php echo e(route('solicitudes.index')); ?>">Solicitudes</a>
+=======
+        <a class="nav-link main-btn" href="<?php echo e(route('solicitud.index')); ?>">SOLICITUDES</a>
+>>>>>>> 5fbdc35 (Reorganizacion de las vistas de  solicitud)
     </li>
     <li class="nav-item">
         <a class="nav-link main-btn" href="<?php echo e(route('suscripciones.create')); ?>">Suscríbete</a>

@@ -19,4 +19,8 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD:storage/framework/views/539a611374bd207d79ee93285b01550a.php
 </div><?php /**PATH C:\Users\Dan\Desktop\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/index/actions.blade.php ENDPATH**/ ?>
+=======
+</div><?php /**PATH C:\Users\Personal\Desktop\rescatando-mascotas\resources\views/admin/mascotas/partials/index/actions.blade.php ENDPATH**/ ?>
+>>>>>>> 5fbdc35 (Reorganizacion de las vistas de  solicitud):storage/framework/views/2e4586e919265e2eead3d30b5951fbaa.php

@@ -25,6 +25,11 @@ body {
     min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
 }
 
+body {
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;/*Fondo de la pagina*/
+}
+
 h1, h2, h3 {
     color: var(--color-turquesa); /* Todos los títulos usan el color Turquesa */
     font-weight: 700;
