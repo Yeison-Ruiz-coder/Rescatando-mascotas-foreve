@@ -1,3 +1,8 @@
+body {
+    background:white!important;
+    min-height: 100vh;/*Fondo de la pagina*/
+}
+
 .proceso-section {
     padding: 80px 0;
     border-top: 1px solid;

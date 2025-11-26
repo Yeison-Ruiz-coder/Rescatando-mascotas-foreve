@@ -1,1 +1,0 @@
-<?php /**PATH C:\Users\Dan\Desktop\Rescatando-mascotas-foreve\resources\views/solicitudes/index.blade.php ENDPATH**/ ?>

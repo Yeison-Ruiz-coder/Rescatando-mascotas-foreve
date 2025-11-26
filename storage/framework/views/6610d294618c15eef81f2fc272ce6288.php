@@ -1,1 +1,0 @@
-hola desde adopta<?php /**PATH C:\Users\Dan\Desktop\Rescatando-mascotas-foreve\resources\views/home/partials/adopta.blade.php ENDPATH**/ ?>
