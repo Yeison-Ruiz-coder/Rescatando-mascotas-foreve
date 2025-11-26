@@ -73,7 +73,7 @@
                         Formularios
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('adopciones.create') }}">Adopción</a></li>
+                        <li><a class="dropdown-item" href="{{ route('public.mascotas.index') }}">Adopción</a></li>
                         <li><a class="dropdown-item" href="{{ route('rescates.create') }}">Rescates</a></li>
                         <li><a class="dropdown-item" href="#">Rescatista</a></li>
                     </ul>

@@ -56,13 +56,14 @@ body {
 }
 
 .btn-outline-secondary {
-    border: 2px solid #6c757d;
-    color: #6c757d;
+    border: 2px solid #044680;
+    color: #0d5492;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
 }
 
 .btn-outline-secondary:hover {
-    background-color: #6c757d;
+    background-color: var(--color-turquesa);
     color: white;
+    border-color: #166db9;
 }

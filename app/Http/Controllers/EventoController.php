@@ -10,7 +10,7 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::orderBy('Fecha_evento', 'desc')->get();
+        $eventos = Evento::orderBy('created_at', 'desc')->get();
         return view('admin.eventos.index', compact('eventos'));
     }
 
@@ -75,8 +75,10 @@ class EventoController extends Controller
     }
 
 
-    public function Eventospublicos(Request $request, Evento $evento)
-    {
-      return view('public.eventos.index', compact('eventospublicos'));
-    }
+public function Eventospublicos()
+{
+    // Si no hay columna de fecha, ordenar por ID o created_at
+    $eventos = Evento::orderBy('created_at', 'desc')->get();
+    return view('public.eventos.index', compact('eventos'));
+}
 }

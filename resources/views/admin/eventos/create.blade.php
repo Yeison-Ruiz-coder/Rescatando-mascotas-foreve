@@ -18,7 +18,7 @@
                         <h4>Crear Nuevo Evento para Mascotas</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.eventos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             
                             <div class="row">
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="{{ route('eventos.index') }}" class="btn btn-secondary me-md-2">Cancelar</a>
+                                <a href="{{ route('admin.eventos.index') }}" class="btn btn-secondary me-md-2">Cancelar</a>
                                 <button type="submit" class="btn btn-primary">Crear Evento</button>
                             </div>
                         </form>

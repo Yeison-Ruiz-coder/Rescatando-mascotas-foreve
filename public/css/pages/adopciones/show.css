@@ -129,7 +129,7 @@ body {
 }
 
 .btn-volver {
-    background-color: #6c757d;
+    background-color: #4b5675bb;
     border-color: #6c757d;
     color: white;
     padding: 0.75rem 1.5rem;
@@ -163,7 +163,7 @@ body {
 }
 
 .btn-eliminar-detalle {
-    background-color: #dc3545;
+    background-color: var(--color-fucsia);
     border-color: #dc3545;
     color: white;
     padding: 0.75rem 1.5rem;

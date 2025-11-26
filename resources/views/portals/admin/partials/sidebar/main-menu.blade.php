@@ -21,7 +21,7 @@
         </li>
         
         <li class="menu-item">
-            <a href="{{ route('adopciones.index') }}" class="menu-link">
+            <a href="{{ route('admin.adopciones.index') }}" class="menu-link">
                 <i class="fas fa-hand-holding-heart"></i>
                 <span>Adopciones</span>
             </a>

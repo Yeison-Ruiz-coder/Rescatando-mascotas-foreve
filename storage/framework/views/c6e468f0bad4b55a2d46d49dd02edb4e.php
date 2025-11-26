@@ -1,1 +1,0 @@
-Eventos DE juanda<?php /**PATH C:\Users\Dan\Desktop\Rescatando-mascotas-foreve\resources\views/home/partials/eventos.blade.php ENDPATH**/ ?>
