@@ -49,8 +49,17 @@ Route::post('/adopciones/solicitar', [AdopcionController::class, 'solicitarStore
     ->name('adopciones.solicitar.store');
 
 
+
+
+// Rutas de admin (solicitudes generales)
+Route::resource('solicitud', SolicitudController::class);
+Route::put('solicitud/{solicitud}/status', [SolicitudController::class, 'updateStatus'])
+    ->name('solicitud.status.update');
+
+
+
 // RUTAS DE AUTENTICACIÓN
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // ⚠️ PARA DESARROLLO - COMENTA EL MIDDLEWARE DE AUTH ⚠️
 /*          ________
@@ -71,7 +80,6 @@ Route::resource('donaciones', DonacionController::class);
 Route::resource('adopciones', AdopcionController::class);
 Route::resource('rescates', RescateController::class);
 Route::resource('reportes', ReporteController::class);
-Route::resource('solicitudes', SolicitudController::class);
 Route::resource('suscripciones', SuscripcionController::class);
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('administradores', AdministradorController::class);
@@ -83,5 +91,4 @@ Route::resource('comentarios', ComentarioController::class);
 Route::resource('notificaciones', NotificacionController::class);
 Route::resource('razas', RazaController::class);
 Route::resource('tipos-vacunas', TipoVacunaController::class);
-
 Route::resource('eventos', EventoController::class);

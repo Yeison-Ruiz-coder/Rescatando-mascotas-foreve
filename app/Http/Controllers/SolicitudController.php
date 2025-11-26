@@ -5,71 +5,104 @@ namespace App\Http\Controllers;
 use App\Models\Solicitud;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SolicitudController extends Controller
 {
     public function index()
     {
-        $solicitudes = Solicitud::with('usuario')->get();
-        return view('solicitudes.index', compact('solicitudes'));
+        $solicitudes = Solicitud::with('usuario')
+            ->orderBy('fecha_solicitud', 'desc')
+            ->paginate(10);
+            
+        // CORREGIDO: Vista en admin.solicitud
+        return view('admin.solicitud.index', compact('solicitudes'));
     }
 
     public function create()
     {
         $usuarios = Usuario::all();
-        return view('solicitudes.create', compact('usuarios'));
+        // CORREGIDO: Vista en admin.solicitud
+        return view('admin.solicitud.create', compact('usuarios'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'tipo' => 'required|in:Para Adoptar,Para Rescatar,Para Apadrinar,Para Donar',
-            'Contenido' => 'required|string',
-            'Fecha_solicitud' => 'required|date',
-            'usuario_id' => 'required|exists:usuarios,id'
+            'contenido' => 'required|string',
+            'fecha_solicitud' => 'required|date',
+            'usuario_id' => 'required|exists:usuarios,id',
+            'estado' => 'nullable|in:En Revisión,Aprobada,Rechazada'
         ]);
 
         Solicitud::create($request->all());
 
-        return redirect()->route('solicitudes.index')
+        // CORREGIDO: Ruta en singular
+        return redirect()->route('solicitud.index')
             ->with('success', 'Solicitud creada exitosamente.');
     }
 
-    public function show($id)
+    public function show(Solicitud $solicitud)
     {
-        $solicitud = Solicitud::with('usuario')->findOrFail($id);
-        return view('solicitudes.show', compact('solicitud'));
+        $solicitud->load('usuario');
+        // ✅ CORREGIDO: Vista en admin.solicitud
+        return view('admin.solicitud.show', compact('solicitud'));
     }
 
-    public function edit($id)
+    public function edit(Solicitud $solicitud)
     {
-        $solicitud = Solicitud::findOrFail($id);
         $usuarios = Usuario::all();
-        return view('solicitudes.edit', compact('solicitud', 'usuarios'));
+        // ✅ CORREGIDO: Vista en admin.solicitud
+        return view('admin.solicitud.edit', compact('solicitud', 'usuarios'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Solicitud $solicitud)
     {
         $request->validate([
             'tipo' => 'required|in:Para Adoptar,Para Rescatar,Para Apadrinar,Para Donar',
-            'Contenido' => 'required|string',
-            'Fecha_solicitud' => 'required|date',
-            'usuario_id' => 'required|exists:usuarios,id'
+            'contenido' => 'required|string',
+            'fecha_solicitud' => 'required|date',
+            'usuario_id' => 'required|exists:usuarios,id',
+            'estado' => 'required|in:En Revisión,Aprobada,Rechazada'
         ]);
 
-        $solicitud = Solicitud::findOrFail($id);
         $solicitud->update($request->all());
 
-        return redirect()->route('solicitudes.index')
+        // ✅ CORREGIDO: Ruta en singular
+        return redirect()->route('solicitud.show', $solicitud)
             ->with('success', 'Solicitud actualizada exitosamente.');
     }
 
-    public function destroy($id)
+    public function updateStatus(Request $request, Solicitud $solicitud)
     {
-        $solicitud = Solicitud::findOrFail($id);
+        $request->validate([
+            'estado' => ['required', 'in:En Revisión,Aprobada,Rechazada'],
+        ]);
+
+        try {
+            DB::beginTransaction();
+            $solicitud->update(['estado' => $request->estado]);
+            DB::commit();
+            
+            // ✅ CORREGIDO: Ruta en singular
+            return redirect()->route('solicitud.index')
+                             ->with('success', 'Estado de la solicitud #' . $solicitud->id . ' actualizado a ' . $solicitud->estado . '.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error al actualizar el estado de la solicitud: ' . $e->getMessage());
+            
+            return redirect()->back()->with('error', 'Error al cambiar el estado.');
+        }
+    }
+
+    public function destroy(Solicitud $solicitud)
+    {
         $solicitud->delete();
 
-        return redirect()->route('solicitudes.index')
+        // ✅ CORREGIDO: Ruta en singular
+        return redirect()->route('solicitud.index')
             ->with('success', 'Solicitud eliminada exitosamente.');
     }
 }

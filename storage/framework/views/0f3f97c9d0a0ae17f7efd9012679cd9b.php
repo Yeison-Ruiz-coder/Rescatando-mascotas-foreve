@@ -12,7 +12,7 @@
         <a class="nav-link main-btn" href="<?php echo e(route('rescates.index')); ?>">RESCATA</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link main-btn" href="<?php echo e(route('solicitudes.index')); ?>">SOLICITUDES</a>
+        <a class="nav-link main-btn" href="<?php echo e(route('solicitud.index')); ?>">SOLICITUDES</a>
     </li>
     <li class="nav-item">
         <a class="nav-link main-btn" href="<?php echo e(route('suscripciones.create')); ?>">SUSCRÍBETE</a>

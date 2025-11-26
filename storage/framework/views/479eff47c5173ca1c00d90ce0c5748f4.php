@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\Personal\Desktop\rescatando-mascotas\resources\views/suscripciones/create.blade.php ENDPATH**/ ?>

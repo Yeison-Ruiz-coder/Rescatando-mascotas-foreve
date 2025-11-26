@@ -12,7 +12,7 @@
         <a class="nav-link main-btn" href="{{ route('rescates.index') }}">RESCATA</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link main-btn" href="{{ route('solicitudes.index') }}">SOLICITUDES</a>
+        <a class="nav-link main-btn" href="{{ route('solicitud.index') }}">SOLICITUDES</a>
     </li>
     <li class="nav-item">
         <a class="nav-link main-btn" href="{{ route('suscripciones.create') }}">SUSCRÍBETE</a>
