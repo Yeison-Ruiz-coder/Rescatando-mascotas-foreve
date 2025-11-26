@@ -57,4 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+@push('scripts')
+<script src="{{ asset('js/pages/solicitud/create.js') }}"></script>
+@endpush
 @endpush

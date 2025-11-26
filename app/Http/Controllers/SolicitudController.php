@@ -15,8 +15,18 @@ class SolicitudController extends Controller
         $solicitudes = Solicitud::with('usuario')
             ->orderBy('fecha_solicitud', 'desc')
             ->paginate(10);
-            
-        // CORREGIDO: Vista en admin.solicitud
+
+        // DEBUG: Solo para desarrollo - ver la primera solicitud
+        if ($solicitudes->count() > 0 && app()->environment('local')) {
+            $primera = $solicitudes->first();
+            logger('DEBUG Usuario:', [
+                'usuario_id' => $primera->usuario_id,
+                'usuario_existe' => !is_null($primera->usuario),
+                'campos_usuario' => $primera->usuario ? array_keys($primera->usuario->getAttributes()) : [],
+                'email' => $primera->usuario ? $primera->usuario->email : 'null'
+            ]);
+        }
+
         return view('admin.solicitud.index', compact('solicitudes'));
     }
 
@@ -47,14 +57,14 @@ class SolicitudController extends Controller
     public function show(Solicitud $solicitud)
     {
         $solicitud->load('usuario');
-        // ✅ CORREGIDO: Vista en admin.solicitud
+        // CORREGIDO: Vista en admin.solicitud
         return view('admin.solicitud.show', compact('solicitud'));
     }
 
     public function edit(Solicitud $solicitud)
     {
         $usuarios = Usuario::all();
-        // ✅ CORREGIDO: Vista en admin.solicitud
+        // CORREGIDO: Vista en admin.solicitud
         return view('admin.solicitud.edit', compact('solicitud', 'usuarios'));
     }
 
@@ -70,7 +80,7 @@ class SolicitudController extends Controller
 
         $solicitud->update($request->all());
 
-        // ✅ CORREGIDO: Ruta en singular
+        // CORREGIDO: Ruta en singular
         return redirect()->route('solicitud.show', $solicitud)
             ->with('success', 'Solicitud actualizada exitosamente.');
     }
@@ -85,14 +95,14 @@ class SolicitudController extends Controller
             DB::beginTransaction();
             $solicitud->update(['estado' => $request->estado]);
             DB::commit();
-            
-            // ✅ CORREGIDO: Ruta en singular
+
+            // CORREGIDO: Ruta en singular
             return redirect()->route('solicitud.index')
-                             ->with('success', 'Estado de la solicitud #' . $solicitud->id . ' actualizado a ' . $solicitud->estado . '.');
+                ->with('success', 'Estado de la solicitud #' . $solicitud->id . ' actualizado a ' . $solicitud->estado . '.');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error al actualizar el estado de la solicitud: ' . $e->getMessage());
-            
+
             return redirect()->back()->with('error', 'Error al cambiar el estado.');
         }
     }
@@ -101,7 +111,7 @@ class SolicitudController extends Controller
     {
         $solicitud->delete();
 
-        // ✅ CORREGIDO: Ruta en singular
+        // CORREGIDO: Ruta en singular
         return redirect()->route('solicitud.index')
             ->with('success', 'Solicitud eliminada exitosamente.');
     }

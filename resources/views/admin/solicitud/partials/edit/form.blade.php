@@ -4,26 +4,36 @@
         @csrf
         @method('PUT')
 
-        <div class="form-grid">
-            <!-- Información del Solicitante -->
-            <div class="form-group">
-                <label for="usuario_id">
-                    <i class="fa-solid fa-user"></i> Solicitante:
-                </label>
-                <select id="usuario_id" name="usuario_id" required class="form-control @error('usuario_id') is-invalid @enderror">
-                    <option value="">Selecciona un usuario</option>
-                    @foreach($usuarios as $usuario)
-                        <option value="{{ $usuario->id }}" 
-                            {{ old('usuario_id', $solicitud->usuario_id) == $usuario->id ? 'selected' : '' }}>
-                            {{ $usuario->nombre }} ({{ $usuario->email }})
-                        </option>
-                    @endforeach
-                </select>
-                @error('usuario_id')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
-            </div>
+        <!-- INFORMACIÓN DE SOLICITANTE (Solo lectura) -->
+<div class="edit-form-container">
+    <form action="{{ route('solicitud.update', $solicitud) }}" method="POST" class="solicitud-form">
+        @csrf
+        @method('PUT')
 
+        <!-- CAMPO OCULTO PARA usuario_id -->
+        <input type="hidden" name="usuario_id" value="{{ $solicitud->usuario_id }}">
+
+        <!-- INFORMACIÓN DE SOLICITANTE (Solo lectura) -->
+        <div class="info-card">
+            <div class="info-grid">
+                <div class="info-item">
+                
+                @if($solicitud->mascota)
+                <div class="info-item">
+                    <strong>Nombre del solicitante:</strong>
+                    <span>{{ $solicitud->usuario->nombre_completo }}</span>
+                </div>
+                @endif
+                @if($solicitud->mascota)
+                <div class="info-item">
+                    <strong>Mascota solicitada:</strong>
+                    <span>{{ $solicitud->mascota->Nombre_mascota }} ({{ $solicitud->mascota->Especie }})</span>
+                </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-grid">
             <!-- Tipo de Solicitud -->
             <div class="form-group">
                 <label for="tipo">

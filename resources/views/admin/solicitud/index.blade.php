@@ -2,6 +2,7 @@
 
 @section('title', 'Gestión de Solicitudes - Admin')
 
+
 @section('content')
 <section class="admin-panel">
     
@@ -31,6 +32,10 @@
     @include('admin.solicitud.partials.index.pagination')
 
 </section>
+
+@push('scripts')
+<script src="{{ asset('js/pages/solicitud/index.js') }}"></script>
+@endpush
 @endsection
 
 @push('styles')

@@ -18,14 +18,22 @@
                     <td>
                         <span class="tipo-badge">{{ $solicitud->tipo }}</span>
                     </td>
-                    <td>{{ $solicitud->usuario->nombre ?? 'N/A' }}</td>
+                    <td>
+                        @if ($solicitud->usuario)
+                            {{ $solicitud->usuario->Nombre_1 }}
+                            {{ $solicitud->usuario->Apellido_1 }} 
+                        @else
+                            Usuario #{{ $solicitud->usuario_id }}
+                        @endif
+                    </td>
                     <td>{{ $solicitud->fecha_solicitud->format('d/m/Y') }}</td>
                     <td>
                         @php
-                            $estado_class = strtolower(str_replace(' ', '-', $solicitud->estado ?? 'revision'));
+                            $estado = $solicitud->estado ?? 'Sin Estado';
+                            $estado_class = strtolower(str_replace(' ', '-', $estado));
                         @endphp
                         <span class="status-badge {{ $estado_class }}">
-                            {{ $solicitud->estado ?? 'Sin Estado' }}
+                            {{ $estado }}
                         </span>
                     </td>
                     <td class="actions">
@@ -38,7 +46,8 @@
                         <form action="{{ route('solicitud.destroy', $solicitud) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn-action delete-btn" title="Eliminar" onclick="return confirm('¿Estás seguro?')">
+                            <button type="submit" class="btn-action delete-btn" title="Eliminar"
+                                onclick="return confirm('¿Estás seguro?')">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>

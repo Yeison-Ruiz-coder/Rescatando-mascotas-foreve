@@ -13,7 +13,11 @@
                     <option value="">Selecciona un usuario</option>
                     @foreach($usuarios as $usuario)
                         <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
-                            {{ $usuario->nombre }} ({{ $usuario->email }})
+                            {{ $usuario->email }} 
+                            @if($usuario->nombre || $usuario->Nombre_1 || $usuario->name)
+                                - {{ $usuario->nombre ?? $usuario->nombre_completo ?? $usuario->name ?? '' }}
+                                
+                            @endif
                         </option>
                     @endforeach
                 </select>
@@ -22,6 +26,7 @@
                 @enderror
             </div>
 
+            <!-- Resto del formulario se mantiene igual -->
             <!-- Tipo de Solicitud -->
             <div class="form-group">
                 <label for="tipo">
@@ -60,7 +65,7 @@
                     <i class="fa-solid fa-calendar"></i> Fecha de Solicitud:
                 </label>
                 <input type="datetime-local" id="fecha_solicitud" name="fecha_solicitud" 
-                       value="{{ old('fecha_solicitud') }}" 
+                       value="{{ old('fecha_solicitud', now()->format('Y-m-d\TH:i')) }}" 
                        required class="form-control @error('fecha_solicitud') is-invalid @enderror">
                 @error('fecha_solicitud')
                     <span class="error-message">{{ $message }}</span>

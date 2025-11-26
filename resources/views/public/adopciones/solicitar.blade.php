@@ -24,7 +24,7 @@
                     <hr class="separador-seccion">
 
                     <!-- FORMULARIO DE SOLICITUD -->
-                    <form action="{{ route('adopciones.solicitar.store', $mascota->id) }}" method="POST" id="formSolicitud">
+                    <form action="{{ route('adopciones.solicitar.store') }}" method="POST" id="formSolicitud">
                         @csrf
                         <input type="hidden" name="mascota_id" value="{{ $mascota->id }}">
 

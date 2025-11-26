@@ -1,6 +1,6 @@
 {{-- resources/views/admin/solicitud/partials/show/_details.blade.php --}}
 <div class="card-details">
-    
+
     <!-- Estado Actual -->
     <div class="detail-group status-group">
         <label>Estado Actual:</label>
@@ -26,15 +26,22 @@
 
         <div class="detail-group">
             <label><i class="fa-solid fa-user"></i> Solicitante:</label>
-            <p>{{ $solicitud->usuario->nombre ?? 'Usuario ID: ' . ($solicitud->usuario_id ?? 'N/A') }}</p>
+            <td>
+                @if ($solicitud->usuario)
+                    {{ $solicitud->usuario->Nombre_1 }}
+                    {{ $solicitud->usuario->Apellido_1 }}
+                @else
+                    Usuario #{{ $solicitud->usuario_id }}
+                @endif
+            </td>
         </div>
-        
+
         <div class="detail-group">
             <label><i class="fa-solid fa-clock"></i> Creada el:</label>
             <p>{{ $solicitud->created_at->format('d/m/Y H:i') }}</p>
         </div>
     </div>
-    
+
     <!-- Contenido / Justificación -->
     <div class="detail-group full-width">
         <label><i class="fa-solid fa-file-lines"></i> Contenido / Justificación:</label>

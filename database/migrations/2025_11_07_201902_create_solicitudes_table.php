@@ -13,17 +13,23 @@ return new class extends Migration
     {
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->id();
-            $table->enum ('tipo', ['Para Adoptar','Para Rescatar','Para Apadrinar','Para Donar']);
-            $table->text('Contenido');
-            $table->timestamp('Fecha_solicitud');
-            
-
+            $table->enum('tipo', ['Para Adoptar','Para Rescatar','Para Apadrinar','Para Donar']);
+            $table->text('contenido'); // Cambiado a minúscula
+            $table->timestamp('fecha_solicitud'); // Cambiado a minúscula
+            $table->enum('estado', ['En Revisión', 'Aprobada', 'Rechazada'])->default('En Revisión'); // NUEVO
             $table->unsignedBigInteger('usuario_id')->nullable();
+            $table->unsignedBigInteger('mascota_id')->nullable(); // NUEVO
 
             $table->foreign('usuario_id')
-            ->references('id')
-            ->on('usuarios')
-            ->onDelete('set null');
+                  ->references('id')
+                  ->on('usuarios')
+                  ->onDelete('set null');
+                  
+            $table->foreign('mascota_id') // NUEVO
+                  ->references('id')
+                  ->on('mascotas')
+                  ->onDelete('set null');
+
             $table->timestamps();
         });
     }
