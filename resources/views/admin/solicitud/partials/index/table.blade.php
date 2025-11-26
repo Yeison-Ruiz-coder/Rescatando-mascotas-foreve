@@ -1,0 +1,60 @@
+{{-- resources/views/admin/solicitud/partials/index/_table.blade.php --}}
+<div class="table-container">
+    <table class="solicitudes-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Solicitante</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($solicitudes as $solicitud)
+                <tr>
+                    <td>#{{ $solicitud->id }}</td>
+                    <td>
+                        <span class="tipo-badge">{{ $solicitud->tipo }}</span>
+                    </td>
+                    <td>{{ $solicitud->usuario->nombre ?? 'N/A' }}</td>
+                    <td>{{ $solicitud->fecha_solicitud->format('d/m/Y') }}</td>
+                    <td>
+                        @php
+                            $estado_class = strtolower(str_replace(' ', '-', $solicitud->estado ?? 'revision'));
+                        @endphp
+                        <span class="status-badge {{ $estado_class }}">
+                            {{ $solicitud->estado ?? 'Sin Estado' }}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <a href="{{ route('solicitud.show', $solicitud) }}" class="btn-action view-btn" title="Ver">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a href="{{ route('solicitud.edit', $solicitud) }}" class="btn-action edit-btn" title="Editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <form action="{{ route('solicitud.destroy', $solicitud) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-action delete-btn" title="Eliminar" onclick="return confirm('¿Estás seguro?')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center no-data">
+                        <i class="fa-solid fa-clipboard-list fa-3x"></i>
+                        <p>No hay solicitudes registradas</p>
+                        <a href="{{ route('solicitud.create') }}" class="btn-action primary-btn">
+                            Crear Primera Solicitud
+                        </a>
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>

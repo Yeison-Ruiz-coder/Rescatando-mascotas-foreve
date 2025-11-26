@@ -1,0 +1,392 @@
+/* public/css/pages/solicitud/index.css */
+
+/* Variables usando tu paleta de colores */
+:root {
+    --color-turquesa: #1B8E95;
+    --color-fucsia: #FD4586;
+    --color-fucsia-hover: #d83d73;
+    --color-gris-claro: #f4f4f4;
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #333;
+    --fuente-principal: 'Roboto', sans-serif;
+    --border-radius: 12px;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Panel Admin */
+.admin-panel {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: var(--fuente-principal);
+    color: var(--color-texto-claro);
+}
+
+/* Banner Titulo */
+.banner-titulo {
+    text-align: center;
+    background: linear-gradient(135deg, var(--color-turquesa) 0%, #1A2032 100%);
+    color: var(--color-texto-claro);
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.banner-titulo h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-texto-claro);
+}
+
+.banner-titulo p {
+    margin: 10px 0 0 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Alertas */
+.alert {
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    font-weight: 600;
+    border: none;
+    box-shadow: var(--shadow);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: var(--color-texto-claro);
+}
+
+.alert-error {
+    background: linear-gradient(135deg, #F44336 0%, #d32f2f 100%);
+    color: var(--color-texto-claro);
+}
+
+.alert i {
+    margin-right: 10px;
+}
+
+/* Acciones */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(26, 32, 50, 0.8);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--color-fucsia) 0%, var(--color-fucsia-hover) 100%);
+    color: var(--color-texto-claro);
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(253, 69, 134, 0.3);
+    color: var(--color-texto-claro);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-texto-claro);
+    font-family: var(--fuente-principal);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--color-turquesa) 0%, #1B8E95 100%);
+    color: var(--color-texto-claro);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: none;
+    padding: 12px 20px;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, #1B8E95 0%, #16757a 100%);
+}
+
+/* Tabla */
+.table-container {
+    background: rgba(26, 32, 50, 0.8);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.solicitudes-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--color-texto-claro);
+}
+
+.solicitudes-table th,
+.solicitudes-table td {
+    padding: 18px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.solicitudes-table th {
+    background: linear-gradient(135deg, var(--color-turquesa) 0%, #1A2032 100%);
+    font-weight: 700;
+    color: var(--color-texto-claro);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.solicitudes-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Badges */
+.tipo-badge {
+    background: rgba(27, 142, 149, 0.2);
+    color: var(--color-turquesa);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    border: 1px solid var(--color-turquesa);
+}
+
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: var(--color-texto-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.en-revisión { 
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: var(--color-texto-oscuro);
+}
+.aprobada { 
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+.rechazada { 
+    background: linear-gradient(135deg, #F44336 0%, #d32f2f 100%);
+}
+
+/* Acciones */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action {
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    box-shadow: var(--shadow);
+}
+
+.view-btn { 
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: var(--color-texto-claro);
+}
+
+.view-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #138496 0%, #117a8b 100%);
+}
+
+.edit-btn { 
+    background: linear-gradient(135deg, var(--color-turquesa) 0%, #16757a 100%);
+    color: var(--color-texto-claro);
+}
+
+.edit-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #16757a 0%, #125c60 100%);
+}
+
+.delete-btn { 
+    background: linear-gradient(135deg, #F44336 0%, #d32f2f 100%);
+    color: var(--color-texto-claro);
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+}
+
+/* Sin datos */
+.no-data {
+    padding: 60px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.no-data i {
+    margin-bottom: 20px;
+    opacity: 0.5;
+    font-size: 3rem;
+}
+
+.no-data p {
+    margin: 10px 0 20px 0;
+    font-size: 1.1rem;
+}
+
+/* Paginación */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(26, 32, 50, 0.8);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-texto-claro);
+}
+
+.pagination-info {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* Estilos para la paginación de Laravel */
+.pagination-links .pagination {
+    margin: 0;
+}
+
+.pagination-links .page-link {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-texto-claro);
+    padding: 8px 16px;
+    margin: 0 2px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.pagination-links .page-link:hover {
+    background: var(--color-turquesa);
+    border-color: var(--color-turquesa);
+    color: var(--color-texto-claro);
+}
+
+.pagination-links .page-item.active .page-link {
+    background: var(--color-fucsia);
+    border-color: var(--color-fucsia);
+    color: var(--color-texto-claro);
+}
+
+.pagination-links .page-item.disabled .page-link {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-panel {
+        padding: 15px;
+    }
+    
+    .banner-titulo {
+        padding: 20px 15px;
+    }
+    
+    .banner-titulo h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .search-input {
+        width: 100%;
+    }
+    
+    .solicitudes-table {
+        font-size: 0.85rem;
+    }
+    
+    .solicitudes-table th,
+    .solicitudes-table td {
+        padding: 12px 8px;
+    }
+    
+    .actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .pagination-container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .solicitudes-table {
+        min-width: 600px;
+    }
+    
+    .banner-titulo h1 {
+        font-size: 1.5rem;
+    }
+    
+    .banner-titulo p {
+        font-size: 1rem;
+    }
+}

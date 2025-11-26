@@ -1,0 +1,32 @@
+<!-- Sección 2: Ubicación y Descripción -->
+<div class="form-section">
+    <h4 class="section-title">
+        <i class="fas fa-map-marker-alt me-2"></i>Ubicación y Descripción
+    </h4>
+    <div class="row g-3">
+        <div class="col-12">
+            <label for="Lugar_rescate" class="form-label">
+                Lugar donde se encuentra <span class="required">*</span>
+            </label>
+            <input type="text" 
+                   class="form-control form-control-custom" 
+                   id="Lugar_rescate" 
+                   name="Lugar_rescate" 
+                   value="<?php echo e(old('Lugar_rescate', $mascota->Lugar_rescate)); ?>"
+                   placeholder="Ej: Parque Central, Calle Principal #123..."
+                   required>
+        </div>
+
+        <div class="col-12">
+            <label for="Descripcion" class="form-label">
+                Descripción <span class="required">*</span>
+            </label>
+            <textarea class="form-control form-control-custom" 
+                      id="Descripcion" 
+                      name="Descripcion" 
+                      rows="5"
+                      placeholder="Describe a la mascota: carácter, comportamiento, condición de salud, necesidades especiales..."
+                      required><?php echo e(old('Descripcion', $mascota->Descripcion)); ?></textarea>
+        </div>
+    </div>
+</div><?php /**PATH C:\Users\Personal\Desktop\rescatando-mascotas\resources\views/admin/mascotas/partials/edit/form-location-description.blade.php ENDPATH**/ ?>
