@@ -8,7 +8,7 @@
             <div class="col-md-4 mb-4">
                 <div class="testimonial-card p-4 h-100">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" 
+                        <img src="https://img.freepik.com/foto-gratis/retrato-joven-hermosa-nina-morena-sonriendo_176420-9836.jpg" 
                              class="testimonial-img me-3" 
                              alt="María González">
                         <div>

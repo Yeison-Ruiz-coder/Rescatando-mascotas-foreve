@@ -8,14 +8,27 @@
     --navbar-height: 80px;
 }
 
-/* NAVBAR PRINCIPAL */
+/* NAVBAR PRINCIPAL - FIJO EN LA PARTE SUPERIOR */
 .custom-navbar {
     background: linear-gradient(135deg, #10141f 0%, #1B8E95 50%, #81022f 100%) !important;
     padding: 0;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     min-height: var(--navbar-height);
-    position: relative;
+    position: fixed; /* ¡ESTO ES LO MÁS IMPORTANTE! */
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1030;
+}
+
+/* ESPACIO RESERVADO PARA EL NAVBAR FIJO */
+body {
+    padding-top: var(--navbar-height) !important;
+}
+
+/* O si prefieres una clase específica */
+.body-with-fixed-navbar {
+    padding-top: var(--navbar-height) !important;
 }
 
 /* LOGO */
@@ -34,7 +47,6 @@
     transform: translateY(-2px);
     opacity: 0.9;
 }
-
 
 /* ENLACES PRINCIPALES */
 .main-link {
@@ -167,6 +179,11 @@
         padding: 0.5rem 0.75rem !important;
         font-size: 0.9rem;
     }
+    
+    /* Actualizar el padding del body para navbar más pequeño */
+    body {
+        padding-top: 70px !important;
+    }
 }
 
 @media (max-width: 991.98px) {
@@ -213,6 +230,11 @@
     .profile-icon {
         width: 40px;
         height: 40px;
+    }
+    
+    /* Actualizar el padding del body para mobile */
+    body {
+        padding-top: 60px !important;
     }
 }
 

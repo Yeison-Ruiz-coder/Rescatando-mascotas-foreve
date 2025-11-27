@@ -82,6 +82,11 @@ Route::prefix('solicitud')->name('solicitud.')->group(function () {
     Route::delete('/{solicitud}', [SolicitudController::class, 'destroy'])->name('destroy');
 });
 
+Route::get('/nosotros', function () {
+    return view('public.nosotros');
+})->name('nosotros');
+
+
 
 // =========================================================================
 // RUTAS ADMIN - PARA GESTIÓN DE EVENTOS
@@ -102,20 +107,14 @@ Route::prefix('eventos')->name('public.')->group(function () {
 // RUTAS DE AUTENTICACIÓN
 require __DIR__ . '/auth.php';
 
-// ⚠️ PARA DESARROLLO - COMENTA EL MIDDLEWARE DE AUTH ⚠️
-/*          ________
-/*|\     | |        |
-/*| \    | |        |
-/*|  \   | |        | 
-/*|   \  | |        | 
-/*|    \ | |        | 
-/*|     \| |________|   TOCAR  ,
+// PARA DESARROLLO - COMENTA EL MIDDLEWARE DE AUTH 
+/*     NO DESCOMENTAR ,NO Descomentar
 Route::middleware(['auth'])->group(function () {
     // ... todo el contenido del middleware
 });
 */
 
-// RUTAS COMPLETAS PÚBLICAS (PARA DESARROLLO)
+// RUTAS COMPLETAS (PARA DESARROLLO)
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('donaciones', DonacionController::class);
 Route::resource('rescates', RescateController::class);
