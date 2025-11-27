@@ -22,8 +22,7 @@
             <input type="date" 
                    class="form-control form-control-custom" 
                    id="Fecha_salida" 
-                   name="Fecha_salida" 
-                   value="{{ old('Fecha_salida') }}">
+                   name="Fecha_salida">
         </div>
         <div class="col-12">
             <label for="fundacion_id" class="form-label">

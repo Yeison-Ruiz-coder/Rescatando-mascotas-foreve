@@ -1,108 +1,276 @@
+/* ===== ESTILOS PARA LA SECCIÓN DE MASCOTAS ===== */
+
 .adopta-section {
-    min-height: 100vh;
+    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    min-height: 100vh;/*Fondo de la pagina*/
     padding: 80px 0;
+    position: relative;
 }
 
-/* Cards para fondo oscuro */
-.bg-dark .adopta-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.section-title {
+    color: var(--color-turquesa) !important;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.section-subtitle {
     color: var(--color-texto-claro);
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    opacity: 0.8;
 }
 
-/* Cards para fondo claro */
-.bg-light .adopta-card {
-    background: var(--color-fondo-claro);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: var(--color-texto-oscuro);
-    box-shadow: var(--shadow);
-}
-
-.adopta-card {
-    border-radius: var(--border-radius);
-    transition: var(--transition);
+/* ===== ESTILOS PARA LAS CARDS MODERNAS ===== */
+.card-mascota-moderna {
+    background: #ffffff;
+    border-radius: 16px;
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(27, 142, 149, 0.1);
     height: 100%;
 }
 
-.adopta-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(253, 69, 134, 0.2);
-    border-color: var(--color-fucsia);
+.card-mascota-moderna:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
-.adopta-card img {
+/* Contenedor de imagen */
+.card-imagen-container {
+    position: relative;
     height: 250px;
-    object-fit: cover;
-    transition: var(--transition);
+    overflow: hidden;
 }
 
-.adopta-card:hover img {
+.card-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-mascota-moderna:hover .card-imagen-container img {
     transform: scale(1.05);
 }
 
-.adopta-card .card-body {
+/* Overlay para la imagen */
+.overlay-mascota {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.4));
+    pointer-events: none;
+}
+
+/* Badges modernos */
+.badges-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2;
+}
+
+.badge-moderno {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-especie-moderno {
+    background: rgba(27, 142, 149, 0.9);
+    color: var(--color-texto-claro);
+}
+
+.badge-genero-moderno {
+    background: rgba(253, 69, 134, 0.9);
+    color: var(--color-texto-claro);
+}
+
+.badge-edad-moderno {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-texto-oscuro);
+}
+
+/* Contenido de la card */
+.card-body-moderno {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - 250px);
 }
 
-.adopta-card .card-title {
-    font-size: 1.3rem;
+.nombre-mascota {
+    color: var(--color-turquesa);
     font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.descripcion-mascota {
+    color: var(--color-texto-oscuro);
+    opacity: 0.8;
+    line-height: 1.5;
+    flex-grow: 1;
     margin-bottom: 1rem;
 }
 
-/* Badges para fondo oscuro */
-.bg-dark .badge-custom {
-    background: rgba(27, 142, 149, 0.2);
-    color: var(--color-texto-claro);
-    border: 1px solid var(--color-turquesa);
+/* Información de fundación */
+.info-fundacion {
+    background: var(--color-gris-claro);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
 }
 
-/* Badges para fondo claro */
-.bg-light .badge-custom {
-    background: rgba(27, 142, 149, 0.1);
+.info-fundacion i {
     color: var(--color-turquesa);
-    border: 1px solid var(--color-turquesa);
 }
 
-.badge-custom {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    margin-right: 0.5rem;
+.info-fundacion span {
+    color: var(--color-texto-oscuro);
+    font-weight: 500;
 }
 
-.status-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 3;
-    background: var(--color-fucsia);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
+/* ===== BOTONES ===== */
+.btn-conocer-mas {
+    background: var(--color-turquesa);
+    color: var(--color-texto-claro);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
     font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.btn-adoptar {
+.btn-conocer-mas:hover {
+    background: #15747a;
+    color: var(--color-texto-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(27, 142, 149, 0.3);
+}
+
+.btn-adoptar-home {
     background: var(--color-fucsia);
     color: var(--color-texto-claro);
+    padding: 12px 15px;
     border: none;
-    border-radius: 10px;
-    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
     font-weight: 600;
-    width: 100%;
-    transition: var(--transition);
-    margin-top: auto;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
-.btn-adoptar:hover {
+.btn-adoptar-home:hover {
     background: var(--color-fucsia-hover);
+    color: var(--color-texto-claro);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(253, 69, 134, 0.3);
+    box-shadow: 0 4px 12px rgba(253, 69, 134, 0.3);
+}
+
+/* Botón principal "Ver Todas las Mascotas" */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--color-turquesa), var(--color-fucsia));
+    color: var(--color-texto-claro);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(27, 142, 149, 0.4);
+    color: var(--color-texto-claro);
+}
+
+/* ===== ANIMACIONES ===== */
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .adopta-section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .card-body-moderno .d-flex.gap-2 {
+        flex-direction: column;
+    }
+    
+    .btn-conocer-mas,
+    .btn-adoptar-home {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .adopta-section {
+        padding: 40px 0;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .card-imagen-container {
+        height: 200px;
+    }
+    
+    .badges-container {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .badge-moderno {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
 }

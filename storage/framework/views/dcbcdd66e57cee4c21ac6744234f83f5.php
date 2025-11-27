@@ -25,7 +25,7 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="text-white">Eventos para Mascotas</h1> 
-                    <a href="<?php echo e(route('eventos.create')); ?>" class="btn btn-primary">
+                    <a href="<?php echo e(route('admin.eventos.create')); ?>" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Crear Nuevo Evento
                     </a>
                 </div>
@@ -90,7 +90,7 @@
                     <div class="alert alert-info text-center">
                         <h4>No hay eventos programados</h4>
                         <p>¡Crea el primer evento para mascotas!</p>
-                        <a href="<?php echo e(route('eventos.create')); ?>" class="btn btn-primary">
+                        <a href="<?php echo e(route('admin.eventos.create')); ?>" class="btn btn-primary">
                             Crear Primer Evento
                         </a>
                     </div>

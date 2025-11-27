@@ -22,14 +22,6 @@ use App\Http\Controllers\RazaController;
 use App\Http\Controllers\TipoVacunaController;
 use App\Http\Controllers\PublicEventoController;
 
-/*
-|--------------------------------------------------------------------------
-| 1. RUTAS PÚBLICAS
-|--------------------------------------------------------------------------
-*/
-
-// Página de inicio
-Route::get('/', [DonacionController::class, 'index'])->name('inicio');
 
 // Donaciones públicas
 Route::resource('donaciones', DonacionController::class)->only(['index', 'create', 'store']);
@@ -42,7 +34,7 @@ Route::get('/', [HomeController::class, 'index'])->name('inicio');
 // RUTAS PÚBLICAS DE MASCOTAS
 Route::get('/mascotas-disponibles', [MascotaController::class, 'publicIndex'])->name('public.mascotas.index');
 Route::get('/mascota/{id}', [MascotaController::class, 'publicShow'])->name('public.mascotas.show');
-//RUTAS PRIVADAS DE MASCOTAS
+//RUTAS ADMIN DE MASCOTAS
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/mascotas', [MascotaController::class, 'index'])->name('mascotas.index');
     Route::get('/mascotas/create', [MascotaController::class, 'create'])->name('mascotas.create');
@@ -54,66 +46,62 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
-// Para el formulario de solicitud
+// Para el formulario de solicitud de adopcion
 Route::get('/adopciones/solicitar/{id}', [AdopcionController::class, 'solicitar'])
     ->name('adopciones.solicitar');
 Route::post('/adopciones/solicitar', [AdopcionController::class, 'solicitarStore'])
     ->name('adopciones.solicitar.store');
 
-/*
-|--------------------------------------------------------------------------
-| 2. AUTENTICACIÓN (Laravel Breeze / Jetstream)
-|--------------------------------------------------------------------------
-|
-| NO TOCAR. Esto carga login, register, logout, etc.
-|
-*/
-require __DIR__.'/auth.php';
-
-
-/*
-|--------------------------------------------------------------------------
-| 3. RUTAS PROTEGIDAS (requieren login)
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware(['auth'])->group(function () {
-});
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    // Recursos protegidos
-    Route::resource('administradores', AdministradorController::class);
-    Route::resource('veterinarias', VeterinariaController::class);
-    Route::resource('fundaciones', FundacionController::class);
-    Route::resource('tiendas', TiendaController::class);
-    Route::resource('mascotas', MascotaController::class);
-    Route::resource('usuarios', UsuarioController::class);
-    Route::resource('reportes', ReporteController::class);
-    Route::resource('eventos', EventoController::class);
-    Route::resource('comentarios', ComentarioController::class);
-    Route::resource('solicitudes', SolicitudController::class);
-    Route::resource('suscripciones', SuscripcionController::class);
+//Rutas de Admin para adopciones
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('adopciones', AdopcionController::class);
-    Route::resource('notificaciones', NotificacionController::class);
-    Route::resource('rescates', RescateController::class);
+});
 
-    // Rutas personalizadas
-    Route::get('/mascotas/estado/{estado}', [MascotaController::class, 'porEstado'])->name('mascotas.estado');
-    Route::get('/usuarios/tipo/{tipo}', [UsuarioController::class, 'porTipo'])->name('usuarios.tipo');
-    Route::get('/estadisticas', [DashboardController::class, 'estadisticas'])->name('estadisticas');
-    Route::get('/perfil', [UsuarioController::class, 'perfil'])->name('usuario.perfil');
 
-    // Vista de eventos
+// =========================================================================
+// RUTAS EXPLÍCITAS PARA SOLICITUDES
+
+Route::prefix('solicitud')->name('solicitud.')->group(function () {
+    // LISTAR
+    Route::get('/', [SolicitudController::class, 'index'])->name('index');
+    
+    // CREAR
+    Route::get('/create', [SolicitudController::class, 'create'])->name('create');
+    Route::post('/', [SolicitudController::class, 'store'])->name('store');
+    
+    // MOSTRAR
+    Route::get('/{solicitud}', [SolicitudController::class, 'show'])->name('show');
+    
+    // EDITAR
+    Route::get('/{solicitud}/edit', [SolicitudController::class, 'edit'])->name('edit');
+    Route::put('/{solicitud}', [SolicitudController::class, 'update'])->name('update');
+    
+    // ACTUALIZAR ESTADO
+    Route::put('/{solicitud}/status', [SolicitudController::class, 'updateStatus'])->name('updateStatus');
+    
+    // ELIMINAR
+    Route::delete('/{solicitud}', [SolicitudController::class, 'destroy'])->name('destroy');
+});
+
+
+// =========================================================================
+// RUTAS ADMIN - PARA GESTIÓN DE EVENTOS
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Rutas de recursos para CRUD completo de eventos
     Route::resource('eventos', EventoController::class);
+});
+
+// =========================================================================
+// RUTAS PÚBLICAS - PARA VISUALIZACIÓN DE EVENTOS
 
 
-    // Formulario manual para crear mascotas
-    Route::get('/mascotas/crear', [MascotaController::class, 'create'])->name('mascotas.create');
-    Route::post('/mascotas', [MascotaController::class, 'store'])->name('mascotas.store');
-
+Route::prefix('eventos')->name('public.')->group(function () {
+    Route::get('/', [EventoController::class, 'Eventospublicos'])
+         ->name('eventos.index');
+});
 // RUTAS DE AUTENTICACIÓN
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // ⚠️ PARA DESARROLLO - COMENTA EL MIDDLEWARE DE AUTH ⚠️
 /*          ________
@@ -131,20 +119,18 @@ Route::middleware(['auth'])->group(function () {
 // RUTAS COMPLETAS PÚBLICAS (PARA DESARROLLO)
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::resource('donaciones', DonacionController::class);
-Route::resource('adopciones', AdopcionController::class);
 Route::resource('rescates', RescateController::class);
 Route::resource('reportes', ReporteController::class);
-Route::resource('solicitudes', SolicitudController::class);
 Route::resource('suscripciones', SuscripcionController::class);
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('administradores', AdministradorController::class);
 Route::resource('veterinarias', VeterinariaController::class);
 Route::resource('fundaciones', FundacionController::class);
 Route::resource('tiendas', TiendaController::class);
-Route::resource('eventos', EventoController::class);
 Route::resource('comentarios', ComentarioController::class);
 Route::resource('notificaciones', NotificacionController::class);
 Route::resource('razas', RazaController::class);
+
 Route::resource('tipos-vacunas', TipoVacunaController::class);
 
 Route::resource('eventos', EventoController::class);
@@ -155,4 +141,7 @@ Route::get('/eventos{evento}', [EventoController::class, 'show'])->name('admin.e
 
 // Rutas PÚBLICAS para usuarios (solo ver)
 Route::get('/eventos', [EventoController::class, 'index'])->name('public.eventos.index');
+
+
+Route::resource('tipos-vacunas', TipoVacunaController::class);
 

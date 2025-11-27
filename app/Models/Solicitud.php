@@ -9,18 +9,33 @@ class Solicitud extends Model
 {
     use HasFactory;
 
-    protected $table = 'solicitudes';
+    protected $table = 'solicitudes'; 
 
     protected $fillable = [
         'tipo',
-        'Contenido',
-        'Fecha_solicitud',
-        'usuario_id'
+        'contenido', // En minúscula
+        'fecha_solicitud', // En minúscula
+        'usuario_id',
+        'estado', // Nuevo campo
+        'mascota_id' // Nuevo campo
     ];
 
-    // Relaciones
+     //  CASTS
+    protected $casts = [
+        'fecha_solicitud' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public $timestamps = true;
+
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    public function mascota()
+    {
+        return $this->belongsTo(Mascota::class);
     }
 }

@@ -12,6 +12,7 @@
     <!-- Mascotas Section -->
     @include('home.partials.mascotas')
     
+
     <!-- Proceso Section -->
     @include('home.partials.proceso')
 

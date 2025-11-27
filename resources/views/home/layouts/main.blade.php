@@ -12,7 +12,7 @@
     
     {{-- Estilos Globales PRIMERO (navbar y footer) --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/navbar.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/components/admin-navbar.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}"> 
     
     {{-- Estilos del Home DESPUÉS --}}
@@ -30,7 +30,7 @@
 
 <body>
     {{-- Navbar (usa SOLO los estilos globales) --}}
-    @include('portals.public.partials.navbar.navbar')
+    @include('portals.admin.partials.navbar.navbar')
 
     {{-- Contenido del Home - AISLADO --}}
     <div id="home-content-wrapper">
@@ -42,6 +42,7 @@
     
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
 </body>
 </html>

@@ -41,7 +41,7 @@
                     Formularios <i class="fas fa-caret-up second-dropdown-arrow"></i>
                 </a>
                 <ul class="dropdown-menu second-row-menu" aria-labelledby="dropdownFormularios">
-                    <li><a class="dropdown-item" href="<?php echo e(route('adopciones.create')); ?>">Adopción</a></li>
+                    <li><a class="dropdown-item" href="<?php echo e(route('admin.adopciones.create')); ?>">Adopción</a></li>
                     <li><a class="dropdown-item" href="<?php echo e(route('rescates.create')); ?>">Rescates</a></li>
                     <li><a class="dropdown-item" href="#">Rescatista</a></li>
                 </ul>

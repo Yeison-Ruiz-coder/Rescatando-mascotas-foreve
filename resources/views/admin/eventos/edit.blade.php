@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="{{ route('eventos.index') }}" class="btn btn-secondary me-md-2">Cancelar</a>
+                                <a href="{{ route('admin.eventos.index') }}" class="btn btn-secondary me-md-2">Cancelar</a>
                                 <button type="submit" class="btn btn-primary">Actualizar Evento</button>
                             </div>
                         </form>

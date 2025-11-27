@@ -18,7 +18,7 @@
                         <h4>Crear Nuevo Evento para Mascotas</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('eventos.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.eventos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             
                             <div class="row">

@@ -26,6 +26,11 @@
                 <li class="nav-item">
                     <a class="nav-link main-link" href="<?php echo e(route('rescates.index')); ?>">Rescates</a>
                 </li>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link main-link" href="<?php echo e(route('public.eventos.index')); ?>">Eventos</a>
+                </li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle main-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,7 +73,7 @@
                         Formularios
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<?php echo e(route('adopciones.create')); ?>">Adopción</a></li>
+                        <li><a class="dropdown-item" href="<?php echo e(route('public.mascotas.index')); ?>">Adopción</a></li>
                         <li><a class="dropdown-item" href="<?php echo e(route('rescates.create')); ?>">Rescates</a></li>
                         <li><a class="dropdown-item" href="#">Rescatista</a></li>
                     </ul>

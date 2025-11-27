@@ -1,6 +1,5 @@
 .hero-section {
     background: var(--color-fondo-oscuro) !important;
-    min-height: 100vh;
     color: var(--color-texto-claro);
     padding: 120px 0 80px;
     position: relative;
