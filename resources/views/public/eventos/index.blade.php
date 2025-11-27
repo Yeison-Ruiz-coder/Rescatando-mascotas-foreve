@@ -33,10 +33,10 @@
             <div class="row">
                 @foreach($eventos as $evento)
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card event-card h-100 shadow-sm">
+                    <div class="card event-card h-100">
                         @if($evento->imagen_url)
-                            <img src="{{ asset('storage' . str_replace('/storage', '', $evento->imagen_url)) }}" 
-                                 class="card-img-top event-image" 
+                            <img src="{{ asset($evento->imagen_url) }}" 
+                                 class="card-img-top" 
                                  alt="{{ $evento->Nombre_evento }}"
                                  style="height: 200px; object-fit: cover;">
                         @else

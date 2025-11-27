@@ -47,7 +47,7 @@
 
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <a href="{{ route('eventos.index') }}" class="btn btn-secondary">
+                                <a href="{{ route('admin.eventos.index') }}" class="btn btn-secondary">
                                     <i class="fas fa-arrow-left"></i> Volver a Eventos
                                 </a>
                             </div>
