@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazaController;
 use App\Http\Controllers\TipoVacunaController;
+use App\Http\Controllers\PublicEventoController;
 
 
 // Donaciones públicas
@@ -129,4 +130,18 @@ Route::resource('tiendas', TiendaController::class);
 Route::resource('comentarios', ComentarioController::class);
 Route::resource('notificaciones', NotificacionController::class);
 Route::resource('razas', RazaController::class);
+
 Route::resource('tipos-vacunas', TipoVacunaController::class);
+
+Route::resource('eventos', EventoController::class);
+
+Route::get('/eventosAdmin', [EventoController::class, 'index'])->name('admin.eventos.index');
+Route::get('/eventos{evento}', [EventoController::class, 'show'])->name('admin.eventos.show');
+
+
+// Rutas PÚBLICAS para usuarios (solo ver)
+Route::get('/eventos', [EventoController::class, 'index'])->name('public.eventos.index');
+
+
+Route::resource('tipos-vacunas', TipoVacunaController::class);
+
