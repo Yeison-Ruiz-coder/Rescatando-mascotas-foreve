@@ -1,10 +1,11 @@
 .testimonials-section {
     padding: 80px 0;
+    background: white;
 }
 
 /* Testimonios en fondo oscuro */
 .bg-dark .testimonial-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 138, 216, 0.555);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--color-texto-claro);
@@ -22,6 +23,7 @@
     border-radius: var(--border-radius);
     padding: 2rem;
     height: 100%;
+    background: rgba(143, 201, 255, 0.555);
     transition: var(--transition);
 }
 

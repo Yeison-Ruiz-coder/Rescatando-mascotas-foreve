@@ -12,7 +12,6 @@
     {{-- Estilos --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/admin-navbar.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/components/sidebar.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}"> 
     
     @stack('styles')
@@ -23,17 +22,13 @@
     {{-- Contenedor Principal --}}
     <div class="admin-container">
         
-        {{-- Sidebar --}}
-        <div class="admin-sidebar-container">
-            @include('portals.admin.partials.sidebar.sidebar')
-        </div>
-
         {{-- Contenido Principal --}}
         <div class="admin-main-container">
             
             {{-- Navbar --}}
             <div class="admin-navbar-container">
-                @include('portals.admin.partials.navbar.navbar')
+                {{-- Header Principal --}}
+                @include('portals.admin.partials.navbar.header-main')
             </div>
 
             {{-- Contenido de la Página --}}
@@ -41,16 +36,18 @@
                 @yield('content')
             </main>
 
-            {{-- Footer Admin (opcional) --}}
+            {{-- Footer Admin --}}
             @include('portals.admin.partials.footer.footer')
 
         </div>
-
     </div>
+
+    {{-- Modales --}}
+    @include('portals.admin.partials.navbar.modals')
     
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/sidebar.js') }}"></script>
+    <script src="{{ asset('js/components/navbar-admin.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

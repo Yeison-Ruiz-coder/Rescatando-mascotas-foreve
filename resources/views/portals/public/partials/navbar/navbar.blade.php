@@ -26,8 +26,6 @@
                 <li class="nav-item">
                     <a class="nav-link main-link" href="{{ route('rescates.index') }}">Rescates</a>
                 </li>
-
-                </li>
                 <li class="nav-item">
                     <a class="nav-link main-link" href="{{ route('public.eventos.index') }}">Eventos</a>
                 </li>
@@ -39,7 +37,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('suscripciones.create') }}">Suscríbete</a></li>
                         <li><a class="dropdown-item" href="{{ route('donaciones.create') }}">Donaciones</a></li>
-                        <li><a class="dropdown-item" href="{{ url('/nosotros') }}">Nosotros</a></li>
+                        <li><a class="dropdown-item" href="{{ route('nosotros') }}">Nosotros</a></li>
                     </ul>
                 </li>
             </ul>
@@ -51,12 +49,11 @@
                         Rescatistas
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Registrarse</a></li>
+                        <li><a class="dropdown-item" href="{{ route('usuarios.create') }}">Registrarse</a></li>
                         <li><a class="dropdown-item" href="#">Formulario</a></li>
                         <li><a class="dropdown-item" href="#">Contactos</a></li>
                     </ul>
                 </li>
-
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle secondary-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,6 +62,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Acerca de...</a></li>
                         <li><a class="dropdown-item" href="{{ route('rescates.index') }}">Últimos rescates</a></li>
+                        <li><a class="dropdown-item" href="{{ route('rescates.create') }}">Reportar rescate</a></li>
                     </ul>
                 </li>
 
@@ -75,7 +73,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('public.mascotas.index') }}">Adopción</a></li>
                         <li><a class="dropdown-item" href="{{ route('rescates.create') }}">Rescates</a></li>
-                        <li><a class="dropdown-item" href="#">Rescatista</a></li>
+                        <li><a class="dropdown-item" href="{{ route('usuarios.create') }}">Rescatista</a></li>
                     </ul>
                 </li>
             </ul>

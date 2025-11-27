@@ -5,6 +5,7 @@ body {
 
 .proceso-section {
     padding: 80px 0;
+    background: white;
     border-top: 1px solid;
     border-bottom: 1px solid;
 }
@@ -19,6 +20,7 @@ body {
 
 .step-card {
     padding: 1rem;
+    background: rgba(143, 201, 255, 0.555);
     text-align: center;
 }
 

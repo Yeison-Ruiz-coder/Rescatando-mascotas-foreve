@@ -1,7 +1,7 @@
 /* ===== ESTILOS PARA LA SECCIÓN DE MASCOTAS ===== */
 
 .adopta-section {
-    background:-webkit-repeating-radial-gradient(black,#10141f,#1A2032)!important;
+    background:white;
     min-height: 100vh;/*Fondo de la pagina*/
     padding: 80px 0;
     position: relative;
@@ -16,7 +16,7 @@
 }
 
 .section-subtitle {
-    color: var(--color-texto-claro);
+    color: var(--color-texto-oscuro);
     text-align: center;
     font-size: 1.1rem;
     margin-bottom: 3rem;
@@ -25,7 +25,7 @@
 
 /* ===== ESTILOS PARA LAS CARDS MODERNAS ===== */
 .card-mascota-moderna {
-    background: #ffffff;
+    background: var(--color-fondo-oscuro);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -121,7 +121,7 @@
 }
 
 .descripcion-mascota {
-    color: var(--color-texto-oscuro);
+    color: var(--color-texto-claro);
     opacity: 0.8;
     line-height: 1.5;
     flex-grow: 1;

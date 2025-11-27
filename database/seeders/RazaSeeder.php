@@ -12,6 +12,7 @@ class RazaSeeder extends Seeder
     {
         $razas = [
             // Perros
+            ['nombre_raza' => 'Otro', 'especie' => 'Otro'],
             ['nombre_raza' => 'Labrador Retriever', 'especie' => 'Perro'],
             ['nombre_raza' => 'Pastor Alemán', 'especie' => 'Perro'],
             ['nombre_raza' => 'Bulldog Francés', 'especie' => 'Perro'],

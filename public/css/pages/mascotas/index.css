@@ -99,7 +99,7 @@ body {
 }
 
 .badge-adopcion {
-    background-color: var(--color-fucsia) ;
+    background-color: var(--color-fucsia)  ;
 }
 
 .badge-adoptado {
@@ -110,6 +110,7 @@ body {
     background-color: #ffc107;
     color: var(--color-texto-oscuro) !important;
 }
+
 
 /* Contenido de la Card */
 .mascota-nombre {
@@ -190,37 +191,66 @@ body {
     opacity: 0.5;
 }
 
-/* Paginación */
-.mascotas-pagination .pagination {
+/* PAGINACIÓN ESTILO MODERNO */
+.mascotas-pagination {
+    display: flex;
     justify-content: center;
+    margin-top: 3rem;
+}
+
+.mascotas-pagination .pagination {
+    background: white;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.mascotas-pagination .page-item {
+    margin: 0;
 }
 
 .mascotas-pagination .page-link {
     color: var(--color-turquesa);
-    border: 1px solid #dee2e6;
-    padding: 0.75rem 1.25rem;
-    margin: 0 0.25rem;
+    border: none;
+    background: transparent;
+    padding: 0.75rem 1rem;
     border-radius: 10px;
+    font-weight: 600;
     transition: all 0.3s ease;
+    min-width: 50px;
+    text-align: center;
 }
 
 .mascotas-pagination .page-link:hover {
-    background-color: var(--color-turquesa);
-    color: white;
-    border-color: var(--color-turquesa);
+    background: rgba(27, 142, 149, 0.1);
+    color: var(--color-turquesa);
+    transform: translateY(-2px);
 }
 
 .mascotas-pagination .page-item.active .page-link {
-    background-color: var(--color-turquesa);
-    border-color: var(--color-turquesa);
+    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
     color: white;
+    box-shadow: 0 5px 15px rgba(27, 142, 149, 0.3);
 }
 
 .mascotas-pagination .page-item.disabled .page-link {
-    color: #6c757d;
-    background-color: #f8f9fa;
+    color: #dee2e6;
+    background: transparent;
+    cursor: not-allowed;
 }
 
+/* Botones anterior/siguiente con iconos */
+.mascotas-pagination .page-item:first-child .page-link::before {
+    content: "← ";
+    font-weight: bold;
+}
+
+.mascotas-pagination .page-item:last-child .page-link::after {
+    content: " →";
+    font-weight: bold;
+}
 /* Filtros */
 .filtros-mascotas .card {
     border-radius: 15px;
