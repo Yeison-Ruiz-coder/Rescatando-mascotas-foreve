@@ -12,7 +12,6 @@
     
     <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/components/admin-navbar.css')); ?>"> 
-    <link rel="stylesheet" href="<?php echo e(asset('css/components/sidebar.css')); ?>"> 
     <link rel="stylesheet" href="<?php echo e(asset('css/components/footer.css')); ?>"> 
     
     <?php echo $__env->yieldPushContent('styles'); ?>
@@ -24,16 +23,12 @@
     <div class="admin-container">
         
         
-        <div class="admin-sidebar-container">
-            <?php echo $__env->make('portals.admin.partials.sidebar.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-        </div>
-
-        
         <div class="admin-main-container">
             
             
             <div class="admin-navbar-container">
-                <?php echo $__env->make('portals.admin.partials.navbar.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                
+                <?php echo $__env->make('portals.admin.partials.navbar.header-main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             </div>
 
             
@@ -45,12 +40,14 @@
             <?php echo $__env->make('portals.admin.partials.footer.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         </div>
-
     </div>
+
+    
+    <?php echo $__env->make('portals.admin.partials.navbar.modals', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo e(asset('js/sidebar.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/components/navbar-admin.js')); ?>"></script>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html><?php /**PATH C:\Users\Juanda\Desktop\Rescatando-mascotas-foreve\resources\views/portals/admin/layouts/app.blade.php ENDPATH**/ ?>

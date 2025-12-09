@@ -30,7 +30,7 @@
 
 <body>
     
-    <?php echo $__env->make('portals.admin.partials.navbar.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
 
     
     <div id="home-content-wrapper">
@@ -45,4 +45,5 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
-</html><?php /**PATH C:\Users\Juanda\Desktop\Rescatando-mascotas-foreve\resources\views/home/layouts/main.blade.php ENDPATH**/ ?>
+</html>
+<?php echo $__env->make('portals.admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanda\Desktop\Rescatando-mascotas-foreve\resources\views/home/layouts/main.blade.php ENDPATH**/ ?>
