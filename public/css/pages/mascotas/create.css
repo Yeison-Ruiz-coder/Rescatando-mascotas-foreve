@@ -8,7 +8,7 @@ body {
 
 /* Header Principal */
 .create-mascota-header {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    background: linear-gradient(135deg, var(--color-turquesa), #9b7bb5);
     color: white;
     padding: 3rem 2rem;
     border-radius: 20px;
@@ -320,44 +320,44 @@ textarea.form-control-custom {
         padding: 2rem 1rem;
         border-radius: 15px;
     }
-    
+
     .create-mascota-header h1 {
         font-size: 2rem;
     }
-    
+
     .form-mascota-header {
         padding: 1rem 1.5rem;
         font-size: 1.1rem;
     }
-    
+
     .form-section {
         padding: 1.5rem 0;
     }
-    
+
     .section-title {
         font-size: 1.1rem;
     }
-    
+
     .radio-group {
         gap: 1rem;
         flex-direction: column;
     }
-    
+
     .form-actions {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .btn-submit,
     .btn-cancel {
         width: 100%;
         max-width: 300px;
     }
-    
+
     .multi-select {
         max-height: 100px;
     }
-    
+
     .preview-item {
         margin-bottom: 0.5rem;
     }
@@ -368,17 +368,17 @@ textarea.form-control-custom {
         text-align: center;
         padding: 1.5rem 1rem;
     }
-    
+
     .form-mascota-card {
         margin: 0 -0.5rem;
         border-radius: 15px;
     }
-    
+
     .form-control-custom,
     .form-select-custom {
         padding: 0.65rem 0.85rem;
     }
-    
+
     .preview-image {
         height: 80px;
     }
@@ -543,11 +543,11 @@ textarea.form-control-custom {
         text-align: center;
         gap: 10px;
     }
-    
+
     .alert-icon {
         font-size: 1.5rem;
     }
-    
+
     .alert-title {
         font-size: 1.1rem;
     }
@@ -624,7 +624,7 @@ textarea.form-control-custom {
     .gallery-preview {
         justify-content: center;
     }
-    
+
     .gallery-preview-item {
         width: 80px;
         height: 70px;

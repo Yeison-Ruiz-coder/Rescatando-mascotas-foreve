@@ -1,5 +1,5 @@
-{{-- resources/views/admin/adopciones/create.blade.php --}}
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/create.css') }}">
@@ -9,10 +9,10 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            
+
             <!-- Header -->
             @include('admin.adopciones.partials.create.header')
-            
+
             <!-- Alertas -->
             @if ($errors->any())
                 <div class="alertas-error mb-4 animacion-entrada">
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const razonTextarea = document.getElementById('razon_rechazo');
     const form = document.getElementById('formAdopcion');
     const btnSubmit = document.getElementById('btnSubmit');
-    
+
     function toggleRazonRechazo() {
         if (estadoSelect.value === 'Rechazado') {
             razonContainer.classList.add('mostrar');
@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
             razonTextarea.required = false;
         }
     }
-    
+
     // Ejecutar al cargar la página
     toggleRazonRechazo();
-    
+
     // Ejecutar cuando cambie el estado
     estadoSelect.addEventListener('change', toggleRazonRechazo);
-    
+
     // Validación antes de enviar el formulario
     form.addEventListener('submit', function(e) {
         if (estadoSelect.value === 'Rechazado' && !razonTextarea.value.trim()) {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             razonTextarea.focus();
             return;
         }
-        
+
         // Mostrar estado de carga
         btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Registrando...';
         btnSubmit.disabled = true;

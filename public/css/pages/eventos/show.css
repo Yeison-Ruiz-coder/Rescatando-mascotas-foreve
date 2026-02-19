@@ -2,8 +2,8 @@
 
 /* Aplicar variables de color */
 :root {
-    --color-turquesa: #1B8E95;
-    --color-fucsia: #FD4586;
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
     --color-fucsia-hover: #d83d73;
     --color-gris-claro: #f4f4f4;
     --color-texto-claro: #fff;
@@ -161,29 +161,29 @@ strong {
     .container {
         padding: 0 15px;
     }
-    
+
     .card-body {
         padding: 1.5rem;
     }
-    
+
     .card-title {
         font-size: 2rem;
     }
-    
+
     .event-image {
         max-height: 300px;
     }
-    
+
     .row.mb-4 {
         padding: 1rem;
     }
-    
+
     .d-flex.justify-content-between {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
     }
-    
+
     .btn {
         width: 100%;
         justify-content: center;
@@ -194,27 +194,27 @@ strong {
     .card-body {
         padding: 1rem;
     }
-    
+
     .card-title {
         font-size: 1.75rem;
     }
-    
+
     .event-image {
         max-height: 250px;
     }
-    
+
     .row.mb-4 {
         margin: 1rem 0;
     }
-    
+
     .col-md-6 {
         margin-bottom: 1rem;
     }
-    
+
     .col-md-6:last-child {
         margin-bottom: 0;
     }
-    
+
     .card-text {
         padding: 1rem;
         font-size: 1rem;
@@ -271,7 +271,7 @@ h1, h5 {
     .card, .btn, .event-image {
         transition: none;
     }
-    
+
     .event-image:hover {
         transform: none;
     }

@@ -1,10 +1,10 @@
 :root {
     /* COLORES PRINCIPALES */
-    --color-turquesa: #1B8E95;  /* Fondo primario, Navbar, Footer */
-    --color-fucsia: #FD4586;    /* Acentos, botones principales */
-    --color-fucsia-hover: #d83d73; /* Fucsia un poco más oscuro */
+    --color-turquesa: #764ba2;  /* Fondo primario, Navbar, Footer */
+    --color-fucsia: #667eea;;    /* Acentos, botones principales */
+    --color-fucsia-hover: #667eead3;; /* Fucsia un poco más oscuro */
     --color-gris-claro: #f4f4f4; /* Fondo de contenedores o tarjetas */
-    
+
     /* COLORES DE TEXTO */
     --color-texto-claro: #fff;
     --color-texto-oscuro: #333;

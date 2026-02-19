@@ -2,8 +2,8 @@
 
 /* VARIABLES */
 :root {
-    --color-turquesa: #1B8E95;
-    --color-fucsia: #FD4586;
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
     --color-fucsia-hover: #d83d73;
     --color-gris-claro: #f4f4f4;
     --color-texto-claro: #fff;
@@ -262,9 +262,9 @@ body {
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .gallery-main-img { height: 300px; }
-    .gallery-thumbnail { 
-        width: 120px !important; 
-        height: 90px !important; 
+    .gallery-thumbnail {
+        width: 120px !important;
+        height: 90px !important;
     }
     .card-header { padding: 0.75rem 1rem; }
     .display-4 { font-size: 2rem; }
@@ -272,8 +272,8 @@ body {
 
 @media (max-width: 576px) {
     .gallery-main-img { height: 250px; }
-    .gallery-thumbnail { 
-        width: 100px !important; 
-        height: 75px !important; 
+    .gallery-thumbnail {
+        width: 100px !important;
+        height: 75px !important;
     }
 }

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    @extends('portals.admin.layouts.app')
+    @extends('admin.layouts.app')
     @section('content')
     <div class="container mt-4">
         <div class="row justify-content-center">
@@ -18,13 +18,13 @@
                 <div class="card">
                     <div class="card-body">
                         @if($evento->imagen_url)
-                            <img src="{{ asset('storage' . str_replace('/storage', '', $evento->imagen_url)) }}" 
-                                 class="event-image mb-4" 
+                            <img src="{{ asset('storage' . str_replace('/storage', '', $evento->imagen_url)) }}"
+                                 class="event-image mb-4"
                                  alt="{{ $evento->Nombre_evento }}">
                         @endif
-                        
+
                         <h1 class="card-title">{{ $evento->Nombre_evento }}</h1>
-                        
+
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="d-flex align-items-center mb-2">
@@ -51,25 +51,25 @@
                                     <i class="fas fa-arrow-left"></i> Volver a Eventos
                                 </a>
                             </div>
-                            
+
                             <div class="d-flex gap-2">
                                 <!-- Botón Editar -->
                                 <a href="{{ route('eventos.edit', $evento) }}" class="btn btn-outline-primary">
                                     <i class="fas fa-edit"></i> Editar
                                 </a>
-                                
+
                                 <!-- Botón Eliminar -->
                                 <form action="{{ route('eventos.destroy', $evento) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger" 
+                                    <button type="submit" class="btn btn-outline-danger"
                                             onclick="return confirm('¿Estás seguro de que quieres eliminar este evento?')">
                                         <i class="fas fa-trash"></i> Eliminar
                                     </button>
                                 </form>
                             </div>
                         </div>
-                        
+
                         <div class="mt-3 text-end">
                             <small class="text-muted">
                                 Creado el: {{ $evento->created_at->format('d M Y') }}

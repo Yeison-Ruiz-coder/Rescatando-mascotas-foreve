@@ -10,12 +10,12 @@ class AdministradorController extends Controller
     public function index()
     {
         $administradores = Administrador::all();
-        return view('administradores.index', compact('administradores'));
+        return view('admin.administradores.index', compact('administradores'));
     }
 
     public function create()
     {
-        return view('administradores.create');
+        return view('admin.administradores.create');
     }
 
     public function store(Request $request)
@@ -38,13 +38,13 @@ class AdministradorController extends Controller
     public function show($id)
     {
         $administrador = Administrador::findOrFail($id);
-        return view('administradores.show', compact('administrador'));
+        return view('admin.administradores.show', compact('administrador'));
     }
 
     public function edit($id)
     {
         $administrador = Administrador::findOrFail($id);
-        return view('administradores.edit', compact('administrador'));
+        return view('admin.administradores.edit', compact('administrador'));
     }
 
     public function update(Request $request, $id)
@@ -59,7 +59,7 @@ class AdministradorController extends Controller
         $administrador = Administrador::findOrFail($id);
         $administrador->update($request->all());
 
-        return redirect()->route('administradores.index')
+        return redirect()->route('admin.administradores.index')
             ->with('success', 'Administrador actualizado exitosamente.');
     }
 
@@ -68,7 +68,7 @@ class AdministradorController extends Controller
         $administrador = Administrador::findOrFail($id);
         $administrador->delete();
 
-        return redirect()->route('administradores.index')
+        return redirect()->route('admin.administradores.index')
             ->with('success', 'Administrador eliminado exitosamente.');
     }
 }

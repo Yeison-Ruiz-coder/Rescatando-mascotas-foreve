@@ -12,14 +12,14 @@ class NotificacionController extends Controller
     public function index()
     {
         $notificaciones = Notificacion::with(['usuario', 'administrador'])->get();
-        return view('notificaciones.index', compact('notificaciones'));
+        return view('admin.notificaciones.index', compact('notificaciones'));
     }
 
     public function create()
     {
         $usuarios = Usuario::all();
         $administradores = Administrador::all();
-        return view('notificaciones.create', compact('usuarios', 'administradores'));
+        return view('admin.notificaciones.create', compact('usuarios', 'administradores'));
     }
 
     public function store(Request $request)
@@ -33,14 +33,14 @@ class NotificacionController extends Controller
 
         Notificacion::create($request->all());
 
-        return redirect()->route('notificaciones.index')
+        return redirect()->route('admin.notificaciones.index')
             ->with('success', 'Notificación creada exitosamente.');
     }
 
     public function show($id)
     {
         $notificacion = Notificacion::with(['usuario', 'administrador'])->findOrFail($id);
-        return view('notificaciones.show', compact('notificacion'));
+        return view('admin.notificaciones.show', compact('notificacion'));
     }
 
     public function edit($id)
@@ -48,7 +48,7 @@ class NotificacionController extends Controller
         $notificacion = Notificacion::findOrFail($id);
         $usuarios = Usuario::all();
         $administradores = Administrador::all();
-        return view('notificaciones.edit', compact('notificacion', 'usuarios', 'administradores'));
+        return view('admin.notificaciones.edit', compact('notificacion', 'usuarios', 'administradores'));
     }
 
     public function update(Request $request, $id)
@@ -72,7 +72,7 @@ class NotificacionController extends Controller
         $notificacion = Notificacion::findOrFail($id);
         $notificacion->delete();
 
-        return redirect()->route('notificaciones.index')
+        return redirect()->route('admin.notificaciones.index')
             ->with('success', 'Notificación eliminada exitosamente.');
     }
 }

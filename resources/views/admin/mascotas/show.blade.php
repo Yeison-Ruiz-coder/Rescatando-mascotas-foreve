@@ -1,11 +1,11 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
 
 
 @section('content')
 <div class="container py-5">
     <!-- Botones de acción -->
     @include('admin.mascotas.partials.show.actions')
-    
+
     <div class="row">
         <!-- Columna izquierda: Galería de fotos -->
         <div class="col-lg-5 mb-4">

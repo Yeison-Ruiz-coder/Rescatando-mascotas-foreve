@@ -10,12 +10,12 @@ class TiendaController extends Controller
     public function index()
     {
         $tiendas = Tienda::all();
-        return view('tiendas.index', compact('tiendas'));
+        return view('admin.tiendas.index', compact('tiendas'));
     }
 
     public function create()
     {
-        return view('tiendas.create');
+        return view('admin.tiendas.create');
     }
 
     public function store(Request $request)
@@ -29,20 +29,20 @@ class TiendaController extends Controller
 
         Tienda::create($request->all());
 
-        return redirect()->route('tiendas.index')
+        return redirect()->route('admin.tiendas.index')
             ->with('success', 'Tienda creada exitosamente.');
     }
 
     public function show($id)
     {
         $tienda = Tienda::findOrFail($id);
-        return view('tiendas.show', compact('tienda'));
+        return view('admin.tiendas.show', compact('tienda'));
     }
 
     public function edit($id)
     {
         $tienda = Tienda::findOrFail($id);
-        return view('tiendas.edit', compact('tienda'));
+        return view('admin.tiendas.edit', compact('tienda'));
     }
 
     public function update(Request $request, $id)
@@ -57,7 +57,7 @@ class TiendaController extends Controller
         $tienda = Tienda::findOrFail($id);
         $tienda->update($request->all());
 
-        return redirect()->route('tiendas.index')
+        return redirect()->route('admin.tiendas.index')
             ->with('success', 'Tienda actualizada exitosamente.');
     }
 
@@ -66,7 +66,27 @@ class TiendaController extends Controller
         $tienda = Tienda::findOrFail($id);
         $tienda->delete();
 
-        return redirect()->route('tiendas.index')
+        return redirect()->route('admin.tiendas.index')
             ->with('success', 'Tienda eliminada exitosamente.');
+    }
+
+    public function ventas($id = null)
+    {
+        if ($id) {
+            $tienda = Tienda::with('ventas')->findOrFail($id);
+            return view('admin.tiendas.ventas', compact('tienda'));
+        }
+        // si no se especifica tienda, podríamos mostrar una página genérica
+        // por ahora simplemente mostramos la vista sin variable para que el menú funcione
+        return view('admin.tiendas.ventas');
+    }
+
+    public function inventario($id = null)
+    {
+        if ($id) {
+            $tienda = Tienda::with('inventario')->findOrFail($id);
+            return view('admin.tiendas.inventario', compact('tienda'));
+        }
+        return view('admin.tiendas.inventario');
     }
 }

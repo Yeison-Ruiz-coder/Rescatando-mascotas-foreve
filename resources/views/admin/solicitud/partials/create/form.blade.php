@@ -1,6 +1,6 @@
 {{-- resources/views/admin/solicitud/partials/create/_form.blade.php --}}
 <div class="create-form-container">
-    <form action="{{ route('solicitud.store') }}" method="POST" class="solicitud-form">
+    <form action="{{ route('admin.solicitudes.store') }}" method="POST" class="solicitud-form">
         @csrf
 
         <div class="form-grid">
@@ -13,10 +13,10 @@
                     <option value="">Selecciona un usuario</option>
                     @foreach($usuarios as $usuario)
                         <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
-                            {{ $usuario->email }} 
+                            {{ $usuario->email }}
                             @if($usuario->nombre || $usuario->Nombre_1 || $usuario->name)
                                 - {{ $usuario->nombre ?? $usuario->nombre_completo ?? $usuario->name ?? '' }}
-                                
+
                             @endif
                         </option>
                     @endforeach
@@ -64,8 +64,8 @@
                 <label for="fecha_solicitud">
                     <i class="fa-solid fa-calendar"></i> Fecha de Solicitud:
                 </label>
-                <input type="datetime-local" id="fecha_solicitud" name="fecha_solicitud" 
-                       value="{{ old('fecha_solicitud', now()->format('Y-m-d\TH:i')) }}" 
+                <input type="datetime-local" id="fecha_solicitud" name="fecha_solicitud"
+                       value="{{ old('fecha_solicitud', now()->format('Y-m-d\TH:i')) }}"
                        required class="form-control @error('fecha_solicitud') is-invalid @enderror">
                 @error('fecha_solicitud')
                     <span class="error-message">{{ $message }}</span>
@@ -81,7 +81,7 @@
             <label for="contenido">
                 <i class="fa-solid fa-file-lines"></i> Contenido / Justificación:
             </label>
-            <textarea id="contenido" name="contenido" rows="10" required 
+            <textarea id="contenido" name="contenido" rows="10" required
                       class="form-control @error('contenido') is-invalid @enderror"
                       placeholder="Describe los detalles de la solicitud, justificación, observaciones...">{{ old('contenido') }}</textarea>
             @error('contenido')
@@ -108,7 +108,7 @@
             <button type="submit" class="btn-submit">
                 <i class="fa-solid fa-plus"></i> Crear Solicitud
             </button>
-            <a href="{{ route('solicitud.index') }}" class="btn-cancel">
+            <a href="{{ route('admin.solicitudes.index') }}" class="btn-cancel">
                 <i class="fa-solid fa-times"></i> Cancelar
             </a>
         </div>

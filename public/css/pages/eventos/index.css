@@ -1,10 +1,10 @@
 :root {
     /* COLORES PRINCIPALES */
-    --color-turquesa: #1B8E95;
-    --color-fucsia: #FD4586;
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
     --color-fucsia-hover: #d83d73;
     --color-gris-claro: #f4f4f4;
-    
+
     /* COLORES DE TEXTO */
     --color-texto-claro: #fff;
     --color-texto-oscuro: #333;
@@ -114,14 +114,14 @@ a:hover {
 
 /* FECHA DEL EVENTO */
 .event-date {
-    background-color: transparent; 
-    color: var(--color-turquesa); 
-    padding: 0.25rem 0; 
-    border-radius: 0;  
+    background-color: transparent;
+    color: var(--color-turquesa);
+    padding: 0.25rem 0;
+    border-radius: 0;
     font-size: 0.875rem;
     font-weight: 600;
-    border: 1px solid var(--color-turquesa); 
-    padding: 0.25rem 0.5rem; 
+    border: 1px solid var(--color-turquesa);
+    padding: 0.25rem 0.5rem;
 }
 
 /* ALERTAS */
@@ -175,15 +175,15 @@ a:hover {
     .container {
         padding: 0 15px;
     }
-    
+
     h1 {
         font-size: 2rem;
     }
-    
+
     .event-card {
         margin-bottom: 1.5rem;
     }
-    
+
     .btn-primary {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;

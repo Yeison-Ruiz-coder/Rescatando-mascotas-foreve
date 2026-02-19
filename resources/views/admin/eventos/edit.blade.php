@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    @extends('portals.admin.layouts.app')
+    @extends('admin.layouts.app')
     @section('content')
     <div class="container mt-4">
         <div class="row justify-content-center">
@@ -21,25 +21,25 @@
                         <form action="{{ route('eventos.update', $evento) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="Nombre_evento" class="form-label">Nombre del Evento *</label>
-                                        <input type="text" class="form-control @error('Nombre_evento') is-invalid @enderror" 
-                                               id="Nombre_evento" name="Nombre_evento" 
+                                        <input type="text" class="form-control @error('Nombre_evento') is-invalid @enderror"
+                                               id="Nombre_evento" name="Nombre_evento"
                                                value="{{ old('Nombre_evento', $evento->Nombre_evento) }}" required>
                                         @error('Nombre_evento')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="Lugar_evento" class="form-label">Lugar del Evento *</label>
-                                        <input type="text" class="form-control @error('Lugar_evento') is-invalid @enderror" 
-                                               id="Lugar_evento" name="Lugar_evento" 
+                                        <input type="text" class="form-control @error('Lugar_evento') is-invalid @enderror"
+                                               id="Lugar_evento" name="Lugar_evento"
                                                value="{{ old('Lugar_evento', $evento->Lugar_evento) }}" required>
                                         @error('Lugar_evento')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -50,7 +50,7 @@
 
                             <div class="mb-3">
                                 <label for="Descripcion" class="form-label">Descripción *</label>
-                                <textarea class="form-control @error('Descripcion') is-invalid @enderror" 
+                                <textarea class="form-control @error('Descripcion') is-invalid @enderror"
                                           id="Descripcion" name="Descripcion" rows="4" required>{{ old('Descripcion', $evento->Descripcion) }}</textarea>
                                 @error('Descripcion')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -61,19 +61,19 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="Fecha_evento" class="form-label">Fecha del Evento *</label>
-                                        <input type="datetime-local" class="form-control @error('Fecha_evento') is-invalid @enderror" 
-                                               id="Fecha_evento" name="Fecha_evento" 
+                                        <input type="datetime-local" class="form-control @error('Fecha_evento') is-invalid @enderror"
+                                               id="Fecha_evento" name="Fecha_evento"
                                                value="{{ old('Fecha_evento', \Carbon\Carbon::parse($evento->Fecha_evento)->format('Y-m-d\TH:i')) }}" required>
                                         @error('Fecha_evento')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="imagen" class="form-label">Imagen del Evento</label>
-                                        <input type="file" class="form-control @error('imagen') is-invalid @enderror" 
+                                        <input type="file" class="form-control @error('imagen') is-invalid @enderror"
                                                id="imagen" name="imagen" accept="image/*">
                                         @error('imagen')
                                             <div class="invalid-feedback">{{ $message }}</div>

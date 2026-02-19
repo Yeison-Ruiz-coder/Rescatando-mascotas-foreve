@@ -3,8 +3,8 @@
 /* VARIABLES ADICIONALES */
 
 :root {
-    --color-turquesa: #1B8E95;
-    --color-fucsia: #FD4586;
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
     --color-fucsia-hover: #d83d73;
     --color-gris-claro: #f4f4f4;
     --color-texto-claro: #fff;
@@ -208,15 +208,15 @@ body {
     .imagen-principal {
         height: 300px;
     }
-    
+
     .gallery-thumb {
         height: 80px;
     }
-    
+
     .card-header-turquesa {
         padding: 0.75rem 1rem;
     }
-    
+
     .btn-fucsia,
     .btn-outline-turquesa {
         padding: 0.75rem 1.5rem;
@@ -228,15 +228,15 @@ body {
     .imagen-principal {
         height: 250px;
     }
-    
+
     .gallery-thumb {
         height: 60px;
     }
-    
+
     .info-circle {
         padding: 0.75rem;
     }
-    
+
     .info-circle .icono {
         font-size: 1.25rem;
     }

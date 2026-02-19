@@ -1,4 +1,4 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/index.css') }}">
@@ -8,13 +8,13 @@
 <div class="container-fluid px-3 px-lg-5 py-4">
     <!-- Header -->
     @include('admin.mascotas.partials.index.header')
-    
+
     <!-- Acciones Principales -->
     @include('admin.mascotas.partials.index.actions')
-    
+
     <!-- Panel de Filtros -->
     @include('components.modules.mascotas.filters')
-    
+
     <!-- Estadísticas Rápidas -->
     @if(!request()->anyFilled(['especie', 'estado', 'raza']))
         @include('admin.mascotas.partials.index.stats')

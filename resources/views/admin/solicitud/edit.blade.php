@@ -1,13 +1,14 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 @section('title', 'Editar Solicitud #' . $solicitud->id)
 
 @section('content')
 <section class="admin-panel">
-    
+
     <!-- Header -->
     @include('admin.solicitud.partials.edit.header')
-    
+
     <!-- Alertas -->
     @if (session('success'))
         <div class="alert alert-success">
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validación del formulario
     const form = document.querySelector('.solicitud-form');
     const contenido = document.getElementById('contenido');
-    
+
     if (form) {
         form.addEventListener('submit', function(e) {
             if (contenido.value.trim().length < 10) {

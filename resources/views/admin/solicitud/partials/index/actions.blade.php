@@ -1,9 +1,9 @@
 {{-- resources/views/admin/solicitud/partials/index/_actions.blade.php --}}
 <div class="card-actions">
-    <a href="{{ route('solicitud.create') }}" class="btn-action primary-btn">
+    <a href="{{ route('admin.solicitudes.create') }}" class="btn-action primary-btn">
         <i class="fa-solid fa-plus"></i> Nueva Solicitud
     </a>
-    
+
     <div class="search-box">
         <input type="text" placeholder="Buscar solicitudes..." class="search-input">
         <button class="search-btn">

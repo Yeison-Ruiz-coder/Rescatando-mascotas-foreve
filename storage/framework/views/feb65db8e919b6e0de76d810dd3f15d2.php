@@ -1,0 +1,5 @@
+<img src="<?php echo e(asset('img/perfil-usuario.png')); ?>" alt="Logo Rescatando Mascotas Forever" class="footer-logo mb-3">
+<p class="footer-mission">
+    Transformando vidas de mascotas abandonadas y creando familias felices desde 2025
+</p>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/portals/admin/partials/footer/logo-section.blade.php ENDPATH**/ ?>

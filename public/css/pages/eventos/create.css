@@ -2,8 +2,8 @@
 
 /* Aplicar variables de color si no las tienes ya */
 :root {
-    --color-turquesa: #1B8E95;
-    --color-fucsia: #FD4586;
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
     --color-fucsia-hover: #d83d73;
     --color-gris-claro: #f4f4f4;
     --color-texto-claro: #fff;
@@ -162,24 +162,24 @@ body {
     .container {
         padding: 0 15px;
     }
-    
+
     .card-body {
         padding: 1.5rem;
     }
-    
+
     .card-header {
         padding: 1.25rem 1.5rem;
     }
-    
+
     .btn {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
-    
+
     .d-md-flex {
         flex-direction: column;
     }
-    
+
     .me-md-2 {
         margin-right: 0 !important;
         margin-bottom: 1rem;
@@ -190,11 +190,11 @@ body {
     .card-body {
         padding: 1rem;
     }
-    
+
     .row .col-md-6 {
         margin-bottom: 1rem;
     }
-    
+
     .row .col-md-6:last-child {
         margin-bottom: 0;
     }

@@ -1,4 +1,4 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             </a>
         </div>
     </div>
-    
+
     {{-- Aquí iría la tabla con el historial de donaciones si existiera una --}}
     {{-- @include('donaciones.partials.table') --}}
 </div>

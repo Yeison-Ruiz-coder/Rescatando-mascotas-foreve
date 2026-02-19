@@ -1,8 +1,8 @@
 :root {
-    --color-turquesa: #1B8E95; 
-    --color-fucsia: #FD4586;   
-    --color-fucsia-hover: #e03a75; 
-    --color-gris-claro: #f8f9fa; 
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
+    --color-fucsia-hover: #e03a75;
+    --color-gris-claro: #f8f9fa;
     --color-texto-claro: #fff;
     --color-texto-oscuro: #333;
     --navbar-height: 80px;
@@ -170,16 +170,16 @@ body {
     .custom-navbar {
         min-height: 70px;
     }
-    
+
     .navbar-logo {
         height: 45px;
     }
-    
+
     .main-link {
         padding: 0.5rem 0.75rem !important;
         font-size: 0.9rem;
     }
-    
+
     /* Actualizar el padding del body para navbar más pequeño */
     body {
         padding-top: 70px !important;
@@ -194,22 +194,22 @@ body {
         border-radius: 8px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
-    
+
     .navbar-nav {
         margin-bottom: 1rem;
     }
-    
+
     .main-link {
         margin: 0.125rem 0;
     }
-    
+
     .secondary-menu {
         display: flex !important;
         flex-direction: column;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
         padding-top: 1rem;
     }
-    
+
     .navbar-profile {
         margin-left: 0;
         text-align: center;
@@ -222,16 +222,16 @@ body {
     .container-fluid {
         padding: 0 1rem;
     }
-    
+
     .navbar-logo {
         height: 40px;
     }
-    
+
     .profile-icon {
         width: 40px;
         height: 40px;
     }
-    
+
     /* Actualizar el padding del body para mobile */
     body {
         padding-top: 60px !important;

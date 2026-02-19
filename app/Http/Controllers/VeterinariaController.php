@@ -10,12 +10,12 @@ class VeterinariaController extends Controller
     public function index()
     {
         $veterinarias = Veterinaria::all();
-        return view('veterinarias.index', compact('veterinarias'));
+        return view('admin.veterinarias.index', compact('veterinarias'));
     }
 
     public function create()
     {
-        return view('veterinarias.create');
+        return view('admin.veterinarias.create');
     }
 
     public function store(Request $request)
@@ -29,20 +29,20 @@ class VeterinariaController extends Controller
 
         Veterinaria::create($request->all());
 
-        return redirect()->route('veterinarias.index')
+        return redirect()->route('admin.veterinarias.index')
             ->with('success', 'Veterinaria creada exitosamente.');
     }
 
     public function show($id)
     {
         $veterinaria = Veterinaria::findOrFail($id);
-        return view('veterinarias.show', compact('veterinaria'));
+        return view('admin.veterinarias.show', compact('veterinaria'));
     }
 
     public function edit($id)
     {
         $veterinaria = Veterinaria::findOrFail($id);
-        return view('veterinarias.edit', compact('veterinaria'));
+        return view('admin.veterinarias.edit', compact('veterinaria'));
     }
 
     public function update(Request $request, $id)
@@ -57,7 +57,7 @@ class VeterinariaController extends Controller
         $veterinaria = Veterinaria::findOrFail($id);
         $veterinaria->update($request->all());
 
-        return redirect()->route('veterinarias.index')
+        return redirect()->route('admin.veterinarias.index')
             ->with('success', 'Veterinaria actualizada exitosamente.');
     }
 
@@ -66,7 +66,7 @@ class VeterinariaController extends Controller
         $veterinaria = Veterinaria::findOrFail($id);
         $veterinaria->delete();
 
-        return redirect()->route('veterinarias.index')
+        return redirect()->route('admin.veterinarias.index')
             ->with('success', 'Veterinaria eliminada exitosamente.');
     }
 }

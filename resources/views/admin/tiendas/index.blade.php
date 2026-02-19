@@ -1,1 +1,2 @@
-hola desde tienda
+@extends('admin.layouts.app')
+hola desde tiendas admin

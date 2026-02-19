@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->decimal('valor_donacion', 10, 2);
             $table->timestamp('Fecha_donacion');
-            
+
             $table->unsignedBigInteger('usuario_id')->nullable();
             $table->unsignedBigInteger('fundacion_id')->nullable();
-            
+            $table->boolean('publica')->default(false);
 
             $table->foreign('usuario_id')
             ->references('id')
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreign('fundacion_id')
             ->references('id')
             ->on('fundaciones')
-            ->onDelete('set null'); 
+            ->onDelete('set null');
             $table->timestamps();
         });
     }
