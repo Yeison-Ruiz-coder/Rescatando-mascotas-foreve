@@ -1,4 +1,5 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 
 @push('styles')
@@ -9,10 +10,10 @@
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            
+
             <!-- Header -->
             @include('admin.adopciones.partials.edit.header')
-            
+
             <!-- Alertas -->
             @if (session('success'))
                 @include('cards.registro-exitoso')
@@ -33,7 +34,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const estadoSelect = document.getElementById('estado');
     const razonContainer = document.getElementById('razon_rechazo_container');
-    
+
     function toggleRazonRechazo() {
         if (estadoSelect.value === 'Rechazado') {
             razonContainer.style.display = 'block';
@@ -41,10 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
             razonContainer.style.display = 'none';
         }
     }
-    
+
     // Ejecutar al cargar la página
     toggleRazonRechazo();
-    
+
     // Ejecutar cuando cambie el estado
     estadoSelect.addEventListener('change', toggleRazonRechazo);
 });

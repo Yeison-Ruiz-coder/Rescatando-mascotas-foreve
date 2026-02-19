@@ -1,4 +1,4 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/create.css') }}">
@@ -6,11 +6,11 @@
 
 @section('content')
 <div class="container-fluid px-3 px-lg-5 py-4">
-    
+
     <!-- Alertas -->
     @include('partials.alerts.error')
     @include('partials.alerts.success')
-    
+
 
     <!-- Header Section -->
     @include('admin.mascotas.partials.create.header')

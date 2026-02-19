@@ -21,7 +21,7 @@
                     <td>
                         @if ($solicitud->usuario)
                             {{ $solicitud->usuario->Nombre_1 }}
-                            {{ $solicitud->usuario->Apellido_1 }} 
+                            {{ $solicitud->usuario->Apellido_1 }}
                         @else
                             Usuario #{{ $solicitud->usuario_id }}
                         @endif
@@ -58,7 +58,7 @@
                     <td colspan="6" class="text-center no-data">
                         <i class="fa-solid fa-clipboard-list fa-3x"></i>
                         <p>No hay solicitudes registradas</p>
-                        <a href="{{ route('solicitud.create') }}" class="btn-action primary-btn">
+                        <a href="{{ route('admin.solicitudes.create') }}" class="btn-action primary-btn">
                             Crear Primera Solicitud
                         </a>
                     </td>

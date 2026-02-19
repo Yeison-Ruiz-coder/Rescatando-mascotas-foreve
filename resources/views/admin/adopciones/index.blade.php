@@ -1,5 +1,6 @@
 {{-- resources/views/admin/adopciones/index.blade.php --}}
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/index.css') }}">
@@ -9,19 +10,19 @@
 <div class="container fade-in py-4 mb-5">
     <div class="row">
         <div class="col-12">
-            
+
             <!-- Header -->
             @include('admin.adopciones.partials.index.header')
-            
+
             <!-- Filtros -->
             @include('admin.adopciones.partials.index.filters')
-            
+
             <!-- Alertas -->
             @include('admin.adopciones.partials.index.alerts')
-            
+
             <!-- Contador -->
             @include('admin.adopciones.partials.index.counter')
-            
+
             <!-- Tabla o Estado Vacío -->
             @if($adopciones->count() > 0)
                 @include('admin.adopciones.partials.index.table')

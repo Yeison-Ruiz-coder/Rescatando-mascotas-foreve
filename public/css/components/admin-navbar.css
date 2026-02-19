@@ -4,7 +4,7 @@
     --am-pink-light: #85d8ff;
     --am-pink-dark: #e9789c;
     --am-pink-glow: #ff4d80;
-   
+
     /* Colores de apoyo con prefijo */
     --am-teal: #94c1c9;
     --am-teal-light: #b8dde5;
@@ -16,19 +16,19 @@
     --am-light-bg: #f8f9fa;
     --am-dark-text: #2c2c2c;
     --am-gray-text: #6c757d;
-   
+
     /* Efectos Glassmorphism con prefijo */
     --am-glass-bg: rgba(255, 255, 255, 0.15);
     --am-glass-border: rgba(255, 255, 255, 0.2);
     --am-glass-shadow: 0 8px 32px 0 rgba(255, 77, 128, 0.2);
     --am-blur-effect: blur(20px);
     --am-backdrop-blur: blur(25px);
-   
+
     /* Transiciones avanzadas con prefijo */
     --am-transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --am-transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     --am-transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-   
+
     /* Sombras y profundidad con prefijo */
     --am-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
     --am-shadow-md: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -781,29 +781,29 @@
     .am-header-content {
         padding: 0 20px;
     }
-   
+
     .am-nav-links {
         gap: 3px;
     }
-   
+
     .am-nav-link {
         padding: 10px 14px;
         font-size: 0.85rem;
     }
-   
+
     .am-nav-link span {
         display: none;
     }
-   
+
     .am-nav-link i {
         font-size: 1.1rem;
     }
-   
+
     .am-sub-menu {
         gap: 15px;
         padding: 0 20px;
     }
-   
+
     .am-logo-text {
         font-size: 1.4rem;
     }
@@ -813,15 +813,15 @@
     .am-nav-container {
         display: none;
     }
-   
+
     .am-mobile-toggle {
         display: block;
     }
-   
+
     .am-user-container .am-user-info {
         display: none;
     }
-   
+
     .am-user-container {
         padding: 8px 12px;
     }
@@ -831,18 +831,18 @@
     .am-navbar-body {
         padding-top: 120px;
     }
-   
+
     .am-header-content {
         flex-direction: row;
         gap: 10px;
         padding: 0 15px;
     }
-   
+
     .am-main-nav {
         width: auto;
         justify-content: flex-end;
     }
-   
+
     .am-nav-container.am-active {
         display: block;
         position: absolute;
@@ -856,32 +856,32 @@
         margin-top: 0;
         box-shadow: var(--am-shadow-md);
     }
-   
+
     .am-nav-links {
         flex-direction: column;
         gap: 8px;
     }
-   
+
     .am-nav-link {
         justify-content: flex-start;
         padding: 12px 16px;
     }
-   
+
     .am-nav-link span {
         display: inline;
         font-size: 0.9rem;
     }
-   
+
     .am-sub-menu {
         flex-direction: column;
         gap: 8px;
         padding: 0 15px;
     }
-   
+
     .am-logo-text {
         font-size: 1.2rem;
     }
-   
+
     .am-logo-icon {
         font-size: 1.8rem;
     }
@@ -891,40 +891,40 @@
     .am-navbar-body {
         padding-top: 110px;
     }
-   
+
     .am-header-content {
         padding: 0 10px;
     }
-   
+
     .am-logo-container {
         padding: 8px 15px;
         gap: 8px;
     }
-   
+
     .am-logo-text {
         font-size: 1.1rem;
     }
-   
+
     .am-logo-icon {
         font-size: 1.6rem;
     }
-   
+
     .am-modal-dialog {
         margin: 10px;
     }
-   
+
     .am-modal-header {
         padding: 15px 20px;
     }
-   
+
     .am-modal-body {
         padding: 20px;
     }
-   
+
     .am-header-main {
         padding: 10px 0;
     }
-   
+
     .am-header-bottom {
         padding: 8px 0;
     }

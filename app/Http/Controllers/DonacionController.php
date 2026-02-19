@@ -1,78 +1,78 @@
 <?php
+// app/Http/Controllers/DonacionController.php
 
 namespace App\Http\Controllers;
 
 use App\Models\Donacion;
-use App\Models\Usuario;
 use App\Models\Fundacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DonacionController extends Controller
 {
+    /**
+     * Ver donaciones públicas
+     */
     public function index()
     {
-        $donaciones = Donacion::with(['usuario', 'fundacion'])->get();
-        return view('donaciones.index', compact('donaciones'));
+        $donaciones = Donacion::with('fundacion')
+            ->where('publica', true)
+            ->latest()
+            ->paginate(20);
+
+        return view('public.donaciones.index', compact('donaciones'));
     }
 
+    /**
+     * Formulario para donar (público)
+     */
     public function create()
     {
-        $usuarios = Usuario::all();
         $fundaciones = Fundacion::all();
-        return view('donaciones.create', compact('usuarios', 'fundaciones'));
+        return view('public.donaciones.create', compact('fundaciones'));
     }
 
+    /**
+     * Guardar donación (usuario autenticado)
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'valor_donacion' => 'required|numeric|min:0',
-            'Fecha_donacion' => 'required|date',
-            'usuario_id' => 'required|exists:usuarios,id',
-            'fundacion_id' => 'required|exists:fundaciones,id'
+            'valor_donacion' => 'required|numeric|min:1000',
+            'fundacion_id' => 'required|exists:fundaciones,id',
+            'comprobante' => 'required|image|max:2048'
         ]);
 
-        Donacion::create($request->all());
+        $donacion = Donacion::create([
+            'valor_donacion' => $request->valor_donacion,
+            'Fecha_donacion' => now(),
+            'usuario_id' => Auth::id(),
+            'fundacion_id' => $request->fundacion_id,
+            'estado' => 'pendiente',
+            'publica' => $request->has('publica')
+        ]);
 
-        return redirect()->route('donaciones.index')
-            ->with('success', 'Donación creada exitosamente.');
+        if ($request->hasFile('comprobante')) {
+            $path = $request->file('comprobante')->store('comprobantes', 'public');
+            $donacion->update(['comprobante' => $path]);
+        }
+
+        return redirect()->route('donaciones.show', $donacion)
+            ->with('success', '¡Gracias por tu donación!');
     }
 
+    /**
+     * Ver recibo de UNA donación (solo dueño)
+     */
     public function show($id)
     {
         $donacion = Donacion::with(['usuario', 'fundacion'])->findOrFail($id);
-        return view('donaciones.show', compact('donacion'));
-    }
 
-    public function edit($id)
-    {
-        $donacion = Donacion::findOrFail($id);
-        $usuarios = Usuario::all();
-        $fundaciones = Fundacion::all();
-        return view('donaciones.edit', compact('donacion', 'usuarios', 'fundaciones'));
-    }
+        // Verificar que sea el dueño
+        if (Auth::id() !== $donacion->usuario_id) {
+            abort(403, 'No puedes ver donaciones de otros usuarios');
+        }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'valor_donacion' => 'required|numeric|min:0',
-            'Fecha_donacion' => 'required|date',
-            'usuario_id' => 'required|exists:usuarios,id',
-            'fundacion_id' => 'required|exists:fundaciones,id'
-        ]);
-
-        $donacion = Donacion::findOrFail($id);
-        $donacion->update($request->all());
-
-        return redirect()->route('donaciones.index')
-            ->with('success', 'Donación actualizada exitosamente.');
-    }
-
-    public function destroy($id)
-    {
-        $donacion = Donacion::findOrFail($id);
-        $donacion->delete();
-
-        return redirect()->route('donaciones.index')
-            ->with('success', 'Donación eliminada exitosamente.');
+        return view('public.donaciones.show', compact('donacion'));
     }
 }

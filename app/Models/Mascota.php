@@ -29,7 +29,7 @@ class Mascota extends Model
     ];
 
     protected $casts = [
-        'galeria_fotos' => 'array', 
+        'galeria_fotos' => 'array',
         'Fecha_ingreso' => 'date',
         'Fecha_salida' => 'date',
     ];
@@ -45,11 +45,16 @@ class Mascota extends Model
         return $this->hasMany(Adopcion::class);
     }
 
+    public function apadrinamientos()
+    {
+        return $this->hasMany(Apadrinamiento::class);
+    }
+
     public function rescates()
     {
         return $this->hasMany(Rescate::class);
     }
-    
+
    public function razas()
     {
         // Une Mascota con Raza a través de la tabla pivot 'mascota_raza'

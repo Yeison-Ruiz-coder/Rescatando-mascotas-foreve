@@ -76,7 +76,7 @@ class EventoController extends Controller
             if ($evento->imagen_url) {
                 Storage::delete(str_replace('/storage/', '', $evento->imagen_url));
             }
-            
+
             // Guardar nueva imagen
             $imagePath = $request->file('imagen')->store('eventos', 'public');
             $validated['imagen_url'] = '/storage/' . $imagePath;
@@ -98,9 +98,9 @@ class EventoController extends Controller
         if ($evento->imagen_url) {
             Storage::delete(str_replace('/storage/', '', $evento->imagen_url));
         }
-        
+
         $evento->delete();
-        
+
         return redirect()->route('admin.eventos.index') // MANTENER admin
             ->with('success', 'Evento eliminado correctamente.');
     }
@@ -109,8 +109,8 @@ class EventoController extends Controller
     public function publicindex()
     {
         $eventos = Evento::where('Fecha_evento', '>=', now())
-                        ->orderBy('Fecha_evento', 'asc')
-                        ->get();
+            ->orderBy('Fecha_evento', 'asc')
+            ->get();
 
         return view('public.eventos.index', compact('eventos'));
     }
@@ -119,5 +119,41 @@ class EventoController extends Controller
     {
         $evento = Evento::findOrFail($id);
         return view('public.eventos.show', compact('evento'));
+    }
+
+    public function calendar()
+    {
+        $eventos = Evento::orderBy('Fecha_evento')->get();
+        return view('admin.eventos.calendar', compact('eventos'));
+    }
+
+    /**
+     * Opcional: Endpoint para datos JSON del calendario
+     * (Útil si usas librerías como FullCalendar)
+     */
+    public function calendarData()
+    {
+        $eventos = Evento::all()->map(function ($evento) {
+            return [
+                'id' => $evento->id,
+                'title' => $evento->Nombre_evento,
+                'start' => $evento->Fecha_evento,
+                'description' => $evento->Descripcion,
+                'url' => route('admin.eventos.show', $evento),
+                'color' => $this->getEventColor($evento) // Método opcional
+            ];
+        });
+
+        return response()->json($eventos);
+    }
+
+    /**
+     * Asignar color según tipo de evento (opcional)
+     */
+    private function getEventColor($evento)
+    {
+        // Puedes agregar lógica según tipo de evento
+        // Por ahora un color fijo
+        return '#3788d8';
     }
 }

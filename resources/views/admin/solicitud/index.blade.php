@@ -1,14 +1,15 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 @section('title', 'Gestión de Solicitudes - Admin')
 
 
 @section('content')
 <section class="admin-panel">
-    
+
     <!-- Header -->
     @include('admin.solicitud.partials.index.header')
-    
+
     <!-- Alertas -->
     @if (session('success'))
         <div class="alert alert-success">
@@ -24,10 +25,10 @@
 
     <!-- Acciones -->
     @include('admin.solicitud.partials.index.actions')
-    
+
     <!-- Tabla -->
     @include('admin.solicitud.partials.index.table')
-    
+
     <!-- Paginación -->
     @include('admin.solicitud.partials.index.pagination')
 

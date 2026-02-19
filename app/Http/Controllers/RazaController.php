@@ -11,13 +11,13 @@ class RazaController extends Controller
     public function index()
     {
         $razas = Raza::all();
-        return view('razas.index', compact('razas'));
+        return view('admin.razas.index', compact('razas'));
     }
 
     // Muestra el formulario para crear una nueva raza
     public function create()
     {
-        return view('razas.create');
+        return view('admin.razas.create');
     }
 
     // Almacena una nueva raza en la base de datos
@@ -30,20 +30,20 @@ class RazaController extends Controller
 
         Raza::create($request->all());
 
-        return redirect()->route('razas.index')
+        return redirect()->route('admin.razas.index')
                          ->with('success', 'Raza creada exitosamente.');
     }
 
     // Muestra el detalle de una raza específica (Opcional para datos maestros)
     public function show(Raza $raza)
     {
-        return view('razas.show', compact('raza'));
+        return view('admin.razas.show', compact('raza'));
     }
 
     // Muestra el formulario para editar una raza
     public function edit(Raza $raza)
     {
-        return view('razas.edit', compact('raza'));
+        return view('admin.razas.edit', compact('raza'));
     }
 
     // Actualiza la raza en la base de datos
@@ -56,7 +56,7 @@ class RazaController extends Controller
 
         $raza->update($request->all());
 
-        return redirect()->route('razas.index')
+        return redirect()->route('admin.razas.index')
                          ->with('success', 'Raza actualizada exitosamente.');
     }
 
@@ -65,7 +65,7 @@ class RazaController extends Controller
     {
         $raza->delete();
 
-        return redirect()->route('razas.index')
+        return redirect()->route('admin.razas.index')
                          ->with('success', 'Raza eliminada correctamente.');
     }
 }

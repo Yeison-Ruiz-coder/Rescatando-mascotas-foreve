@@ -1,10 +1,10 @@
-@extends('portals.public.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 
 <div class="container mt-5">
     <div class="row">
-        
+
         <div class="col-md-6 header-text">
             <h1 class="text-start">Dona y cambia</h1>
             <h1 class="text-start mb-4">una vida</h1>
@@ -12,10 +12,10 @@
         </div>
 
         <div class="col-md-6 d-flex justify-content-center align-items-center">
-            
+
         </div>
     </div>
-    
+
     <div class="row justify-content-center mt-4">
         <div class="col-md-7">
             @yield('content')

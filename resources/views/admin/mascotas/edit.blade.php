@@ -1,4 +1,4 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/edit.css') }}">

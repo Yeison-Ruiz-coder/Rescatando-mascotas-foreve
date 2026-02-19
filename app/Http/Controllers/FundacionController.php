@@ -10,12 +10,12 @@ class FundacionController extends Controller
     public function index()
     {
         $fundaciones = Fundacion::all();
-        return view('fundaciones.index', compact('fundaciones'));
+        return view('admin.fundaciones.index', compact('fundaciones'));
     }
 
     public function create()
     {
-        return view('fundaciones.create');
+        return view('admin.fundaciones.create');
     }
 
     public function store(Request $request)
@@ -29,20 +29,20 @@ class FundacionController extends Controller
 
         Fundacion::create($request->all());
 
-        return redirect()->route('fundaciones.index')
+        return redirect()->route('admin.fundaciones.index')
             ->with('success', 'Fundación creada exitosamente.');
     }
 
     public function show($id)
     {
         $fundacion = Fundacion::findOrFail($id);
-        return view('fundaciones.show', compact('fundacion'));
+        return view('admin.fundaciones.show', compact('fundacion'));
     }
 
     public function edit($id)
     {
         $fundacion = Fundacion::findOrFail($id);
-        return view('fundaciones.edit', compact('fundacion'));
+        return view('admin.fundaciones.edit', compact('fundacion'));
     }
 
     public function update(Request $request, $id)
@@ -57,7 +57,7 @@ class FundacionController extends Controller
         $fundacion = Fundacion::findOrFail($id);
         $fundacion->update($request->all());
 
-        return redirect()->route('fundaciones.index')
+        return redirect()->route('admin.fundaciones.index')
             ->with('success', 'Fundación actualizada exitosamente.');
     }
 
@@ -66,7 +66,7 @@ class FundacionController extends Controller
         $fundacion = Fundacion::findOrFail($id);
         $fundacion->delete();
 
-        return redirect()->route('fundaciones.index')
+        return redirect()->route('admin.fundaciones.index')
             ->with('success', 'Fundación eliminada exitosamente.');
     }
 }

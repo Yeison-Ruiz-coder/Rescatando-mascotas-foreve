@@ -1,4 +1,5 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/show.css') }}">
@@ -10,12 +11,12 @@
         <div class="col-lg-10">
             <!-- CARD PRINCIPAL -->
             <div class="card card-detalle-adopcion animate-slide-in">
-                
+
                 <!-- Header -->
                 @include('admin.adopciones.partials.show.header')
-                
+
                 <div class="card-body p-4">
-                    
+
                     <!-- Alertas -->
                     @include('admin.adopciones.partials.show.alerts')
 

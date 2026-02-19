@@ -16,15 +16,15 @@ class RescateController extends Controller
     public function index()
     {
         $rescates = Rescate::with([
-            'usuario', 
-            'mascota', 
-            'veterinaria', 
-            'tienda', 
-            'fundacion', 
+            'usuario',
+            'mascota',
+            'veterinaria',
+            'tienda',
+            'fundacion',
             'administrador'
         ])->get();
-        
-        return view('rescates.index', compact('rescates'));
+
+        return view('admin.rescates.index', compact('rescates'));
     }
 
     public function create()
@@ -35,13 +35,13 @@ class RescateController extends Controller
         $tiendas = Tienda::all();
         $fundaciones = Fundacion::all();
         $administradores = Administrador::all();
-        
+
         return view('rescates.create', compact(
-            'usuarios', 
-            'mascotas', 
-            'veterinarias', 
-            'tiendas', 
-            'fundaciones', 
+            'usuarios',
+            'mascotas',
+            'veterinarias',
+            'tiendas',
+            'fundaciones',
             'administradores'
         ));
     }
@@ -69,14 +69,14 @@ class RescateController extends Controller
     public function show($id)
     {
         $rescate = Rescate::with([
-            'usuario', 
-            'mascota', 
-            'veterinaria', 
-            'tienda', 
-            'fundacion', 
+            'usuario',
+            'mascota',
+            'veterinaria',
+            'tienda',
+            'fundacion',
             'administrador'
         ])->findOrFail($id);
-        
+
         return view('rescates.show', compact('rescate'));
     }
 
@@ -89,14 +89,14 @@ class RescateController extends Controller
         $tiendas = Tienda::all();
         $fundaciones = Fundacion::all();
         $administradores = Administrador::all();
-        
+
         return view('rescates.edit', compact(
             'rescate',
-            'usuarios', 
-            'mascotas', 
-            'veterinarias', 
-            'tiendas', 
-            'fundaciones', 
+            'usuarios',
+            'mascotas',
+            'veterinarias',
+            'tiendas',
+            'fundaciones',
             'administradores'
         ));
     }

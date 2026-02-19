@@ -6,9 +6,9 @@ body {
 }
 :root {
     /* COLORES PRINCIPALES */
-    --color-turquesa: #1B8E95;
-    --color-fucsia: #FD4586;
-    --color-fucsia-hover: #d83d73;
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
+    --color-fucsia-hover: #667eeac0;
     --color-gris-claro: #f4f4f4;
     --color-texto-claro: #fff;
     --color-texto-oscuro: #333;
@@ -30,7 +30,7 @@ body {
 }
 
 .adopciones-title {
-    color: var(--color-turquesa);
+    color: var(--color-texto-claro);
     font-weight: 700;
     margin: 0;
     font-size: 1.8rem;
@@ -76,7 +76,7 @@ body {
 }
 
 .filtros-header {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    background: linear-gradient(135deg, var(--color-turquesa), #9b7bb5);
     color: var(--color-texto-claro);
     padding: 1rem 1.5rem;
     border-bottom: none;
@@ -84,6 +84,7 @@ body {
 
 .filtros-header h5 {
     margin: 0;
+    color: var(--color-texto-claro);
     font-weight: 600;
     font-size: 1.1rem;
 }
@@ -123,7 +124,7 @@ body {
 }
 
 .tabla-adopciones thead {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    background: linear-gradient(135deg, var(--color-turquesa), #9b7bb5);
     color: var(--color-texto-claro);
 }
 
@@ -267,21 +268,21 @@ body {
     .adopciones-title {
         font-size: 1.5rem;
     }
-    
+
     .filtros-body {
         padding: 1rem;
     }
-    
+
     .tabla-adopciones {
         font-size: 0.85rem;
     }
-    
+
     .btn-group-acciones {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
     }
-    
+
     .btn-group-acciones .btn {
         margin: 0;
     }

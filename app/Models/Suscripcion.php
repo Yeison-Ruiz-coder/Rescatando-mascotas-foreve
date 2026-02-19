@@ -12,15 +12,24 @@ class Suscripcion extends Model
     protected $table = 'suscripciones';
 
     protected $fillable = [
-        'tipo',
-        'Contenido',
-        'Fecha_suscripcion',
-        'usuario_id'
+        'usuario_id',
+        'mascota_id',
+        'monto_mensual',
+        'frecuencia',
+        'fecha_inicio',
+        'fecha_fin',
+        'mensaje_apoyo',
+        'estado'
     ];
 
     // Relaciones
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    public function mascota()
+    {
+        return $this->belongsTo(Mascota::class);
     }
 }

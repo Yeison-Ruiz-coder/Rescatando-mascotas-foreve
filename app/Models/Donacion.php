@@ -15,7 +15,8 @@ class Donacion extends Model
         'valor_donacion',
         'Fecha_donacion',
         'usuario_id',
-        'fundacion_id'
+        'fundacion_id',
+        'publica'
     ];
 
     // Relaciones

@@ -30,7 +30,7 @@
 
 <body>
     {{-- Navbar (usa SOLO los estilos globales) --}}
-    @extends('portals.admin.layouts.app')
+    @extends('admin.layouts.app')
 
     {{-- Contenido del Home - AISLADO --}}
     <div id="home-content-wrapper">

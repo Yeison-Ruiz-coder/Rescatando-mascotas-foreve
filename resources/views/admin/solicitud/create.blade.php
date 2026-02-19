@@ -1,13 +1,14 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 
 @section('title', 'Crear Nueva Solicitud')
 
 @section('content')
 <section class="admin-panel">
-    
+
     <!-- Header -->
     @include('admin.solicitud.partials.create.header')
-    
+
     <!-- Alertas -->
     @if (session('success'))
         <div class="alert alert-success">
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Validación del formulario
     const form = document.querySelector('.solicitud-form');
     const contenido = document.getElementById('contenido');
-    
+
     if (form) {
         form.addEventListener('submit', function(e) {
             if (contenido.value.trim().length < 10) {

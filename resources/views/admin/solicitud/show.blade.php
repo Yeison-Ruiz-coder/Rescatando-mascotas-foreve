@@ -1,12 +1,13 @@
-@extends('portals.admin.layouts.app')
+@extends('admin.layouts.app')
+
 @section('title', 'Detalles de Solicitud #' . $solicitud->id)
 
 @section('content')
 <section class="admin-panel">
-    
+
     <!-- Header -->
     @include('admin.solicitud.partials.show.header')
-    
+
     <!-- Alertas -->
     @if (session('success'))
         <div class="alert alert-success">
@@ -22,7 +23,7 @@
 
     <!-- Detalles de la Solicitud -->
     @include('admin.solicitud.partials.show.details')
-    
+
     <!-- Acciones -->
     @include('admin.solicitud.partials.show.actions')
 
