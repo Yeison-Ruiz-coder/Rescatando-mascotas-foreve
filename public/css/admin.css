@@ -99,6 +99,22 @@
     max-height: 45px;
 }
 
+.header-logo-texto {
+    height: 90px; /* Misma altura que tenía el wrapper */
+    width: auto;  /* Mantiene proporción */
+    object-fit: contain;
+    margin-right: 12px;
+    margin-top: 12px;
+}
+
+/* Opcional: Si el logo es muy ancho, ajusta el ancho máximo */
+.header-logo-texto {
+    max-width: 250px !important; /* Ajusta según tu logo */
+    height: auto;
+    max-height: 85px !important;
+}
+
+
 .logo-wrapper {
     width: 45px;
     height: 45px;
