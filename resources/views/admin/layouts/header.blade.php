@@ -11,11 +11,10 @@
         <!-- Logo y Título (AHORA CON IMAGEN) -->
         <div class="header-brand">
             <!-- CAMBIO AQUÍ: Eliminamos el icono y ponemos la imagen -->
-            <img src="{{ asset('img/logo-azul.png') }}" alt="Logo Fundación" class="header-logo">
+            <img src="{{ asset('img/logo-oscuro.png') }}" alt="Logo Fundación" class="header-logo">
+            <img src="{{ asset('img/texto-logo-oscuro.png') }}" alt="Logo Fundación" class="header-logo-texto">
 
             <div class="brand-text">
-                <h1 class="brand-title">Panel Administrativo</h1>
-                <span class="brand-subtitle">Fundación Mascotas</span>
             </div>
         </div>
 
