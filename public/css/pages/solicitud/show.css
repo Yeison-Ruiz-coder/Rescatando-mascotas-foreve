@@ -9,7 +9,7 @@
 
 /* BANNER TÍTULO */
 .banner-titulo {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    background: linear-gradient(135deg, var(--color-turquesa),  #764ba2);
     color: var(--color-texto-claro);
     padding: 2rem;
     border-radius: 15px;
@@ -98,17 +98,17 @@
 }
 
 .status-badge.large.en-revisión {
-    background: linear-gradient(135deg, #ffd89b, #19547b);
+    background: blue;
     color: white;
 }
 
 .status-badge.large.aprobada {
-    background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+    background: green;
     color: white;
 }
 
 .status-badge.large.rechazada {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    background: red;
     color: white;
 }
 

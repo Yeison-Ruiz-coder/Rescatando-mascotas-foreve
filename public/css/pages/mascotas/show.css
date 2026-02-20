@@ -4,7 +4,7 @@
 :root {
     --color-turquesa: #764ba2;
     --color-fucsia: #667eea;
-    --color-fucsia-hover: #d83d73;
+    --color-fucsia-hover: #667eeac0;
     --color-gris-claro: #f4f4f4;
     --color-texto-claro: #fff;
     --color-texto-oscuro: #333;
@@ -49,8 +49,8 @@ body {
 
 
 .btn-warning:hover {
-    background-color: #16747a !important;
-    border-color: #16747a !important;
+    background-color: #667eeac0!important;
+    border-color: #764ba2 !important;
     box-shadow: 0 4px 15px rgba(27, 142, 149, 0.3);
 }
 
@@ -61,8 +61,8 @@ body {
 }
 
 .btn-danger:hover {
-    background-color: var(--color-fucsia-hover) !important;
-    border-color: var(--color-fucsia-hover) !important;
+    background-color:#d83d73 !important;
+    border-color: #d83d73 !important;
     box-shadow: 0 4px 15px rgba(253, 69, 134, 0.3);
 }
 

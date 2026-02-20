@@ -5,7 +5,7 @@ body {
 
 /* Estilos específicos para edición de adopciones */
 .edit-adopcion-header {
-    background: linear-gradient(135deg, rgba(27, 143, 149, 0.596), rgba(253, 69, 133, 0.445));
+    background: linear-gradient(135deg,#764ba2, #667eea);
     border-radius: 15px;
     padding: 2rem;
     margin-bottom: 2rem;

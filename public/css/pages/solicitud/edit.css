@@ -9,7 +9,7 @@
 
 /* BANNER TÍTULO */
 .banner-titulo {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    background: linear-gradient(135deg, var(--color-turquesa), #764ba2);
     color: var(--color-texto-claro);
     padding: 2rem;
     border-radius: 15px;
