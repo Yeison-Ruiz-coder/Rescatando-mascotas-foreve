@@ -28,63 +28,88 @@ use App\Http\Controllers\TipoVacunaController;
 // RUTAS PÚBLICAS (SIN PREFIJO /admin)
 // =========================================================================
 
-// PÁGINA DE INICIO
+// PÁGINA DE INICIO - CORREGIDA
 Route::get('/', [HomeController::class, 'index'])->name('inicio');
 Route::get('/nosotros', function () {
     return view('public.nosotros');
 })->name('nosotros');
 
-// RUTAS PÚBLICAS DE MASCOTAS
+// RUTAS PÚBLICAS DE MASCOTAS - CORREGIDAS
 Route::prefix('mascotas')->name('public.mascotas.')->group(function () {
     Route::get('/', [MascotaController::class, 'publicIndex'])->name('index');
     Route::get('/{id}', [MascotaController::class, 'publicShow'])->name('show');
 });
 
-// RUTAS PÚBLICAS DE ADOPCIONES
-Route::prefix('adopciones')->name('adopciones.')->group(function () {
+// RUTAS PÚBLICAS DE ADOPCIONES - CORREGIDAS
+Route::prefix('adopciones')->name('public.adopciones.')->group(function () {
+    Route::get('/', [AdopcionController::class, 'publicIndex'])->name('index');
     Route::get('/solicitar/{id}', [AdopcionController::class, 'solicitar'])->name('solicitar');
     Route::post('/solicitar', [AdopcionController::class, 'solicitarStore'])->name('solicitar.store');
 });
 
-// RUTAS PÚBLICAS DE SOLICITUDES (si es necesario que los usuarios creen solicitudes)
-Route::prefix('solicitudes')->name('solicitudes.')->group(function () {
-    Route::get('/create', [SolicitudController::class, 'create'])->name('create');
-    Route::post('/', [SolicitudController::class, 'store'])->name('store');
+// RUTAS PÚBLICAS DE SOLICITUDES - CORREGIDAS
+Route::prefix('solicitudes')->name('public.solicitudes.')->group(function () {
+    Route::get('/', [SolicitudController::class, 'publicIndex'])->name('index');
+    Route::get('/create', [SolicitudController::class, 'publicCreate'])->name('create');
+    Route::post('/', [SolicitudController::class, 'publicStore'])->name('store');
 });
 
-// RUTAS PÚBLICAS DE EVENTOS
+// RUTAS PÚBLICAS DE EVENTOS - CORREGIDAS
 Route::prefix('eventos')->name('public.eventos.')->group(function () {
-    Route::get('/', [EventoController::class, 'Eventospublicos'])->name('index');
-    Route::get('/{evento}', [EventoController::class, 'showPublic'])->name('show');
+    Route::get('/', [EventoController::class, 'publicIndex'])->name('index');
+    Route::get('/{evento}', [EventoController::class, 'publicShow'])->name('show');
 });
 
-// ===========================================
-// RUTAS PÚBLICAS DE APADRINAMIENTOS (como donaciones)
-// ===========================================
-Route::prefix('apadrinamientos')->name('apadrinamientos.')->group(function () {
+// RUTAS PÚBLICAS DE APADRINAMIENTOS - CORREGIDAS
+Route::prefix('apadrinamientos')->name('public.apadrinamientos.')->group(function () {
+    Route::get('/', [ApadrinamientoController::class, 'publicIndex'])->name('index');
     Route::get('/planes', [ApadrinamientoController::class, 'planes'])->name('planes');
     Route::get('/iniciar/{mascota}', [ApadrinamientoController::class, 'iniciar'])->name('iniciar');
     Route::post('/procesar-pago', [ApadrinamientoController::class, 'procesarPago'])->name('procesar-pago');
     Route::get('/confirmacion/{id}', [ApadrinamientoController::class, 'confirmacion'])->name('confirmacion');
 });
-// RUTAS PÚBLICAS DE DONACIONES
-Route::prefix('donaciones')->name('donaciones.')->group(function () {
-    Route::get('/', [DonacionController::class, 'index'])->name('index');
-    Route::get('/crear', [DonacionController::class, 'create'])->name('create');
-    Route::post('/', [DonacionController::class, 'store'])->name('store');
-    Route::get('/{id}', [DonacionController::class, 'show'])->name('show');
+
+// RUTAS PÚBLICAS DE DONACIONES - CORREGIDAS
+Route::prefix('donaciones')->name('public.donaciones.')->group(function () {
+    Route::get('/', [DonacionController::class, 'publicIndex'])->name('index');
+    Route::get('/crear', [DonacionController::class, 'publicCreate'])->name('create');
+    Route::post('/', [DonacionController::class, 'publicStore'])->name('store');
+    Route::get('/{id}', [DonacionController::class, 'publicShow'])->name('show');
 });
 
-// =========================================================================
-// RUTAS PÚBLICAS DE COMENTARIOS
-// =========================================================================
+// RUTAS PÚBLICAS DE COMENTARIOS - CORREGIDAS
 Route::prefix('comentarios')->name('public.comentarios.')->group(function () {
-    Route::get('/{entidadTipo}/{entidadId}', [PublicComentarioController::class, 'index'])->name('index');
+    Route::get('/', [PublicComentarioController::class, 'index'])->name('index');
+    Route::get('/{entidadTipo}/{entidadId}', [PublicComentarioController::class, 'show'])->name('show');
     Route::post('/', [PublicComentarioController::class, 'store'])->name('store');
 });
 
+// RUTAS PÚBLICAS DE VETERINARIAS - NUEVAS
+Route::prefix('veterinarias')->name('public.veterinarias.')->group(function () {
+    Route::get('/', [VeterinariaController::class, 'publicIndex'])->name('index');
+    Route::get('/{id}', [VeterinariaController::class, 'publicShow'])->name('show');
+});
+
+// RUTAS PÚBLICAS DE FUNDACIONES - NUEVAS
+Route::prefix('fundaciones')->name('public.fundaciones.')->group(function () {
+    Route::get('/', [FundacionController::class, 'publicIndex'])->name('index');
+    Route::get('/{id}', [FundacionController::class, 'publicShow'])->name('show');
+});
+
+// RUTAS PÚBLICAS DE TIENDA - NUEVAS
+Route::prefix('tienda')->name('public.tienda.')->group(function () {
+    Route::get('/', [TiendaController::class, 'publicIndex'])->name('index');
+    Route::get('/producto/{id}', [TiendaController::class, 'publicShow'])->name('show');
+});
+
+// RUTAS PÚBLICAS DE RESCATES - NUEVAS
+Route::prefix('rescates')->name('public.rescates.')->group(function () {
+    Route::get('/', [RescateController::class, 'publicIndex'])->name('index');
+    Route::get('/{id}', [RescateController::class, 'publicShow'])->name('show');
+});
+
 // =========================================================================
-// RUTAS DE ADMINISTRACIÓN (CON PREFIJO /admin)
+// RUTAS DE ADMINISTRACIÓN (CON PREFIJO /admin) - SIN MODIFICAR
 // =========================================================================
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -118,11 +143,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/eventos/calendar/vista', [EventoController::class, 'calendar'])->name('eventos.calendar');
     Route::get('/eventos/calendar/data', [EventoController::class, 'calendarData'])->name('eventos.calendar.data');
 
-    // APADRINAMIENTOS (Admin) - Usando SuscripcionController
+    // APADRINAMIENTOS (Admin)
     Route::resource('apadrinamientos', AdminApadrinamientoController::class);
     Route::patch('/apadrinamientos/{id}/estado', [AdminApadrinamientoController::class, 'cambiarEstado'])
         ->name('apadrinamientos.estado');
-
 
     // DONACIONES (Admin)
     Route::prefix('donaciones')->name('donaciones.')->group(function () {
@@ -157,14 +181,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('tipos-vacunas', TipoVacunaController::class);
 
     // REPORTES
-    // rutas específicas van primero, así no las atrapa {reporte}
     Route::get('/reportes/generales', [ReporteController::class, 'generales'])->name('reportes.generales');
     Route::get('/reportes/exportar/{tipo?}', [ReporteController::class, 'exportar'])->name('reportes.exportar');
     Route::resource('reportes', ReporteController::class);
 
     // TIENDAS
-    // rutas específicas de ventas/inventario, el parámetro id es opcional pero colocado tras el segmento estático
-    // para que la generación de URL sin id no produzca doble barra.
     Route::get('/tiendas/ventas/{id?}', [TiendaController::class, 'ventas'])->name('tiendas.ventas');
     Route::get('/tiendas/inventario/{id?}', [TiendaController::class, 'inventario'])->name('tiendas.inventario');
     Route::resource('tiendas', TiendaController::class);
