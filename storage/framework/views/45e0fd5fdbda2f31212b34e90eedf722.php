@@ -41,13 +41,13 @@
                         </span>
                     </td>
                     <td class="actions">
-                        <a href="<?php echo e(route('solicitud.show', $solicitud)); ?>" class="btn-action view-btn" title="Ver">
+                        <a href="<?php echo e(route('admin.solicitudes.show', $solicitud)); ?>" class="btn-action view-btn" title="Ver">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        <a href="<?php echo e(route('solicitud.edit', $solicitud)); ?>" class="btn-action edit-btn" title="Editar">
+                        <a href="<?php echo e(route('admin.solicitudes.edit', $solicitud)); ?>" class="btn-action edit-btn" title="Editar">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <form action="<?php echo e(route('solicitud.destroy', $solicitud)); ?>" method="POST" class="d-inline">
+                        <form action="<?php echo e(route('admin.solicitudes.destroy', $solicitud)); ?>" method="POST" class="d-inline">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="btn-action delete-btn" title="Eliminar"
@@ -59,10 +59,10 @@
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <tr>
-                    <td colspan="6" class="text-center no-data">
+                    <td colspan="6" class="card-actions no-data">
                         <i class="fa-solid fa-clipboard-list fa-3x"></i>
                         <p>No hay solicitudes registradas</p>
-                        <a href="<?php echo e(route('admin.solicitudes.create')); ?>" class="btn-action primary-btn">
+                        <a href="<?php echo e(route('admin.solicitudes.create')); ?>" class="btn-action primary-btn ">
                             Crear Primera Solicitud
                         </a>
                     </td>

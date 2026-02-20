@@ -243,9 +243,9 @@ body {
 }
 
 .alert-success {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: #155724;
-    border-left: 4px solid #28a745;
+    background-color: #667eeaa4;
+    color: white;
+    border-left: 4px solid rgb(133, 40, 167);
 }
 
 .alert-info {
