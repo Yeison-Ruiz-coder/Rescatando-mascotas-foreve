@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Rescatando Mascotas - Hogar de Esperanza')</title>
-    
+
     {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     {{-- Estilos Globales PRIMERO (navbar y footer) --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/components/admin-navbar.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}"> 
-    
+    <link rel="stylesheet" href="{{ asset('css/components/admin-navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}">
+
     {{-- Estilos del Home DESPUÉS --}}
     <link rel="stylesheet" href="{{ asset('css/home/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/home/hero.css') }}">
@@ -24,13 +24,13 @@
     <link rel="stylesheet" href="{{ asset('css/home/testimonios.css') }}">
     <link rel="stylesheet" href="{{ asset('css/home/cta.css') }}">
     <link rel="stylesheet" href="{{ asset('css/home/responsive.css') }}">
-    
+
     @stack('styles')
 </head>
 
 <body>
     {{-- Navbar (usa SOLO los estilos globales) --}}
-    @extends('admin.layouts.app')
+    @extends('portals.public.layouts.app')
 
     {{-- Contenido del Home - AISLADO --}}
     <div id="home-content-wrapper">
@@ -39,7 +39,7 @@
 
     {{-- Footer (usa SOLO los estilos globales) --}}
     @include('portals.public.partials.footer.footer')
-    
+
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

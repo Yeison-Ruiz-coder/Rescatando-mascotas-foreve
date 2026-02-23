@@ -14,7 +14,7 @@
     <!-- Tus estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/components/admin.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 

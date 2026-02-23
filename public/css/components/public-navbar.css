@@ -1,0 +1,539 @@
+/* ========== assets/css/components/public-navbar.css ========== */
+
+:root {
+    /* Usamos las mismas variables pero con prefijo public */
+    --public-primary: #667eea;
+    --public-secondary: #764ba2;
+    --public-dark: #1a1a2e;
+    --public-light: #f8f9fa;
+    --public-danger: #ff4757;
+    --public-success: #26de81;
+    --public-text: #333;
+    --public-text-light: #fff;
+    --public-border: rgba(0,0,0,0.05);
+    --public-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+/* ========== NAVBAR SUPERIOR PÚBLICO ========== */
+.public-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: white;
+    box-shadow: var(--public-shadow);
+    z-index: 1030;
+    border-bottom: 1px solid var(--public-border);
+}
+
+.public-navbar-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Botón hamburguesa - para abrir sidebar público */
+.public-hamburger-btn {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--public-primary), var(--public-secondary));
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.public-hamburger-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.public-hamburger-btn span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+/* Animación cuando el sidebar público está abierto */
+.public-hamburger-btn.open span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.public-hamburger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.public-hamburger-btn.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Logo y marca */
+.public-navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.public-navbar-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+
+.public-navbar-logo-texto {
+    height: 85px;
+    width: auto;
+    object-fit: contain;
+    margin-top: 8px;
+}
+
+.public-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.public-brand-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    color: #2d3748;
+    line-height: 1.3;
+}
+
+.public-brand-subtitle {
+    font-size: 0.75rem;
+    color: #718096;
+    letter-spacing: 0.3px;
+}
+
+/* Botón de reporte urgente - DESTACADO */
+.public-urgent-btn {
+    background: var(--public-danger);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    transition: all 0.3s;
+    margin: 0 15px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.public-urgent-btn:hover {
+    background: #ff2e44;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+    color: white;
+}
+
+.public-urgent-btn i {
+    font-size: 1.1rem;
+}
+
+/* Perfil de usuario público */
+.public-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 10px 5px 15px;
+    border-radius: 50px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    text-decoration: none;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.public-profile-btn:hover {
+    background: #edf2f7;
+    border-color: #cbd5e0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.public-profile-avatar {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--public-primary), var(--public-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+.public-profile-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.public-profile-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.public-profile-role {
+    font-size: 0.7rem;
+    color: #718096;
+}
+
+/* ========== SIDEBAR PÚBLICO ========== */
+.public-sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100vh;
+    background: white;
+    z-index: 1040;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.public-sidebar.open {
+    left: 0;
+}
+
+/* Header del sidebar público */
+.public-sidebar-header {
+    padding: 20px;
+    background: linear-gradient(135deg, var(--public-primary), var(--public-secondary));
+    color: white;
+    position: relative;
+}
+
+.public-sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.public-sidebar-avatar {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.public-sidebar-user-info h5 {
+    margin: 0;
+    font-size: 16px;
+    color: white;
+}
+
+.public-sidebar-user-role {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.public-sidebar-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.public-sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Búsqueda en sidebar público */
+.public-sidebar-search {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.public-sidebar-search i {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.public-sidebar-search input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.public-sidebar-search input:focus {
+    outline: none;
+    border-color: var(--public-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Navegación del sidebar público */
+.public-sidebar-nav {
+    flex: 1;
+    padding: 15px 0;
+}
+
+.public-sidebar-section {
+    margin-bottom: 10px;
+}
+
+.public-section-title {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    font-weight: 600;
+}
+
+.public-sidebar-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+
+.public-sidebar-item i:first-child {
+    width: 20px;
+    color: var(--public-primary);
+    font-size: 1.1rem;
+}
+
+.public-sidebar-item span {
+    flex: 1;
+    font-size: 14px;
+}
+
+.public-sidebar-item .arrow {
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+.public-sidebar-item:hover {
+    background: #f5f5f5;
+    color: var(--public-primary);
+}
+
+.public-sidebar-item.active {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--public-primary);
+    border-left: 3px solid var(--public-primary);
+}
+
+/* Item especial para rescates (destacado) */
+.public-sidebar-item.public-rescate-item {
+    background: rgba(255, 71, 87, 0.05);
+    border-radius: 8px;
+    margin: 5px 15px;
+    padding: 12px 15px;
+}
+
+.public-sidebar-item.public-rescate-item i:first-child {
+    color: var(--public-danger);
+}
+
+.public-sidebar-item.public-rescate-item:hover {
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.public-sidebar-badge {
+    background: var(--public-danger);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-left: auto;
+}
+
+/* Submenús */
+.public-sidebar-submenu {
+    display: none;
+    background: #f9f9f9;
+    padding: 5px 0;
+}
+
+.public-sidebar-submenu.open {
+    display: block;
+}
+
+.public-sidebar-section.open .arrow {
+    transform: rotate(90deg);
+}
+
+.public-sidebar-subitem {
+    padding: 10px 20px 10px 52px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.public-sidebar-subitem i {
+    width: 16px;
+    font-size: 12px;
+    color: #999;
+}
+
+.public-sidebar-subitem:hover {
+    background: #f0f0f0;
+    color: var(--public-primary);
+}
+
+/* Footer del sidebar público */
+.public-sidebar-footer {
+    border-top: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.public-sidebar-footer .public-sidebar-item.text-danger i {
+    color: var(--public-danger);
+}
+
+/* ========== OVERLAY PÚBLICO ========== */
+.public-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1035;
+    display: none;
+}
+
+.public-sidebar-overlay.active {
+    display: block;
+}
+
+/* ========== CONTENIDO PRINCIPAL PÚBLICO ========== */
+.public-main-content {
+    transition: margin-left 0.3s;
+    margin-left: 0;
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+}
+
+.public-main-content.shifted {
+    margin-left: 320px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+    .public-brand-subtitle {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .public-sidebar {
+        width: 280px;
+    }
+
+    .public-main-content.shifted {
+        margin-left: 0;
+    }
+
+    .public-navbar-container {
+        padding: 0 15px;
+    }
+
+    .public-brand-title {
+        font-size: 1rem;
+    }
+
+    .public-brand-subtitle {
+        display: none;
+    }
+
+    .public-profile-info {
+        display: none;
+    }
+
+    .public-profile-btn {
+        padding: 5px;
+        background: transparent;
+        border: none;
+    }
+
+    .public-profile-btn:hover {
+        background: transparent;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .public-profile-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .public-urgent-btn span {
+        display: none;
+    }
+
+    .public-urgent-btn {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .public-urgent-btn i {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .public-navbar-logo-texto {
+        max-width: 120px;
+        height: auto;
+    }
+}

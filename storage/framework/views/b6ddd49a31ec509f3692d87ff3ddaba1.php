@@ -7,12 +7,13 @@
             <a href="<?php echo e(route('public.mascotas.index')); ?>" class="btn btn-light btn-lg px-4">
                 <i class="fas fa-heart me-2"></i>Adoptar una Mascota
             </a>
-            <a href="<?php echo e(route('rescates.create')); ?>" class="btn btn-outline-light btn-lg px-4">
+            <a href="<?php echo e(route('public.rescates.create')); ?>" class="btn btn-outline-light btn-lg px-4">
                 <i class="fas fa-life-ring me-2"></i>Reportar Rescate
             </a>
-            <a href="<?php echo e(route('donaciones.create')); ?>" class="btn btn-outline-light btn-lg px-4">
+            <a href="<?php echo e(route('public.donaciones.create')); ?>" class="btn btn-outline-light btn-lg px-4">
                 <i class="fas fa-donate me-2"></i>Hacer Donación
             </a>
         </div>
     </div>
-</section><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/home/partials/cta.blade.php ENDPATH**/ ?>
+</section>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/home/partials/cta.blade.php ENDPATH**/ ?>
