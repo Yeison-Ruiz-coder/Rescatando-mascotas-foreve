@@ -50,7 +50,7 @@ class SolicitudController extends Controller
         Solicitud::create($request->all());
 
         // CORREGIDO: Ruta en singular
-        return redirect()->route('solicitud.index')
+        return redirect()->route('admin.solicitudes.index')
             ->with('success', 'Solicitud creada exitosamente.');
     }
 
@@ -81,7 +81,7 @@ class SolicitudController extends Controller
         $solicitud->update($request->all());
 
         // CORREGIDO: Ruta en singular
-        return redirect()->route('solicitud.show', $solicitud)
+        return redirect()->route('admin.solicitudes.show', $solicitud)
             ->with('success', 'Solicitud actualizada exitosamente.');
     }
 
@@ -97,7 +97,7 @@ class SolicitudController extends Controller
             DB::commit();
 
             // CORREGIDO: Ruta en singular
-            return redirect()->route('solicitud.index')
+            return redirect()->route('admin.solicitudes.index')
                 ->with('success', 'Estado de la solicitud #' . $solicitud->id . ' actualizado a ' . $solicitud->estado . '.');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -112,7 +112,7 @@ class SolicitudController extends Controller
         $solicitud->delete();
 
         // CORREGIDO: Ruta en singular
-        return redirect()->route('solicitud.index')
+        return redirect()->route('admin.solicitudes.index')
             ->with('success', 'Solicitud eliminada exitosamente.');
     }
 }

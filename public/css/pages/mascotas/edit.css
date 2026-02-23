@@ -7,7 +7,7 @@ body {
 
 /* Header Principal */
 .edit-mascota-header {
-    background: linear-gradient( #016065,#10141f);
+    background: linear-gradient( var(--color-turquesa),var(--color-fucsia));
     color: white;
     padding: 3rem 2rem;
     border-radius: 20px;
@@ -25,7 +25,7 @@ body {
 }
 
 .text-turquesa {
-    color: var(--color-turquesa) !important;
+    color: white !important;
 }
 
 /* Card del Formulario */
