@@ -90,14 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
         btnEnviar.disabled = true;
     });
     
-    // Restaurar estado del formulario si hay errores
-    @if($errors->any())
-        const firstError = document.querySelector('.is-invalid');
-        if (firstError) {
-            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            firstError.focus();
-        }
-    @endif
 });
 </script>
 @endsection

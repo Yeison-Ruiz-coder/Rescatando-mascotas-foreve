@@ -60,7 +60,7 @@
                                    class="btn-conocer-mas flex-fill">
                                    <i class="fas fa-heart me-2"></i>Conocer más
                                 </a>
-                                <a href="<?php echo e(route('adopciones.solicitar', $mascota->id)); ?>" 
+                                <a href="<?php echo e(route('public.adopciones.solicitar', $mascota->id)); ?>" 
                                    class="btn-adoptar-home">
                                    <i class="fas fa-home me-2"></i>Adoptar
                                 </a>
