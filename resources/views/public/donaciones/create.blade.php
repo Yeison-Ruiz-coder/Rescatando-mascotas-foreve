@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <h1 class="text-center mb-4">Realizar Donación</h1>
 
-            <form action="{{ route('donaciones.store') }}" method="POST">
+            <form action="{{ route('public.donaciones.store') }}" method="POST">
                 @csrf
                 {{-- Campos del formulario --}}
                 <div class="text-center">

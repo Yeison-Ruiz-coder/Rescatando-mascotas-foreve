@@ -2,14 +2,14 @@
     /* Colores principales con prefijo único */
     --am-primary-pink: hsl(244, 90%, 64%);
     --am-pink-light: #85d8ff;
-    --am-pink-dark: #e9789c;
-    --am-pink-glow: #ff4d80;
+    --am-pink-dark: #e978e0;
+    --am-pink-glow: #e14dff;
 
     /* Colores de apoyo con prefijo */
     --am-teal: #94c1c9;
     --am-teal-light: #b8dde5;
     --am-purple: #9d4edd;
-    --am-blue: #f11cd1;
+    --am-blue: #cd1cf1;
 
     /* Colores neutros con prefijo */
     --am-white: #ffffff;

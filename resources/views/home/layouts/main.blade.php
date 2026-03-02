@@ -15,22 +15,14 @@
     <link rel="stylesheet" href="{{ asset('css/components/admin-navbar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}">
 
-    {{-- Estilos del Home DESPUÉS --}}
-    <link rel="stylesheet" href="{{ asset('css/home/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/hero.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/stats.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/mascotas.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/proceso.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/testimonios.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/cta.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home/responsive.css') }}">
+    
 
     @stack('styles')
 </head>
 
 <body>
     {{-- Navbar (usa SOLO los estilos globales) --}}
-    @extends('portals.public.layouts.app')
+    @extends('public.layouts.app')
 
     {{-- Contenido del Home - AISLADO --}}
     <div id="home-content-wrapper">
@@ -38,7 +30,7 @@
     </div>
 
     {{-- Footer (usa SOLO los estilos globales) --}}
-    @include('portals.public.partials.footer.footer')
+    @include('public.layouts.partials.footer.footer')
 
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

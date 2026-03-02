@@ -7,7 +7,7 @@
         <div class="col-12">
             <h2>Historial de Donaciones</h2>
             <p class="lead">Aquí verías un listado de las donaciones realizadas.</p>
-            <a href="{{ route('donaciones.create') }}" class="btn btn-primary btn-lg">
+            <a href="{{ route('public.donaciones.create') }}" class="btn btn-primary btn-lg">
                 Hacer una Nueva Donación
             </a>
         </div>

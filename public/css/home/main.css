@@ -1,13 +1,13 @@
 :root {
     --color-turquesa: #764ba2;
     --color-fucsia: #667eea;
-    --color-fucsia-hover: #e03a75;
+    --color-fucsia-hover: #667eead3;
     --color-gris-claro: #f8f9fa;
     --color-texto-claro: #fff;
     --color-texto-oscuro: #333;
     --color-fondo-oscuro: #10141f;
     --color-fondo-claro: #ffffff;
-    --color-fondo-gradiente: linear-gradient(135deg, #10141f 0%, #1B8E95 50%, #81022f 100%);
+    --color-fondo-gradiente: linear-gradient(135deg, #10141f 0%, #764ba2 50%, #81022f 100%);
     --border-radius: 15px;
     --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     --shadow-dark: 0 10px 25px rgba(0, 0, 0, 0.3);

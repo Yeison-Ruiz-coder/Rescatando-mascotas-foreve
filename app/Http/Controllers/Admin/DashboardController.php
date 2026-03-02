@@ -12,7 +12,6 @@ use App\Models\Donacion;
 use App\Models\User;
 use App\Models\Fundacion;
 use App\Models\Veterinaria;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller

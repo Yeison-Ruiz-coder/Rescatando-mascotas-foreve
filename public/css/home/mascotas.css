@@ -91,12 +91,12 @@
 }
 
 .badge-especie-moderno {
-    background: rgba(27, 142, 149, 0.9);
+    background: var(--color-turquesa);
     color: var(--color-texto-claro);
 }
 
 .badge-genero-moderno {
-    background: rgba(253, 69, 134, 0.9);
+    background: var(--color-fucsia);
     color: var(--color-texto-claro);
 }
 
@@ -235,15 +235,15 @@
     .adopta-section {
         padding: 60px 0;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .card-body-moderno .d-flex.gap-2 {
         flex-direction: column;
     }
-    
+
     .btn-conocer-mas,
     .btn-adoptar-home {
         width: 100%;
@@ -255,20 +255,20 @@
     .adopta-section {
         padding: 40px 0;
     }
-    
+
     .section-title {
         font-size: 1.75rem;
     }
-    
+
     .card-imagen-container {
         height: 200px;
     }
-    
+
     .badges-container {
         top: 10px;
         left: 10px;
     }
-    
+
     .badge-moderno {
         font-size: 0.7rem;
         padding: 4px 10px;
