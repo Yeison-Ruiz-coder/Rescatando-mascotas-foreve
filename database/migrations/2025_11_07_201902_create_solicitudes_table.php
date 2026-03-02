@@ -6,37 +6,38 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['Para Adoptar','Para Rescatar','Para Apadrinar','Para Donar']);
-            $table->text('contenido'); // Cambiado a minúscula
-            $table->timestamp('fecha_solicitud'); // Cambiado a minúscula
-            $table->enum('estado', ['En Revisión', 'Aprobada', 'Rechazada'])->default('En Revisión'); // NUEVO
-            $table->unsignedBigInteger('usuario_id')->nullable();
-            $table->unsignedBigInteger('mascota_id')->nullable(); // NUEVO
+            $table->enum('tipo_solicitud', ['adopcion', 'rescate', 'apadrinamiento', 'donacion', 'otro'])->default('adopcion');
+            $table->text('contenido')->nullable(); // Mensaje del solicitante
+            $table->timestamp('fecha_solicitud')->useCurrent();
+            $table->enum('estado', ['pendiente', 'en_revision', 'aprobada', 'rechazada', 'completada'])->default('pendiente');
+            $table->text('razon_rechazo')->nullable();
+            $table->text('notas_internas')->nullable(); // Para administradores
 
-            $table->foreign('usuario_id')
-                  ->references('id')
-                  ->on('usuarios')
-                  ->onDelete('set null');
-                  
-            $table->foreign('mascota_id') // NUEVO
-                  ->references('id')
-                  ->on('mascotas')
-                  ->onDelete('set null');
+            // Solicitante (puede ser un usuario registrado o no)
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->string('nombre_solicitante')->nullable(); // Si no es usuario registrado
+            $table->string('email_solicitante')->nullable();
+            $table->string('telefono_solicitante')->nullable();
+
+            // Item solicitado (polimórfico: mascota, ayuda económica, etc.)
+            $table->nullableMorphs('solicitable'); // Crea solicitable_id y solicitable_type
+
+            // Gestión interna
+            $table->foreignId('revisado_por')->nullable()->constrained('users')->onDelete('set null');
+            $table->timestamp('fecha_revision')->nullable();
 
             $table->timestamps();
+
+            $table->index('estado');
+            $table->index('tipo_solicitud');
+            $table->index('fecha_solicitud');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('solicitudes');

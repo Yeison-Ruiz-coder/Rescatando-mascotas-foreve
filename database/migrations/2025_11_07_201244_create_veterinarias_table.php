@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('Direccion')->unique();
             $table->string('Telefono')->unique();
             $table->string('Email')->unique();
+            $table->json('servicios')->nullable(); // ["urgencias", "cirugía", "vacunación", etc.]
+            $table->boolean('urgencias_24h')->default(false);
+            $table->json('convenios')->nullable(); // IDs de fundaciones con convenio
             $table->timestamps();
         });
     }

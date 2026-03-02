@@ -13,19 +13,18 @@ return new class extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre_evento');
-            $table->string('Lugar_evento');
-            $table->text('Descripcion');
-            $table->date('Fecha_evento')->nullable();
+            $table->string('nombre_evento');
+            $table->string('lugar_evento');
+            $table->text('descripcion');
+            $table->date('fecha_evento')->nullable();
             $table->string('imagen_url')->nullable();
 
-            $table->unsignedBigInteger('administrador_id')->nullable();
+            // CORREGIDO: Ahora apunta a users en lugar de administradores
+            $table->foreignId('creado_por_id')
+                  ->nullable()
+                  ->constrained('users')
+                  ->onDelete('set null');
 
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
-            
             $table->timestamps();
         });
     }

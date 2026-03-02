@@ -13,7 +13,7 @@
     @include('admin.mascotas.partials.index.actions')
 
     <!-- Panel de Filtros -->
-    @include('components.modules.mascotas.filters')
+    @include('components.modules.mascotas.filters', ['especies' => $especies ?? []])
 
     <!-- Estadísticas Rápidas -->
     @if(!request()->anyFilled(['especie', 'estado', 'raza']))

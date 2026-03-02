@@ -15,7 +15,7 @@
             @include('admin.adopciones.partials.index.header')
 
             <!-- Filtros -->
-            @include('admin.adopciones.partials.index.filters')
+            @include('admin.adopciones.partials.index.filters', ['estados' => $estados ?? [], 'mascotas' => $mascotas ?? [], 'usuarios' => $usuarios ?? []])
 
             <!-- Alertas -->
             @include('admin.adopciones.partials.index.alerts')

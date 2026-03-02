@@ -12,20 +12,23 @@ class Notificacion extends Model
     protected $table = 'notificaciones';
 
     protected $fillable = [
-        'Contenido',
-        'Fecha_envio',
-        'usuario_id',
-        'administrador_id'
+        'contenido',
+        'fecha_envio',
+        'user_id',
+        'creado_por_id',
     ];
 
-    // Relaciones
+    protected $casts = [
+        'fecha_envio' => 'datetime',
+    ];
+
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function administrador()
+    public function creadoPor()
     {
-        return $this->belongsTo(Administrador::class);
+        return $this->belongsTo(User::class, 'creado_por_id');
     }
 }

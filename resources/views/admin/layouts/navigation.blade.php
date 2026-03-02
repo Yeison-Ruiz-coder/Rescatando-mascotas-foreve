@@ -23,7 +23,8 @@
     <div class="menu-sections">
         <!-- Dashboard -->
         <div class="menu-section">
-            <a href="{{ route('admin.dashboard.index') }}" class="menu-item {{ request()->routeIs('admin.dashboard.index') ? 'active' : '' }}">
+            <a href="{{ route('admin.dashboard.index') }}"
+                class="menu-item {{ request()->routeIs('admin.dashboard.index') ? 'active' : '' }}">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
@@ -62,7 +63,7 @@
                 <span>Adopciones</span>
                 <i class="fas fa-chevron-right arrow"></i>
                 @php $solicitudesPendientes = 5; @endphp
-                @if($solicitudesPendientes > 0)
+                @if ($solicitudesPendientes > 0)
                     <span class="menu-badge">{{ $solicitudesPendientes }}</span>
                 @endif
             </div>
@@ -72,7 +73,7 @@
                 </a>
                 <a href="{{ route('admin.solicitudes.index') }}" class="submenu-item">
                     <i class="fas fa-clipboard-list"></i> Solicitudes
-                    @if($solicitudesPendientes > 0)
+                    @if ($solicitudesPendientes > 0)
                         <span class="badge bg-danger">{{ $solicitudesPendientes }}</span>
                     @endif
                 </a>
@@ -90,7 +91,7 @@
                 <a href="{{ route('admin.donaciones.index') }}" class="submenu-item">
                     <i class="fas fa-list"></i> Ver Donaciones
                 </a>
-                <a href="{{ route('admin.donaciones.reportes') }}" class="submenu-item">
+                <a href="{{ route('admin.donaciones.reporte') }}" class="submenu-item">
                     <i class="fas fa-chart-line"></i> Reportes
                 </a>
             </div>
@@ -144,7 +145,7 @@
                 <a href="{{ route('admin.reportes.generales') }}" class="submenu-item">
                     <i class="fas fa-chart-pie"></i> Reportes Generales
                 </a>
-                <a href="{{ route('admin.reportes.exportar') }}" class="submenu-item">
+                <a href="{{ route('admin.reportes.exportar', ['tipo' => 'general']) }}" class="submenu-item">
                     <i class="fas fa-file-export"></i> Exportar Datos
                 </a>
             </div>
@@ -161,12 +162,16 @@
                 <a href="{{ route('admin.tiendas.index') }}" class="submenu-item">
                     <i class="fas fa-box"></i> Productos
                 </a>
-                <a href="{{ route('admin.tiendas.ventas') }}" class="submenu-item">
-                    <i class="fas fa-shopping-cart"></i> Ventas
-                </a>
-                <a href="{{ route('admin.tiendas.inventario') }}" class="submenu-item">
-                    <i class="fas fa-warehouse"></i> Inventario
-                </a>
+                    @isset($tiendas)
+                        @foreach($tiendas as $tienda)
+                            <a href="{{ route('admin.tiendas.ventas', ['tienda' => $tienda->id]) }}" class="submenu-item">
+                                <i class="fas fa-shopping-cart"></i> Ventas de {{ $tienda->Nombre_tienda }}
+                            </a>
+                            <a href="{{ route('admin.tiendas.inventario', ['tienda' => $tienda->id]) }}" class="submenu-item">
+                                <i class="fas fa-warehouse"></i> Inventario de {{ $tienda->Nombre_tienda }}
+                            </a>
+                        @endforeach
+                    @endisset
             </div>
         </div>
 
@@ -184,7 +189,7 @@
                 <i class="fas fa-bell"></i>
                 <span>Notificaciones</span>
                 @php $notificacionesNoLeidas = 3; @endphp
-                @if($notificacionesNoLeidas > 0)
+                @if ($notificacionesNoLeidas > 0)
                     <span class="menu-badge">{{ $notificacionesNoLeidas }}</span>
                 @endif
             </a>
@@ -196,7 +201,7 @@
                 <i class="fas fa-comments"></i>
                 <span>Comentarios</span>
                 @php $comentariosPendientes = 2; @endphp
-                @if($comentariosPendientes > 0)
+                @if ($comentariosPendientes > 0)
                     <span class="menu-badge">{{ $comentariosPendientes }}</span>
                 @endif
             </a>
@@ -209,9 +214,13 @@
             <i class="fas fa-cog"></i>
             <span>Configuración</span>
         </a>
-        <a href="{{ route('logout') }}" class="menu-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Cerrar Sesión</span>
+        <a href="{{ route('logout') }}" class="menu-item text-danger"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
         </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
     </div>
 </nav>

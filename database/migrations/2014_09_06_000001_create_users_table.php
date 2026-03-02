@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('tipo', ['admin', 'user', 'veterinaria', 'fundacion'])->default('user');
-            $table->enum('estado', ['activo', 'inactivo', 'suspendido', 'pendiente'])->default('activo'); // AGREGADO
+            $table->enum('estado', ['activo', 'inactivo', 'suspendido', 'pendiente'])->default('activo');
             $table->date('fecha_nacimiento')->nullable();
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
@@ -25,17 +25,17 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            // Auditoría (estos SÍ pueden ir aquí porque usuarios ya existe)
-            $table->foreignId('creado_por')->nullable()->constrained('users');
-            $table->foreignId('actualizado_por')->nullable()->constrained('users');
             $table->softDeletes();
 
-            // ÍNDICES CORREGIDOS - SOLO columnas que existen
+            // Auditoría - Nombres corregidos
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+
+            // Índices
             $table->index('email');
             $table->index('tipo');
-            $table->index('estado'); // AHORA SÍ existe
-            $table->index('created_at'); // en lugar de 'fecha_ingreso'
+            $table->index('estado');
+            $table->index('created_at');
         });
     }
 

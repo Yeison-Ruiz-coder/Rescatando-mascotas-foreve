@@ -16,19 +16,20 @@ class Entrevista extends Model
         'fecha_entrevista',
         'notas',
         'resultado',
-        'admin_id'
+        'administrador_id',
     ];
 
-    // Relación 1:N Inversa: Una Entrevista pertenece a una Adopción
+    protected $casts = [
+        'fecha_entrevista' => 'date',
+    ];
+
     public function adopcion()
     {
         return $this->belongsTo(Adopcion::class, 'adopcion_id');
     }
 
-    // Relación 1:N Inversa: Una Entrevista fue realizada por un Administrador/Usuario
     public function administrador()
     {
-        // Asumiendo que admin_id apunta a la tabla 'usuarios'
-        return $this->belongsTo(Usuario::class, 'admin_id'); 
+        return $this->belongsTo(User::class, 'administrador_id');
     }
 }

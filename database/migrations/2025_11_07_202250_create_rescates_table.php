@@ -6,63 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('rescates', function (Blueprint $table) {
             $table->id();
-            $table->date('Fecha_rescate');
-            $table->string('Lugar_rescate');
-            $table->text('Descripcion_rescate');
-            
-            
-            $table->unsignedBigInteger('usuario_id')->nullable();
-            $table->unsignedBigInteger('mascota_id')->nullable();
-            $table->unsignedBigInteger('veterinaria_id')->nullable();
-            $table->unsignedBigInteger('tienda_id')->nullable(); 
-            $table->unsignedBigInteger('fundacion_id')->nullable();
-            $table->unsignedBigInteger('administrador_id')->nullable();
-            
+            $table->date('fecha_rescate');
+            $table->string('lugar_rescate');
+            $table->text('descripcion_rescate');
+            $table->enum('estado', ['en_proceso', 'completado', 'seguimiento'])->default('en_proceso');
 
-            $table->foreign('usuario_id')
-            ->references('id')
-            ->on('usuarios')
-            ->onDelete('set null');
-
-            $table->foreign('mascota_id')
-            ->references('id')
-            ->on('mascotas')
-            ->onDelete('set null');
-
-            $table->foreign('veterinaria_id')
-            ->references('id')
-            ->on('veterinarias')
-            ->onDelete('set null');
-
-            $table->foreign('tienda_id')
-            ->references('id')
-            ->on('tiendas')
-            ->onDelete('set null');
-
-            $table->foreign('fundacion_id')
-            ->references('id')
-            ->on('fundaciones')
-            ->onDelete('set null');
-
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
+            $table->foreignId('mascota_id')->nullable()->constrained('mascotas')->onDelete('set null');
+            $table->foreignId('reporte_id')->nullable()->constrained('reportes')->onDelete('set null'); // Si vino de un reporte
+            $table->foreignId('usuario_reporto_id')->nullable()->constrained('users')->onDelete('set null'); // Quien lo reportó
+            $table->foreignId('veterinaria_id')->nullable()->constrained('veterinarias')->onDelete('set null');
+            $table->foreignId('fundacion_id')->nullable()->constrained('fundaciones')->onDelete('set null');
+            $table->foreignId('administrador_gestion_id')->nullable()->constrained('users')->onDelete('set null'); // Quien lo gestiona
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('rescates');

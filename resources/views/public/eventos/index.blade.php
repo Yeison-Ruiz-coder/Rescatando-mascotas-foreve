@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    @extends('portals.public.layouts.app')
+    @extends('public.layouts.app')
     @section('content')
     <div class="container mt-4">
         @if(session('success'))
@@ -35,23 +35,23 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card event-card h-100">
                         @if($evento->imagen_url)
-                            <img src="{{ asset($evento->imagen_url) }}" 
-                                 class="card-img-top" 
+                            <img src="{{ asset($evento->imagen_url) }}"
+                                 class="card-img-top"
                                  alt="{{ $evento->Nombre_evento }}"
                                  style="height: 200px; object-fit: cover;">
                         @else
-                            <img src="https://via.placeholder.com/300x200/1B8E95/FFFFFF?text=Evento+Mascotas" 
-                                 class="card-img-top event-image" 
+                            <img src="https://via.placeholder.com/300x200/1B8E95/FFFFFF?text=Evento+Mascotas"
+                                 class="card-img-top event-image"
                                  alt="Imagen por defecto"
                                  style="height: 200px; object-fit: cover;">
                         @endif
-                        
+
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-turquesa">{{ $evento->Nombre_evento }}</h5>
                             <p class="card-text flex-grow-1 text-muted">
                                 {{ Str::limit($evento->Descripcion, 100) }}
                             </p>
-                            
+
                             <div class="mt-auto">
                                 <div class="event-info mb-3">
                                     <div class="d-flex align-items-center mb-2">
@@ -65,9 +65,9 @@
                                         </small>
                                     </div>
                                 </div>
-                                
+
                                 <div class="d-grid">
-                                    <a href="{{ route('public.eventos.show', $evento) }}" 
+                                    <a href="{{ route('public.eventos.show', $evento) }}"
                                        class="btn btn-turquesa btn-sm">
                                         <i class="fas fa-eye me-1"></i> Ver Detalles del Evento
                                     </a>

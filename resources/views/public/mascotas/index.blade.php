@@ -1,4 +1,4 @@
-@extends('portals.public.layouts.app')
+@extends('public.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/public-index.css') }}?v=2.0">
@@ -8,16 +8,16 @@
 <div class="container py-4">
     <!-- Hero Section -->
     @include('public.mascotas.partials.index.hero')
-    
+
     <!-- Filtros -->
-    @include('public.mascotas.partials.index.filters')
-    
+    @include('public.mascotas.partials.index.filters', ['especies' => $especies])
+
     <!-- Contador -->
     @include('public.mascotas.partials.index.counter')
-    
+
     <!-- Grid de Mascotas -->
     @include('public.mascotas.partials.index.mascotas-grid')
-    
+
     <!-- Paginación -->
     @include('public.mascotas.partials.index.pagination')
 </div>

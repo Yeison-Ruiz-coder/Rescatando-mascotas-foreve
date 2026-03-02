@@ -10,21 +10,17 @@ return new class extends Migration
     {
         Schema::create('entrevistas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('adopcion_id');
+            $table->foreignId('adopcion_id')
+                ->constrained('adopciones')
+                ->onDelete('cascade');
+
             $table->date('fecha_entrevista');
             $table->text('notas');
-            $table->enum('resultado', ['Aprobado', 'Rechazado', 'Pendiente']);
+            $table->enum('resultado', ['Aprobado', 'Rechazado', 'Pendiente'])->default('Pendiente');
 
-            $table->unsignedBigInteger('administrador_id');
-
-            $table->foreign('adopcion_id')
-            ->references('id')
-            ->on('adopciones')
-            ->onDelete('cascade');
-            
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores');
+            // CORREGIDO: Apunta a users
+            $table->foreignId('administrador_id')
+                ->constrained('users'); // El admin que hace la entrevista
 
             $table->timestamps();
         });

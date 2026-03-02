@@ -1,4 +1,4 @@
-@extends('portals.public.layouts.app')
+@extends('public.layouts.app')
 
 @section('title', 'Nosotros - Rescatando Mascotas Forever')
 

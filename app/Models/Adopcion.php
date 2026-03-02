@@ -12,36 +12,36 @@ class Adopcion extends Model
     protected $table = 'adopciones';
 
     protected $fillable = [
-        'Lugar_adopcion',
-        'Fecha_adopcion',
+        'fecha_adopcion',
         'estado',
         'razon_rechazo',
         'fecha_cierre',
-        'usuario_id',
+        'solicitud_id',
+        'user_id',
         'mascota_id',
+        'fundacion_id',
         'administrador_id',
-        'fundacion_id'
     ];
 
     protected $casts = [
-        'Fecha_adopcion' => 'date',
+        'fecha_adopcion' => 'date',
         'fecha_cierre' => 'date',
     ];
 
-    // Relaciones CORREGIDAS
-    public function usuario()
+    // Relaciones
+    public function solicitud()
     {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
+        return $this->belongsTo(Solicitud::class, 'solicitud_id');
+    }
+
+    public function adoptante()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function mascota()
     {
-        return $this->belongsTo(Mascota::class);
-    }
-
-    public function administrador()
-    {
-        return $this->belongsTo(Administrador::class, 'administrador_id');
+        return $this->belongsTo(Mascota::class, 'mascota_id');
     }
 
     public function fundacion()
@@ -49,9 +49,29 @@ class Adopcion extends Model
         return $this->belongsTo(Fundacion::class, 'fundacion_id');
     }
 
-    // Entrevistas - la dejamos para después
+    public function administrador()
+    {
+        return $this->belongsTo(User::class, 'administrador_id');
+    }
+
     public function entrevistas()
     {
         return $this->hasMany(Entrevista::class, 'adopcion_id');
+    }
+
+    public function seguimientos()
+    {
+        return $this->hasMany(SeguimientoAdopcion::class, 'adopcion_id');
+    }
+
+    // Scopes
+    public function scopeEnProceso($query)
+    {
+        return $query->where('estado', 'en_proceso');
+    }
+
+    public function scopeCompletadas($query)
+    {
+        return $query->where('estado', 'completada');
     }
 }

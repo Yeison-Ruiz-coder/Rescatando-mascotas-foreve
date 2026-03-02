@@ -1,4 +1,4 @@
-@extends('portals.public.layouts.app')
+@extends('public.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/solicitudes.css') }}">
@@ -15,11 +15,11 @@
             <div class="card card-solicitud animacion-entrada">
                 <!-- HEADER -->
                 @include('public.adopciones.partials.header')
-                
+
                 <div class="card-body p-4">
                     <!-- INFORMACIÓN DE LA MASCOTA -->
                     @include('public.adopciones.partials.mascota_info')
-                    
+
                     <!-- SEPARADOR -->
                     <hr class="separador-seccion">
 
@@ -30,13 +30,13 @@
 
                         <!-- SECCIÓN DATOS PERSONALES -->
                         @include('public.adopciones.partials.form_datos_personales')
-                        
+
                         <!-- SECCIÓN INFORMACIÓN ADICIONAL -->
                         @include('public.adopciones.partials.form_informacion_adicional')
-                        
+
                         <!-- COMPROMISOS DE ADOPCIÓN -->
                         @include('public.adopciones.partials.compromisos')
-                        
+
                         <!-- BOTONES DE ACCIÓN -->
                         @include('public.adopciones.partials.acciones')
                     </form>
@@ -57,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnEnviar = document.getElementById('btnEnviarSolicitud');
     const checkboxes = [
         'compromiso_cuidado',
-        'compromiso_esterilizacion', 
+        'compromiso_esterilizacion',
         'compromiso_seguimiento'
     ];
-    
+
     // Validación de checkboxes
     form.addEventListener('submit', function(e) {
         let todosMarcados = true;
-        
+
         for (let checkboxId of checkboxes) {
             const checkbox = document.getElementById(checkboxId);
             if (!checkbox.checked) {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             }
         }
-        
+
         if (!todosMarcados) {
             e.preventDefault();
             Swal.fire({
@@ -83,13 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             return;
         }
-        
+
         // Mostrar estado de carga
         btnEnviar.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
         btnEnviar.classList.add('cargando');
         btnEnviar.disabled = true;
     });
-    
+
 });
 </script>
 @endsection

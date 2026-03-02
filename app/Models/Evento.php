@@ -9,21 +9,23 @@ class Evento extends Model
 {
     use HasFactory;
 
+    protected $table = 'eventos';
+
     protected $fillable = [
-        'Nombre_evento',
-        'Lugar_evento',
-        'Descripcion',
-        'Fecha_evento',
+        'nombre_evento',
+        'lugar_evento',
+        'descripcion',
+        'fecha_evento',
         'imagen_url',
-        'administrador_id'
+        'creado_por_id',
     ];
 
     protected $casts = [
-        'Fecha_evento' => 'datetime',
+        'fecha_evento' => 'date',
     ];
 
-    public function administrador()
+    public function creadoPor()
     {
-        return $this->belongsTo(Administrador::class);
+        return $this->belongsTo(User::class, 'creado_por_id');
     }
 }

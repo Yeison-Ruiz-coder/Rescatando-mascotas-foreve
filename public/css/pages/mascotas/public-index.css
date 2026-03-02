@@ -5,7 +5,7 @@ body {
 }
 
 .hero-mascotas {
-    background: linear-gradient(135deg, var(--color-turquesa) 0%, black 100%);
+    background: linear-gradient(135deg, var(--color-turquesa) 0%, #667eea 100%);
     color:white;
     padding: 4rem 0;
     border-radius: 20px;
@@ -84,7 +84,7 @@ body {
 
 /* CONTADOR */
 .contador-mascotas {
-    background: linear-gradient(135deg, #667eea 0%, #FD4586 100%);
+    background: linear-gradient(135deg, #667eea 0%, #f55f93 100%);
     color: white;
     padding: 1rem 2rem;
     border-radius: 15px;
@@ -312,7 +312,7 @@ body {
 
 /* BOTÓN MODERNO - SIEMPRE ABAJO */
 .btn-conocer-mas {
-    background: linear-gradient(135deg, var(--color-turquesa), #1a7a80);
+    background: linear-gradient(135deg, var(--color-turquesa),#f55f93);
     border: none;
     border-radius: 12px;
     padding: 0.75rem 2rem;
@@ -328,7 +328,7 @@ body {
 }
 
 .btn-conocer-mas:hover {
-    background: linear-gradient(135deg, #1a7a80, var(--color-turquesa));
+    background: linear-gradient(135deg, #f55f93, var(--color-turquesa));
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(27, 142, 149, 0.4);
@@ -421,19 +421,19 @@ body {
         padding: 3rem 1rem;
         border-radius: 15px;
     }
-    
+
     .hero-mascotas h1 {
         font-size: 2rem;
     }
-    
+
     .filtros-modernos {
         padding: 1.5rem;
     }
-    
+
     .card-imagen-container {
         height: 220px;
     }
-    
+
     .badge-moderno {
         padding: 0.4rem 0.8rem;
         font-size: 0.75rem;
@@ -444,11 +444,11 @@ body {
     .hero-mascotas h1 {
         font-size: 1.8rem;
     }
-    
+
     .card-body-moderno {
         padding: 1rem;
     }
-    
+
     .nombre-mascota {
         font-size: 1.1rem;
     }

@@ -9,25 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // database/migrations/2025_11_07_202127_create_notificaciones_table.php
     public function up(): void
     {
         Schema::create('notificaciones', function (Blueprint $table) {
             $table->id();
-            $table->text('Contenido');
-            $table->timestamp('Fecha_envio');
-            
-            $table->unsignedBigInteger('usuario_id')->nullable();
-            $table->unsignedBigInteger('administrador_id')->nullable();
+            $table->text('contenido');
+            $table->timestamp('fecha_envio')->useCurrent(); // Cambiado Fecha_envio
 
-            $table->foreign('usuario_id')
-            ->references('id')
-            ->on('usuarios')
-            ->onDelete('set null');
+            // CORREGIDO: Ambas apuntan a users
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('set null');
 
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
+            $table->foreignId('creado_por_id') // Quién envió la notificación (admin)
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('set null');
+
             $table->timestamps();
         });
     }

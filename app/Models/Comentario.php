@@ -12,14 +12,17 @@ class Comentario extends Model
     protected $table = 'comentarios';
 
     protected $fillable = [
-        'Contenido',
-        'Fecha',
-        'usuario_id'
+        'contenido',
+        'fecha',
+        'user_id',
     ];
 
-    // Relaciones
+    protected $casts = [
+        'fecha' => 'datetime',
+    ];
+
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

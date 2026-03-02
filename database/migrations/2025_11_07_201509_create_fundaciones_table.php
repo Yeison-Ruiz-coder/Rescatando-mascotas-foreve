@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('Direccion')->unique();
             $table->string('Telefono')->unique();
             $table->string('Email')->unique();
+            $table->string('registro_sanitario')->nullable(); // NIT o registro
+            $table->integer('capacidad_maxima')->nullable();
+            $table->json('necesidades_actuales')->nullable(); // ["alimento", "medicinas", "voluntarios"]
+            $table->string('horario_atencion')->nullable();
+            $table->boolean('recibe_voluntarios')->default(false);
             $table->timestamps();
         });
     }

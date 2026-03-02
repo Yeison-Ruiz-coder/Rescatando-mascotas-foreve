@@ -23,7 +23,8 @@
     <div class="menu-sections">
         <!-- Dashboard -->
         <div class="menu-section">
-            <a href="<?php echo e(route('admin.dashboard.index')); ?>" class="menu-item <?php echo e(request()->routeIs('admin.dashboard.index') ? 'active' : ''); ?>">
+            <a href="<?php echo e(route('admin.dashboard.index')); ?>"
+                class="menu-item <?php echo e(request()->routeIs('admin.dashboard.index') ? 'active' : ''); ?>">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
@@ -90,7 +91,7 @@
                 <a href="<?php echo e(route('admin.donaciones.index')); ?>" class="submenu-item">
                     <i class="fas fa-list"></i> Ver Donaciones
                 </a>
-                <a href="<?php echo e(route('admin.donaciones.reportes')); ?>" class="submenu-item">
+                <a href="<?php echo e(route('admin.donaciones.reporte')); ?>" class="submenu-item">
                     <i class="fas fa-chart-line"></i> Reportes
                 </a>
             </div>
@@ -144,7 +145,7 @@
                 <a href="<?php echo e(route('admin.reportes.generales')); ?>" class="submenu-item">
                     <i class="fas fa-chart-pie"></i> Reportes Generales
                 </a>
-                <a href="<?php echo e(route('admin.reportes.exportar')); ?>" class="submenu-item">
+                <a href="<?php echo e(route('admin.reportes.exportar', ['tipo' => 'general'])); ?>" class="submenu-item">
                     <i class="fas fa-file-export"></i> Exportar Datos
                 </a>
             </div>
@@ -161,12 +162,18 @@
                 <a href="<?php echo e(route('admin.tiendas.index')); ?>" class="submenu-item">
                     <i class="fas fa-box"></i> Productos
                 </a>
-                <a href="<?php echo e(route('admin.tiendas.ventas')); ?>" class="submenu-item">
-                    <i class="fas fa-shopping-cart"></i> Ventas
-                </a>
-                <a href="<?php echo e(route('admin.tiendas.inventario')); ?>" class="submenu-item">
-                    <i class="fas fa-warehouse"></i> Inventario
-                </a>
+                    <?php if(isset($tiendas)): ?>
+                        <?php $__currentLoopData = $tiendas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tienda): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a href="<?php echo e(route('admin.tiendas.ventas', ['tienda' => $tienda->id])); ?>" class="submenu-item">
+                                <i class="fas fa-shopping-cart"></i> Ventas de <?php echo e($tienda->Nombre_tienda); ?>
+
+                            </a>
+                            <a href="<?php echo e(route('admin.tiendas.inventario', ['tienda' => $tienda->id])); ?>" class="submenu-item">
+                                <i class="fas fa-warehouse"></i> Inventario de <?php echo e($tienda->Nombre_tienda); ?>
+
+                            </a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endif; ?>
             </div>
         </div>
 
@@ -209,10 +216,14 @@
             <i class="fas fa-cog"></i>
             <span>Configuración</span>
         </a>
-        <a href="<?php echo e(route('logout')); ?>" class="menu-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Cerrar Sesión</span>
+        <a href="<?php echo e(route('logout')); ?>" class="menu-item text-danger"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
         </a>
+            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                <?php echo csrf_field(); ?>
+            </form>
     </div>
 </nav>
 <?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/layouts/navigation.blade.php ENDPATH**/ ?>

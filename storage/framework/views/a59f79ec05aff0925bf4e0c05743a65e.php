@@ -11,7 +11,7 @@
             <?php echo $__env->make('admin.adopciones.partials.index.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
             <!-- Filtros -->
-            <?php echo $__env->make('admin.adopciones.partials.index.filters', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('admin.adopciones.partials.index.filters', ['estados' => $estados ?? [], 'mascotas' => $mascotas ?? [], 'usuarios' => $usuarios ?? []], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
             <!-- Alertas -->
             <?php echo $__env->make('admin.adopciones.partials.index.alerts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

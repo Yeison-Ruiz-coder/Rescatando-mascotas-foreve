@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('public.layouts.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/edit.css') }}">
@@ -52,10 +52,10 @@
                                     <label for="Nombre_mascota" class="form-label">
                                         Nombre de la Mascota <span class="required">*</span>
                                     </label>
-                                    <input type="text" 
-                                           class="form-control form-control-custom" 
-                                           id="Nombre_mascota" 
-                                           name="Nombre_mascota" 
+                                    <input type="text"
+                                           class="form-control form-control-custom"
+                                           id="Nombre_mascota"
+                                           name="Nombre_mascota"
                                            value="{{ old('Nombre_mascota', $mascota->Nombre_mascota) }}"
                                            placeholder="Ej: Max, Luna, Toby..."
                                            required>
@@ -65,9 +65,9 @@
                                     <label for="Especie" class="form-label">
                                         Especie <span class="required">*</span>
                                     </label>
-                                    <select class="form-select form-select-custom" 
-                                            id="Especie" 
-                                            name="Especie" 
+                                    <select class="form-select form-select-custom"
+                                            id="Especie"
+                                            name="Especie"
                                             required>
                                         <option value="">Selecciona una especie</option>
                                         <option value="Perro" {{ old('Especie', $mascota->Especie) == 'Perro' ? 'selected' : '' }}>🐕 Perro</option>
@@ -83,15 +83,15 @@
                                         Razas <span class="required">*</span>
                                     </label>
                                     <div class="multi-select-container">
-                                        <select class="form-select form-select-custom multi-select" 
-                                                id="razas" 
-                                                name="razas[]" 
+                                        <select class="form-select form-select-custom multi-select"
+                                                id="razas"
+                                                name="razas[]"
                                                 multiple
                                                 size="3"
                                                 required>
                                             <option value="">Selecciona una o más razas</option>
                                             @foreach($razas as $raza)
-                                                <option value="{{ $raza->id }}" 
+                                                <option value="{{ $raza->id }}"
                                                     {{ in_array($raza->id, old('razas', $mascota->razas->pluck('id')->toArray())) ? 'selected' : '' }}>
                                                     {{ $raza->nombre_raza }} ({{ $raza->especie }})
                                                 </option>
@@ -107,13 +107,13 @@
                                     <label for="Edad_aprox" class="form-label">
                                         Edad Aproximada (años) <span class="required">*</span>
                                     </label>
-                                    <input type="number" 
-                                           class="form-control form-control-custom" 
-                                           id="Edad_aprox" 
-                                           name="Edad_aprox" 
+                                    <input type="number"
+                                           class="form-control form-control-custom"
+                                           id="Edad_aprox"
+                                           name="Edad_aprox"
                                            value="{{ old('Edad_aprox', $mascota->Edad_aprox) }}"
-                                           min="0" 
-                                           max="30" 
+                                           min="0"
+                                           max="30"
                                            step="0.5"
                                            placeholder="Ej: 2.5"
                                            required>
@@ -123,11 +123,11 @@
                                     <label class="form-label">Género <span class="required">*</span></label>
                                     <div class="radio-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" 
-                                                   type="radio" 
-                                                   name="Genero" 
-                                                   id="GeneroMacho" 
-                                                   value="Macho" 
+                                            <input class="form-check-input"
+                                                   type="radio"
+                                                   name="Genero"
+                                                   id="GeneroMacho"
+                                                   value="Macho"
                                                    {{ old('Genero', $mascota->Genero) == 'Macho' ? 'checked' : '' }}
                                                    required>
                                             <label class="form-check-label" for="GeneroMacho">
@@ -135,11 +135,11 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" 
-                                                   type="radio" 
-                                                   name="Genero" 
-                                                   id="GeneroHembra" 
-                                                   value="Hembra" 
+                                            <input class="form-check-input"
+                                                   type="radio"
+                                                   name="Genero"
+                                                   id="GeneroHembra"
+                                                   value="Hembra"
                                                    {{ old('Genero', $mascota->Genero) == 'Hembra' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="GeneroHembra">
                                                 <i class="fas fa-venus me-1"></i>Hembra
@@ -152,9 +152,9 @@
                                     <label for="estado" class="form-label">
                                         Estado Actual <span class="required">*</span>
                                     </label>
-                                    <select class="form-select form-select-custom" 
-                                            id="estado" 
-                                            name="estado" 
+                                    <select class="form-select form-select-custom"
+                                            id="estado"
+                                            name="estado"
                                             required>
                                         <option value="">Selecciona un estado</option>
                                         <option value="En adopcion" {{ old('estado', $mascota->estado) == 'En adopcion' ? 'selected' : '' }}>
@@ -181,10 +181,10 @@
                                     <label for="Lugar_rescate" class="form-label">
                                         Lugar donde se encuentra <span class="required">*</span>
                                     </label>
-                                    <input type="text" 
-                                           class="form-control form-control-custom" 
-                                           id="Lugar_rescate" 
-                                           name="Lugar_rescate" 
+                                    <input type="text"
+                                           class="form-control form-control-custom"
+                                           id="Lugar_rescate"
+                                           name="Lugar_rescate"
                                            value="{{ old('Lugar_rescate', $mascota->Lugar_rescate) }}"
                                            placeholder="Ej: Parque Central, Calle Principal #123..."
                                            required>
@@ -194,9 +194,9 @@
                                     <label for="Descripcion" class="form-label">
                                         Descripción <span class="required">*</span>
                                     </label>
-                                    <textarea class="form-control form-control-custom" 
-                                              id="Descripcion" 
-                                              name="Descripcion" 
+                                    <textarea class="form-control form-control-custom"
+                                              id="Descripcion"
+                                              name="Descripcion"
                                               rows="5"
                                               placeholder="Describe a la mascota: carácter, comportamiento, condición de salud, necesidades especiales..."
                                               required>{{ old('Descripcion', $mascota->Descripcion) }}</textarea>
@@ -215,14 +215,14 @@
                                         Vacunas Aplicadas
                                     </label>
                                     <div class="multi-select-container">
-                                        <select class="form-select form-select-custom multi-select" 
-                                                id="vacunas_aplicadas" 
-                                                name="vacunas_aplicadas[]" 
+                                        <select class="form-select form-select-custom multi-select"
+                                                id="vacunas_aplicadas"
+                                                name="vacunas_aplicadas[]"
                                                 multiple
                                                 size="3">
                                             <option value="">Selecciona las vacunas aplicadas</option>
                                             @foreach($vacunas as $vacuna)
-                                                <option value="{{ $vacuna->id }}" 
+                                                <option value="{{ $vacuna->id }}"
                                                     {{ in_array($vacuna->id, old('vacunas_aplicadas', $mascota->tiposVacunas->pluck('id')->toArray())) ? 'selected' : '' }}>
                                                     {{ $vacuna->nombre_vacuna }}
                                                 </option>
@@ -246,21 +246,21 @@
                                     <label for="Foto" class="form-label">
                                         Foto Principal
                                     </label>
-                                    
+
                                     <!-- Mostrar imagen actual -->
                                     @if($mascota->Foto)
                                     <div class="current-image mb-3">
                                         <p class="text-muted small mb-2">Imagen actual:</p>
-                                        <img src="{{ Storage::url($mascota->Foto) }}" 
-                                             alt="{{ $mascota->Nombre_mascota }}" 
+                                        <img src="{{ Storage::url($mascota->Foto) }}"
+                                             alt="{{ $mascota->Nombre_mascota }}"
                                              class="img-thumbnail current-img">
                                     </div>
                                     @endif
-                                    
-                                    <input type="file" 
-                                           class="form-control form-control-custom" 
-                                           id="Foto" 
-                                           name="Foto" 
+
+                                    <input type="file"
+                                           class="form-control form-control-custom"
+                                           id="Foto"
+                                           name="Foto"
                                            accept="image/*">
                                     <div class="form-help">
                                         <i class="fas fa-info-circle"></i> Deja vacío para mantener la imagen actual • Formatos: JPG, PNG, GIF • Máx. 2MB
@@ -276,17 +276,17 @@
                                         Galería de Fotos (Máximo 3 imágenes)
                                     </label>
                                     <div class="gallery-upload-container">
-                                        <input type="file" 
-                                               class="form-control form-control-custom" 
-                                               id="galeria_fotos" 
-                                               name="galeria_fotos[]" 
+                                        <input type="file"
+                                               class="form-control form-control-custom"
+                                               id="galeria_fotos"
+                                               name="galeria_fotos[]"
                                                multiple
                                                accept="image/*"
                                                max="3">
                                         <div class="form-help">
                                             <i class="fas fa-info-circle"></i> Puedes seleccionar hasta 3 imágenes adicionales para la galería
                                         </div>
-                                        
+
                                         <!-- Mostrar galería actual -->
                                         @if($mascota->galeria_fotos && count($mascota->galeria_fotos) > 0)
                                         <div class="current-gallery mt-3">
@@ -295,8 +295,8 @@
                                                 @foreach($mascota->galeria_fotos as $index => $foto)
                                                 <div class="col-4">
                                                     <div class="gallery-item position-relative">
-                                                        <img src="{{ Storage::url($foto['ruta']) }}" 
-                                                             alt="Foto {{ $index + 1 }}" 
+                                                        <img src="{{ Storage::url($foto['ruta']) }}"
+                                                             alt="Foto {{ $index + 1 }}"
                                                              class="img-thumbnail w-100">
                                                         <div class="gallery-overlay">
                                                             <small>Foto {{ $index + 1 }}</small>
@@ -322,10 +322,10 @@
                                     <label for="Fecha_ingreso" class="form-label">
                                         Fecha de Ingreso <span class="required">*</span>
                                     </label>
-                                    <input type="date" 
-                                           class="form-control form-control-custom" 
-                                           id="Fecha_ingreso" 
-                                           name="Fecha_ingreso" 
+                                    <input type="date"
+                                           class="form-control form-control-custom"
+                                           id="Fecha_ingreso"
+                                           name="Fecha_ingreso"
                                            value="{{ old('Fecha_ingreso', $mascota->Fecha_ingreso) }}"
                                            required>
                                 </div>
@@ -333,22 +333,22 @@
                                     <label for="Fecha_salida" class="form-label">
                                         Fecha de Salida (si aplica)
                                     </label>
-                                    <input type="date" 
-                                           class="form-control form-control-custom" 
-                                           id="Fecha_salida" 
-                                           name="Fecha_salida" 
+                                    <input type="date"
+                                           class="form-control form-control-custom"
+                                           id="Fecha_salida"
+                                           name="Fecha_salida"
                                            value="{{ old('Fecha_salida', $mascota->Fecha_salida) }}">
                                 </div>
                                 <div class="col-12">
                                     <label for="fundacion_id" class="form-label">
                                         Fundación (opcional)
                                     </label>
-                                    <select class="form-select form-select-custom" 
-                                            id="fundacion_id" 
+                                    <select class="form-select form-select-custom"
+                                            id="fundacion_id"
                                             name="fundacion_id">
                                         <option value="">Sin fundación asignada</option>
                                         @foreach($fundaciones as $fundacion)
-                                            <option value="{{ $fundacion->id }}" 
+                                            <option value="{{ $fundacion->id }}"
                                                 {{ old('fundacion_id', $mascota->fundacion_id) == $fundacion->id ? 'selected' : '' }}>
                                                 {{ $fundacion->Nombre_1 }}
                                             </option>

@@ -4,45 +4,79 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comentario;
+use App\Models\Mascota;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
 {
-    // Mostrar comentarios en la página pública de una mascota/evento
-    public function index($entidadTipo, $entidadId)
+    /**
+     * Mostrar comentarios de una entidad
+     */
+    public function index(Request $request)
     {
-        $comentarios = Comentario::where('comentable_type', $entidadTipo)
-                                 ->where('comentable_id', $entidadId)
-                                 ->where('aprobado', true)
+        $request->validate([
+            'entidad_tipo' => 'required|in:mascota,evento',
+            'entidad_id' => 'required|integer',
+        ]);
+
+        $comentarios = Comentario::where('comentable_type', 'App\\Models\\' . ucfirst($request->entidad_tipo))
+                                 ->where('comentable_id', $request->entidad_id)
                                  ->with('usuario')
+                                 ->latest()
                                  ->get();
 
-        return view('public.comentarios.index', compact('comentarios'));
+        return response()->json($comentarios);
     }
 
-    // Guardar comentario desde el frontend
+    /**
+     * Mostrar comentarios de una entidad (vista)
+     */
+    public function show($entidadTipo, $entidadId)
+    {
+        if ($entidadTipo === 'mascota') {
+            $entidad = Mascota::findOrFail($entidadId);
+        } elseif ($entidadTipo === 'evento') {
+            $entidad = Evento::findOrFail($entidadId);
+        } else {
+            abort(404);
+        }
+
+        $comentarios = Comentario::where('comentable_type', 'App\\Models\\' . ucfirst($entidadTipo))
+                                 ->where('comentable_id', $entidadId)
+                                 ->with('usuario')
+                                 ->latest()
+                                 ->paginate(10);
+
+        return view('public.comentarios.show', compact('comentarios', 'entidad', 'entidadTipo'));
+    }
+
+    /**
+     * Guardar comentario
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'Contenido' => 'required|string|min:3',
-            'entidad_tipo' => 'required|string',
+            'contenido' => 'required|string|min:3|max:1000',
+            'entidad_tipo' => 'required|in:mascota,evento',
             'entidad_id' => 'required|integer',
-            'usuario_id' => 'required|exists:usuarios,id'
         ]);
 
         $comentario = Comentario::create([
-            'Contenido' => $request->Contenido,
-            'Fecha' => now(),
-            'usuario_id' => $request->usuario_id,
-            'comentable_type' => $request->entidad_tipo,
+            'contenido' => $request->contenido,
+            'user_id' => auth()->id(),
+            'comentable_type' => 'App\\Models\\' . ucfirst($request->entidad_tipo),
             'comentable_id' => $request->entidad_id,
-            'aprobado' => false // Requiere aprobación del admin
+            'fecha' => now(),
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Comentario enviado para revisión',
-            'comentario' => $comentario
-        ]);
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'comentario' => $comentario->load('usuario')
+            ]);
+        }
+
+        return back()->with('success', 'Comentario publicado');
     }
 }

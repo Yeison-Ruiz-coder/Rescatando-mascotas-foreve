@@ -27,6 +27,7 @@ class HistorialMedico extends Model
         'fecha_consulta' => 'date',
     ];
 
+    // Relaciones
     public function mascota()
     {
         return $this->belongsTo(Mascota::class, 'mascota_id');

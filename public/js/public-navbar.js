@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Manejo de submenús (si los hay)
     const publicMenuItems = document.querySelectorAll('.public-sidebar-item.has-submenu');
-    
+
     publicMenuItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();

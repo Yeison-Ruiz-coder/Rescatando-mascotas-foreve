@@ -9,20 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // database/migrations/2025_11_07_201838_create_comentarios_table.php
     public function up(): void
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->text('Contenido');
-            $table->timestamp('Fecha');
-            
+            $table->text('contenido');
+            $table->timestamp('fecha')->useCurrent(); // Cambiado Fecha -> fecha
 
-            $table->unsignedBigInteger('usuario_id')->nullable();
+            // CORREGIDO: Apunta a users
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('set null');
 
-            $table->foreign('usuario_id')
-            ->references('id')
-            ->on('usuarios')
-            ->onDelete('set null');
             $table->timestamps();
         });
     }
