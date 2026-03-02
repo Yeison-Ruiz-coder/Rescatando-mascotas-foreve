@@ -6,41 +6,38 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('mascotas', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre_mascota');
-            $table->string('Especie')->nullable();
-            $table->string('Raza');
-            $table->integer('Edad_aprox');
-            $table->string('Genero');
-            $table->enum ('estado', ['Adoptado','En adopcion','Rescatada']);
-            $table->string('Lugar_rescate');
-            $table->text('Descripcion');
-            $table->text('Foto');
+            $table->string('nombre_mascota');
+            $table->string('especie')->nullable(); // Perro, Gato, etc.
+            // El campo 'raza' se manejará con la tabla pivote 'mascota_raza'
+            $table->integer('edad_aprox')->nullable();
+            $table->enum('genero', ['Macho', 'Hembra', 'Desconocido'])->nullable();
+            $table->enum('estado', ['Adoptado', 'En adopcion', 'Rescatada', 'En acogida'])->default('En adopcion');
+            $table->string('lugar_rescate')->nullable();
+            $table->text('descripcion')->nullable();
+            $table->string('foto_principal')->nullable(); // Ruta de la foto principal
             $table->json('galeria_fotos')->nullable();
-            $table->string('vacunas');
-            $table->date('Fecha_ingreso');
-            $table->date('Fecha_salida')->nullable(); 
+            $table->boolean('necesita_hogar_temporal')->default(false);
+            $table->boolean('apto_con_ninos')->default(true);
+            $table->boolean('apto_con_otros_animales')->default(true);
+            $table->text('condiciones_especiales')->nullable(); // Enfermedades crónicas, discapacidades
+            // El campo 'vacunas' se manejará con la tabla pivote 'mascota_vacuna'
+            $table->date('fecha_ingreso')->nullable();
+            $table->date('fecha_salida')->nullable();
 
             $table->unsignedBigInteger('fundacion_id')->nullable();
-
             $table->foreign('fundacion_id')
-            ->references('id')
-            ->on('fundaciones')
-            ->onDelete('set null');
+                ->references('id')
+                ->on('fundaciones')
+                ->onDelete('set null');
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('mascotas');

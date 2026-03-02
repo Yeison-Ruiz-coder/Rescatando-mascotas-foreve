@@ -15,26 +15,49 @@ class Fundacion extends Model
         'Nombre_1',
         'Direccion',
         'Telefono',
-        'Email'
+        'Email',
+        'registro_sanitario',
+        'capacidad_maxima',
+        'necesidades_actuales',
+        'horario_atencion',
+        'recibe_voluntarios',
+    ];
+
+    protected $casts = [
+        'necesidades_actuales' => 'array',
+        'recibe_voluntarios' => 'boolean',
+        'capacidad_maxima' => 'integer',
     ];
 
     // Relaciones
     public function mascotas()
     {
-        return $this->hasMany(Mascota::class);
+        return $this->hasMany(Mascota::class, 'fundacion_id');
+    }
+
+    public function adopciones()
+    {
+        return $this->hasMany(Adopcion::class, 'fundacion_id');
     }
 
     public function donaciones()
     {
-        return $this->hasMany(Donacion::class);
+        return $this->hasMany(Donacion::class, 'fundacion_id');
     }
 
     public function rescates()
     {
-        return $this->hasMany(Rescate::class);
+        return $this->hasMany(Rescate::class, 'fundacion_id');
     }
 
-    public function adopciones(){
-        return $this->hasMany(Adopcion::class);
+    public function usuariosFundacion()
+    {
+        return $this->hasMany(User::class, 'fundacion_id');
+    }
+
+    // Scope para fundaciones que reciben voluntarios
+    public function scopeRecibenVoluntarios($query)
+    {
+        return $query->where('recibe_voluntarios', true);
     }
 }

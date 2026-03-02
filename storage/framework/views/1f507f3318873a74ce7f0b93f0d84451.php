@@ -19,7 +19,9 @@
         </div>
 
         <!-- Botón de Perfil Simple -->
-        <a href="<?php echo e(route('admin.administradores.index')); ?>" class="profile-btn">
+
+        <a href="<?php echo e(('admin.administradores.index')); ?>" class="profile-btn">
+
             <div class="profile-avatar">
                 <i class="fas fa-user-shield"></i>
             </div>

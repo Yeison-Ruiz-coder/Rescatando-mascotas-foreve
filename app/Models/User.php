@@ -7,39 +7,185 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
+        'nombre',
+        'apellidos',
         'email',
         'password',
+        'tipo',
+        'estado',
+        'fecha_nacimiento',
+        'direccion',
+        'telefono',
+        'avatar',
+        'tipo_documento',
+        'numero_documento',
+        'email_verified_at',
+        'created_by',
+        'updated_by',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'fecha_nacimiento' => 'date',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
+
+    // Relaciones de usuario creador/editor
+    public function creador()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function editor()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    // Usuarios que este usuario creó
+    public function usuariosCreados()
+    {
+        return $this->hasMany(User::class, 'created_by');
+    }
+
+    // Relaciones con otras tablas
+    public function mascotas()
+    {
+        return $this->hasMany(Mascota::class, 'fundacion_id');
+    }
+
+    public function reportes()
+    {
+        return $this->hasMany(Reporte::class, 'user_id');
+    }
+
+    public function reportesResueltos()
+    {
+        return $this->hasMany(Reporte::class, 'resuelto_por');
+    }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class, 'user_id');
+    }
+
+    public function solicitudes()
+    {
+        return $this->hasMany(Solicitud::class, 'user_id');
+    }
+
+    public function solicitudesRevisadas()
+    {
+        return $this->hasMany(Solicitud::class, 'revisado_por');
+    }
+
+    public function suscripciones()
+    {
+        return $this->hasMany(Suscripcion::class, 'user_id');
+    }
+
+    public function adopciones()
+    {
+        return $this->hasMany(Adopcion::class, 'user_id');
+    }
+
+    public function adopcionesAprobadas()
+    {
+        return $this->hasMany(Adopcion::class, 'administrador_id');
+    }
+
+    public function notificaciones()
+    {
+        return $this->hasMany(Notificacion::class, 'user_id');
+    }
+
+    public function notificacionesEnviadas()
+    {
+        return $this->hasMany(Notificacion::class, 'creado_por_id');
+    }
+
+    public function donaciones()
+    {
+        return $this->hasMany(Donacion::class, 'user_id');
+    }
+
+    public function rescatesReportados()
+    {
+        return $this->hasMany(Rescate::class, 'usuario_reporto_id');
+    }
+
+    public function rescatesGestionados()
+    {
+        return $this->hasMany(Rescate::class, 'administrador_gestion_id');
+    }
+
+    public function entrevistas()
+    {
+        return $this->hasMany(Entrevista::class, 'administrador_id');
+    }
+
+    public function apadrinamientos()
+    {
+        return $this->hasMany(Apadrinamiento::class, 'user_id');
+    }
+
+    public function seguimientosRealizados()
+    {
+        return $this->hasMany(SeguimientoAdopcion::class, 'realizado_por');
+    }
+
+    public function historialesMedicosVeterinario()
+    {
+        return $this->hasMany(HistorialMedico::class, 'veterinario_id');
+    }
+
+    public function historialesMedicosRegistrados()
+    {
+        return $this->hasMany(HistorialMedico::class, 'registrado_por');
+    }
+
+    // Helper para verificar roles
+    public function isAdmin(): bool
+    {
+        return $this->tipo === 'admin';
+    }
+
+    public function isVeterinaria(): bool
+    {
+        return $this->tipo === 'veterinaria';
+    }
+
+    public function isFundacion(): bool
+    {
+        return $this->tipo === 'fundacion';
+    }
+
+    public function isUser(): bool
+    {
+        return $this->tipo === 'user';
+    }
+
+    // Scope para usuarios activos
+    public function scopeActivos($query)
+    {
+        return $query->where('estado', 'activo');
+    }
+
+    // Nombre completo
+    public function getNombreCompletoAttribute(): string
+    {
+        return trim($this->nombre . ' ' . $this->apellidos);
+    }
 }

@@ -12,70 +12,124 @@ class Mascota extends Model
     protected $table = 'mascotas';
 
     protected $fillable = [
-        'Nombre_mascota',
-        'Especie',
-        'Raza',
-        'Edad_aprox',
-        'Genero',
+        'nombre_mascota',
+        'especie',
+        'edad_aprox',
+        'genero',
         'estado',
-        'Lugar_rescate',
-        'Descripcion',
-        'Foto',
+        'lugar_rescate',
+        'descripcion',
+        'foto_principal',
         'galeria_fotos',
-        'vacunas',
-        'Fecha_ingreso',
-        'Fecha_salida',
-        'fundacion_id'
+        'necesita_hogar_temporal',
+        'apto_con_ninos',
+        'apto_con_otros_animales',
+        'condiciones_especiales',
+        'fecha_ingreso',
+        'fecha_salida',
+        'fundacion_id',
     ];
 
     protected $casts = [
         'galeria_fotos' => 'array',
-        'Fecha_ingreso' => 'date',
-        'Fecha_salida' => 'date',
+        'necesita_hogar_temporal' => 'boolean',
+        'apto_con_ninos' => 'boolean',
+        'apto_con_otros_animales' => 'boolean',
+        'fecha_ingreso' => 'date',
+        'fecha_salida' => 'date',
     ];
 
     // Relaciones
     public function fundacion()
     {
-        return $this->belongsTo(Fundacion::class);
+        return $this->belongsTo(User::class, 'fundacion_id');
+    }
+
+    public function razas()
+    {
+        return $this->belongsToMany(Raza::class, 'mascota_raza', 'mascota_id', 'raza_id');
+    }
+
+    public function vacunas()
+    {
+        return $this->belongsToMany(TipoVacuna::class, 'mascota_vacuna', 'mascota_id', 'tipos_vacunas_id')
+            ->withPivot('fecha_aplicacion')
+            ->withTimestamps();
+    }
+
+    public function solicitudes()
+    {
+        return $this->morphMany(Solicitud::class, 'solicitable');
     }
 
     public function adopciones()
     {
-        return $this->hasMany(Adopcion::class);
-    }
-
-    public function apadrinamientos()
-    {
-        return $this->hasMany(Apadrinamiento::class);
+        return $this->hasMany(Adopcion::class, 'mascota_id');
     }
 
     public function rescates()
     {
-        return $this->hasMany(Rescate::class);
+        return $this->hasMany(Rescate::class, 'mascota_id');
     }
 
-   public function razas()
+    public function suscripciones()
     {
-        // Une Mascota con Raza a través de la tabla pivot 'mascota_raza'
-        return $this->belongsToMany(Raza::class, 'mascota_raza', 'mascota_id', 'raza_id');
+        return $this->hasMany(Suscripcion::class, 'mascota_id');
     }
 
-    public function tiposVacunas()
+    public function apadrinamientos()
     {
-        // Une Mascota con TipoVacuna a través de la tabla pivot 'mascota_vacuna'
-        // Permite acceder a la fecha de aplicación
-        return $this->belongsToMany(TipoVacuna::class, 'mascota_vacuna', 'mascota_id', 'tipos_vacunas_id')
-                    ->withPivot('fecha_aplicacion');
+        return $this->hasMany(Apadrinamiento::class, 'mascota_id');
     }
 
-    public function solicitudAdopcion()
+    public function historialMedico()
     {
-        return $this->hasMany(solicitudAdopcion::class);
+        return $this->hasMany(HistorialMedico::class, 'mascota_id');
     }
 
-    public function solicitud()
+    // Scope para mascotas disponibles para adopción
+    public function scopeDisponibles($query)
     {
-        return $this->hasMany(solicitud::class);
+        return $query->where('estado', 'En adopcion');
+    }
+
+    // Scope por especie
+    public function scopePorEspecie($query, $especie)
+    {
+        return $query->where('especie', $especie);
+    }
+
+    // Verificar si está disponible
+    public function isDisponible(): bool
+    {
+        return $this->estado === 'En adopcion';
+    }
+
+    // En app/Models/Mascota.php - Agrega esta relación
+
+    /**
+     * Solicitudes de adopción para esta mascota
+     */
+    public function solicitudesAdopcion()
+    {
+        return $this->hasMany(SolicitudAdopcion::class, 'mascota_id');
+    }
+
+    /**
+     * Solicitudes de adopción pendientes
+     */
+    public function solicitudesPendientes()
+    {
+        return $this->solicitudesAdopcion()->where('estado', 'Pendiente');
+    }
+
+    /**
+     * Verificar si tiene solicitudes activas
+     */
+    public function tieneSolicitudesActivas(): bool
+    {
+        return $this->solicitudesAdopcion()
+            ->whereIn('estado', ['Pendiente', 'En revisión'])
+            ->exists();
     }
 }

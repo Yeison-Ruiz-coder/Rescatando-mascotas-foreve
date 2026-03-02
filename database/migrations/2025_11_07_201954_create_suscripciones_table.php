@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('suscripciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('usuario_id')->constrained('usuarios');
+            // CORREGIDO: Apunta a users
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('mascota_id')->nullable()->constrained('mascotas');
             $table->decimal('monto_mensual', 10, 2);
             $table->enum('frecuencia', ['unica', 'mensual', 'trimestral', 'anual'])->default('mensual');

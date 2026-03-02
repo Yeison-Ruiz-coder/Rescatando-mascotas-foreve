@@ -1,1 +1,1 @@
-hola desde tienda
+@extends('public.layouts.app')

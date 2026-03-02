@@ -11,7 +11,7 @@
     <?php echo $__env->make('admin.mascotas.partials.index.actions', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <!-- Panel de Filtros -->
-    <?php echo $__env->make('components.modules.mascotas.filters', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('components.modules.mascotas.filters', ['especies' => $especies ?? []], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <!-- Estadísticas Rápidas -->
     <?php if(!request()->anyFilled(['especie', 'estado', 'raza'])): ?>

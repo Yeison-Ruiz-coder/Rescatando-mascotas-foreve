@@ -13,17 +13,39 @@ class SeguimientoAdopcion extends Model
 
     protected $fillable = [
         'adopcion_id',
+        'tipo_seguimiento',
         'fecha_seguimiento',
+        'proximo_seguimiento',
         'observaciones',
+        'recomendaciones',
         'estado_mascota',
+        'resultado',
         'foto_url',
+        'fotos_adicionales',
+        'video_url',
+        'documento_url',
+        'condiciones_hogar',
+        'observaciones_hogar',
+        'convive_con_otros_animales',
+        'comportamiento_observado',
         'realizado_por',
+        'realizado_por_nombre',
+        'requiere_nuevo_seguimiento',
+        'firma_adoptante',
+        'fecha_confirmacion',
     ];
 
     protected $casts = [
+        'fotos_adicionales' => 'array',
         'fecha_seguimiento' => 'date',
+        'proximo_seguimiento' => 'date',
+        'fecha_confirmacion' => 'datetime',
+        'requiere_nuevo_seguimiento' => 'boolean',
+        'firma_adoptante' => 'boolean',
+        'convive_con_otros_animales' => 'boolean',
     ];
 
+    // Relaciones
     public function adopcion()
     {
         return $this->belongsTo(Adopcion::class, 'adopcion_id');
@@ -32,5 +54,18 @@ class SeguimientoAdopcion extends Model
     public function realizadoPor()
     {
         return $this->belongsTo(User::class, 'realizado_por');
+    }
+
+    // Scopes
+    public function scopePendientesProximoSeguimiento($query)
+    {
+        return $query->where('requiere_nuevo_seguimiento', true)
+                     ->whereNotNull('proximo_seguimiento')
+                     ->whereDate('proximo_seguimiento', '<=', now());
+    }
+
+    public function scopePorEstadoMascota($query, $estado)
+    {
+        return $query->where('estado_mascota', $estado);
     }
 }

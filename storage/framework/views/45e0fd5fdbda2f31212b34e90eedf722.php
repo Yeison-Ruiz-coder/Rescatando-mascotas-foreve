@@ -16,16 +16,16 @@
                 <tr>
                     <td>#<?php echo e($solicitud->id); ?></td>
                     <td>
-                        <span class="tipo-badge"><?php echo e($solicitud->tipo); ?></span>
+                        <span class="tipo-badge"><?php echo e($solicitud->tipo_solicitud); ?></span>
                     </td>
                     <td>
                         <?php if($solicitud->usuario): ?>
-                            <?php echo e($solicitud->usuario->Nombre_1); ?>
+                            <?php echo e($solicitud->usuario->nombre); ?>
 
-                            <?php echo e($solicitud->usuario->Apellido_1); ?>
+                            <?php echo e($solicitud->usuario->apellidos); ?>
 
                         <?php else: ?>
-                            Usuario #<?php echo e($solicitud->usuario_id); ?>
+                            Usuario #<?php echo e($solicitud->user_id); ?>
 
                         <?php endif; ?>
                     </td>

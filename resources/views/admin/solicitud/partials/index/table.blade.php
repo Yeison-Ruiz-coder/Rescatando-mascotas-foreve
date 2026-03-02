@@ -16,14 +16,14 @@
                 <tr>
                     <td>#{{ $solicitud->id }}</td>
                     <td>
-                        <span class="tipo-badge">{{ $solicitud->tipo }}</span>
+                        <span class="tipo-badge">{{ $solicitud->tipo_solicitud }}</span>
                     </td>
                     <td>
                         @if ($solicitud->usuario)
-                            {{ $solicitud->usuario->Nombre_1 }}
-                            {{ $solicitud->usuario->Apellido_1 }}
+                            {{ $solicitud->usuario->nombre }}
+                            {{ $solicitud->usuario->apellidos }}
                         @else
-                            Usuario #{{ $solicitud->usuario_id }}
+                            Usuario #{{ $solicitud->user_id }}
                         @endif
                     </td>
                     <td>{{ $solicitud->fecha_solicitud->format('d/m/Y') }}</td>

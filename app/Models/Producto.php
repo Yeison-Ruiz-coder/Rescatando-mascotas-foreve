@@ -4,46 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Producto extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    protected $table = 'productos';
+    use HasFactory;
 
     protected $fillable = [
-        'tienda_id',
         'nombre',
         'descripcion',
         'precio',
         'stock',
-        'categoria',
-        'imagenes',
+        'imagen_url',
         'estado',
-        'creado_por',
-        'actualizado_por',
+        'user_id', // 👈 ID del vendedor (fundación/veterinaria)
     ];
 
-    protected $casts = [
-        'precio' => 'decimal:2',
-        'stock' => 'integer',
-        'imagenes' => 'array',
-    ];
-
-    public function tienda()
+    // Relación con el vendedor
+    public function vendedor()
     {
-        return $this->belongsTo(Tienda::class, 'tienda_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Auditoría
-    public function creador()
+    // Scope para productos disponibles
+    public function scopeDisponibles($query)
     {
-        return $this->belongsTo(User::class, 'creado_por');
+        return $query->where('estado', 'disponible')->where('stock', '>', 0);
     }
 
-    public function actualizador()
+    // Verificar disponibilidad
+    public function isDisponible(): bool
     {
-        return $this->belongsTo(User::class, 'actualizado_por');
+        return $this->estado === 'disponible' && $this->stock > 0;
     }
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    @extends('layouts.app')
+    @extends('public.layouts.app')
 
     @section('content')
     <div class="container mt-4">
@@ -17,14 +17,14 @@
                 <div class="card shadow">
                     <div class="card-body">
                         @if($evento->imagen_url)
-                            <img src="{{ asset($evento->imagen_url) }}" 
-                                 class="img-fluid rounded mb-4 w-100" 
+                            <img src="{{ asset($evento->imagen_url) }}"
+                                 class="img-fluid rounded mb-4 w-100"
                                  alt="{{ $evento->Nombre_evento }}"
                                  style="max-height: 400px; object-fit: cover;">
                         @endif
-                        
+
                         <h1 class="card-title text-primary">{{ $evento->Nombre_evento }}</h1>
-                        
+
                         <div class="row mb-4 bg-light rounded p-3">
                             <div class="col-md-6">
                                 <div class="d-flex align-items-center mb-2">

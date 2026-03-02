@@ -4,16 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSolicitudesAdopcionTable extends Migration
+return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
+    // Versión mejorada de solicitudes_adopcion
     public function up()
     {
         Schema::create('solicitudes_adopcion', function (Blueprint $table) {
             $table->id();
 
-
-
-            // Datos del solicitante (NO requiere usuario existente)
+            // Datos del solicitante
             $table->string('nombre_solicitante');
             $table->string('apellido_solicitante');
             $table->string('email');
@@ -27,19 +29,21 @@ class CreateSolicitudesAdopcionTable extends Migration
             $table->boolean('compromiso_esterilizacion')->default(false);
             $table->boolean('compromiso_seguimiento')->default(false);
 
-
-            $table->string('estado')->default('Pendiente'); // Pendiente, Aprobada, Rechazada, En revisión
-
-
+            $table->string('estado')->default('Pendiente');
             $table->text('razon_rechazo')->nullable();
             $table->text('notas_administrador')->nullable();
 
-
-            $table->foreignId('administrador_id')
+            // 👇 CORRECCIÓN 1: Apunta a users, no a administradores
+            $table->foreignId('revisado_por')  // Cambié el nombre
                 ->nullable()
-                ->constrained('administradores')
+                ->constrained('users')
                 ->onDelete('set null');
 
+            // 👇 CORRECCIÓN 2: Agrega user_id por si está registrado
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('set null');
 
             $table->foreignId('mascota_id')
                 ->constrained('mascotas')
@@ -47,15 +51,16 @@ class CreateSolicitudesAdopcionTable extends Migration
 
             $table->timestamps();
 
-            
             $table->index('estado');
             $table->index('email');
             $table->index('created_at');
         });
     }
-
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('solicitudes_adopcion');
     }
-}
+};

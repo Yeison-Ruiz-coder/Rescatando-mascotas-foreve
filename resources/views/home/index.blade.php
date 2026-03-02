@@ -1,4 +1,4 @@
-@extends('home.layouts.main') <!-- Usa el nuevo layout del home -->
+@extends('public.layouts.app') <!-- Usa el nuevo layout del home -->
 
 @section('title', 'Rescatando Mascotas - Inicio')
 

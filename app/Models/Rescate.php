@@ -12,45 +12,50 @@ class Rescate extends Model
     protected $table = 'rescates';
 
     protected $fillable = [
-        'Fecha_rescate',
-        'Lugar_rescate',
-        'Descripcion_rescate',
-        'usuario_id',
+        'fecha_rescate',
+        'lugar_rescate',
+        'descripcion_rescate',
+        'estado',
         'mascota_id',
+        'reporte_id',
+        'usuario_reporto_id',
         'veterinaria_id',
-        'tienda_id',
         'fundacion_id',
-        'administrador_id'
+        'administrador_gestion_id',
+    ];
+
+    protected $casts = [
+        'fecha_rescate' => 'date',
     ];
 
     // Relaciones
-    public function usuario()
-    {
-        return $this->belongsTo(Usuario::class);
-    }
-
     public function mascota()
     {
-        return $this->belongsTo(Mascota::class);
+        return $this->belongsTo(Mascota::class, 'mascota_id');
+    }
+
+    public function reporte()
+    {
+        return $this->belongsTo(Reporte::class, 'reporte_id');
+    }
+
+    public function usuarioReporto()
+    {
+        return $this->belongsTo(User::class, 'usuario_reporto_id');
     }
 
     public function veterinaria()
     {
-        return $this->belongsTo(Veterinaria::class);
-    }
-
-    public function tienda()
-    {
-        return $this->belongsTo(Tienda::class);
+        return $this->belongsTo(Veterinaria::class, 'veterinaria_id');
     }
 
     public function fundacion()
     {
-        return $this->belongsTo(Fundacion::class);
+        return $this->belongsTo(Fundacion::class, 'fundacion_id');
     }
 
-    public function administrador()
+    public function administradorGestion()
     {
-        return $this->belongsTo(Administrador::class);
+        return $this->belongsTo(User::class, 'administrador_gestion_id');
     }
 }

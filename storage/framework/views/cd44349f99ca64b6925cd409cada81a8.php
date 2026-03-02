@@ -1,0 +1,2 @@
+
+<?php echo $__env->make('public.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/fundaciones/index.blade.php ENDPATH**/ ?>

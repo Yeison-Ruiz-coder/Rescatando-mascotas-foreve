@@ -1,1 +1,1 @@
-hola desde planes publicos
+@extends('public.layouts.app')

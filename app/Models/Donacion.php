@@ -13,20 +13,25 @@ class Donacion extends Model
 
     protected $fillable = [
         'valor_donacion',
-        'Fecha_donacion',
-        'usuario_id',
+        'fecha_donacion',
+        'publica',
+        'user_id',
         'fundacion_id',
-        'publica'
     ];
 
-    // Relaciones
+    protected $casts = [
+        'fecha_donacion' => 'datetime',
+        'publica' => 'boolean',
+        'valor_donacion' => 'decimal:2',
+    ];
+
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function fundacion()
     {
-        return $this->belongsTo(Fundacion::class);
+        return $this->belongsTo(Fundacion::class, 'fundacion_id');
     }
 }

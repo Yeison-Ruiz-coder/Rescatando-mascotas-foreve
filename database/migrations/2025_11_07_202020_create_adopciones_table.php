@@ -6,52 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('adopciones', function (Blueprint $table) {
             $table->id();
-            $table->string('Lugar_adopcion');
-            $table->date('Fecha_adopcion');
-            $table->enum ('estado', ['Aprobado','En proceso','Rechazado']);
+            $table->date('fecha_adopcion')->nullable();
+            $table->enum('estado', ['en_proceso', 'aprobada', 'completada', 'rechazada', 'cancelada'])->default('en_proceso');
             $table->text('razon_rechazo')->nullable();
             $table->date('fecha_cierre')->nullable();
-            
 
-            $table->unsignedBigInteger('usuario_id')->nullable();
-            $table->unsignedBigInteger('mascota_id')->nullable();
-            $table->unsignedBigInteger('administrador_id')->nullable(); 
-            $table->unsignedBigInteger('fundacion_id')->nullable(); 
-
-            $table->foreign('usuario_id')
-            ->references('id')
-            ->on('usuarios')
-            ->onDelete('set null');
-
-            $table->foreign('mascota_id')
-            ->references('id')
-            ->on('mascotas')
-            ->onDelete('set null'); 
-            
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
-
-            $table->foreign('fundacion_id') 
-                ->references('id')
-                ->on('fundaciones')
-                ->onDelete('set null');
+            // Relaciones clave
+            $table->foreignId('solicitud_id')->nullable()->constrained('solicitudes')->onDelete('set null');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Quien adopta (YA ES USUARIO)
+            $table->foreignId('mascota_id')->constrained('mascotas')->onDelete('cascade');
+            $table->foreignId('fundacion_id')->nullable()->constrained('fundaciones')->onDelete('set null'); // Fundación responsable
+            $table->foreignId('administrador_id')->nullable()->constrained('users')->onDelete('set null'); // Admin que aprueba
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('adopciones');

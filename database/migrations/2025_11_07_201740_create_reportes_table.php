@@ -6,34 +6,42 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('reportes', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre_rep')->nullable();
-            $table->date('Fecha_reporte')->nullable;
-            $table->text('Descripcion')->nullable();
-            $table->string('Email');
+            $table->enum('tipo_reporte', ['perdido', 'encontrado', 'maltrato', 'otro'])->default('perdido');
+            $table->string('titulo');
+            $table->text('descripcion');
+            $table->string('ubicacion');
+            $table->date('fecha_incidente');
+            $table->string('especie')->nullable(); // Perro, Gato, etc.
+            $table->string('raza')->nullable();
+            $table->string('color')->nullable();
+            $table->string('foto_url')->nullable();
+            $table->json('galeria_fotos')->nullable();
+            $table->enum('estado', ['activo', 'resuelto', 'cerrado'])->default('activo');
 
-            
-            
-            $table->unsignedBigInteger('administrador_id')->nullable();
+            // Persona que reporta
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->string('nombre_reportante')->nullable();
+            $table->string('telefono_reportante')->nullable();
+            $table->string('email_reportante')->nullable();
 
-            $table->foreign('administrador_id')
-            ->references('id')
-            ->on('administradores')
-            ->onDelete('set null');
+            // Gestión interna
+            $table->text('solucion')->nullable();
+            $table->foreignId('resuelto_por')->nullable()->constrained('users')->onDelete('set null');
+            $table->timestamp('fecha_resolucion')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->index('tipo_reporte');
+            $table->index('estado');
+            $table->index('fecha_incidente');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('reportes');
