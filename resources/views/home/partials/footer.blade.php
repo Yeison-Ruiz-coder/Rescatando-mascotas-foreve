@@ -14,17 +14,17 @@
                     <a href="#" class="text-light"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
-            
+
             <div class="col-lg-2 col-md-6 mb-4">
                 <h6 class="fw-bold">Enlaces Rápidos</h6>
                 <ul class="list-unstyled">
                     <li><a href="{{ url('/') }}" class="text-light text-decoration-none">Inicio</a></li>
                     <li><a href="{{ route('public.mascotas.index') }}" class="text-light text-decoration-none">Adoptar</a></li>
-                    <li><a href="{{ route('rescates.create') }}" class="text-light text-decoration-none">Rescatar</a></li>
-                    <li><a href="{{ route('donaciones.create') }}" class="text-light text-decoration-none">Donar</a></li>
+                    <li><a href="{{ route('public.rescates.create') }}" class="text-light text-decoration-none">Rescatar</a></li>
+                    <li><a href="{{ route('public.donaciones.create') }}" class="text-light text-decoration-none">Donar</a></li>
                 </ul>
             </div>
-            
+
             <div class="col-lg-3 col-md-6 mb-4">
                 <h6 class="fw-bold">Servicios</h6>
                 <ul class="list-unstyled">
@@ -34,7 +34,7 @@
                     <li><a href="#" class="text-light text-decoration-none">Voluntariado</a></li>
                 </ul>
             </div>
-            
+
             <div class="col-lg-3 col-md-6 mb-4">
                 <h6 class="fw-bold">Contacto</h6>
                 <ul class="list-unstyled">
@@ -53,9 +53,9 @@
                 </ul>
             </div>
         </div>
-        
+
         <hr class="bg-light">
-        
+
         <div class="row align-items-center">
             <div class="col-md-6">
                 <p class="mb-0 text-light">&copy; 2024 Rescatando Mascotas. Todos los derechos reservados.</p>

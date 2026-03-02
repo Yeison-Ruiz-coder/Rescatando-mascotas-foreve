@@ -18,11 +18,11 @@
 .stat-number {
     font-size: 3rem;
     font-weight: 800;
-    color: #00cfeb;
+    color: #5a00eb;
     margin-bottom: 0.5rem;
     position: relative;
     z-index: 2;
-    text-shadow: 0 2px 10px rgba(0, 207, 235, 0.3);
+    text-shadow: 0 2px 10px rgba(129, 0, 235, 0.3);
 }
 
 .stats-section p {

@@ -8,6 +8,7 @@ use App\Models\SeguimientoAdopcion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class AdopcionController extends Controller
 {
     /**

@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 // RUTAS PÚBLICAS (TUS RUTAS ORIGINALES)
 // =========================================================================
 
-use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Public\MascotaController as PublicMascotaController;
 use App\Http\Controllers\Public\AdopcionController as PublicAdopcionController;
 use App\Http\Controllers\Public\SolicitudController as PublicSolicitudController;
@@ -111,6 +111,8 @@ Route::prefix('fundaciones')->name('public.fundaciones.')->group(function () {
 // RESCATES PÚBLICOS
 Route::prefix('rescates')->name('public.rescates.')->group(function () {
     Route::get('/', [PublicRescateController::class, 'index'])->name('index');
+    Route::get('/create', [PublicRescateController::class, 'create'])->name('create');
+    Route::post('/', [PublicRescateController::class, 'store'])->name('store');
     Route::get('/{id}', [PublicRescateController::class, 'show'])->name('show');
 });
 

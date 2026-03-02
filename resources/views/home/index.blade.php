@@ -21,4 +21,14 @@
 
     <!-- CTA Section -->
     @include('home.partials.cta')
+
+    @push('styles')
+    {{-- TODOS los estilos del home aquí --}}
+    <link rel="stylesheet" href="{{ asset('css/home/hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home/mascotas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home/cta.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home/stats.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home/testimonios.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home/responsive.css') }}">
+@endpush
 @endsection

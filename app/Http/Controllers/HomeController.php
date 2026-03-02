@@ -8,28 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         try {
             // Verificar conexión a la base de datos
             DB::connection()->getPdo();
-            
-            // Obtener mascotas disponibles (probando diferentes valores de estado)
+
+            // Obtener mascotas disponibles - USANDO LOS NOMBRES CORRECTOS DE LAS MIGRACIONES
             $mascotasRecientes = Mascota::where(function($query) {
                     $query->where('estado', 'En adopcion')
                           ->orWhere('estado', 'En adopción')
@@ -69,14 +54,14 @@ class HomeController extends Controller
         return collect([
             (object)[
                 'id' => 1,
-                'Nombre_mascota' => 'Rocky',
-                'Especie' => 'Perro',
-                'Raza' => 'Mixed',
-                'Edad_aprox' => 2,
-                'Genero' => 'Macho',
+                'nombre_mascota' => 'Rocky',  // CAMBIADO: antes era Nombre_mascota
+                'especie' => 'Perro',          // CAMBIADO: antes era Especie
+                'raza' => 'Mixed',
+                'edad_aprox' => 2,             // CAMBIADO: antes era Edad_aprox
+                'genero' => 'Macho',            // CAMBIADO: antes era Genero
                 'estado' => 'En adopcion',
-                'Descripcion' => 'Perro juguetón y muy cariñoso. Perfecto para familias activas. Le encanta correr y jugar en el parque.',
-                'Foto' => null,
+                'descripcion' => 'Perro juguetón y muy cariñoso. Perfecto para familias activas. Le encanta correr y jugar en el parque.', // CAMBIADO: antes era Descripcion
+                'foto_principal' => null,       // CAMBIADO: antes era Foto
                 'fundacion' => (object)[
                     'id' => 1,
                     'Nombre_1' => 'Fundación Amigos Peludos'
@@ -84,14 +69,14 @@ class HomeController extends Controller
             ],
             (object)[
                 'id' => 2,
-                'Nombre_mascota' => 'Luna',
-                'Especie' => 'Gato',
-                'Raza' => 'Siamés',
-                'Edad_aprox' => 1,
-                'Genero' => 'Hembra',
+                'nombre_mascota' => 'Luna',
+                'especie' => 'Gato',
+                'raza' => 'Siamés',
+                'edad_aprox' => 1,
+                'genero' => 'Hembra',
                 'estado' => 'En adopcion',
-                'Descripcion' => 'Gatita tranquila y cariñosa. Ideal para apartamentos. Le gusta dormir en lugares cálidos y acurrucarse.',
-                'Foto' => null,
+                'descripcion' => 'Gatita tranquila y cariñosa. Ideal para apartamentos. Le gusta dormir en lugares cálidos y acurrucarse.',
+                'foto_principal' => null,
                 'fundacion' => (object)[
                     'id' => 2,
                     'Nombre_1' => 'Refugio Felino'
@@ -99,14 +84,14 @@ class HomeController extends Controller
             ],
             (object)[
                 'id' => 3,
-                'Nombre_mascota' => 'Max',
-                'Especie' => 'Perro',
-                'Raza' => 'Labrador',
-                'Edad_aprox' => 3,
-                'Genero' => 'Macho',
+                'nombre_mascota' => 'Max',
+                'especie' => 'Perro',
+                'raza' => 'Labrador',
+                'edad_aprox' => 3,
+                'genero' => 'Macho',
                 'estado' => 'En adopcion',
-                'Descripcion' => 'Perro tranquilo y protector. Excelente con niños y otros animales. Muy obediente y cariñoso.',
-                'Foto' => null,
+                'descripcion' => 'Perro tranquilo y protector. Excelente con niños y otros animales. Muy obediente y cariñoso.',
+                'foto_principal' => null,
                 'fundacion' => (object)[
                     'id' => 3,
                     'Nombre_1' => 'Rescate Animal'

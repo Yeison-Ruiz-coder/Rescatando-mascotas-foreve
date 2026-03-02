@@ -41,9 +41,9 @@ class RescateController extends Controller
     /**
      * Reportar un animal para rescate
      */
-    public function reportar()
+    public function create()
     {
-        return view('public.rescates.reportar');
+        return view('public.rescates.create');
     }
 
     /**
