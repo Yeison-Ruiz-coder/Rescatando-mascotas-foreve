@@ -41,8 +41,8 @@
                         <i class="fas fa-paw"></i>
                     </div>
                     <div class="stat-info">
-                        <h4>{{ $mascotas->count() }}</h4>
-                        <p>Total Mostrado</p>
+                        <h4>{{ $mascotas->total() }}</h4>
+                        <p>Total en Sistema</p>
                     </div>
                 </div>
             </div>

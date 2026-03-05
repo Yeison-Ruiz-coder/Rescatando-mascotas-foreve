@@ -42,7 +42,7 @@ class Mascota extends Model
     // Relaciones
     public function fundacion()
     {
-        return $this->belongsTo(User::class, 'fundacion_id');
+        return $this->belongsTo(Fundacion::class, 'fundacion_id');
     }
 
     public function razas()

@@ -10,6 +10,7 @@ use App\Models\TipoVacuna;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class MascotaController extends Controller
 {
@@ -18,7 +19,7 @@ class MascotaController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Mascota::with('fundacion', 'razas');
+        $query = Mascota::with(['fundacion', 'razas', 'vacunas']); // ✅ Agregué 'vacunas'
 
         // Filtros
         if ($request->filled('estado')) {
@@ -34,14 +35,17 @@ class MascotaController extends Controller
         }
 
         if ($request->filled('buscar')) {
-            $query->where('nombre_mascota', 'like', '%' . $request->buscar . '%');
+            $query->where(function($q) use ($request) {
+                $q->where('nombre_mascota', 'like', '%' . $request->buscar . '%')
+                  ->orWhere('lugar_rescate', 'like', '%' . $request->buscar . '%'); // ✅ Búsqueda mejorada
+            });
         }
 
         $mascotas = $query->latest()->paginate(15);
 
         $fundaciones = Fundacion::all();
         $estados = ['En adopcion', 'Adoptado', 'Rescatada', 'En acogida'];
-        $especies = Mascota::distinct('especie')->pluck('especie');
+        $especies = Mascota::whereNotNull('especie')->distinct('especie')->pluck('especie');
 
         return view('admin.mascotas.index', compact('mascotas', 'fundaciones', 'estados', 'especies'));
     }
@@ -52,8 +56,8 @@ class MascotaController extends Controller
     public function create()
     {
         $fundaciones = Fundacion::all();
-        $razas = Raza::all();
-        $vacunas = TipoVacuna::all();
+        $razas = Raza::orderBy('especie')->orderBy('nombre_raza')->get(); // ✅ Ordenado
+        $vacunas = TipoVacuna::orderBy('nombre_vacuna')->get();
 
         return view('admin.mascotas.create', compact('fundaciones', 'razas', 'vacunas'));
     }
@@ -69,21 +73,33 @@ class MascotaController extends Controller
             'edad_aprox' => 'nullable|integer|min:0|max:30',
             'genero' => 'required|in:Macho,Hembra,Desconocido',
             'estado' => 'required|in:En adopcion,Adoptado,Rescatada,En acogida',
+            'lugar_rescate' => 'nullable|string|max:255', // ✅ Agregado
             'descripcion' => 'nullable|string',
-            'foto_principal' => 'nullable|image|max:2048',
-            'galeria_fotos.*' => 'nullable|image|max:2048',
+            'foto_principal' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'galeria_fotos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'fundacion_id' => 'required|exists:fundaciones,id',
-            'apto_con_ninos' => 'boolean',
-            'apto_con_otros_animales' => 'boolean',
+            'necesita_hogar_temporal' => 'nullable|boolean', // ✅ Agregado
+            'apto_con_ninos' => 'nullable|boolean',
+            'apto_con_otros_animales' => 'nullable|boolean',
             'condiciones_especiales' => 'nullable|string',
-            'razas' => 'array',
-            'vacunas' => 'array',
+            'fecha_ingreso' => 'nullable|date', // ✅ Agregado
+            'fecha_salida' => 'nullable|date|after_or_equal:fecha_ingreso', // ✅ Agregado
+            'razas' => 'nullable|array',
+            'razas.*' => 'exists:razas,id',
+            'vacunas' => 'nullable|array',
+            'vacunas.*' => 'exists:tipos_vacunas,id',
         ]);
 
         DB::beginTransaction();
 
         try {
+            // Preparar datos
             $data = $request->except(['foto_principal', 'galeria_fotos', 'razas', 'vacunas']);
+
+            // Manejar booleanos (si no vienen en el request, serán false)
+            $data['necesita_hogar_temporal'] = $request->has('necesita_hogar_temporal');
+            $data['apto_con_ninos'] = $request->has('apto_con_ninos');
+            $data['apto_con_otros_animales'] = $request->has('apto_con_otros_animales');
 
             // Foto principal
             if ($request->hasFile('foto_principal')) {
@@ -91,15 +107,16 @@ class MascotaController extends Controller
                 $data['foto_principal'] = $path;
             }
 
-            // Galería
+            // Galería - ✅ CORREGIDO: Usar array directamente
             if ($request->hasFile('galeria_fotos')) {
                 $galeria = [];
                 foreach ($request->file('galeria_fotos') as $foto) {
                     $galeria[] = $foto->store('mascotas/galeria', 'public');
                 }
-                $data['galeria_fotos'] = json_encode($galeria);
+                $data['galeria_fotos'] = $galeria; // El casts 'array' lo maneja
             }
 
+            // Crear mascota
             $mascota = Mascota::create($data);
 
             // Sincronizar razas
@@ -107,7 +124,7 @@ class MascotaController extends Controller
                 $mascota->razas()->sync($request->razas);
             }
 
-            // Sincronizar vacunas
+            // Sincronizar vacunas con fecha actual
             if ($request->has('vacunas')) {
                 $vacunasData = [];
                 foreach ($request->vacunas as $vacunaId) {
@@ -119,10 +136,13 @@ class MascotaController extends Controller
             DB::commit();
 
             return redirect()->route('admin.mascotas.index')
-                ->with('success', 'Mascota creada exitosamente');
+                ->with('success', 'Mascota creada exitosamente.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Error al crear mascota: ' . $e->getMessage());
+            Log::error('Error al crear mascota: ' . $e->getMessage());
+
+            return back()->with('error', 'Error al crear mascota. Por favor, intenta nuevamente.')
+                ->withInput();
         }
     }
 
@@ -131,8 +151,16 @@ class MascotaController extends Controller
      */
     public function show($id)
     {
-        $mascota = Mascota::with(['fundacion', 'razas', 'vacunas', 'historialMedico', 'adopciones'])
-            ->findOrFail($id);
+        $mascota = Mascota::with([
+            'fundacion',
+            'razas',
+            'vacunas' => function($q) {
+                $q->withPivot('fecha_aplicacion'); // ✅ Asegurar que traiga fecha_aplicacion
+            },
+            'historialMedico',
+            'adopciones.solicitante',
+            'rescates'
+        ])->findOrFail($id);
 
         return view('admin.mascotas.show', compact('mascota'));
     }
@@ -142,11 +170,12 @@ class MascotaController extends Controller
      */
     public function edit($id)
     {
-        $mascota = Mascota::with('razas', 'vacunas')->findOrFail($id);
+        $mascota = Mascota::with(['razas', 'vacunas'])->findOrFail($id);
         $fundaciones = Fundacion::all();
-        $razas = Raza::all();
-        $vacunas = TipoVacuna::all();
+        $razas = Raza::orderBy('especie')->orderBy('nombre_raza')->get();
+        $vacunas = TipoVacuna::orderBy('nombre_vacuna')->get();
 
+        // Obtener IDs seleccionados
         $razasSeleccionadas = $mascota->razas->pluck('id')->toArray();
         $vacunasSeleccionadas = $mascota->vacunas->pluck('id')->toArray();
 
@@ -173,15 +202,21 @@ class MascotaController extends Controller
             'edad_aprox' => 'nullable|integer|min:0|max:30',
             'genero' => 'required|in:Macho,Hembra,Desconocido',
             'estado' => 'required|in:En adopcion,Adoptado,Rescatada,En acogida',
+            'lugar_rescate' => 'nullable|string|max:255',
             'descripcion' => 'nullable|string',
-            'foto_principal' => 'nullable|image|max:2048',
-            'galeria_fotos.*' => 'nullable|image|max:2048',
+            'foto_principal' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'galeria_fotos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'fundacion_id' => 'required|exists:fundaciones,id',
-            'apto_con_ninos' => 'boolean',
-            'apto_con_otros_animales' => 'boolean',
+            'necesita_hogar_temporal' => 'nullable|boolean',
+            'apto_con_ninos' => 'nullable|boolean',
+            'apto_con_otros_animales' => 'nullable|boolean',
             'condiciones_especiales' => 'nullable|string',
-            'razas' => 'array',
-            'vacunas' => 'array',
+            'fecha_ingreso' => 'nullable|date',
+            'fecha_salida' => 'nullable|date|after_or_equal:fecha_ingreso',
+            'razas' => 'nullable|array',
+            'razas.*' => 'exists:razas,id',
+            'vacunas' => 'nullable|array',
+            'vacunas.*' => 'exists:tipos_vacunas,id',
         ]);
 
         DB::beginTransaction();
@@ -189,8 +224,14 @@ class MascotaController extends Controller
         try {
             $data = $request->except(['foto_principal', 'galeria_fotos', 'razas', 'vacunas']);
 
+            // Manejar booleanos
+            $data['necesita_hogar_temporal'] = $request->has('necesita_hogar_temporal');
+            $data['apto_con_ninos'] = $request->has('apto_con_ninos');
+            $data['apto_con_otros_animales'] = $request->has('apto_con_otros_animales');
+
             // Procesar foto principal
             if ($request->hasFile('foto_principal')) {
+                // Eliminar foto anterior si existe
                 if ($mascota->foto_principal) {
                     Storage::disk('public')->delete($mascota->foto_principal);
                 }
@@ -198,9 +239,8 @@ class MascotaController extends Controller
                 $data['foto_principal'] = $path;
             }
 
-            // 👇 CORREGIDO: Procesar galería de fotos
+            // Procesar galería - ✅ VERSIÓN MEJORADA
             if ($request->hasFile('galeria_fotos')) {
-                // Obtener galería actual (ya es array por el casts)
                 $galeria = $mascota->galeria_fotos ?? [];
 
                 // Asegurar que sea array
@@ -213,24 +253,35 @@ class MascotaController extends Controller
                     $galeria[] = $foto->store('mascotas/galeria', 'public');
                 }
 
-                // Asignar el array directamente (el casts lo convierte a JSON al guardar)
-                $data['galeria_fotos'] = $galeria; // 👈 IMPORTANTE: asignar array, NO json_encode
+                $data['galeria_fotos'] = $galeria;
             }
 
+            // Actualizar mascota
             $mascota->update($data);
 
             // Sincronizar razas
             if ($request->has('razas')) {
                 $mascota->razas()->sync($request->razas);
+            } else {
+                $mascota->razas()->sync([]); // Limpiar si no se enviaron
             }
 
             // Sincronizar vacunas
             if ($request->has('vacunas')) {
                 $vacunasData = [];
                 foreach ($request->vacunas as $vacunaId) {
-                    $vacunasData[$vacunaId] = ['fecha_aplicacion' => now()];
+                    // Verificar si ya tenía fecha_aplicacion
+                    $fechaExistente = $mascota->vacunas()
+                        ->where('tipos_vacunas_id', $vacunaId)
+                        ->first()?->pivot->fecha_aplicacion;
+
+                    $vacunasData[$vacunaId] = [
+                        'fecha_aplicacion' => $fechaExistente ?? now()
+                    ];
                 }
                 $mascota->vacunas()->sync($vacunasData);
+            } else {
+                $mascota->vacunas()->sync([]);
             }
 
             DB::commit();
@@ -239,39 +290,81 @@ class MascotaController extends Controller
                 ->with('success', 'Mascota actualizada exitosamente.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Error al actualizar: ' . $e->getMessage())
+            Log::error('Error al actualizar mascota: ' . $e->getMessage());
+
+            return back()->with('error', 'Error al actualizar. Por favor, intenta nuevamente.')
                 ->withInput();
         }
     }
+
     /**
      * Eliminar mascota
      */
     public function destroy(Mascota $mascota)
     {
-        // Eliminar foto principal
-        if ($mascota->foto_principal) {
-            if (Storage::disk('public')->exists($mascota->foto_principal)) {
+        DB::beginTransaction();
+
+        try {
+            // Eliminar foto principal
+            if ($mascota->foto_principal) {
                 Storage::disk('public')->delete($mascota->foto_principal);
             }
-        }
 
-        // Eliminar fotos de galería
-        if ($mascota->galeria_fotos) {
-            // Ya viene como array por el casts
-            $galeria = $mascota->galeria_fotos;
-
-            if (is_array($galeria)) {
-                foreach ($galeria as $foto) {
-                    if (!empty($foto) && Storage::disk('public')->exists($foto)) {
+            // Eliminar fotos de galería
+            if ($mascota->galeria_fotos && is_array($mascota->galeria_fotos)) {
+                foreach ($mascota->galeria_fotos as $foto) {
+                    if (!empty($foto)) {
                         Storage::disk('public')->delete($foto);
                     }
                 }
             }
+
+            // Eliminar relaciones (por las foreign keys con cascade no es necesario, pero por seguridad)
+            $mascota->razas()->detach();
+            $mascota->vacunas()->detach();
+
+            // Eliminar la mascota
+            $mascota->delete();
+
+            DB::commit();
+
+            return redirect()->route('admin.mascotas.index')
+                ->with('success', 'Mascota eliminada exitosamente.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error al eliminar mascota: ' . $e->getMessage());
+
+            return back()->with('error', 'Error al eliminar mascota.');
+        }
+    }
+
+    /**
+     * Eliminar una foto específica de la galería (AJAX)
+     */
+    public function eliminarFotoGaleria(Request $request, $id)
+    {
+        $request->validate([
+            'foto' => 'required|string'
+        ]);
+
+        $mascota = Mascota::findOrFail($id);
+
+        // Obtener galería actual
+        $galeria = $mascota->galeria_fotos ?? [];
+
+        if (is_array($galeria) && in_array($request->foto, $galeria)) {
+            // Eliminar archivo físico
+            Storage::disk('public')->delete($request->foto);
+
+            // Quitar del array
+            $galeria = array_values(array_diff($galeria, [$request->foto]));
+
+            // Actualizar
+            $mascota->update(['galeria_fotos' => $galeria]);
+
+            return response()->json(['success' => true]);
         }
 
-        $mascota->delete();
-
-        return redirect()->route('admin.mascotas.index')
-            ->with('success', 'Mascota eliminada exitosamente.');
+        return response()->json(['success' => false], 404);
     }
 }

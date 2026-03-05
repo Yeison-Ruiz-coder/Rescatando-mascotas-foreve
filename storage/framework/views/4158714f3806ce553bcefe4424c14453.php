@@ -5,33 +5,78 @@
     </h4>
     <div class="row g-3">
         <div class="col-md-6">
-            <label for="Fecha_ingreso" class="form-label">
+            <label for="fecha_ingreso" class="form-label">
                 Fecha de Ingreso <span class="required">*</span>
             </label>
-            <input type="date" 
-                   class="form-control form-control-custom" 
-                   id="Fecha_ingreso" 
-                   name="Fecha_ingreso" 
-                   value="<?php echo e(old('Fecha_ingreso', date('Y-m-d'))); ?>" 
+            <input type="date"
+                   class="form-control form-control-custom <?php $__errorArgs = ['fecha_ingreso'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                   id="fecha_ingreso"
+                   name="fecha_ingreso"
+                   value="<?php echo e(old('fecha_ingreso', date('Y-m-d'))); ?>"
                    required>
+            <?php $__errorArgs = ['fecha_ingreso'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         </div>
+
         <div class="col-md-6">
-            <label for="Fecha_salida" class="form-label">
+            <label for="fecha_salida" class="form-label">
                 Fecha de Salida (si aplica)
             </label>
-            <input type="date" 
-                   class="form-control form-control-custom" 
-                   id="Fecha_salida" 
-                   name="Fecha_salida">
+            <input type="date"
+                   class="form-control form-control-custom <?php $__errorArgs = ['fecha_salida'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                   id="fecha_salida"
+                   name="fecha_salida"
+                   value="<?php echo e(old('fecha_salida')); ?>">
+            <?php $__errorArgs = ['fecha_salida'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         </div>
+
         <div class="col-12">
             <label for="fundacion_id" class="form-label">
-                Fundación (opcional)
+                Fundación <span class="required">*</span>
             </label>
-            <select class="form-select form-select-custom" 
-                    id="fundacion_id" 
-                    name="fundacion_id">
-                <option value="">Sin fundación asignada</option>
+            <select class="form-select form-select-custom <?php $__errorArgs = ['fundacion_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                    id="fundacion_id"
+                    name="fundacion_id"
+                    required>
+                <option value="">Selecciona una fundación</option>
                 <?php $__currentLoopData = $fundaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fundacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <option value="<?php echo e($fundacion->id); ?>"
                         <?php echo e(old('fundacion_id') == $fundacion->id ? 'selected' : ''); ?>>
@@ -40,6 +85,17 @@
                     </option>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
+            <?php $__errorArgs = ['fundacion_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         </div>
     </div>
-</div><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/create/form-dates-foundation.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/create/form-dates-foundation.blade.php ENDPATH**/ ?>

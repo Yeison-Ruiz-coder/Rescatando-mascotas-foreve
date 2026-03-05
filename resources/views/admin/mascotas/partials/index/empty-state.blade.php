@@ -10,7 +10,7 @@
             <a href="{{ route('admin.mascotas.index') }}" class="btn btn-primary">
                 <i class="fas fa-redo me-2"></i>Ver todas las mascotas
             </a>
-            <a href="{{  route('admin.mascotas.create') }}" class="btn btn-success">
+            <a href="{{ route('admin.mascotas.create') }}" class="btn btn-success">
                 <i class="fas fa-plus me-2"></i>Crear Nueva Mascota
             </a>
         </div>
