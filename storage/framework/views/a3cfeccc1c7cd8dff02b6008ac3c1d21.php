@@ -4,108 +4,166 @@
         <i class="fas fa-camera me-2"></i>Galería de Fotos
     </h4>
     <div class="row g-3">
-        <div class="col-12">
-            <label for="fotos" class="form-label">
-                Fotos de la Mascota <span class="required">*</span>
+        <!-- Foto Principal -->
+        <div class="col-md-6">
+            <label for="foto_principal" class="form-label">
+                Foto Principal <span class="required">*</span>
             </label>
-            <input type="file" 
-                   class="form-control form-control-custom" 
-                   id="fotos" 
-                   name="fotos[]" 
-                   multiple 
-                   accept="image/*" 
-                   required
-                   onchange="previewGalleryImages(this)">
+            <input type="file"
+                   class="form-control form-control-custom <?php $__errorArgs = ['foto_principal'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                   id="foto_principal"
+                   name="foto_principal"
+                   accept="image/jpeg,image/png,image/jpg,image/gif"
+                   required>
             <div class="form-help">
-                <i class="fas fa-info-circle"></i> Selecciona una o más fotos • La primera será la principal • Formatos: JPG, PNG, GIF • Máx. 2MB cada una
+                <i class="fas fa-info-circle"></i> Esta será la foto destacada • Formatos: JPG, PNG, GIF • Máx. 2MB
             </div>
+            <?php $__errorArgs = ['foto_principal'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
-            <!-- Preview de imágenes seleccionadas -->
-            <div id="preview-galeria" class="preview-container" style="display: none;">
-                <h6 class="preview-title">Vista previa de las imágenes:</h6>
+            <!-- Preview foto principal -->
+            <div id="preview_principal_container" class="mt-2" style="display: none;">
+                <img id="preview_principal" src="#" alt="Vista previa" class="img-thumbnail" style="max-height: 150px;">
+            </div>
+        </div>
+
+        <!-- Galería de Fotos -->
+        <div class="col-md-6">
+            <label for="galeria_fotos" class="form-label">
+                Galería de Fotos
+            </label>
+            <input type="file"
+                   class="form-control form-control-custom <?php $__errorArgs = ['galeria_fotos'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> <?php $__errorArgs = ['galeria_fotos.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                   id="galeria_fotos"
+                   name="galeria_fotos[]"
+                   multiple
+                   accept="image/jpeg,image/png,image/jpg,image/gif">
+            <div class="form-help">
+                <i class="fas fa-info-circle"></i> Puedes seleccionar múltiples fotos adicionales • Máx. 2MB cada una
+            </div>
+            <?php $__errorArgs = ['galeria_fotos'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            <?php $__errorArgs = ['galeria_fotos.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback"><?php echo e($message); ?></div>
+            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+
+            <!-- Preview de galería -->
+            <div id="preview_galeria_container" class="mt-2" style="display: none;">
+                <h6 class="preview-title">Vista previa:</h6>
                 <div class="gallery-preview" id="galleryPreview"></div>
             </div>
-
-            <?php $__errorArgs = ['fotos'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                <div class="error-message"><?php echo e($message); ?></div>
-            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-            <?php $__errorArgs = ['fotos.*'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                <div class="error-message"><?php echo e($message); ?></div>
-            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 </div>
 
 <script>
-function previewGalleryImages(input) {
-    const previewContainer = document.getElementById('preview-galeria');
+// Script para previsualizar foto principal
+document.getElementById('foto_principal').addEventListener('change', function(e) {
+    const previewContainer = document.getElementById('preview_principal_container');
+    const previewImg = document.getElementById('preview_principal');
+
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewContainer.style.display = 'block';
+        }
+
+        reader.readAsDataURL(this.files[0]);
+    } else {
+        previewContainer.style.display = 'none';
+        previewImg.src = '#';
+    }
+});
+
+// Script para previsualizar galería
+document.getElementById('galeria_fotos').addEventListener('change', function(e) {
+    const previewContainer = document.getElementById('preview_galeria_container');
     const galleryPreview = document.getElementById('galleryPreview');
-    
-    // Limpiar preview anterior
+
     galleryPreview.innerHTML = '';
-    
-    if (input.files && input.files.length > 0) {
-        // Mostrar contenedor de preview
+
+    if (this.files && this.files.length > 0) {
         previewContainer.style.display = 'block';
-        
-        // Procesar cada archivo
-        Array.from(input.files).forEach((file, index) => {
+
+        Array.from(this.files).forEach((file, index) => {
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
-                
+
                 reader.onload = function(e) {
                     const previewItem = document.createElement('div');
                     previewItem.className = 'gallery-preview-item';
                     previewItem.innerHTML = `
-                        <span class="preview-badge">${index + 1}</span>
-                        <img src="${e.target.result}" alt="Preview ${index + 1}">
-                        <button type="button" class="remove-preview" onclick="removeImagePreview(this, ${index})">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        <img src="${e.target.result}" alt="Preview ${index + 1}" class="img-thumbnail" style="height: 80px; width: 80px; object-fit: cover; margin: 5px;">
+                        <span class="badge bg-primary position-absolute top-0 start-0">${index + 1}</span>
                     `;
                     galleryPreview.appendChild(previewItem);
                 };
-                
+
                 reader.readAsDataURL(file);
             }
         });
     } else {
-        // Ocultar contenedor si no hay archivos
         previewContainer.style.display = 'none';
     }
-}
+});
+</script>
 
-function removeImagePreview(button, index) {
-    const input = document.getElementById('fotos');
-    const files = Array.from(input.files);
-    
-    // Remover archivo del array
-    files.splice(index, 1);
-    
-    // Crear nuevo DataTransfer y actualizar input
-    const dt = new DataTransfer();
-    files.forEach(file => dt.items.add(file));
-    input.files = dt.files;
-    
-    // Volver a generar el preview
-    previewGalleryImages(input);
-    
-    // Disparar evento change para actualizar validación
-    const event = new Event('change', { bubbles: true });
-    input.dispatchEvent(event);
+<style>
+.gallery-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
 }
-</script><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/create/form-gallery.blade.php ENDPATH**/ ?>
+.gallery-preview-item {
+    position: relative;
+    display: inline-block;
+}
+</style>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/create/form-gallery.blade.php ENDPATH**/ ?>

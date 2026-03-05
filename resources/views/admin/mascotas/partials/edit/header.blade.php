@@ -5,7 +5,7 @@
             <h1 class="display-5 fw-bold">
                 <i class="fas fa-edit me-3"></i>Editar Mascota
             </h1>
-            <p class="lead text-muted">Actualiza la información de <strong class="text-turquesa">{{ $mascota->Nombre_mascota }}</strong></p>
+            <p class="lead text-muted">Actualiza la información de <strong class="text-turquesa">{{ $mascota->nombre_mascota }}</strong></p>
         </div>
     </div>
 </div>

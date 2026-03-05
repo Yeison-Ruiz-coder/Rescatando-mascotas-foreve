@@ -41,11 +41,12 @@
                         <i class="fas fa-paw"></i>
                     </div>
                     <div class="stat-info">
-                        <h4><?php echo e($mascotas->count()); ?></h4>
-                        <p>Total Mostrado</p>
+                        <h4><?php echo e($mascotas->total()); ?></h4>
+                        <p>Total en Sistema</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/index/stats.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/mascotas/partials/index/stats.blade.php ENDPATH**/ ?>

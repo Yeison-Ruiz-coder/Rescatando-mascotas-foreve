@@ -3,7 +3,7 @@
     <div class="col-12">
         <div class="create-mascota-header text-center">
             <h1 class="display-5 fw-bold">
-                <i class="fas fa-paw me-3"></i>Reportar Nueva Mascota
+                <i class="fas fa-paw me-3"></i>Registrar Nueva Mascota
             </h1>
             <p class="lead">Ayuda a una mascota a encontrar un hogar lleno de amor</p>
         </div>

@@ -1,5 +1,5 @@
 <!-- Botones de acción -->
-<div class="form-actions">
+<div class="form-actions mt-4">
     <button type="submit" class="btn btn-submit">
         <i class="fas fa-paw me-2"></i>Registrar Mascota
     </button>

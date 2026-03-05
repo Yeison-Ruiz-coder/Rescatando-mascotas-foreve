@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        
         if (!Schema::hasColumn('mascotas', 'galeria_fotos')) {
             Schema::table('mascotas', function (Blueprint $table) {
-                $table->json('galeria_fotos')->nullable()->after('Foto');
+                // Usa el nombre correcto de la columna anterior
+                $table->json('galeria_fotos')->nullable()->after('foto_principal');
             });
         }
     }
 
     public function down(): void
     {
-        
+
         if (Schema::hasColumn('mascotas', 'galeria_fotos')) {
             Schema::table('mascotas', function (Blueprint $table) {
                 $table->dropColumn('galeria_fotos');
