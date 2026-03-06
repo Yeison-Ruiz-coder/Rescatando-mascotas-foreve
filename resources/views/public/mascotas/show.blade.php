@@ -24,7 +24,7 @@
         <div class="col-lg-6">
             <div class="card card-mascota">
                 <div class="card-header card-header-turquesa">
-                    <h3 class="mb-0 fw-bold">{{ $mascota->Nombre_mascota }}</h3>
+                    <h3 class="mb-0 fw-bold">{{ $mascota->nombre_mascota }}</h3>
                 </div>
                 <div class="card-body p-4">
                     <!-- Información básica -->

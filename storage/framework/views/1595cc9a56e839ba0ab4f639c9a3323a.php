@@ -4,4 +4,5 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
         <?php echo $__env->make('public.mascotas.partials.index.empty-state', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?>
-</div><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/mascotas/partials/index/mascotas-grid.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/mascotas/partials/index/mascotas-grid.blade.php ENDPATH**/ ?>

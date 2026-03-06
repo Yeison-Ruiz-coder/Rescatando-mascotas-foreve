@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="{{ asset('css/components/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('css/components/public-navbar.css') }}" rel="stylesheet">
-
     
+
     @stack('styles')
 </head>
 

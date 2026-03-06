@@ -1,13 +1,13 @@
 <!-- Badges informativos -->
 <div class="mb-4">
     <span class="badge badge-especie me-2 mb-2">
-        <i class="fas fa-paw me-1"></i>{{ $mascota->Especie }}
+        <i class="fas fa-paw me-1"></i>{{ $mascota->especie ?? 'No especificada' }}
     </span>
     <span class="badge badge-genero me-2 mb-2">
-        <i class="fas fa-venus-mars me-1"></i>{{ $mascota->Genero }}
+        <i class="fas fa-venus-mars me-1"></i>{{ $mascota->genero ?? 'No especificado' }}
     </span>
     <span class="badge bg-secondary me-2 mb-2 px-3 py-2">
-        <i class="fas fa-birthday-cake me-1"></i>{{ $mascota->Edad_aprox }} años
+        <i class="fas fa-birthday-cake me-1"></i>{{ $mascota->edad_aprox ?? '?' }} años
     </span>
 </div>
 
@@ -18,7 +18,7 @@
             <i class="fas fa-paw icono me-3"></i>
             <div>
                 <small class="text-muted d-block">Especie</small>
-                <strong class="text-turquesa">{{ $mascota->Especie }}</strong>
+                <strong class="text-turquesa">{{ $mascota->especie ?? 'No especificada' }}</strong>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
             <i class="fas fa-venus-mars icono me-3"></i>
             <div>
                 <small class="text-muted d-block">Género</small>
-                <strong class="text-turquesa">{{ $mascota->Genero }}</strong>
+                <strong class="text-turquesa">{{ $mascota->genero ?? 'No especificado' }}</strong>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
             <i class="fas fa-birthday-cake icono me-3"></i>
             <div>
                 <small class="text-muted d-block">Edad</small>
-                <strong class="text-turquesa">{{ $mascota->Edad_aprox }} años</strong>
+                <strong class="text-turquesa">{{ $mascota->edad_aprox ?? '?' }} años</strong>
             </div>
         </div>
     </div>
@@ -45,7 +45,15 @@
             <i class="fas fa-dna icono me-3"></i>
             <div>
                 <small class="text-muted d-block">Raza</small>
-                <strong class="text-turquesa">{{ $mascota->Raza }}</strong>
+                <strong class="text-turquesa">
+                    @if($mascota->razas && $mascota->razas->count() > 0)
+                        @foreach($mascota->razas as $raza)
+                            {{ $raza->nombre_raza }}@if(!$loop->last), @endif
+                        @endforeach
+                    @else
+                        No especificada
+                    @endif
+                </strong>
             </div>
         </div>
     </div>

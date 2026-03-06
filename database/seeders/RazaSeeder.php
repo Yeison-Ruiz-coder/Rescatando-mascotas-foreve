@@ -3,40 +3,50 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Raza;
+use App\Models\Raza; // Asegúrate de tener el modelo Raza
 
 class RazaSeeder extends Seeder
 {
     public function run(): void
     {
         $razas = [
-            // Razas de Perros
-            ['nombre_raza' => 'Labrador Retriever', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Pastor Alemán', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Golden Retriever', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Bulldog Francés', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Poodle', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Chihuahua', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Husky Siberiano', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Dálmata', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Pug', 'especie' => 'Perro'],
-            ['nombre_raza' => 'Rottweiler', 'especie' => 'Perro'],
-
-            // Razas de Gatos
-            ['nombre_raza' => 'Siamés', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Persa', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Maine Coon', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Bengalí', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Sphynx', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Angora', 'especie' => 'Gato'],
-            ['nombre_raza' => 'British Shorthair', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Abisinio', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Ragdoll', 'especie' => 'Gato'],
-            ['nombre_raza' => 'Birmano', 'especie' => 'Gato'],
+            // Razas de perros
+            ['nombre_raza' => 'Labrador Retriever', 'especie' => 'perro'],
+            ['nombre_raza' => 'Pastor Alemán', 'especie' => 'perro'],
+            ['nombre_raza' => 'Golden Retriever', 'especie' => 'perro'],
+            ['nombre_raza' => 'Bulldog Francés', 'especie' => 'perro'],
+            ['nombre_raza' => 'Beagle', 'especie' => 'perro'],
+            ['nombre_raza' => 'Poodle', 'especie' => 'perro'],
+            ['nombre_raza' => 'Chihuahua', 'especie' => 'perro'],
+            ['nombre_raza' => 'Yorkshire Terrier', 'especie' => 'perro'],
+            ['nombre_raza' => 'Boxer', 'especie' => 'perro'],
+            ['nombre_raza' => 'Shih Tzu', 'especie' => 'perro'],
+            ['nombre_raza' => 'Rottweiler', 'especie' => 'perro'],
+            ['nombre_raza' => 'Doberman', 'especie' => 'perro'],
+            ['nombre_raza' => 'Husky Siberiano', 'especie' => 'perro'],
+            ['nombre_raza' => 'Dálmata', 'especie' => 'perro'],
+            ['nombre_raza' => 'Pug', 'especie' => 'perro'],
+            ['nombre_raza' => 'Maltés', 'especie' => 'perro'],
+            ['nombre_raza' => 'Pomerania', 'especie' => 'perro'],
+            ['nombre_raza' => 'San Bernardo', 'especie' => 'perro'],
+            ['nombre_raza' => 'Dogo Argentino', 'especie' => 'perro'],
+            ['nombre_raza' => 'Pitbull', 'especie' => 'perro'],
+            ['nombre_raza' => 'Mestizo', 'especie' => 'perro'],
+            ['nombre_raza' => 'Criollo', 'especie' => 'perro'],
+            // ... resto de razas
         ];
 
         foreach ($razas as $raza) {
-            Raza::create($raza);
+            Raza::updateOrCreate(
+                ['nombre_raza' => $raza['nombre_raza']], // Buscar por nombre_raza
+                [
+                    'especie' => $raza['especie'],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]
+            );
         }
+
+        $this->command->info('Razas insertadas/actualizadas correctamente');
     }
 }

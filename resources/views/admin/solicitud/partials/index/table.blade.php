@@ -6,6 +6,7 @@
                 <th>ID</th>
                 <th>Tipo</th>
                 <th>Solicitante</th>
+                <th>Item</th>
                 <th>Fecha</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -16,24 +17,46 @@
                 <tr>
                     <td>#{{ $solicitud->id }}</td>
                     <td>
-                        <span class="tipo-badge">{{ $solicitud->tipo_solicitud }}</span>
+                        <span class="tipo-badge tipo-{{ $solicitud->tipo_solicitud }}">
+                            {{ ucfirst($solicitud->tipo_solicitud) }}
+                        </span>
                     </td>
                     <td>
                         @if ($solicitud->usuario)
-                            {{ $solicitud->usuario->nombre }}
-                            {{ $solicitud->usuario->apellidos }}
+                            {{ $solicitud->usuario->name ?? $solicitud->usuario->nombre_completo }}
                         @else
-                            Usuario #{{ $solicitud->user_id }}
+                            {{ $solicitud->nombre_solicitante }}
+                            @if($solicitud->esAdopcion() && $apellido = $solicitud->getDatoAdopcion('apellido_solicitante'))
+                                {{ $apellido }}
+                            @endif
+                            <br>
+                            <small class="text-muted">{{ $solicitud->email_solicitante }}</small>
+                        @endif
+                    </td>
+                    <td>
+                        @if($solicitud->solicitable)
+                            @if($solicitud->solicitable_type == 'App\Models\Mascota')
+                                <span class="item-info">
+                                    <i class="fa-solid fa-paw"></i>
+                                    {{ $solicitud->solicitable->nombre ?? 'Mascota' }}
+                                </span>
+                            @else
+                                <span class="item-info">
+                                    {{ class_basename($solicitud->solicitable_type) }}
+                                </span>
+                            @endif
+                        @else
+                            <span class="text-muted">-</span>
                         @endif
                     </td>
                     <td>{{ $solicitud->fecha_solicitud->format('d/m/Y') }}</td>
                     <td>
                         @php
-                            $estado = $solicitud->estado ?? 'Sin Estado';
-                            $estado_class = strtolower(str_replace(' ', '-', $estado));
+                            $estado_class = strtolower(str_replace('_', '-', $solicitud->estado ?? 'pendiente'));
+                            $estado_texto = str_replace('_', ' ', ucfirst($solicitud->estado ?? 'pendiente'));
                         @endphp
                         <span class="status-badge {{ $estado_class }}">
-                            {{ $estado }}
+                            {{ $estado_texto }}
                         </span>
                     </td>
                     <td class="actions">
@@ -47,7 +70,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-action delete-btn" title="Eliminar"
-                                onclick="return confirm('¿Estás seguro?')">
+                                onclick="return confirm('¿Estás seguro de eliminar esta solicitud?')">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </form>
@@ -55,10 +78,10 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="card-actions no-data">
+                    <td colspan="7" class="no-data">
                         <i class="fa-solid fa-clipboard-list fa-3x"></i>
                         <p>No hay solicitudes registradas</p>
-                        <a href="{{ route('admin.solicitudes.create') }}" class="btn-action primary-btn ">
+                        <a href="{{ route('admin.solicitudes.create') }}" class="btn-action primary-btn">
                             Crear Primera Solicitud
                         </a>
                     </td>

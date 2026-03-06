@@ -4,7 +4,7 @@
     </h5>
     <div class="info-circle">
         <p class="text-muted mb-0" style="line-height: 1.6;">
-            {{ $mascota->Descripcion }}
+            {{ $mascota->descripcion ?? 'No hay descripción disponible.' }}
         </p>
     </div>
 </div>

@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
     <link href="<?php echo e(asset('css/components/admin.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/components/public-navbar.css')); ?>" rel="stylesheet">
-
     
+
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 

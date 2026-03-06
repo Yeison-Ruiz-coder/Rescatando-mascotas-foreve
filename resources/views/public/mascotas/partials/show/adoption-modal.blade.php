@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title fw-bold text-white" id="modalAdopcionLabel">
-                    <i class="fas fa-heart me-2"></i>Solicitar Adopción de {{ $mascota->Nombre_mascota }}
+                    <i class="fas fa-heart me-2"></i>Solicitar Adopción de {{ $mascota->nombre_mascota }}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -12,7 +12,7 @@
                     <i class="fas fa-info-circle text-turquesa me-2"></i>
                     Para solicitar la adopción, por favor contacta directamente a la fundación.
                 </div>
-                
+
                 @if($mascota->fundacion)
                 <div class="card border-turquesa mb-4">
                     <div class="card-header bg-light py-2">
@@ -26,21 +26,21 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <strong class="text-turquesa d-block mb-1">Teléfono:</strong>
-                                <span class="text-muted">{{ $mascota->fundacion->Telefono }}</span>
+                                <span class="text-muted">{{ $mascota->fundacion->Telefono ?? 'No especificado' }}</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <strong class="text-turquesa d-block mb-1">Email:</strong>
-                                <span class="text-muted">{{ $mascota->fundacion->Email }}</span>
+                                <span class="text-muted">{{ $mascota->fundacion->Email ?? 'No especificado' }}</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <strong class="text-turquesa d-block mb-1">Dirección:</strong>
-                                <span class="text-muted">{{ $mascota->fundacion->Direccion }}</span>
+                                <span class="text-muted">{{ $mascota->fundacion->Direccion ?? 'No especificada' }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endif
-                
+
                 <div class="p-3 bg-gris-claro rounded">
                     <p class="text-muted mb-2 small">
                         <i class="fas fa-clock text-fucsia me-2"></i>
