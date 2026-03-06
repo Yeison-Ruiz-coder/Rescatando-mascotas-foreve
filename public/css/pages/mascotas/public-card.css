@@ -1,0 +1,186 @@
+/* ========================================
+   TARJETA DE MASCOTA - COMPONENTE REUTILIZABLE
+   ======================================== */
+
+/* TARJETAS DE MASCOTAS MODERNAS */
+.card-mascota-moderna {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-mascota-moderna:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor de imagen */
+.card-imagen-container {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+    flex-shrink: 0;
+}
+
+.card-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-mascota-moderna:hover .card-imagen-container img {
+    transform: scale(1.1);
+}
+
+/* Overlay */
+.overlay-mascota {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-mascota-moderna:hover .overlay-mascota {
+    opacity: 1;
+}
+
+/* Badges */
+.badges-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+}
+
+.badge-moderno {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-especie-moderno {
+    background: #F80058;
+    color: white;
+}
+
+.badge-genero-moderno {
+    background: rgba(253, 69, 134, 0.9);
+    color: white;
+}
+
+.badge-edad-moderno {
+    background: #FEA4C4;
+    color: #000;
+}
+
+/* Contenido de la tarjeta */
+.card-body-moderno {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.nombre-mascota {
+    color: var(--color-turquesa, #764ba2);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.descripcion-mascota {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+/* Información de fundación */
+.info-fundacion {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f4f4f4;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.info-fundacion i {
+    color: var(--color-turquesa, #764ba2);
+    margin-right: 0.5rem;
+}
+
+.info-fundacion span {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Botón */
+.btn-conocer-mas {
+    background: linear-gradient(135deg, var(--color-turquesa, #764ba2), #f55f93);
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+.btn-conocer-mas:hover {
+    background: linear-gradient(135deg, #f55f93, var(--color-turquesa, #764ba2));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-imagen-container {
+        height: 220px;
+    }
+
+    .badge-moderno {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body-moderno {
+        padding: 1rem;
+    }
+
+    .nombre-mascota {
+        font-size: 1.1rem;
+    }
+}

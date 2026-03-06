@@ -6,72 +6,140 @@
         <div class="form-grid">
             <!-- Información del Solicitante -->
             <div class="form-group">
-                <label for="usuario_id">
-                    <i class="fa-solid fa-user"></i> Solicitante:
+                <label for="user_id">
+                    <i class="fa-solid fa-user"></i> Usuario Registrado (opcional):
                 </label>
-                <select id="usuario_id" name="usuario_id" required class="form-control @error('usuario_id') is-invalid @enderror">
-                    <option value="">Selecciona un usuario</option>
+                <select id="user_id" name="user_id" class="form-control @error('user_id') is-invalid @enderror">
+                    <option value="">Selecciona un usuario (o completa datos manual)</option>
                     @foreach($usuarios as $usuario)
-                        <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
-                            {{ $usuario->email }}
-                            @if($usuario->nombre || $usuario->Nombre_1 || $usuario->name)
-                                - {{ $usuario->nombre ?? $usuario->nombre_completo ?? $usuario->name ?? '' }}
-
-                            @endif
+                        <option value="{{ $usuario->id }}" {{ old('user_id') == $usuario->id ? 'selected' : '' }}>
+                            {{ $usuario->email }} - {{ $usuario->name ?? $usuario->nombre_completo }}
                         </option>
                     @endforeach
                 </select>
-                @error('usuario_id')
+                @error('user_id')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Resto del formulario se mantiene igual -->
+            <!-- Separador: Datos manuales (se ocultan si hay user_id) -->
+            <div id="datosManuales" class="form-group full-width">
+                <h4>Datos del Solicitante (si no es usuario registrado)</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre_solicitante">Nombre:</label>
+                        <input type="text" id="nombre_solicitante" name="nombre_solicitante"
+                               value="{{ old('nombre_solicitante') }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email_solicitante">Email:</label>
+                        <input type="email" id="email_solicitante" name="email_solicitante"
+                               value="{{ old('email_solicitante') }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono_solicitante">Teléfono:</label>
+                        <input type="text" id="telefono_solicitante" name="telefono_solicitante"
+                               value="{{ old('telefono_solicitante') }}" class="form-control">
+                    </div>
+                </div>
+            </div>
+
             <!-- Tipo de Solicitud -->
             <div class="form-group">
-                <label for="tipo">
+                <label for="tipo_solicitud">
                     <i class="fa-solid fa-tag"></i> Tipo de Solicitud:
                 </label>
-                <select id="tipo" name="tipo" required class="form-control @error('tipo') is-invalid @enderror">
+                <select id="tipo_solicitud" name="tipo_solicitud" required class="form-control @error('tipo_solicitud') is-invalid @enderror">
                     <option value="">Selecciona un tipo</option>
-                    <option value="Para Adoptar" {{ old('tipo') == 'Para Adoptar' ? 'selected' : '' }}>Para Adoptar</option>
-                    <option value="Para Rescatar" {{ old('tipo') == 'Para Rescatar' ? 'selected' : '' }}>Para Rescatar</option>
-                    <option value="Para Apadrinar" {{ old('tipo') == 'Para Apadrinar' ? 'selected' : '' }}>Para Apadrinar</option>
-                    <option value="Para Donar" {{ old('tipo') == 'Para Donar' ? 'selected' : '' }}>Para Donar</option>
+                    <option value="adopcion" {{ old('tipo_solicitud') == 'adopcion' ? 'selected' : '' }}>Adopción</option>
+                    <option value="rescate" {{ old('tipo_solicitud') == 'rescate' ? 'selected' : '' }}>Rescate</option>
+                    <option value="apadrinamiento" {{ old('tipo_solicitud') == 'apadrinamiento' ? 'selected' : '' }}>Apadrinamiento</option>
+                    <option value="donacion" {{ old('tipo_solicitud') == 'donacion' ? 'selected' : '' }}>Donación</option>
+                    <option value="otro" {{ old('tipo_solicitud') == 'otro' ? 'selected' : '' }}>Otro</option>
                 </select>
-                @error('tipo')
+                @error('tipo_solicitud')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
 
-            <!-- Estado -->
+            <!-- Item Solicitado (Mascota) -->
             <div class="form-group">
-                <label for="estado">
-                    <i class="fa-solid fa-circle-check"></i> Estado:
+                <label for="solicitable_id">
+                    <i class="fa-solid fa-paw"></i> Mascota:
                 </label>
-                <select id="estado" name="estado" required class="form-control @error('estado') is-invalid @enderror">
-                    <option value="En Revisión" {{ old('estado', 'En Revisión') == 'En Revisión' ? 'selected' : '' }}>En Revisión</option>
-                    <option value="Aprobada" {{ old('estado') == 'Aprobada' ? 'selected' : '' }}>Aprobada</option>
-                    <option value="Rechazada" {{ old('estado') == 'Rechazada' ? 'selected' : '' }}>Rechazada</option>
+                <select id="solicitable_id" name="solicitable_id" required class="form-control @error('solicitable_id') is-invalid @enderror">
+                    <option value="">Selecciona una mascota</option>
+                    @foreach($mascotas as $mascota)
+                        <option value="{{ $mascota->id }}" {{ old('solicitable_id') == $mascota->id ? 'selected' : '' }}>
+                            {{ $mascota->nombre }} ({{ $mascota->especie }})
+                        </option>
+                    @endforeach
                 </select>
-                @error('estado')
+                <input type="hidden" name="solicitable_type" value="App\Models\Mascota">
+                @error('solicitable_id')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
+        </div>
 
-            <!-- Fecha de Solicitud -->
-            <div class="form-group">
-                <label for="fecha_solicitud">
-                    <i class="fa-solid fa-calendar"></i> Fecha de Solicitud:
-                </label>
-                <input type="datetime-local" id="fecha_solicitud" name="fecha_solicitud"
-                       value="{{ old('fecha_solicitud', now()->format('Y-m-d\TH:i')) }}"
-                       required class="form-control @error('fecha_solicitud') is-invalid @enderror">
-                @error('fecha_solicitud')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
-                <div class="help-text">
-                    <i class="fa-solid fa-info-circle"></i> Se autocompletará con la fecha y hora actual
+        <!-- Campos específicos para adopción (se muestran solo si se selecciona adopción) -->
+        <div id="camposAdopcion" style="display: none;">
+            <h4><i class="fa-solid fa-file-signature"></i> Detalles de Adopción</h4>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="datos_adopcion_apellido">Apellido:</label>
+                    <input type="text" id="datos_adopcion_apellido" name="datos_adopcion[apellido_solicitante]"
+                           value="{{ old('datos_adopcion.apellido_solicitante') }}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="datos_adopcion_direccion">Dirección:</label>
+                    <input type="text" id="datos_adopcion_direccion" name="datos_adopcion[direccion]"
+                           value="{{ old('datos_adopcion.direccion') }}" class="form-control">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="datos_adopcion_experiencia">Experiencia con mascotas:</label>
+                    <textarea id="datos_adopcion_experiencia" name="datos_adopcion[experiencia_mascotas]"
+                              rows="3" class="form-control">{{ old('datos_adopcion.experiencia_mascotas') }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="datos_adopcion_tipo_vivienda">Tipo de vivienda:</label>
+                    <select id="datos_adopcion_tipo_vivienda" name="datos_adopcion[tipo_vivienda]" class="form-control">
+                        <option value="">Selecciona...</option>
+                        <option value="casa" {{ old('datos_adopcion.tipo_vivienda') == 'casa' ? 'selected' : '' }}>Casa</option>
+                        <option value="apartamento" {{ old('datos_adopcion.tipo_vivienda') == 'apartamento' ? 'selected' : '' }}>Apartamento</option>
+                        <option value="finca" {{ old('datos_adopcion.tipo_vivienda') == 'finca' ? 'selected' : '' }}>Finca</option>
+                        <option value="otro" {{ old('datos_adopcion.tipo_vivienda') == 'otro' ? 'selected' : '' }}>Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="datos_adopcion_motivo">Motivo de adopción:</label>
+                    <textarea id="datos_adopcion_motivo" name="datos_adopcion[motivo_adopcion]"
+                              rows="3" class="form-control">{{ old('datos_adopcion.motivo_adopcion') }}</textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Compromisos:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="datos_adopcion[compromiso_cuidado]" value="1"
+                                   {{ old('datos_adopcion.compromiso_cuidado') ? 'checked' : '' }}>
+                            Compromiso de cuidado responsable
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="datos_adopcion[compromiso_esterilizacion]" value="1"
+                                   {{ old('datos_adopcion.compromiso_esterilizacion') ? 'checked' : '' }}>
+                            Compromiso de esterilización
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="datos_adopcion[compromiso_seguimiento]" value="1"
+                                   {{ old('datos_adopcion.compromiso_seguimiento') ? 'checked' : '' }}>
+                            Acepta seguimiento post-adopción
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,17 +160,6 @@
             </div>
         </div>
 
-        <!-- Información Adicional -->
-        <div class="info-card">
-            <h5><i class="fa-solid fa-lightbulb"></i> Información Importante</h5>
-            <ul>
-                <li>Las solicitudes creadas aparecerán en el listado principal</li>
-                <li>El estado por defecto es "En Revisión"</li>
-                <li>Puedes editar la solicitud después de crearla</li>
-                <li>Verifica que todos los datos sean correctos antes de guardar</li>
-            </ul>
-        </div>
-
         <!-- Botones de Acción -->
         <div class="form-actions">
             <button type="submit" class="btn-submit">
@@ -114,3 +171,41 @@
         </div>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar/ocultar datos manuales según selección de usuario
+    const userSelect = document.getElementById('user_id');
+    const datosManuales = document.getElementById('datosManuales');
+
+    function toggleDatosManuales() {
+        if (userSelect.value) {
+            datosManuales.style.display = 'none';
+            // Limpiar campos manuales si se seleccionó usuario
+            document.getElementById('nombre_solicitante').value = '';
+            document.getElementById('email_solicitante').value = '';
+            document.getElementById('telefono_solicitante').value = '';
+        } else {
+            datosManuales.style.display = 'block';
+        }
+    }
+
+    userSelect.addEventListener('change', toggleDatosManuales);
+    toggleDatosManuales();
+
+    // Mostrar/ocultar campos de adopción según tipo
+    const tipoSelect = document.getElementById('tipo_solicitud');
+    const camposAdopcion = document.getElementById('camposAdopcion');
+
+    function toggleCamposAdopcion() {
+        if (tipoSelect.value === 'adopcion') {
+            camposAdopcion.style.display = 'block';
+        } else {
+            camposAdopcion.style.display = 'none';
+        }
+    }
+
+    tipoSelect.addEventListener('change', toggleCamposAdopcion);
+    toggleCamposAdopcion();
+});
+</script>

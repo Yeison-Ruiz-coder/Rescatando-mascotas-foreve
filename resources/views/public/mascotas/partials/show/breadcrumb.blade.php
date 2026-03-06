@@ -5,6 +5,6 @@
                 <i class="fas fa-arrow-left me-2"></i>Volver a Mascotas
             </a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ $mascota->Nombre_mascota }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ $mascota->nombre_mascota }}</li>
     </ol>
 </nav>

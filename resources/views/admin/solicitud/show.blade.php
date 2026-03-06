@@ -24,6 +24,9 @@
     <!-- Detalles de la Solicitud -->
     @include('admin.solicitud.partials.show.details')
 
+    <!-- Status y Modal -->
+    @include('admin.solicitud.partials.show.status-modal')
+
     <!-- Acciones -->
     @include('admin.solicitud.partials.show.actions')
 

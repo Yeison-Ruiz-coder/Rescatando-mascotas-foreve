@@ -35,26 +35,30 @@
             </div>
 
             {{-- Rescates - Item destacado --}}
-            <a href="{{ url('/rescates') }}" class="public-sidebar-item public-rescate-item {{ request()->is('rescates*') ? 'active' : '' }}">
+            <a href="{{ url('/rescates') }}"
+                class="public-sidebar-item public-rescate-item {{ request()->is('rescates*') ? 'active' : '' }}">
                 <i class="fas fa-paw"></i>
                 <span>Reportar Rescate</span>
                 <span class="public-sidebar-badge">URGENTE</span>
             </a>
 
             {{-- Rescates activos --}}
-            <a href="{{ url('/rescates/activos') }}" class="public-sidebar-subitem {{ request()->is('rescates/activos') ? 'active' : '' }}">
+            <a href="{{ url('/rescates/activos') }}"
+                class="public-sidebar-subitem {{ request()->is('rescates/activos') ? 'active' : '' }}">
                 <i class="fas fa-map-marker-alt"></i>
                 <span>Rescates activos</span>
             </a>
 
             {{-- Mi historial de reportes --}}
-            <a href="{{ url('/rescates/historial') }}" class="public-sidebar-subitem {{ request()->is('rescates/historial') ? 'active' : '' }}">
+            <a href="{{ url('/rescates/historial') }}"
+                class="public-sidebar-subitem {{ request()->is('rescates/historial') ? 'active' : '' }}">
                 <i class="fas fa-history"></i>
                 <span>Mi historial</span>
             </a>
 
             {{-- Reportes --}}
-            <a href="{{ url('/reportes') }}" class="public-sidebar-item {{ request()->is('reportes*') ? 'active' : '' }}">
+            <a href="{{ url('/reportes') }}"
+                class="public-sidebar-item {{ request()->is('reportes*') ? 'active' : '' }}">
                 <i class="fas fa-file-alt"></i>
                 <span>Reportes generales</span>
             </a>
@@ -67,7 +71,8 @@
             </div>
 
             {{-- Mascotas --}}
-            <a href="{{ url('/mascotas') }}" class="public-sidebar-item {{ request()->is('mascotas*') ? 'active' : '' }}">
+            <a href="{{ url('/mascotas') }}"
+                class="public-sidebar-item {{ request()->is('mascotas*') ? 'active' : '' }}">
                 <i class="fas fa-dog"></i>
                 <span>Mascotas</span>
             </a>
@@ -78,23 +83,31 @@
                 <span>Adopciones</span>
                 <i class="fas fa-chevron-right arrow"></i>
             </div>
-            <div class="public-sidebar-submenu {{ request()->is('adopciones*') ? 'open' : '' }}">
-                <a href="{{ url('/adopciones/disponibles') }}" class="public-sidebar-subitem {{ request()->is('adopciones/disponibles') ? 'active' : '' }}">
+            <div class="public-sidebar-submenu {{ request()->routeIs('public.adopciones.*') ? 'open' : '' }}">
+                <a href="{{ route('public.adopciones.index') }}"
+                    class="public-sidebar-subitem {{ request()->routeIs('public.adopciones.index') ? 'active' : '' }}">
                     <i class="fas fa-list"></i>
                     <span>Disponibles</span>
                 </a>
-                <a href="{{ url('/adopciones/solicitudes') }}" class="public-sidebar-subitem {{ request()->is('adopciones/solicitudes') ? 'active' : '' }}">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>Mis solicitudes</span>
-                </a>
-                <a href="{{ url('/adopciones/proceso') }}" class="public-sidebar-subitem {{ request()->is('adopciones/proceso') ? 'active' : '' }}">
-                    <i class="fas fa-clock"></i>
-                    <span>En proceso</span>
-                </a>
+
+                @auth
+                    <a href="{{ route('public.adopciones.mis-solicitudes') }}"
+                        class="public-sidebar-subitem {{ request()->routeIs('public.adopciones.mis-solicitudes') ? 'active' : '' }}">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Mis solicitudes</span>
+                    </a>
+
+                    <a href="{{ route('public.adopciones.en-proceso') }}"
+                        class="public-sidebar-subitem {{ request()->routeIs('public.adopciones.en-proceso') ? 'active' : '' }}">
+                        <i class="fas fa-clock"></i>
+                        <span>En proceso</span>
+                    </a>
+                @endauth
             </div>
 
             {{-- Apadrinamientos --}}
-            <a href="{{ url('/apadrinamientos') }}" class="public-sidebar-item {{ request()->is('apadrinamientos*') ? 'active' : '' }}">
+            <a href="{{ url('/apadrinamientos') }}"
+                class="public-sidebar-item {{ request()->is('apadrinamientos*') ? 'active' : '' }}">
                 <i class="fas fa-heart"></i>
                 <span>Apadrinamientos</span>
             </a>
@@ -107,19 +120,22 @@
             </div>
 
             {{-- Donaciones --}}
-            <a href="{{ url('/donaciones') }}" class="public-sidebar-item {{ request()->is('donaciones*') ? 'active' : '' }}">
+            <a href="{{ url('/donaciones') }}"
+                class="public-sidebar-item {{ request()->is('donaciones*') ? 'active' : '' }}">
                 <i class="fas fa-donate"></i>
                 <span>Donaciones</span>
             </a>
 
             {{-- Suscripciones --}}
-            <a href="{{ url('/suscripciones') }}" class="public-sidebar-item {{ request()->is('suscripciones*') ? 'active' : '' }}">
+            <a href="{{ url('/suscripciones') }}"
+                class="public-sidebar-item {{ request()->is('suscripciones*') ? 'active' : '' }}">
                 <i class="fas fa-calendar-check"></i>
                 <span>Suscripciones</span>
             </a>
 
             {{-- Eventos --}}
-            <a href="{{ url('/eventos') }}" class="public-sidebar-item {{ request()->is('eventos*') ? 'active' : '' }}">
+            <a href="{{ url('/eventos') }}"
+                class="public-sidebar-item {{ request()->is('eventos*') ? 'active' : '' }}">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Eventos</span>
             </a>
@@ -132,7 +148,8 @@
             </div>
 
             {{-- Tiendas --}}
-            <a href="{{ url('/tiendas') }}" class="public-sidebar-item {{ request()->is('tiendas*') ? 'active' : '' }}">
+            <a href="{{ url('/tiendas') }}"
+                class="public-sidebar-item {{ request()->is('tiendas*') ? 'active' : '' }}">
                 <i class="fas fa-store"></i>
                 <span>Tiendas</span>
             </a>
@@ -144,16 +161,19 @@
                 <i class="fas fa-chevron-right arrow"></i>
             </div>
             <div class="public-sidebar-submenu {{ request()->is('veterinarias*') ? 'open' : '' }}">
-                <a href="{{ url('/veterinarias') }}" class="public-sidebar-subitem {{ request()->is('veterinarias') ? 'active' : '' }}">
+                <a href="{{ url('/veterinarias') }}"
+                    class="public-sidebar-subitem {{ request()->is('veterinarias') ? 'active' : '' }}">
                     <i class="fas fa-list"></i>
                     <span>Todas</span>
                 </a>
-                <a href="{{ url('/veterinarias/urgencias') }}" class="public-sidebar-subitem {{ request()->is('veterinarias/urgencias') ? 'active' : '' }}">
+                <a href="{{ url('/veterinarias/urgencias') }}"
+                    class="public-sidebar-subitem {{ request()->is('veterinarias/urgencias') ? 'active' : '' }}">
                     <i class="fas fa-ambulance"></i>
                     <span>Urgencias 24/7</span>
                     <span class="badge bg-danger">24h</span>
                 </a>
-                <a href="{{ url('/veterinarias/mapa') }}" class="public-sidebar-subitem {{ request()->is('veterinarias/mapa') ? 'active' : '' }}">
+                <a href="{{ url('/veterinarias/mapa') }}"
+                    class="public-sidebar-subitem {{ request()->is('veterinarias/mapa') ? 'active' : '' }}">
                     <i class="fas fa-map"></i>
                     <span>Ver mapa</span>
                 </a>
@@ -167,19 +187,22 @@
             </div>
 
             {{-- Fundaciones --}}
-            <a href="{{ url('/fundaciones') }}" class="public-sidebar-item {{ request()->is('fundaciones*') ? 'active' : '' }}">
+            <a href="{{ url('/fundaciones') }}"
+                class="public-sidebar-item {{ request()->is('fundaciones*') ? 'active' : '' }}">
                 <i class="fas fa-building"></i>
                 <span>Fundaciones</span>
             </a>
 
             {{-- Usuarios --}}
-            <a href="{{ url('/usuarios') }}" class="public-sidebar-item {{ request()->is('usuarios*') ? 'active' : '' }}">
+            <a href="{{ url('/usuarios') }}"
+                class="public-sidebar-item {{ request()->is('usuarios*') ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
                 <span>Usuarios</span>
             </a>
 
             {{-- Comentarios --}}
-            <a href="{{ url('/comentarios') }}" class="public-sidebar-item {{ request()->is('comentarios*') ? 'active' : '' }}">
+            <a href="{{ url('/comentarios') }}"
+                class="public-sidebar-item {{ request()->is('comentarios*') ? 'active' : '' }}">
                 <i class="fas fa-comments"></i>
                 <span>Comentarios</span>
             </a>
@@ -192,19 +215,21 @@
             </div>
 
             {{-- Nosotros --}}
-            <a href="{{ url('/nosotros') }}" class="public-sidebar-item {{ request()->is('nosotros') ? 'active' : '' }}">
+            <a href="{{ url('/nosotros') }}"
+                class="public-sidebar-item {{ request()->is('nosotros') ? 'active' : '' }}">
                 <i class="fas fa-info-circle"></i>
                 <span>Nosotros</span>
             </a>
 
             {{-- Notificaciones con badge --}}
-            <a href="{{ url('/notificaciones') }}" class="public-sidebar-item {{ request()->is('notificaciones*') ? 'active' : '' }}">
+            <a href="{{ url('/notificaciones') }}"
+                class="public-sidebar-item {{ request()->is('notificaciones*') ? 'active' : '' }}">
                 <i class="fas fa-bell"></i>
                 <span>Notificaciones</span>
                 @php
                     $notificacionesNoLeidas = 3; // Esto vendría de tu controlador
                 @endphp
-                @if($notificacionesNoLeidas > 0)
+                @if ($notificacionesNoLeidas > 0)
                     <span class="public-sidebar-badge">{{ $notificacionesNoLeidas }}</span>
                 @endif
             </a>
@@ -245,13 +270,14 @@
 
         {{-- Cerrar sesión (si está logueado) --}}
         @auth
-        <a href="{{ url('/logout') }}" class="public-sidebar-item text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Cerrar sesión</span>
-        </a>
-        <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
+            <a href="{{ url('/logout') }}" class="public-sidebar-item text-danger"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar sesión</span>
+            </a>
+            <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         @endauth
     </div>
 </aside>

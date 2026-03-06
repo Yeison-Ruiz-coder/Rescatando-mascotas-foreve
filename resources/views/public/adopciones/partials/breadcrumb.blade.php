@@ -7,7 +7,7 @@
         </li>
         <li class="breadcrumb-item">
             <a href="{{ route('public.mascotas.show', $mascota->id) }}">
-                {{ $mascota->Nombre_mascota }}
+                {{ $mascota->nombre_mascota }}
             </a>
         </li>
         <li class="breadcrumb-item active">Solicitar Adopción</li>

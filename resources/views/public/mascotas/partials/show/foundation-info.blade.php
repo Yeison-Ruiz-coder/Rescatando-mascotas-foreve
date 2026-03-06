@@ -10,15 +10,15 @@
         <div class="card-body">
             <div class="d-flex align-items-center mb-2">
                 <i class="fas fa-map-marker-alt text-fucsia me-3"></i>
-                <span class="text-muted">{{ $mascota->fundacion->Direccion }}</span>
+                <span class="text-muted">{{ $mascota->fundacion->Direccion ?? 'No especificada' }}</span>
             </div>
             <div class="d-flex align-items-center mb-2">
                 <i class="fas fa-phone text-fucsia me-3"></i>
-                <span class="text-muted">{{ $mascota->fundacion->Telefono }}</span>
+                <span class="text-muted">{{ $mascota->fundacion->Telefono ?? 'No especificado' }}</span>
             </div>
             <div class="d-flex align-items-center">
                 <i class="fas fa-envelope text-fucsia me-3"></i>
-                <span class="text-muted">{{ $mascota->fundacion->Email }}</span>
+                <span class="text-muted">{{ $mascota->fundacion->Email ?? 'No especificado' }}</span>
             </div>
         </div>
     </div>

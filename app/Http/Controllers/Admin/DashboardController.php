@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Mascota;
 use App\Models\Adopcion;
-use App\Models\SolicitudAdopcion;
+use App\Models\Solicitud;
 use App\Models\Reporte;
 use App\Models\Rescate;
 use App\Models\Donacion;
@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $totalFundaciones = Fundacion::count();
         $totalVeterinarias = Veterinaria::count();
 
-        $solicitudesPendientes = SolicitudAdopcion::where('estado', 'Pendiente')->count();
+        $solicitudesPendientes = Solicitud::where('estado', 'pendiente')->count();
         $adopcionesMes = Adopcion::whereMonth('created_at', now()->month)->count();
 
         $donacionesMes = Donacion::whereMonth('created_at', now()->month)->sum('valor_donacion');
@@ -51,7 +51,7 @@ class DashboardController extends Controller
         ->get();
 
         // Últimas solicitudes
-        $ultimasSolicitudes = SolicitudAdopcion::with('mascota')
+        $ultimasSolicitudes = Solicitud::with('mascota')
                                               ->latest()
                                               ->take(5)
                                               ->get();
@@ -107,7 +107,7 @@ class DashboardController extends Controller
                              });
 
         // Solicitudes nuevas
-        $solicitudes = SolicitudAdopcion::with('mascota')
+        $solicitudes = Solicitud::with('mascota')
                                        ->latest()
                                        ->take(3)
                                        ->get()

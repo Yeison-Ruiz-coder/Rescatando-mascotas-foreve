@@ -1,5 +1,7 @@
 <?php $__env->startPush('styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/pages/mascotas/public-card.css')); ?>?v=2.0">
 <link rel="stylesheet" href="<?php echo e(asset('css/pages/mascotas/public-index.css')); ?>?v=2.0">
+<link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>?v=2.0">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>

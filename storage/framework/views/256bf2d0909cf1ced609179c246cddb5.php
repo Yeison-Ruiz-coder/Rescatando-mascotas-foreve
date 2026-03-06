@@ -29,4 +29,5 @@
             </form>
         </div>
     </div>
-</div><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/mascotas/partials/index/filters.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/mascotas/partials/index/filters.blade.php ENDPATH**/ ?>

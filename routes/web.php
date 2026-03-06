@@ -49,11 +49,23 @@ Route::prefix('mascotas')->name('public.mascotas.')->group(function () {
     Route::get('/{id}', [PublicMascotaController::class, 'show'])->name('show');
 });
 
-// ADOPCIONES PÚBLICAS
+// ADOPCIONES PÚBLICAS (VERSIÓN ACTUALIZADA)
 Route::prefix('adopciones')->name('public.adopciones.')->group(function () {
     Route::get('/', [PublicAdopcionController::class, 'index'])->name('index');
+    Route::get('/mascota/{id}', [PublicAdopcionController::class, 'show'])->name('show'); // Detalle de mascota
     Route::get('/solicitar/{id}', [PublicAdopcionController::class, 'solicitar'])->name('solicitar');
     Route::post('/solicitar', [PublicAdopcionController::class, 'solicitarStore'])->name('solicitar.store');
+    Route::get('/solicitud-exitosa/{id}', [PublicAdopcionController::class, 'solicitudExitosa'])->name('solicitud-exitosa');
+
+    // Rutas para usuarios autenticados
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/mis-solicitudes', [PublicAdopcionController::class, 'misSolicitudes'])->name('mis-solicitudes');
+        Route::get('/en-proceso', [PublicAdopcionController::class, 'enProceso'])->name('en-proceso');
+        Route::get('/solicitud/{id}', [PublicAdopcionController::class, 'solicitudDetalle'])->name('solicitud-detalle');
+    });
+
+    // Ruta AJAX (pública)
+    Route::get('/verificar-disponibilidad/{id}', [PublicAdopcionController::class, 'verificarDisponibilidad'])->name('verificar-disponibilidad');
 });
 
 // SOLICITUDES PÚBLICAS
@@ -148,7 +160,6 @@ Route::prefix('pedidos')->name('public.pedidos.')->middleware(['auth'])->group(f
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\MascotaController;
 use App\Http\Controllers\Admin\AdopcionController;
-use App\Http\Controllers\Admin\SolicitudAdopcionController;
 use App\Http\Controllers\Admin\SolicitudController as AdminSolicitudController;
 use App\Http\Controllers\Admin\EventoController;
 use App\Http\Controllers\Admin\ApadrinamientoController;
@@ -179,10 +190,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     // ADOPCIONES
     Route::resource('adopciones', AdopcionController::class);
 
-    // SOLICITUDES DE ADOPCIÓN
-    Route::resource('solicitudes-adopcion', SolicitudAdopcionController::class);
-    // SOLICITUDES GENERALES (ahora sí activa)
+    //  SOLICITUDES GENERALES (UNA SOLA VEZ, CON AdminSolicitudController)
     Route::resource('solicitudes', AdminSolicitudController::class);
+    Route::patch('/solicitudes/{id}/status', [AdminSolicitudController::class, 'updateStatus'])
+        ->name('solicitudes.update-status'); // Sin 'admin.' porque ya está en el prefijo
 
     // EVENTOS
     Route::resource('eventos', EventoController::class);
@@ -245,7 +256,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('reportes', ReporteController::class);
 
     // TIENDAS
-     Route::resource('tiendas', \App\Http\Controllers\Admin\TiendaController::class);
+    Route::resource('tiendas', \App\Http\Controllers\Admin\TiendaController::class);
     Route::get('/tiendas/{tienda}/ventas', [\App\Http\Controllers\Admin\TiendaController::class, 'ventas'])->name('tiendas.ventas');
     Route::get('/tiendas/{tienda}/inventario', [\App\Http\Controllers\Admin\TiendaController::class, 'inventario'])->name('tiendas.inventario');
 
@@ -276,4 +287,4 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 // =========================================================================
 // RUTAS DE AUTENTICACIÓN (Breeze)
 // =========================================================================
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

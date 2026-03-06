@@ -5,4 +5,5 @@
 
     </div>
 </div>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/mascotas/partials/index/pagination.blade.php ENDPATH**/ ?>
+<?php endif; ?>
+<?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/mascotas/partials/index/pagination.blade.php ENDPATH**/ ?>

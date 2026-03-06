@@ -1,7 +1,9 @@
 @extends('public.layouts.app')
 
 @push('styles')
+<link rel="stylesheet" href="{{ asset('css/pages/mascotas/public-card.css') }}?v=2.0">
 <link rel="stylesheet" href="{{ asset('css/pages/mascotas/public-index.css') }}?v=2.0">
+<link rel="stylesheet" href="{{ asset('css/style.css') }}?v=2.0">
 @endpush
 
 @section('content')
