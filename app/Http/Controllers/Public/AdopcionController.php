@@ -140,7 +140,7 @@ class AdopcionController extends Controller
             abort(404);
         }
 
-        return view('public.adopciones.exito', compact('solicitud'));
+        return view('public.adopciones.solicitud-exitosa', compact('solicitud'));
     }
 
     /**
