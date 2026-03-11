@@ -30,6 +30,18 @@
                 <span class="profile-role">Administrador</span>
             </div>
         </a>
+
+        <div class="language-selector">
+            <a href="<?php echo e(route('locale.switch', 'es')); ?>"
+               class="language-link <?php echo e(app()->getLocale() == 'es' ? 'active' : ''); ?>">
+                ES
+            </a>
+            <span class="language-divider">|</span>
+            <a href="<?php echo e(route('locale.switch', 'en')); ?>"
+               class="language-link <?php echo e(app()->getLocale() == 'en' ? 'active' : ''); ?>">
+                EN
+            </a>
+        </div>
     </div>
 </header>
 <?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/admin/layouts/header.blade.php ENDPATH**/ ?>

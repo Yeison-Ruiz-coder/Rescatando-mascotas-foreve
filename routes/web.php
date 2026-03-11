@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 // =========================================================================
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Public\MascotaController as PublicMascotaController;
 use App\Http\Controllers\Public\AdopcionController as PublicAdopcionController;
 use App\Http\Controllers\Public\SolicitudController as PublicSolicitudController;
@@ -32,6 +33,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Rutas  para traductor de pagina
+Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+Route::get('locale/{locale}', function ($locale) {
+    if (in_array($locale, ['es', 'en'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return redirect()->back();
+})->name('locale.switch');
 
 // =========================================================================
 // TUS RUTAS PÚBLICAS (REINCORPORADAS)

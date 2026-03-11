@@ -3,7 +3,7 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
-<link rel="stylesheet" href="{{ asset('css/pages/adopciones/index.css') }}?v={{ time() }}">
+<link rel="stylesheet" href="{{ asset('css/pages/adopciones/public-index.css') }}">
 @endpush
 
 @section('content')

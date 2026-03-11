@@ -30,5 +30,17 @@
                 <span class="profile-role">Administrador</span>
             </div>
         </a>
+
+        <div class="language-selector">
+            <a href="{{ route('locale.switch', 'es') }}"
+               class="language-link {{ app()->getLocale() == 'es' ? 'active' : '' }}">
+                ES
+            </a>
+            <span class="language-divider">|</span>
+            <a href="{{ route('locale.switch', 'en') }}"
+               class="language-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                EN
+            </a>
+        </div>
     </div>
 </header>

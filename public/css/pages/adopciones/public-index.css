@@ -1,0 +1,247 @@
+:root {
+    /* TUS COLORES ORIGINALES */
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
+    --color-fucsia-hover: #667eeac0;
+    --color-gris-claro: #f4f4f4;
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #333;
+
+    /* COLORES ADICIONALES */
+    --gradient-principal: linear-gradient(135deg, var(--color-turquesa), var(--color-fucsia));
+    --gradient-hover: linear-gradient(135deg, #5a3a7e, #4f6ad3);
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --shadow-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Estilos para la card moderna */
+.card-mascota-moderna {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    width: 400px;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.card-mascota-moderna:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-turquesa);
+    box-shadow: 0 20px 40px -10px var(--shadow-color);
+}
+
+/* Contenedor de imagen */
+.card-imagen-container {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.card-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.card-mascota-moderna:hover .card-imagen-container img {
+    transform: scale(1.1);
+}
+
+/* Overlay en hover */
+.overlay-mascota {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(118, 75, 162, 0.4), rgba(102, 126, 234, 0.4));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.card-mascota-moderna:hover .overlay-mascota {
+    opacity: 1;
+}
+
+/* Contenedor de badges */
+.badges-container {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+/* Badges modernos */
+.badge-moderno {
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.5s ease backwards;
+}
+
+.badge-especie-moderno {
+    background: rgba(118, 75, 162, 0.9);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-genero-moderno {
+    background: rgba(102, 126, 234, 0.9);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-edad-moderno {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Contenido de la card */
+.card-body-moderno {
+    padding: 1.5rem;
+}
+
+.nombre-mascota {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    background: var(--gradient-principal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.descripcion-mascota {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Info de fundación */
+.info-fundacion {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 0;
+    margin-bottom: 1rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.info-fundacion i {
+    color: var(--color-fucsia);
+    font-size: 1rem;
+}
+
+/* Botón conocer más */
+.btn-conocer-mas {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--gradient-principal);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-conocer-mas:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--shadow-color);
+    color: white;
+    text-decoration: none;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-conocer-mas i {
+    transition: transform 0.3s ease;
+}
+
+.btn-conocer-mas:hover i {
+    transform: scale(1.2);
+    color: #ffd700;
+}
+
+/* Placeholder cuando no hay imagen */
+.bg-gris-claro {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+}
+
+.text-turquesa.opacity-50 {
+    color: var(--color-turquesa) !important;
+    opacity: 0.5;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación para cada badge (efecto escalonado) */
+.badges-container .badge-moderno:nth-child(1) { animation-delay: 0.1s; }
+.badges-container .badge-moderno:nth-child(2) { animation-delay: 0.2s; }
+.badges-container .badge-moderno:nth-child(3) { animation-delay: 0.3s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-imagen-container {
+        height: 200px;
+    }
+
+    .badges-container {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .badge-moderno {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .card-body-moderno {
+        padding: 1.2rem;
+    }
+
+    .nombre-mascota {
+        font-size: 1.3rem;
+    }
+
+    .btn-conocer-mas {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+    }
+}

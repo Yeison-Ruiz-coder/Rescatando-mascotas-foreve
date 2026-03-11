@@ -1,10 +1,20 @@
-{{-- resources/views/admin/adopciones/partials/show/_header.blade.php --}}
-<div class="card-header card-header-detalle d-flex justify-content-between align-items-center">
-    <div class="d-flex align-items-center">
-        <i class="fas fa-paw me-3 fa-lg"></i>
-        <div>
-            <h4 class="mb-0">Detalle de Adopción</h4>
-            <small class="opacity-75">ID: #{{ $adopcion->id }}</small>
-        </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1">
+            <i class="fas fa-paw me-2 text-primary"></i>
+            Adopción #{{ $adopcion->id }}
+        </h2>
+        <p class="text-muted mb-0">
+            {{ $adopcion->mascota->nombre ?? 'Mascota' }} -
+            {{ $adopcion->adoptante->name ?? 'Adoptante' }}
+        </p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{{ route('admin.adopciones.edit', $adopcion->id) }}" class="btn btn-warning">
+            <i class="fas fa-edit me-2"></i>Editar
+        </a>
+        <a href="{{ route('admin.adopciones.index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Volver
+        </a>
     </div>
 </div>

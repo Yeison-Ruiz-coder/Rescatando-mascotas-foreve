@@ -50,38 +50,9 @@ class DashboardController extends Controller
         ->orderBy('month', 'asc')
         ->get();
 
-        // Últimas solicitudes
-        $ultimasSolicitudes = Solicitud::with('mascota')
-                                              ->latest()
-                                              ->take(5)
-                                              ->get();
 
-        // Últimos reportes
-        $ultimosReportes = Reporte::with('usuario')
-                                  ->latest()
-                                  ->take(5)
-                                  ->get();
 
-        // Actividad reciente (eventos combinados)
-        $actividadReciente = $this->getActividadReciente();
-
-        return view('admin.dashboard.index', compact(
-            'totalMascotas',
-            'mascotasEnAdopcion',
-            'mascotasAdoptadas',
-            'totalUsuarios',
-            'totalFundaciones',
-            'totalVeterinarias',
-            'solicitudesPendientes',
-            'adopcionesMes',
-            'donacionesMes',
-            'reportesActivos',
-            'rescatesMes',
-            'adopcionesPorMes',
-            'ultimasSolicitudes',
-            'ultimosReportes',
-            'actividadReciente'
-        ));
+        return view('admin.dashboard.index');
     }
 
     /**

@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', '¡Solicitud Enviada con Éxito!'); ?>
 
 <?php $__env->startPush('styles'); ?>

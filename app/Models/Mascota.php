@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Translatable;
 
 class Mascota extends Model
 {
-    use HasFactory;
+    use HasFactory, Translatable;
+
 
     protected $table = 'mascotas';
 
@@ -112,7 +114,7 @@ class Mascota extends Model
      */
     public function solicitudesAdopcion()
     {
-        return $this->hasMany(SolicitudAdopcion::class, 'mascota_id');
+        return $this->hasMany(Adopcion::class, 'mascota_id');
     }
 
     /**

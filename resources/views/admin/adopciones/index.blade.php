@@ -1,6 +1,4 @@
-{{-- resources/views/admin/adopciones/index.blade.php --}}
 @extends('admin.layouts.app')
-
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/adopciones/index.css') }}">
@@ -15,7 +13,11 @@
             @include('admin.adopciones.partials.index.header')
 
             <!-- Filtros -->
-            @include('admin.adopciones.partials.index.filters', ['estados' => $estados ?? [], 'mascotas' => $mascotas ?? [], 'usuarios' => $usuarios ?? []])
+            @include('admin.adopciones.partials.index.filters', [
+                'estados' => $estados ?? [],
+                'mascotas' => $mascotas ?? [],
+                'usuarios' => $usuarios ?? []
+            ])
 
             <!-- Alertas -->
             @include('admin.adopciones.partials.index.alerts')
@@ -34,5 +36,5 @@
         </div>
     </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

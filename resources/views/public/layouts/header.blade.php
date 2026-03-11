@@ -12,7 +12,6 @@
         <a href="{{ url('/') }}" class="public-navbar-brand">
             <img src="{{ asset('img/logo-oscuro.png') }}" alt="Logo Fundación" class="header-logo">
             <img src="{{ asset('img/texto-logo-oscuro.png') }}" alt="Logo Fundación" class="header-logo-texto">
-
         </a>
 
         {{-- Botón de reporte urgente --}}
@@ -21,7 +20,7 @@
             <span>Reportar Rescate</span>
         </a>
 
-        {{-- Perfil de usuario --}}
+        {{-- PERFIL DE USUARIO --}}
         @auth
         <div class="public-profile-btn dropdown" data-bs-toggle="dropdown">
             <div class="public-profile-avatar">
@@ -53,5 +52,18 @@
             </div>
         </a>
         @endauth
+
+        {{-- 🌐 SELECTOR DE IDIOMA - DESPUÉS DEL PERFIL --}}
+        <div class="language-selector">
+            <a href="{{ route('locale.switch', 'es') }}"
+               class="language-link {{ app()->getLocale() == 'es' ? 'active' : '' }}">
+                ES
+            </a>
+            <span class="language-divider">|</span>
+            <a href="{{ route('locale.switch', 'en') }}"
+               class="language-link {{ app()->getLocale() == 'en' ? 'active' : '' }}">
+                EN
+            </a>
+        </div>
     </div>
 </nav>

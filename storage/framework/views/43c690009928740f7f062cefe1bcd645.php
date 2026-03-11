@@ -12,7 +12,6 @@
         <a href="<?php echo e(url('/')); ?>" class="public-navbar-brand">
             <img src="<?php echo e(asset('img/logo-oscuro.png')); ?>" alt="Logo Fundación" class="header-logo">
             <img src="<?php echo e(asset('img/texto-logo-oscuro.png')); ?>" alt="Logo Fundación" class="header-logo-texto">
-
         </a>
 
         
@@ -53,6 +52,19 @@
             </div>
         </a>
         <?php endif; ?>
+
+        
+        <div class="language-selector">
+            <a href="<?php echo e(route('locale.switch', 'es')); ?>"
+               class="language-link <?php echo e(app()->getLocale() == 'es' ? 'active' : ''); ?>">
+                ES
+            </a>
+            <span class="language-divider">|</span>
+            <a href="<?php echo e(route('locale.switch', 'en')); ?>"
+               class="language-link <?php echo e(app()->getLocale() == 'en' ? 'active' : ''); ?>">
+                EN
+            </a>
+        </div>
     </div>
 </nav>
 <?php /**PATH C:\xampp\htdocs\Rescatando-mascotas-foreve\resources\views/public/layouts/header.blade.php ENDPATH**/ ?>

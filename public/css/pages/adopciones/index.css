@@ -245,3 +245,480 @@
         font-size: 0.95rem;
     }
 }
+z
+:root {
+    /* TUS COLORES ORIGINALES */
+    --color-turquesa: #764ba2;
+    --color-fucsia: #667eea;
+    --color-fucsia-hover: #667eeac0;
+    --color-gris-claro: #f4f4f8;
+    --color-texto-claro: #fff;
+    --color-texto-oscuro: #2d3748;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-info: #3b82f6;
+
+    /* GRADIENTES */
+    --gradient-principal: linear-gradient(135deg, var(--color-turquesa), var(--color-fucsia));
+    --gradient-hover: linear-gradient(135deg, #5a3a7e, #4f6ad3);
+}
+
+/* ========== ESTILOS GENERALES ========== */
+body {
+    background: var(--color-gris-claro);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color-texto-oscuro);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ========== HEADER ========== */
+.adopciones-header {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+}
+
+.adopciones-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: var(--gradient-principal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.btn-primary {
+    background: var(--gradient-principal);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    background: var(--gradient-hover);
+}
+
+.btn-outline-primary {
+    color: var(--color-fucsia);
+    border: 2px solid var(--color-fucsia);
+    background: transparent;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: var(--gradient-principal);
+    border-color: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* ========== FILTROS ========== */
+.filtros-card {
+    background: white;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.filtros-card:hover {
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.1);
+}
+
+.filtros-header {
+    background: var(--gradient-principal);
+    color: white;
+    padding: 1.2rem 1.8rem;
+    border: none;
+}
+
+.filtros-header h5 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+.filtros-header i {
+    opacity: 0.9;
+}
+
+.filtros-body {
+    padding: 2rem;
+}
+
+/* Estilos para inputs y selects */
+.form-label {
+    font-weight: 600;
+    color: var(--color-texto-oscuro);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control, .form-select {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-fucsia);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    outline: none;
+    background: white;
+}
+
+.form-control:hover, .form-select:hover {
+    border-color: var(--color-turquesa);
+    background: white;
+}
+
+/* ========== CONTADOR DE RESULTADOS ========== */
+.contador-resultados {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--color-fucsia);
+}
+
+.text-fucsia {
+    color: var(--color-fucsia) !important;
+    font-weight: 700;
+}
+
+.text-turquesa {
+    color: var(--color-turquesa) !important;
+    font-weight: 700;
+}
+
+.alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #1e40af;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+.alert-link {
+    color: var(--color-fucsia);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.alert-link:hover {
+    text-decoration: underline;
+}
+
+/* ========== TABLA DE ADOPCIONES ========== */
+.tabla-adopciones {
+    background: white;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: var(--gradient-principal);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 1.2rem 1rem;
+    border: none;
+    white-space: nowrap;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 20px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 20px;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.table tbody td {
+    padding: 1.2rem 1rem;
+    vertical-align: middle;
+    color: var(--color-texto-oscuro);
+    font-size: 0.95rem;
+}
+
+/* Badges de estado mejorados */
+.badge-estado {
+    padding: 0.6rem 1rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+}
+
+.badge-estado.bg-success {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.badge-estado.bg-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    color: white !important;
+}
+
+.badge-estado.bg-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+}
+
+/* Botones de acción */
+.btn-group-acciones {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.btn-group-acciones .btn {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px !important;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-outline-info {
+    color: var(--color-info);
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.btn-outline-info:hover {
+    background: var(--color-info);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-outline-primary {
+    color: var(--color-fucsia);
+    border-color: rgba(102, 126, 234, 0.3);
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.btn-outline-primary:hover {
+    background: var(--gradient-principal);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-outline-danger {
+    color: var(--color-danger);
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.btn-outline-danger:hover {
+    background: var(--color-danger);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* ========== ESTADO VACÍO ========== */
+.estado-vacio {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 20px;
+}
+
+.estado-vacio i {
+    font-size: 5rem;
+    background: var(--gradient-principal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.estado-vacio h4 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-texto-oscuro);
+    margin-bottom: 1rem;
+}
+
+.estado-vacio p {
+    color: #718096;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+}
+
+.estado-vacio .btn-primary {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+/* ========== PAGINACIÓN ========== */
+.pagination {
+    gap: 0.5rem;
+}
+
+.page-link {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px !important;
+    color: var(--color-texto-oscuro);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.page-link:hover {
+    background: var(--gradient-principal);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.page-item.active .page-link {
+    background: var(--gradient-principal);
+    border-color: transparent;
+    color: white;
+}
+
+.page-item.disabled .page-link {
+    background: #f1f5f9;
+    color: #94a3b8;
+    border-color: #e2e8f0;
+}
+
+/* ========== ALERTAS ========== */
+.alert {
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border-left: 5px solid #10b981;
+}
+
+.alert i {
+    font-size: 1.2rem;
+}
+
+/* ========== ANIMACIONES ========== */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .adopciones-title {
+        font-size: 1.6rem;
+    }
+
+    .filtros-body {
+        padding: 1.2rem;
+    }
+
+    .btn-group-acciones {
+        flex-direction: column;
+    }
+
+    .btn-group-acciones .btn {
+        width: 100%;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .estado-vacio {
+        padding: 2rem 1rem;
+    }
+
+    .estado-vacio i {
+        font-size: 3.5rem;
+    }
+
+    .estado-vacio h4 {
+        font-size: 1.4rem;
+    }
+
+    .table thead th {
+        font-size: 0.75rem;
+        padding: 1rem 0.5rem;
+    }
+
+    .table tbody td {
+        padding: 1rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .badge-estado {
+        min-width: 80px;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}

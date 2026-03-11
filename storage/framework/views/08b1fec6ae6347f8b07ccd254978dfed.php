@@ -2,7 +2,7 @@
 
 <?php $__env->startPush('styles'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>?v=<?php echo e(time()); ?>">
-<link rel="stylesheet" href="<?php echo e(asset('css/pages/adopciones/index.css')); ?>?v=<?php echo e(time()); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/pages/adopciones/public-index.css')); ?>">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
